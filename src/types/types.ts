@@ -7,6 +7,7 @@ export interface User {
   socials: string;
   speciality: string;
   username: string;
+  created_at: string;
 }
 export interface UserTagProps {
   userId: string | undefined;

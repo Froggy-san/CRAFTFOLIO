@@ -4,6 +4,7 @@ import useLogout from "@/features/authentication/useLogout";
 import { PiSpinnerThin } from "react-icons/pi";
 import { UserTagProps } from "@/types/types";
 import TooltipComp from "./TooltipComp";
+import { defaultProfilePicture } from "@/utils/constants";
 
 const UserTag = ({
   user,
@@ -37,10 +38,7 @@ const UserTag = ({
           {" "}
           <Avatar className="w-7 h-7">
             <AvatarImage
-              src={
-                user.avatar ||
-                "https://ixzmsptjfugshygjmvmh.supabase.co/storage/v1/object/public/projects/360_F_587766653_PkBNyGx7mQh9l1XXPtCAq1lBgOsLl6xH.jpg"
-              }
+              src={user.avatar || defaultProfilePicture}
               className=" object-cover"
             />
             <AvatarFallback>image</AvatarFallback>

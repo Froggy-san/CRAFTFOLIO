@@ -15,6 +15,15 @@ import { PAGE_SIZE } from "@/utils/constants";
 //   return { projects, error };
 // }
 
+export async function getNumOfProjectsForUser(userId: string) {
+  const { count, error } = await supabase
+    .from("projects")
+    .select("", { count: "exact", head: true })
+    .eq("user_id", userId);
+  if (error) throw new Error(`Couldn't get the number of project for the user`);
+  return count;
+}
+
 interface getPosts {
   page: number;
   searchTerm: string | null;

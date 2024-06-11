@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { updateUser as updateUserApi } from "@/services/authApi";
 import { useMutation } from "@tanstack/react-query";
+import { format } from "date-fns";
 import toast from "react-hot-toast";
 
 export default function useUpdateUser() {
@@ -26,6 +27,7 @@ export default function useUpdateUser() {
         phone: data.user.user_metadata.phone,
         speciality: data.user.user_metadata.speciality,
         username: data.user.user_metadata.username,
+        created_at: format(new Date(data.user.created_at), "LLLL/dd/yyyy"),
       });
       toast.dismiss();
       toast.success("User info has been updated");

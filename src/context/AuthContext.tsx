@@ -1,5 +1,6 @@
 import { getCurrentUser } from "@/services/authApi";
 import { User } from "@/types/types";
+import { format } from "date-fns";
 import React, { createContext, useEffect, useState } from "react";
 
 const initailUser = {
@@ -11,9 +12,8 @@ const initailUser = {
   socials: "",
   speciality: "",
   username: "",
+  created_at: "",
 };
-
-
 
 const INITIAL_STATE = {
   user: initailUser,
@@ -45,7 +45,7 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
     try {
       setIsloading(true);
 
-      const currentUser = await getCurrentUser();
+      const currentUser = await getCurrentUser(); // getting the current user.
 
       if (currentUser) {
         setUser({
@@ -57,6 +57,7 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
           phone: currentUser.user_metadata.phone,
           speciality: currentUser.user_metadata.speciality,
           username: currentUser.user_metadata.username,
+          created_at: format(new Date(currentUser.created_at), "LLLL/dd/yyyy"),
         });
         setIsAuthenticated(true);
       } else {

@@ -1,10 +1,11 @@
 import Loading from "@/components/shared/Loading";
 import UpdateUserForm from "@/features/authentication/UpdateUserForm";
+import UserOverview from "@/features/authentication/UserOverview";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 
 const UserSettings = () => {
-  const { isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
   useScrollUpWhenMounted();
   if (isLoading)
     return (
@@ -14,7 +15,8 @@ const UserSettings = () => {
     );
   return (
     <div>
-      <UpdateUserForm />
+      <UserOverview user={user} />
+      <UpdateUserForm user={user} />
     </div>
   );
 };

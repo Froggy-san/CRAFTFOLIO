@@ -3,8 +3,9 @@ import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function deleteUser(userId: string) {
-  const serviceRoleKey =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsZHB0Y3pheHliaWpiaGxjYmpqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNTUxOTAzMiwiZXhwIjoyMDMxMDk1MDMyfQ.riwd24bYKRy160eqPRtr_ZJijvwh5E3GbiAcnWC_Qbw";
+  // const serviceRoleKey =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsZHB0Y3pheHliaWpiaGxjYmpqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNTUxOTAzMiwiZXhwIjoyMDMxMDk1MDMyfQ.riwd24bYKRy160eqPRtr_ZJijvwh5E3GbiAcnWC_Qbw";
+  const serviceRoleKey = import.meta.env.VITE_SUPABASE_ADMIN_KEY as string;
   const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
   const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
   if (error) throw new Error(error.message);

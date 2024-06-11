@@ -7,11 +7,18 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
 
 import { validateEgyptianPhoneNumber } from "@/utils/helper";
@@ -21,40 +28,13 @@ import useUpdateUser from "./useUpdateUser";
 import { useAuth } from "@/hooks/useAuth";
 import { Textarea } from "@/components/ui/textarea";
 import FormRow from "@/components/shared/FormRow";
-
-const updateUserSchema = z
-  .object({
-    username: z
-      .string()
-      .min(6, { message: `password is too short` })
-      .max(55, { message: `password is too long.` }),
-    email: z.string().min(2).max(50),
-
-    speciality: z.string(),
-    socials: z.string(),
-    phone: z
-      .string()
-      .min(6, { message: `password is too short` })
-      .max(55, { message: `password is too long.` }),
-    avatar: z.custom<File[]>(),
-  })
-  .refine(
-    (data) => {
-      return validateEgyptianPhoneNumber(data.phone);
-    },
-    {
-      message: `Phone number must match the patterns of Egyptian phone numbers`,
-      path: ["phone"],
-    }
-  );
+import updateUserSchema from "@/formScehmas/updateUserSchema";
+import FormFieldItem from "@/components/shared/FormFieldItem";
+import { User } from "@/types/types";
 
 type updateUserSchemaTypes = z.infer<typeof updateUserSchema>;
 
-const UpdateUserForm = () => {
-  // const { user } = useUser();
-
-  const { user } = useAuth();
-
+const UpdateUserForm = ({ user }: { user: User | undefined }) => {
   console.log(user, "user))))))))))))))))");
   const { isUpdatingUser, updateUser } = useUpdateUser();
 
@@ -85,107 +65,109 @@ const UpdateUserForm = () => {
     });
   }
   return (
-    <div className="   w-[94%] lg:w-[850px] mx-auto  overflow-y-auto h-[81%] mt-12 sm:px-3">
+    <div className="   w-[94%] lg:w-[850px] mx-auto  overflow-y-auto  overflow-x-hidden h-[81%] mt-12 sm:px-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-       <FormRow>
-       <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="cartfoilio200"
-                    {...field}
-                    disabled={isUpdatingUser}
-                  />
-                </FormControl>
+          <FormRow>
+            <FormFieldItem<updateUserSchemaTypes>
+              labelText="Username"
+              fieldName="username"
+              control={form.control}
+            >
+              <Input placeholder="Mohammed Osama" disabled={isUpdatingUser} />
+            </FormFieldItem>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormFieldItem<updateUserSchemaTypes>
+              labelText="Email"
+              fieldName="email"
+              control={form.control}
+            >
+              <Input placeholder="Mohammed Osama" disabled />
+            </FormFieldItem>
+          </FormRow>
 
+          <FormRow>
+            <FormFieldItem<updateUserSchemaTypes>
+              labelText="Speciality"
+              fieldName="speciality"
+              control={form.control}
+            >
+              <Input
+                type="text"
+                placeholder="What are you good at?"
+                disabled={isUpdatingUser}
+              />
+            </FormFieldItem>
+
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="011-294-244-76"
+                      {...field}
+                      disabled={isUpdatingUser}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormRow>
           <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="craftfolio@me.com" {...field} disabled />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-       </FormRow>
-
-   <FormRow>
-   <FormField
-            control={form.control}
-            name="speciality"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Speciality</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="React"
-                    {...field}
-                    disabled={isUpdatingUser}
-                  />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-
-<FormField
             control={form.control}
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone</FormLabel>
+                <FormLabel>Phone number</FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="011-294-244-76"
-                    {...field}
+                  <InputOTP
+                    className=" "
                     disabled={isUpdatingUser}
-                  />
+                    aria-label="phone number"
+                    maxLength={11}
+                    {...field}
+                  >
+                    <div className="     w-full  items-center">
+                      <InputOTPGroup className="divide-width-type ">
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                        <InputOTPSlot index={6} />
+                        <InputOTPSlot index={7} />
+                        <InputOTPSlot index={8} />
+                        <InputOTPSlot index={9} />
+                        <InputOTPSlot index={10} />
+                      </InputOTPGroup>
+                    </div>
+                  </InputOTP>
                 </FormControl>
-
+                <FormDescription>
+                  Please enter the one-time password sent to your phone.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-   </FormRow>
-          <FormField
+          <FormFieldItem<updateUserSchemaTypes>
+            labelText="Socials"
+            fieldName="socials"
             control={form.control}
-            name="socials"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>socials</FormLabel>
-                <FormControl>
-                  <Textarea
-                  className=" h-[140px]"
-                    placeholder="how can people reach you."
-                    {...field}
-                    disabled={isUpdatingUser}
-                  />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-     
+          >
+            <Textarea
+              className=" h-[140px]"
+              placeholder="how can people reach you."
+              disabled={isUpdatingUser}
+            />
+          </FormFieldItem>
 
           <FormField
             control={form.control}

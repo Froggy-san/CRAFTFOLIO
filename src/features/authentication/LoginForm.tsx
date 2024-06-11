@@ -20,14 +20,7 @@ import { useState } from "react";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEyeFill } from "react-icons/ri";
 import IconButton from "@/components/shared/IconButton";
-
-const loginSchema = z.object({
-  email: z.string().min(2).max(50),
-  password: z
-    .string()
-    .min(6, { message: `password is too short` })
-    .max(55, { message: `password is too long.` }),
-});
+import loginSchema from "@/formScehmas/loginSchema";
 
 type loginSchemaTypes = z.infer<typeof loginSchema>;
 
@@ -51,6 +44,7 @@ const LoginForm = () => {
 
   return (
     <div className="w-[94%] mx-auto ">
+      <h1 className=" text-xl font-semibold mb-12">Login</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

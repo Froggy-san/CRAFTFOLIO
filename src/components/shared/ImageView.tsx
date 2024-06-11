@@ -35,7 +35,11 @@ const ImageView = ({
             <IoIosClose size={50} />
           </Button>
           <ClickAwayListener
-            onClickAway={() => {
+            mouseEvent="onMouseUp" // the default mode by the way
+            touchEvent="onTouchEnd" // here we are telling it to call the onClickAway when the user touch the screen to make it work right on mobile phones
+            onClickAway={(e) => {
+              // Prevent the click from propagating and triggering the image view again
+              e.preventDefault();
               handleClose();
             }}
           >

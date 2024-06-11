@@ -35,6 +35,8 @@
     --radius: 0.5rem;
   }
 
+  .phone-fields {
+  }
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -76,6 +78,18 @@
 }
 
 @layer utilities {
+  .phone-fields {
+    @apply w-8  xs:w-10 sm:w-7 md:w-8 lg:w-10;
+  }
+  .phone-number-width {
+    width: 100% !important;
+  }
+  .phone-input-fields-width {
+    width: calc(86% / 3);
+  }
+  .phone-input-fields-width-two {
+    width: calc(70% / 3);
+  }
   .tool-tip {
     position: relative;
   }
@@ -161,6 +175,12 @@
     width: calc((100% / 2));
   }
 
+  .divide-width-type > * {
+    width: calc((100% / 11));
+  }
+  .divide-width-type-screen > * {
+    width: calc((100% / 3));
+  }
   .grany {
     &::before {
       position: absolute;
