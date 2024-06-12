@@ -49,7 +49,7 @@ const SignUpForm = () => {
   function onSubmit(values: sginUpSchemaTypes) {
     console.log(values, "form  vlaues");
 
-    signUp(values);
+    signUp({ ...values, role: "user" });
   }
   return (
     <div className="w-[94%] mx-auto  overflow-y-auto overflow-x-hidden h-[81%] mt-32 px-3">

@@ -11,6 +11,7 @@ const updateUserSchema = z
 
     speciality: z.string(),
     socials: z.string(),
+    resumeUrl: z.string(),
     phone: z
       .string()
       .min(6, { message: `password is too short` })

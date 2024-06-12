@@ -12,9 +12,6 @@ import Loading from "@/components/shared/Loading";
 const UserOverview = ({ user }: { user: User | undefined }) => {
   const { isLoading, count } = useGetNumOfProjects(user?.id || "");
 
-  console.log(user, "user from over view for testing ?");
-
-  console.log(count, "count");
   const [viewedImage, setViewedImage] = useState<string | null>(null);
   const image = user?.avatar || defaultProfilePicture;
   return (
@@ -24,7 +21,6 @@ const UserOverview = ({ user }: { user: User | undefined }) => {
           User settings
         </h1>
         <p aria-label="email address">{user?.email}</p>
-        <p aria-label="email address">{user?.username}</p>
 
         <p aria-label="the date the user created the account">{`Joined Craftfolio on ${
           user?.created_at

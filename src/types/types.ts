@@ -8,6 +8,8 @@ export interface User {
   speciality: string;
   username: string;
   created_at: string;
+  role: string;
+  resumeUrl: string;
 }
 export interface UserTagProps {
   userId: string | undefined;

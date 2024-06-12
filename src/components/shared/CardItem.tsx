@@ -20,38 +20,37 @@ import { Button } from "../ui/button";
 import { BsArrowUpRight } from "react-icons/bs";
 // import { MdArrowOutward } from "react-icons/md";
 import { findPreviewLink } from "@/utils/helper";
+const previewRegex = /pre[av]iew/i;
 
-function extractPreviewLink(text: string) {
-  // The updated regex includes '.*?' to handle any characters between 'preview:' and the actual URL
-  const match = text.match(/pre[av]iew:.*?(https:\/\/\S+)/i);
-  return match ? match[1] : null;
-}
+// function extractPreviewLink(text: string) {
+//   // The updated regex includes '.*?' to handle any characters between 'preview:' and the actual URL
+//   const match = text.match(/pre[av]iew:.*?(https:\/\/\S+)/i);
+//   return match ? match[1] : null;
+// }
 const CardItem = ({ post }: { post: Project }) => {
   const { isDeleting, deletePost } = useDeletePost();
   const { user: loggedInUser } = useAuth();
-
-  const getPreviewLink = () => {
-    const link = findPreviewLink(post.links);
-    if (link) return extractPreviewLink(link);
-  };
-
-  const previewLink = getPreviewLink();
-
-  console.log(previewLink, "Link");
-  // console.log(previewLink?.split(previewRegex), "Link");
-  const imagesToDelete = post.projectImages.map(
-    (image: imageObject) => image.imageUrl.split("projects/")[1]
-  );
   const user = {
     username: post.publicUsers?.username,
     userId: post.publicUsers?.userId,
     avatar: post.publicUsers?.avatar,
   };
-  const currentOwner = post.user_id === loggedInUser?.id;
 
+  const previewLink = JSON.parse(post.links).find(
+    (link: { description: string; url: string }) =>
+      previewRegex.test(link.description)
+  )?.url;
+
+  const imagesToDelete = post.projectImages.map(
+    (image: imageObject) => image.imageUrl.split("projects/")[1]
+  );
+
+  const currentOwner =
+    loggedInUser?.role === "admin" || post.user_id === loggedInUser?.id;
+  //bg-[#ffffff]
   return (
     <li
-      className={`p-1 relative  bg-[#ffffff]   rounded-lg h-fit break-words ${
+      className={`p-1 relative    rounded-lg h-fit break-words ${
         isDeleting && "opacity-60 cursor-not-allowed"
       }`}
     >
@@ -78,7 +77,7 @@ const CardItem = ({ post }: { post: Project }) => {
                 <div id="carousel div" className=" ">
                   <Card
                     id="carousel card"
-                    className=" w-full border-none overflow-hidden rounded-lg"
+                    className=" w-full border-none bg-[transparent] overflow-hidden rounded-lg"
                   >
                     {/* xs:h-[23rem] */}
                     <CardContent

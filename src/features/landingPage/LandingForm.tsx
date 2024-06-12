@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { TbPhotoEdit } from "react-icons/tb";
 import { Button } from "@/components/ui/button";
 import Avatar from "@/components/shared/Avatar";
-import LandingImageUploader from "./LandingImageUploader";
+
 import { Textarea } from "@/components/ui/textarea";
 import useCreateLanding from "./useCreateLanding";
 import { useAuth } from "@/hooks/useAuth";
@@ -35,6 +35,7 @@ import IconButton from "@/components/shared/IconButton";
 import _ from "lodash";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import { defaultLandingPageImage } from "@/utils/constants";
+import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
 const landingPageSchma = z
   .object({
     primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
@@ -279,7 +280,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                     <FormItem>
                       <FormLabel>Profile image</FormLabel>
                       <FormControl>
-                        <LandingImageUploader
+                        <ProfileImageUploader
                           mediaUrl={landingToEdit?.avatarImage || user?.avatar}
                           fieldChange={field.onChange}
                         />
@@ -311,25 +312,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   )}
                 />
 
-                <div className=" flex items-center gap-4 pb-10">
-                  {landingToEdit ? (
-                    <Button
-                      size="sm"
-                      disabled={isEqual || isCreanting || isEditting}
-                      type="submit"
-                      className=" tracking-wider"
-                    >
-                      Edit
-                    </Button>
-                  ) : (
-                    <Button
-                      size="sm"
-                      disabled={isCreanting || isEditting}
-                      type="submit"
-                    >
-                      Upload landing page
-                    </Button>
-                  )}
+                <div className="flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 ">
                   <Button
                     variant="secondary"
                     size="sm"
@@ -339,10 +322,29 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                     }}
                     disabled={isCreanting || isEditting}
                     type="button"
-                    className=" tracking-wider"
+                    className=" tracking-wider w-full sm:w-[unset]"
                   >
                     Cancel
                   </Button>
+                  {landingToEdit ? (
+                    <Button
+                      size="sm"
+                      disabled={isEqual || isCreanting || isEditting}
+                      type="submit"
+                      className=" tracking-wider w-full sm:w-[unset]"
+                    >
+                      Edit
+                    </Button>
+                  ) : (
+                    <Button
+                      size="sm"
+                      disabled={isCreanting || isEditting}
+                      type="submit"
+                      className="w-full sm:w-[unset]"
+                    >
+                      Upload landing page
+                    </Button>
+                  )}
                 </div>
               </form>
             </Form>

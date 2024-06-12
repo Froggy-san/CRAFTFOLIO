@@ -25,7 +25,9 @@ const ProjectView = () => {
 
   const project = projectById?.[0];
   const relatedUser = userById?.[0]; // user that owns the related project.
-  const isProjectOwner = isAuthenticated && user?.id === relatedUser?.userId; // is the current viewer the same person as the owner of the post?
+  const isProjectOwner =
+    user?.role === "admin" ||
+    (isAuthenticated && user?.id === relatedUser?.userId); // is the current viewer the same person as the owner of the post?
 
   if (isLoading)
     return (
@@ -33,14 +35,14 @@ const ProjectView = () => {
         <Loading />
       </div>
     );
+
   if (!project) return <ErrorComp />;
   const imagesToDelete = project.projectImages.map(
     (image: imageObject) => image.imageUrl.split("projects/")[1]
   );
-  // console.log(project, "project .");
-  // console.log(imagesToDelete, "images to delete");
+
   return (
-    <div className=" mb-40">
+    <div className=" mb-40 mt-6">
       {isAuthLoading ? (
         <Loading />
       ) : (

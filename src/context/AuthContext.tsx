@@ -13,6 +13,8 @@ const initailUser = {
   speciality: "",
   username: "",
   created_at: "",
+  role: "",
+  resumeUrl: "",
 };
 
 const INITIAL_STATE = {
@@ -47,6 +49,7 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
 
       const currentUser = await getCurrentUser(); // getting the current user.
 
+      console.log(currentUser, "user data.1!");
       if (currentUser) {
         setUser({
           aud: currentUser.aud,
@@ -57,15 +60,17 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
           phone: currentUser.user_metadata.phone,
           speciality: currentUser.user_metadata.speciality,
           username: currentUser.user_metadata.username,
+          role: currentUser.user_metadata.role,
+          resumeUrl: currentUser.user_metadata.resumeUrl,
           created_at: format(new Date(currentUser.created_at), "LLLL/dd/yyyy"),
         });
         setIsAuthenticated(true);
+        return true;
       } else {
         setUser(undefined);
+        setIsAuthenticated(false);
         return false;
       }
-
-      return true;
     } catch (error) {
       setIsAuthenticated(false);
       setUser(undefined);

@@ -36,7 +36,7 @@ const LandingPage = ({
     <div className=" select-none">
       {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null}
 
-      <div className=" h-[75dvb] md:h-[83dvb] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  p-5">
+      <div className=" h-fit max-h-[83dvb] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  p-5">
         {/* <GranyImg /> */}
         <img
           src={landingPage?.landingImage || defaultLandingPageImage}

@@ -33,6 +33,7 @@ interface sginupProps {
   phone: string;
   speciality: string;
   username: string;
+  role: string;
 }
 
 export async function signUp({
@@ -41,6 +42,7 @@ export async function signUp({
   phone,
   speciality,
   username,
+  role,
 }: sginupProps) {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -51,6 +53,8 @@ export async function signUp({
         phone,
         speciality,
         username,
+        role,
+        resumeUrl: "",
       },
     },
   });
@@ -58,7 +62,16 @@ export async function signUp({
   if (error) throw new Error(error.message);
   const { error: publicUserError } = await supabase
     .from("publicUsers")
-    .insert([{ email, phone, speciality, username, userId: data.user?.id }])
+    .insert([
+      {
+        email,
+        phone,
+        speciality,
+        username,
+        userId: data.user?.id,
+        resumeUrl: "",
+      },
+    ])
     .select();
 
   if (publicUserError) throw new Error(publicUserError.message);
@@ -112,6 +125,7 @@ interface userToBeUpdatedProps {
   avatar: File[] | "";
   userId: string;
   avatarImageToDelete: string | undefined;
+  resumeUrl: string;
 }
 
 export async function updateUser({
@@ -122,11 +136,12 @@ export async function updateUser({
   socials,
   userId,
   avatarImageToDelete,
+  resumeUrl,
 }: userToBeUpdatedProps) {
   //https://ixzmsptjfugshygjmvmh.supabase.co/storage/v1/object/public/avatars/ab67616d0000b273a5151f2ffeb8510131c4af81.jpg?t=2024-04-06T09%3A44%3A53.245Z
 
   const { data, error } = await supabase.auth.updateUser({
-    data: { username, phone, speciality, socials },
+    data: { username, phone, speciality, socials, resumeUrl },
   });
 
   if (error) throw new Error(error.message);
@@ -134,7 +149,7 @@ export async function updateUser({
   // ---
   const { error: publicUserError } = await supabase
     .from("publicUsers")
-    .update({ username, phone, speciality, socials })
+    .update({ username, phone, speciality, socials, resumeUrl })
     .eq("userId", userId)
     .select();
 

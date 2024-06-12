@@ -15,18 +15,20 @@ const FormFieldItem = <TFieldValues extends FieldValues>({
   labelText,
   children,
   fieldName,
+  className,
 }: {
   fieldName: Path<TFieldValues>;
   control: Control<TFieldValues>;
   labelText: string;
   children: ReactElement;
+  className?: string;
 }) => {
   return (
     <FormField
       control={control}
       name={fieldName}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={className}>
           <FormLabel>{labelText}</FormLabel>
           <FormControl>
             {React.cloneElement(children, { ...field })}

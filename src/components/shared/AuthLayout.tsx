@@ -1,7 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
+import { useAuth } from "@/hooks/useAuth";
 
 const AuthLayout = () => {
+  const { isAuthenticated } = useAuth();
+  if (isAuthenticated) return <Navigate to="/" replace={true} />;
   return (
     <div className="flex   justify-between h-screen">
       <Logo

@@ -28,6 +28,8 @@ export default function useUpdateUser() {
         speciality: data.user.user_metadata.speciality,
         username: data.user.user_metadata.username,
         created_at: format(new Date(data.user.created_at), "LLLL/dd/yyyy"),
+        role: data.user.user_metadata.role,
+        resumeUrl: data.user.user_metadata.resumeUrl,
       });
       toast.dismiss();
       toast.success("User info has been updated");

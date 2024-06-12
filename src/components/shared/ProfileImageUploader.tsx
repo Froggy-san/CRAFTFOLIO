@@ -5,9 +5,14 @@ import { LuImagePlus } from "react-icons/lu";
 type AvatarProps = {
   fieldChange: (FILES: File[]) => void;
   mediaUrl?: string;
+  className?: string;
 };
 
-const LandingImageUploader = ({ fieldChange, mediaUrl }: AvatarProps) => {
+const ProfileImageUploader = ({
+  fieldChange,
+  mediaUrl,
+  className,
+}: AvatarProps) => {
   const [fileUrl, setFileUrl] = useState(mediaUrl);
   const [file, setFile] = useState<File[]>([]);
 
@@ -34,13 +39,15 @@ const LandingImageUploader = ({ fieldChange, mediaUrl }: AvatarProps) => {
     <div
       {...getRootProps({
         className:
-          "item-center flex cursor-pointer flex-col  justify-center rounded-full items-center",
+          "item-center flex cursor-pointer flex-col  justify-center rounded-full items-center w-fit mx-auto",
       })}
     >
       <input {...getInputProps()} className="cursor-pointer " />
       {fileUrl ? (
         <>
-          <div className="flex w-[250px] h-[250px]  sm:w-[350px] sm:h-[350px] p-1  lg:p-10 justify-center  ">
+          <div
+            className={`w-[250px] h-[250px]  sm:w-[330px] sm:h-[330px]   p-1   ${className}`}
+          >
             <img
               src={fileUrl}
               alt="image"
@@ -63,4 +70,4 @@ const LandingImageUploader = ({ fieldChange, mediaUrl }: AvatarProps) => {
   );
 };
 
-export default LandingImageUploader;
+export default ProfileImageUploader;
