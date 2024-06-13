@@ -187,7 +187,7 @@ const icons: { [key: string]: JSX.Element } = {
 const options = {
   includeScore: true,
   findAllMatches: true,
-  threshold: 0.4, // Adjust this threshold to your needs
+  threshold: 0.2, // Adjust this threshold to your needs
 };
 const fuse = new Fuse(Object.keys(icons), options);
 

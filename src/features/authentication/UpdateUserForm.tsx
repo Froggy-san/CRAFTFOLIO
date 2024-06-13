@@ -20,49 +20,44 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
-
-import { validateEgyptianPhoneNumber } from "@/utils/helper";
-
-import Avatar from "../../components/shared/Avatar";
 import useUpdateUser from "./useUpdateUser";
-import { useAuth } from "@/hooks/useAuth";
 import { Textarea } from "@/components/ui/textarea";
 import FormRow from "@/components/shared/FormRow";
 import updateUserSchema from "@/formScehmas/updateUserSchema";
 import FormFieldItem from "@/components/shared/FormFieldItem";
 import { User } from "@/types/types";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
+import useObjectCompare from "@/hooks/useCompareObjects";
 
 type updateUserSchemaTypes = z.infer<typeof updateUserSchema>;
 
 const UpdateUserForm = ({ user }: { user: User | undefined }) => {
-  console.log(user, "user))))))))))))))))");
   const { isUpdatingUser, updateUser } = useUpdateUser();
+
+  const defaultValues = {
+    email: user?.email || "",
+    phone: user?.phone || "",
+    speciality: user?.speciality || "",
+    socials: user?.socials || "",
+    username: user?.username || "",
+    resumeUrl: user?.resumeUrl || "",
+    avatar: [],
+  };
 
   const form = useForm<updateUserSchemaTypes>({
     resolver: zodResolver(updateUserSchema),
-    defaultValues: {
-      email: user?.email || "",
-      phone: user?.phone || "",
-      speciality: user?.speciality || "",
-      socials: user?.socials || "",
-      username: user?.username || "",
-      resumeUrl: user?.resumeUrl || "",
-      avatar: [],
-    },
+    defaultValues,
   });
-  function onSubmit(values: updateUserSchemaTypes) {
-    console.log(values);
 
+  const isEqual = useObjectCompare(form.getValues(), defaultValues);
+  function onSubmit(values: updateUserSchemaTypes) {
     updateUser({
       ...values,
       avatar:
         !values.avatar.length || typeof values.avatar === "string"
           ? ""
           : values.avatar,
-
       userId: user?.id || "1",
-
       avatarImageToDelete: user?.avatar ? user.avatar.split("avatars/")[1] : "",
     });
   }
@@ -219,7 +214,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
             </Button>
             <Button
               size="sm"
-              disabled={isUpdatingUser}
+              disabled={isEqual || isUpdatingUser}
               type="submit"
               className=" w-full sm:w-[120px]"
             >

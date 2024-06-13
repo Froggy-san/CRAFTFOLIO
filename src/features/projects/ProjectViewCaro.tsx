@@ -11,6 +11,7 @@ import {
 import { imageObject } from "@/types/types";
 import ImagePortrait from "@/components/shared/ImagePortrait";
 import ImageView from "@/components/shared/ImageView";
+
 const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
   const [viewedImage, setViewedImaged] = useState<null | string>(null);
   const [api, setApi] = React.useState<CarouselApi>();
@@ -38,7 +39,7 @@ const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
   return (
     <div>
       <div className=" flex justify-center items-center">
-        <Carousel setApi={setApi} className="w-full  ">
+        <Carousel setApi={setApi} className=" w-full sm:w-[90%]  ">
           <CarouselContent className="">
             {imageObjs.map((imageObj, index) => (
               <CarouselItem key={index} className="">
@@ -47,9 +48,15 @@ const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
                     className="flex 
              h-[350px] sm:h-[600px]  items-center justify-center p-0  rounded-lg overflow-hidden select-none"
                   >
-                    <ImagePortrait
+                    {/* <ImagePortrait
                       handleViewImage={handleViewImage}
                       image={imageObj.imageUrl}
+                    /> */}
+                    <img
+                      onClick={() => setViewedImaged(imageObj.imageUrl)}
+                      src={imageObj.imageUrl}
+                      alt="image"
+                      className=" w-full h-full object-cover cursor-pointer"
                     />
                   </CardContent>
                 </Card>
