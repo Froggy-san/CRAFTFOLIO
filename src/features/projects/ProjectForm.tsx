@@ -337,14 +337,14 @@ const ProjectForm = ({
                   <div
                     className={`${
                       activeStep === 0 ? "block" : "hidden"
-                    }    mt-5 space-y-4`}
+                    }    mt-5 space-y-4 pb-1`}
                   >
-                    <FormRow className=" justify-between">
+                    <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
                       <FormField
                         control={form.control}
                         name="name"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="w-full">
                             <FormLabel>Name</FormLabel>
                             <FormControl>
                               <Input
@@ -361,7 +361,7 @@ const ProjectForm = ({
                         control={form.control}
                         name="type"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className=" w-full">
                             <FormLabel>Type</FormLabel>
                             <FormControl>
                               <Input
@@ -376,12 +376,12 @@ const ProjectForm = ({
                       />
                     </FormRow>
 
-                    <FormRow className=" justify-between">
+                    <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
                       <FormField
                         control={form.control}
                         name="startDate"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className=" w-full">
                             <FormLabel>Start Date</FormLabel>
                             <FormControl>
                               <Popover>
@@ -425,7 +425,7 @@ const ProjectForm = ({
                         control={form.control}
                         name="endDate"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className=" w-full">
                             <FormLabel>End date</FormLabel>
                             <FormControl>
                               <FormControl>

@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -36,6 +37,7 @@ import _ from "lodash";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import { defaultLandingPageImage } from "@/utils/constants";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
+import { Switch } from "@/components/ui/switch";
 const landingPageSchma = z
   .object({
     primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
@@ -57,7 +59,8 @@ const landingPageSchma = z
           .filter((str) => str !== "")
           .join(",")
       ),
-
+    grainyTexture: z.boolean(),
+    blur: z.boolean(),
     avatar: z.custom<File[]>(),
     landingImage: z.custom<File[]>(),
   })
@@ -74,11 +77,14 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
   const { isCreanting, createLanding } = useCreateLanding();
   const [isOpen, setIsOpen] = useState(false);
 
+  console.log(landingToEdit, "landing to eidit");
   const defaultValues = {
     primaryText: landingToEdit?.primaryText || "",
     secondaryText: landingToEdit?.secondaryText || "",
     tertiaryText: landingToEdit?.tertiaryText || "",
     socials: landingToEdit?.socials || "",
+    grainyTexture: landingToEdit ? landingToEdit?.grainyTexture : true,
+    blur: landingToEdit ? landingToEdit?.blur : true,
     avatar: [],
     landingImage: [],
   };
@@ -88,6 +94,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
     defaultValues, // defaultValues:{...defualtValues (the one we defined up there)}
   });
 
+  console.log(form.getValues(), "from balues");
   // Check if the user changed anything about the landing page's data, to prevent any unnecessary api calls.
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
 
@@ -272,7 +279,51 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="grainyTexture"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                      <div className="space-y-0.5">
+                        <FormLabel className="text-base">Grany image</FormLabel>
+                        <FormDescription>
+                          Receive emails about your account security.
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          aria-readonly
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
 
+                <FormField
+                  control={form.control}
+                  name="blur"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                      <div className="space-y-0.5">
+                        <FormLabel className="text-base">
+                          Blur landing image
+                        </FormLabel>
+                        <FormDescription>
+                          Receive emails about your account security.
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          aria-readonly
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="avatar"
