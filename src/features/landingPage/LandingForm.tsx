@@ -29,7 +29,7 @@ import Avatar from "@/components/shared/Avatar";
 import { Textarea } from "@/components/ui/textarea";
 import useCreateLanding from "./useCreateLanding";
 import { useAuth } from "@/hooks/useAuth";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { landingProps } from "@/types/types";
 import useEditLandingPage from "./useEditLandingPage";
 import IconButton from "@/components/shared/IconButton";
@@ -38,6 +38,8 @@ import useObjectCompare from "@/hooks/useCompareObjects";
 import { defaultLandingPageImage } from "@/utils/constants";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
 import { Switch } from "@/components/ui/switch";
+
+import ColorPicker from "@/components/shared/ColorPicker";
 const landingPageSchma = z
   .object({
     primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
@@ -61,6 +63,12 @@ const landingPageSchma = z
       ),
     grainyTexture: z.boolean(),
     blur: z.boolean(),
+    textColor: z.object({
+      r: z.number(),
+      g: z.number(),
+      b: z.number(),
+      a: z.number(),
+    }),
     avatar: z.custom<File[]>(),
     landingImage: z.custom<File[]>(),
   })
@@ -76,8 +84,10 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
   const { isEditting, editLandingPage } = useEditLandingPage();
   const { isCreanting, createLanding } = useCreateLanding();
   const [isOpen, setIsOpen] = useState(false);
+  const [showColorBoard, setShowColorBoard] = useState(false);
 
   console.log(landingToEdit, "landing to eidit");
+  console.log(showColorBoard, "AASA");
   const defaultValues = {
     primaryText: landingToEdit?.primaryText || "",
     secondaryText: landingToEdit?.secondaryText || "",
@@ -85,6 +95,15 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
     socials: landingToEdit?.socials || "",
     grainyTexture: landingToEdit ? landingToEdit?.grainyTexture : true,
     blur: landingToEdit ? landingToEdit?.blur : true,
+    textColor:
+      landingToEdit && landingToEdit.textColor
+        ? JSON.parse(landingToEdit.textColor)
+        : {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 100,
+          },
     avatar: [],
     landingImage: [],
   };
@@ -141,6 +160,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
           user_id: user?.id || "",
           avatarImageToDelete: avatarImageToRemove,
           landingImageToDelete: landingImageToRemove,
+          textColor: JSON.stringify(values.textColor),
         },
         { onSuccess: () => setIsOpen(false) }
       );
@@ -159,7 +179,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
             typeof values.landingImage[0] === "string"
               ? ""
               : values.landingImage,
-
+          textColor: JSON.stringify(values.textColor),
           user_id: user?.id || "",
         },
         { onSuccess: () => setIsOpen(false) }
@@ -196,7 +216,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
               Talk about your self and what you do.
             </DialogDescription>
           </DialogHeader>
-          <div className="   w-[94%]  mx-auto   px-3">
+          <div className="   w-[94%]  mx-auto   px-1">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -326,6 +346,27 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                 />
                 <FormField
                   control={form.control}
+                  name="textColor"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 relative">
+                      <div className="space-y-0.5">
+                        <FormLabel className="text-base">Grany image</FormLabel>
+                        <FormDescription>
+                          Receive emails about your account security.
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <ColorPicker
+                          color={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
                   name="avatar"
                   render={({ field }) => (
                     <FormItem>
@@ -407,3 +448,42 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
 };
 
 export default LandingForm;
+{
+  /* <ClickAwayListener
+                          onClickAway={() => setShowColorBoard(false)}
+                        >
+                          <div>
+                            <Button
+                              onClick={() => setShowColorBoard((is) => !is)}
+                              type="button"
+                              className=" shadow-2xl border-spacing-2 border-2 border-dotted"
+                              style={{
+                                width: "40px",
+                                height: "25px",
+                                borderRadius: "3px",
+                                backgroundColor: `rgba(${Object.values(
+                                  field.value
+                                ).join(",")})`,
+                              }}
+                            ></Button>
+                            <SketchPicker
+                              color={field.value}
+                              className={` absolute right-0 top-[100%]  duration-150  ${
+                                showColorBoard
+                                  ? "opacity-1 visible"
+                                  : "opacity-0 invisible"
+                              }`}
+                              onChange={(color) => {
+                                // Create a color object that includes the alpha value
+                                const colorWithAlpha = {
+                                  ...color.rgb,
+                                  a: color.rgb.a,
+                                };
+                                console.log(colorWithAlpha, "color with alpha");
+
+                                field.onChange(colorWithAlpha);
+                              }}
+                            />
+                          </div>
+                        </ClickAwayListener> */
+}

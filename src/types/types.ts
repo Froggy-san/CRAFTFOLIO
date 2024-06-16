@@ -27,8 +27,15 @@ export interface landingProps {
   tertiaryText: string;
   grainyTexture: boolean;
   blur: boolean;
+  textColor: string;
   socials: string;
   user_id: string;
+}
+
+export interface landingPageTextProps {
+  primaryText: string;
+  secondaryText: string;
+  tertiaryText: string;
 }
 
 export interface createLandingProps {
@@ -40,6 +47,7 @@ export interface createLandingProps {
   landingImage: File[] | string;
   grainyTexture: boolean;
   blur: boolean;
+  textColor: string;
   user_id: string;
 }
 
@@ -54,6 +62,7 @@ export interface editLandingProps {
   user_id: string;
   grainyTexture: boolean;
   blur: boolean;
+  textColor: string;
   avatarImageToDelete: string | null;
   landingImageToDelete: string | null;
 }

@@ -7,19 +7,14 @@ import useLandingPage from "./useLandingPage";
 import LandingForm from "./LandingForm";
 // import Loading from "@/components/shared/Loading";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-import { defaultLandingPageImage } from "@/utils/constants";
+import { defaultLandingPageImage, defaultText } from "@/utils/constants";
 import GrainyImg from "@/components/shared/GrainyImg";
-const defaultText = {
-  title: ` Hello, I am Something something and i whatever whatever fuck you`,
-  about: `Tech-savvy and eager, the Junior React Developer combines web
-    fundamentals with a love for React, a UI-building library. They
-    write clean code and navigate the web's blueprint. Their React
-    skills shine, crafting reusable components and managing data flow.
-    Always learning, they explore React's ecosystem. From collaborating
-    on projects to crafting UIs, each challenge paves their path to
-    becoming a web development force.`,
-};
 
+import LandingPageText from "./LandingPageText";
+import LandingUserInfo from "./LandingUserInfo";
+import LandingPageImage from "./LandingPageImage";
+import { landingProps } from "@/types/types";
+const theColorBlack = "0,0,0,1";
 const LandingPage = ({
   isUser,
   isOwner,
@@ -27,47 +22,45 @@ const LandingPage = ({
   isUser: boolean;
   isOwner: boolean;
 }) => {
+  /// getting the LandingPage related to the page owner, in that userLandingPage data there might be a profile picture that user added in the landing page if not we are getting the userAvatar to put it instead.
   const { isLoading, userLandingPage, userAvatar } = useLandingPage();
 
-  const landingPage = userLandingPage?.[0];
-  console.log(landingPage, "landing page,!!");
+  const landingPage: landingProps | undefined = userLandingPage?.[0];
+  const textColor =
+    landingPage && landingPage.textColor
+      ? Object.values(JSON.parse(landingPage.textColor)).join(",")
+      : theColorBlack;
+  console.log(landingPage, "landing pagessssssssssssssss");
+  const landingPageText = {
+    primaryText: landingPage?.primaryText || defaultText.title,
+    secondaryText: landingPage?.secondaryText || defaultText.about,
+    tertiaryText: landingPage?.tertiaryText || defaultText.about,
+  };
+
   if (isLoading) return <FullSnLoading />;
 
   return (
     <div className=" select-none">
       {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null}
 
-      <div className="  max-h-[83dvb] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 p-5">
+      <div className="  max-h-[83vh] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 p-5">
         {!landingPage || landingPage.grainyTexture ? <GrainyImg /> : null}
-        <img
-          src={landingPage?.landingImage || defaultLandingPageImage}
-          alt="asa"
-          className={`absolute w-full h-full inset-0 object-cover ${
-            !landingPage || (landingPage.blur && "blur-[3px]")
-          } `}
+
+        <LandingPageImage
+          landingImage={landingPage?.landingImage || defaultLandingPageImage}
+          imageEffects={!landingPage || landingPage?.blur}
         />
-        <div className=" z-10 h-full flex flex-col gap-3  flex-1 max-w-[1000px]  text-teal-400">
-          <h1 className="  text-xl  xs:text-1xl md:text-2xl lg:text-4xl ">
-            {landingPage?.primaryText || defaultText.title}
-          </h1>
 
-          <h2 className=" text-xs xs:text-sm sm:text-xl sm:pt-6  md:pt-16  lg:pt-24 lg:text-2xl">
-            {landingPage?.secondaryText || defaultText.about}
-          </h2>
-
-          <p className=" hidden md:block text-sm">
-            {landingPage?.tertiaryText || defaultText.about}
-          </p>
-        </div>
-
-        <div className=" z-10 h-full w-[200px] flex  sm:items-end items-center flex-col gap-3 mb-auto   ">
-          <div className=" flex flex-col gap-2 items-center h-full">
-            <UserLandingProfile
-              avatar={landingPage?.avatarImage || userAvatar?.[0].avatar || ""}
-            />
-            <HandleIcons links={landingPage?.socials.split(",") || []} />
-          </div>
-        </div>
+        <LandingPageText
+          landingPageText={landingPageText}
+          style={{ color: `rgba(${textColor})` }}
+        />
+        <LandingUserInfo
+          landingPageAvatarImg={
+            landingPage?.avatarImage || userAvatar?.[0].avatar || ""
+          }
+          icons={landingPage?.socials.split(",") || []}
+        />
       </div>
     </div>
   );

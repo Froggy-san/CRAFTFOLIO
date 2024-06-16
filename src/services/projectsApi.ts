@@ -106,6 +106,7 @@ export async function createLanding({
   user_id,
   grainyTexture,
   blur,
+  textColor,
 }: createLandingProps) {
   const avatarIsAString = typeof avatar === "string";
   const landingImageIsAString = typeof landingImage === "string";
@@ -137,6 +138,7 @@ export async function createLanding({
     socials,
     blur,
     grainyTexture,
+    textColor,
     avatarImage: avatarPath,
     landingImage: landingImagePath,
   };
@@ -181,6 +183,7 @@ export async function editLandtingPage(landingToEdit: editLandingProps) {
     landingImage: landingToEdit.landingImage,
     grainyTexture: landingToEdit.grainyTexture,
     blur: landingToEdit.blur,
+    textColor: landingToEdit.textColor,
     socials: landingToEdit.socials,
   };
 
