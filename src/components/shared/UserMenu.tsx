@@ -31,13 +31,13 @@ const UserMenu = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="ghost">
           {" "}
           <UserTag
             showToolTip={false}
             user={user}
             link=""
-            className=" w-[120px]"
+            className="w-fit max-w-[120px]"
           />
         </Button>
       </DropdownMenuTrigger>

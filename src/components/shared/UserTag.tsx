@@ -50,7 +50,7 @@ const UserTag = ({
               </p>
             </TooltipComp>
           ) : (
-            <p className=" flex-1 overflow-hidden whitespace-nowrap overflow-ellipsis ">
+            <p className=" flex-1 overflow-hidden whitespace-nowrap overflow-ellipsis hidden sm:block ">
               {isLoading ? "Loading..." : user.username || "user"}
             </p>
           )}

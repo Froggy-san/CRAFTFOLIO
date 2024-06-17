@@ -20,7 +20,7 @@ const UserProfile = () => {
   // useScrollUpWhenMounted();
 
   const { userId } = useParams();
-  const isTheOwnerOfPage = user?.id === userId;
+  const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
 
   // const userProfileId = userId || "";
   // const { isLoading: isUserProfileLoading, userProfile } = useGetUserProfile();

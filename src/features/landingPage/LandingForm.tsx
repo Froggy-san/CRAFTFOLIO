@@ -84,10 +84,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
   const { isEditting, editLandingPage } = useEditLandingPage();
   const { isCreanting, createLanding } = useCreateLanding();
   const [isOpen, setIsOpen] = useState(false);
-  const [showColorBoard, setShowColorBoard] = useState(false);
 
-  console.log(landingToEdit, "landing to eidit");
-  console.log(showColorBoard, "AASA");
   const defaultValues = {
     primaryText: landingToEdit?.primaryText || "",
     secondaryText: landingToEdit?.secondaryText || "",
@@ -124,6 +121,18 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
       ...defaultValues,
     });
   }, [landingToEdit, form]);
+
+  useEffect(() => {
+    const handleBackButton = (event: PopStateEvent) => {
+      if (isOpen) {
+        event.preventDefault();
+        handleClose(); // Set isOpen to false explicitly
+      }
+    };
+
+    window.addEventListener("popstate", handleBackButton);
+    return () => window.removeEventListener("popstate", handleBackButton);
+  }, [isOpen]);
 
   function handleClose() {
     setIsOpen((is) => !is);

@@ -215,3 +215,16 @@ export async function deletePublicUser(userId: string) {
     .eq("userId", userId);
   if (error) throw new Error(error?.message);
 }
+
+export async function getUserByNameOrEmail(searchTerm: string) {
+  const { data: publicUsers, error } = await supabase
+    .from("publicUsers")
+    .select("userId,username,avatar,email")
+    .or(`username.ilike.%${searchTerm}%,email.ilike.%${searchTerm}`);
+
+  if (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+  return publicUsers;
+}

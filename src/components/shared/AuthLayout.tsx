@@ -11,7 +11,7 @@ const AuthLayout = () => {
         className=" absolute left-5
       top-5"
       />
-      <div className="w-full md:w-[50%]  flex justify-center items-center h-full ">
+      <div className="w-full md:w-[50%]  flex justify-center items-center  min-h-full md:h-full h-fit ">
         <Outlet />
       </div>
       <img

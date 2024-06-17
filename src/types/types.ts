@@ -71,6 +71,7 @@ export interface publicUser {
   userId: string;
   username: string;
   avatar: string;
+  email?: string;
 }
 
 export interface imageObject {

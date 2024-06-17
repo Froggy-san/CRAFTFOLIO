@@ -6,13 +6,13 @@ export default function useDeleteParam() {
 
   const navigate = useNavigate();
   const deleteParam = useCallback(
-    (paramName: string) => {
+    (paramName: string, replace?: boolean) => {
       // Create a new URLSearchParams object without the product parameter
       const newParams = new URLSearchParams(searchParams);
       newParams.delete(paramName);
 
       // Navigate to the same pathname with the new search string
-      navigate({ search: newParams.toString() });
+      navigate({ search: newParams.toString() }, { replace: replace });
     },
     [navigate, searchParams]
   );

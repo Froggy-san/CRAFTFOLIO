@@ -26,7 +26,7 @@ const Home = () => {
   console.log(posts, "POSTS");
   return (
     <div>
-      <div className=" ball"></div>
+      {/* <div className=" ball"></div> */}
       <Banner />
 
       {/* {user ? (
