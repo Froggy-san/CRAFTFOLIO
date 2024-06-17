@@ -26,7 +26,7 @@ const SearchBar = ({
         autoFocus
         className="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50  "
         value={searchTerm}
-        type="search"
+        type="text"
         placeholder="Search for people..."
         onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -35,7 +35,7 @@ const SearchBar = ({
         variant="link"
         className=" hover:opacity-80 duration-200"
       >
-        <IoClose size={15} />
+        <IoClose size={17} />
       </IconButton>
     </div>
   );

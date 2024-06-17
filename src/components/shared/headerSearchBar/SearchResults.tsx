@@ -16,7 +16,9 @@ const SearchResults = ({
   closeDialogFn,
 }: SearchResultsProps) => {
   return (
-    <div className={`px-2   max-h-[40vh] overflow-y-auto ${className}`}>
+    <div
+      className={`px-2   max-h-[300px]  overflow-x-hidden overflow-y-auto ${className}`}
+    >
       <h1 className=" text-sm font-semibold ml-3 mb-2">Users</h1>
       <ul>
         {users.map((user) => (

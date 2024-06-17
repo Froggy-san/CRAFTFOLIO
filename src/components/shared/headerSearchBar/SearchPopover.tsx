@@ -50,20 +50,26 @@ const SearchPopover = ({ open, onOpenChange }: searchPopoverProps) => {
             setSearchTerm={setSearchTerm}
           />
         </DialogHeader>
-        {publicUsers?.length ? (
-          <SearchResults
-            closeDialogFn={() => onOpenChange(false)}
-            users={publicUsers}
-          />
-        ) : error ? (
-          <p className=" text-center">Something went wrong!</p>
-        ) : searchTerm && !publicUsers?.length ? (
-          <p className=" text-center  truncate px-4 w-full">
-            No results for "{searchTerm}"
-          </p>
-        ) : (
-          <p className=" text-center">Start searching</p>
-        )}
+        <div>
+          {publicUsers?.length ? (
+            <SearchResults
+              closeDialogFn={() => onOpenChange(false)}
+              users={publicUsers}
+            />
+          ) : error ? (
+            <p className=" text-center  py-6 truncate px-4 w-full">
+              Something went wrong!
+            </p>
+          ) : searchTerm && !publicUsers?.length ? (
+            <p className=" text-center  py-6 truncate px-4 w-full">
+              No results for "{searchTerm}"
+            </p>
+          ) : (
+            <p className=" text-center  py-6 truncate px-4 w-full">
+              Start searching
+            </p>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );
