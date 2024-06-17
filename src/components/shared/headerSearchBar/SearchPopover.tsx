@@ -40,17 +40,22 @@ const SearchPopover = ({ open, onOpenChange }: searchPopoverProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* <DialogTrigger>Open</DialogTrigger> */}
-      <DialogContent className="p-0 pb-3 border overflow-hidden ">
-        <DialogHeader>
-          {/* <DialogTitle>Are you absolutely sure?</DialogTitle> */}
+      <DialogContent className="p-0 pb-3 border  overflow-hidden ">
+        {/* <DialogHeader>
+  
 
           <SearchBar
             closeDiaFn={() => onOpenChange(false)}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
           />
-        </DialogHeader>
-        <div>
+        </DialogHeader> */}
+        <div className=" h-full">
+          <SearchBar
+            closeDiaFn={() => onOpenChange(false)}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
           {publicUsers?.length ? (
             <SearchResults
               closeDialogFn={() => onOpenChange(false)}
