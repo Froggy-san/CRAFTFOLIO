@@ -2,7 +2,7 @@
 // import { differenceInDays } from "date-fns/esm";
 
 import supabase from "@/services/supabase";
-import { formatDistance, subDays } from "date-fns";
+import { formatDistance, parseISO, subDays } from "date-fns";
 
 // // We want to make this function work for both Date objects and strings (which come from Supabase)
 // export const subtractDates = (dateStr1, dateStr2) =>
@@ -173,13 +173,24 @@ export async function copyTextToClipboard(text: string) {
   }
 }
 
-export function calcHowManyDaysAgo(date: string) {
+// export function calcHowManyDaysAgo(date: string) {
+//   if (!date) {
+//     console.warn("You didn't put a date!");
+//     return "";
+//   }
+//   return formatDistance(date, new Date(), { addSuffix: true });
+//   //=> "3 days ago"
+// }
+
+export function calcHowManyDaysAgo(date: string | undefined) {
   if (!date) {
     console.warn("You didn't put a date!");
     return "";
+  } else {
+    const dateToCompare = parseISO(date);
+    return formatDistance(dateToCompare, new Date(), { addSuffix: true });
+    //=> "3 days ago"
   }
-  return formatDistance(date, new Date(), { addSuffix: true });
-  //=> "3 days ago"
 }
 
 export function handleText(text: string) {

@@ -292,6 +292,7 @@ export async function createProject(project: createProjectProps) {
         return {
           project_id: data.at(0).id,
           imageUrl: `${supabaseUrl}/storage/v1/object/public/projects/${name}`,
+          userId: project.user_id,
         };
       })
     : [];
@@ -336,6 +337,7 @@ export async function editPost({
   postToEdit,
   imagesToDelete,
   postId,
+  userId,
 }: editProps) {
   const { projectImages, ...post } = postToEdit;
 
@@ -365,6 +367,7 @@ export async function editPost({
         return {
           project_id: data.at(0).id,
           imageUrl: `${supabaseUrl}/storage/v1/object/public/projects/${imageName}`,
+          userId,
         };
       })
     : [];
@@ -548,4 +551,39 @@ export async function deletePost({ postId, imagesToDelete }: deletePostProps) {
   const { error } = await supabase.from("projects").delete().eq("id", postId);
 
   if (error) throw new Error(error.message);
+}
+
+export async function deleteAllUsersPosts(userId: string) {
+  const { error: error } = await supabase
+    .from("projects")
+    .delete()
+    .eq("user_id", userId);
+
+  if (error) throw new Error(error.message);
+
+  const { data: imageNames, error: projectImagesError } = await supabase
+    .from("projectImages")
+    .select("imageUrl")
+    .eq("userId", userId);
+
+  if (projectImagesError) throw new Error(projectImagesError.message);
+
+  let imagesToDelete: string[] = [];
+
+  imageNames &&
+    imageNames.forEach((name) =>
+      imagesToDelete.push(name.imageUrl.split("projects/")[1])
+    );
+
+  const { error: imageDeletionError } = await supabase
+    .from("projectImages")
+    .delete()
+    .eq("userId", userId);
+
+  if (imageDeletionError) throw new Error(imageDeletionError.message);
+
+  deleteImgFromStrage({
+    storageName: "projects",
+    imagesToDelete,
+  });
 }

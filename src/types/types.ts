@@ -125,6 +125,7 @@ export interface editProps {
   postToEdit: editProjectProps;
   imagesToDelete: string[];
   postId: number;
+  userId: string;
 }
 
 // shadcn button types

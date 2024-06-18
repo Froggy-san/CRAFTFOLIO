@@ -62,7 +62,7 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
           username: currentUser.user_metadata.username,
           role: currentUser.user_metadata.role,
           resumeUrl: currentUser.user_metadata.resumeUrl,
-          created_at: format(new Date(currentUser.created_at), "LLLL/dd/yyyy"),
+          created_at: currentUser.created_at,
         });
         setIsAuthenticated(true);
         return true;

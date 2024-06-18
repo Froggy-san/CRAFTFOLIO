@@ -228,3 +228,12 @@ export async function getUserByNameOrEmail(searchTerm: string) {
   }
   return publicUsers;
 }
+
+export async function updatePassword(password: string) {
+  const { data, error } = await supabase.auth.updateUser({
+    password,
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}

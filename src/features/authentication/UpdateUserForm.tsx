@@ -207,7 +207,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
               onClick={() => {
                 form.reset();
               }}
-              disabled={isUpdatingUser}
+              disabled={isEqual || isUpdatingUser}
               type="button"
             >
               Cancel

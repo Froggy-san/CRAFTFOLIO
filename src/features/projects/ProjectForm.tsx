@@ -246,6 +246,7 @@ const ProjectForm = ({
         postToEdit: { ...values, links: JSON.stringify(values.links) },
         postId: post.id,
         imagesToDelete: deletedImages,
+        userId: user?.id || "",
       });
     } else {
       console.log(typeof values.startDate);

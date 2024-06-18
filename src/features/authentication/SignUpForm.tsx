@@ -24,10 +24,9 @@ import { Link } from "react-router-dom";
 import useSignUp from "./useSignUp";
 import { validateEgyptianPhoneNumber } from "@/utils/helper";
 import { useState } from "react";
-import IconButton from "@/components/shared/IconButton";
-import { RiEyeCloseFill, RiEyeFill } from "react-icons/ri";
 import FormFieldItem from "@/components/shared/FormFieldItem";
 import signUpSchema from "@/formScehmas/signUpSchema";
+import PasswordShowHide from "@/components/shared/PasswordShowHide";
 
 type sginUpSchemaTypes = z.infer<typeof signUpSchema>;
 
@@ -71,107 +70,24 @@ const SignUpForm = () => {
           >
             <Input placeholder="cartfoilio200" disabled={isSigning} />
           </FormFieldItem>
-
-          {!isShowPass ? (
-            <FormFieldItem<sginUpSchemaTypes>
-              labelText="Password"
-              control={form.control}
-              fieldName="password"
-            >
-              <div className=" relative ">
-                <Input
-                  className=" pr-10"
-                  disabled={isSigning}
-                  type="password"
-                  placeholder="Password"
-                />
-                <IconButton
-                  type="button"
-                  ariaLabel="show password"
-                  variant="outline"
-                  className="  absolute right-3 top-1/2 translate-y-[-50%]"
-                  onClick={() => setIsShowPass(true)}
-                >
-                  <RiEyeFill size={20} />
-                </IconButton>
-              </div>
-            </FormFieldItem>
-          ) : (
-            <FormFieldItem<sginUpSchemaTypes>
-              labelText="Password"
-              control={form.control}
-              fieldName="password"
-            >
-              <div className=" relative ">
-                <Input
-                  className=" pr-10"
-                  disabled={isSigning}
-                  type="text"
-                  placeholder="Password"
-                />
-                <IconButton
-                  type="button"
-                  ariaLabel=" hide password"
-                  variant="outline"
-                  className="  absolute right-3 top-1/2 translate-y-[-50%]"
-                  onClick={() => setIsShowPass(false)}
-                >
-                  <RiEyeCloseFill size={20} />
-                </IconButton>
-              </div>
-            </FormFieldItem>
-          )}
+          <PasswordShowHide<sginUpSchemaTypes>
+            onChange={setIsShowPass}
+            disabled={isSigning}
+            show={isShowPass}
+            labelText={"Password"}
+            fieldName={"password"}
+            control={form.control}
+          />
 
           {/* Confirm password start */}
-          {!isShowPass ? (
-            <FormFieldItem<sginUpSchemaTypes>
-              labelText="Confirm password"
-              control={form.control}
-              fieldName="confirmPassword"
-            >
-              <div className=" relative ">
-                <Input
-                  className=" pr-10"
-                  disabled={isSigning}
-                  type="password"
-                  placeholder="Password"
-                />
-                <IconButton
-                  type="button"
-                  ariaLabel="show password"
-                  variant="outline"
-                  className="  absolute right-3 top-1/2 translate-y-[-50%]"
-                  onClick={() => setIsShowPass(true)}
-                >
-                  <RiEyeFill size={20} />
-                </IconButton>
-              </div>
-            </FormFieldItem>
-          ) : (
-            <FormFieldItem<sginUpSchemaTypes>
-              labelText="Confirm password"
-              control={form.control}
-              fieldName="confirmPassword"
-            >
-              <div className=" relative ">
-                <Input
-                  className=" pr-10"
-                  disabled={isSigning}
-                  type="text"
-                  placeholder="Password"
-                />
-                <IconButton
-                  type="button"
-                  ariaLabel=" hide password"
-                  variant="outline"
-                  className="  absolute right-3 top-1/2 translate-y-[-50%]"
-                  onClick={() => setIsShowPass(false)}
-                >
-                  <RiEyeCloseFill size={20} />
-                </IconButton>
-              </div>
-            </FormFieldItem>
-          )}
+          <PasswordShowHide<sginUpSchemaTypes>
+            onChange={setIsShowPass}
+            disabled={isSigning}
+            show={isShowPass}
+            labelText={"Confirm password"}
+            fieldName={"confirmPassword"}
+            control={form.control}
+          />
 
           {/* Confirm password end */}
           <FormFieldItem<sginUpSchemaTypes>

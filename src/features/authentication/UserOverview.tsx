@@ -8,12 +8,14 @@ import { calcHowManyDaysAgo } from "@/utils/helper";
 import React, { useState } from "react";
 import useGetNumOfProjects from "../projects/useGetNumOfProjects";
 import Loading from "@/components/shared/Loading";
+import { format } from "date-fns";
 
 const UserOverview = ({ user }: { user: User | undefined }) => {
   const { isLoading, count } = useGetNumOfProjects(user?.id || "");
-
   const [viewedImage, setViewedImage] = useState<string | null>(null);
   const image = user?.avatar || defaultProfilePicture;
+  const date = user ? format(new Date(user.created_at), "LLLL/dd/yyyy") : "";
+  const timePassed = calcHowManyDaysAgo(user ? user.created_at : "");
   return (
     <Card className=" flex  p-5 my-4 w-full lg:max-w-[70%] mx-auto gap-2">
       <div className=" space-y-1 flex-1">
@@ -22,9 +24,9 @@ const UserOverview = ({ user }: { user: User | undefined }) => {
         </h1>
         <p aria-label="email address">{user?.email}</p>
 
-        <p aria-label="the date the user created the account">{`Joined Craftfolio on ${
-          user?.created_at
-        } (${calcHowManyDaysAgo(user?.created_at || "")})`}</p>
+        <p aria-label="the date the user created the account">
+          {`Joined Craftfolio on ${date} (${timePassed})`}
+        </p>
         <div className=" flex gap-1">
           Created {isLoading ? <Loading /> : count || 0} proejcts.
         </div>
