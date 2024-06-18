@@ -50,6 +50,12 @@ const SearchPopover = ({ open, onOpenChange }: searchPopoverProps) => {
             setSearchTerm={setSearchTerm}
           />
         </DialogHeader> */}
+        <DialogHeader>
+          <DialogTitle>Create Your landing page.</DialogTitle>
+          <DialogDescription>
+            Talk about your self and what you do.
+          </DialogDescription>
+        </DialogHeader>
         <div className=" h-full">
           <SearchBar
             closeDiaFn={() => onOpenChange(false)}
