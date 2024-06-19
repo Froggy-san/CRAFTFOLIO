@@ -1,5 +1,6 @@
 import Loading from "@/components/shared/Loading";
 import { Button } from "@/components/ui/button";
+import DeleteAllPost from "@/features/authentication/DeleteAllPost";
 import UpdatePasswordForm from "@/features/authentication/UpdatePasswordForm";
 import UpdateUserForm from "@/features/authentication/UpdateUserForm";
 import UserOverview from "@/features/authentication/UserOverview";
@@ -9,7 +10,7 @@ import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 
 const UserSettings = () => {
   const { user, isLoading } = useAuth();
-  const { isDeletingPosts, deleteAllPosts } = useDeleteUserPosts();
+
   useScrollUpWhenMounted();
   if (isLoading)
     return (
@@ -22,11 +23,7 @@ const UserSettings = () => {
       <UserOverview user={user} />
       <UpdateUserForm user={user} />
       <UpdatePasswordForm />
-      {user && (
-        <Button variant="destructive" onClick={() => deleteAllPosts(user.id)}>
-          Delete all posts
-        </Button>
-      )}
+      {user && <DeleteAllPost userId={user.id} />}
     </div>
   );
 };
