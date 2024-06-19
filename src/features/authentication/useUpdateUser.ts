@@ -27,7 +27,7 @@ export default function useUpdateUser() {
         phone: data.user.user_metadata.phone,
         speciality: data.user.user_metadata.speciality,
         username: data.user.user_metadata.username,
-        created_at: format(new Date(data.user.created_at), "LLLL/dd/yyyy"),
+        created_at: data.user.created_at,
         role: data.user.user_metadata.role,
         resumeUrl: data.user.user_metadata.resumeUrl,
       });
