@@ -11,6 +11,7 @@ import IconButton from "./IconButton";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LENGHT_OF_STRING } from "@/utils/constants";
 import { variant } from "@/types/types";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 interface CollapseContextValue {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -45,12 +46,17 @@ const Collapse = function ({
 }: CollapseProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [showCollapseBtn, setShowCollapseBtn] = useState(false);
+  // we need to know if the user is using a bigger screen or not, because if not, and the text length is too big the text will look bad and too much, thus we need to make the text more appealing by dividing the text length by 2, the number 2 it self is a random number i picked up feel free to change it.
+  const isBigScreen = useMediaQuery("(min-width: 768px)");
+  const isTextBig = textLenght > 600;
+  const textLenghtinScreen =
+    !isBigScreen && isTextBig ? textLenght / 2 : textLenght;
   return (
     <CollapseContext.Provider
       value={{
         isOpen,
         setIsOpen,
-        textLenght,
+        textLenght: textLenghtinScreen,
         setShowCollapseBtn,
         showCollapseBtn,
       }}

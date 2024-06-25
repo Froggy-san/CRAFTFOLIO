@@ -58,7 +58,7 @@ const SearchPopover = ({ open, onOpenChange }: searchPopoverProps) => {
             Talk about your self and what you do.
           </DialogDescription>
         </DialogHeader>
-        <div className=" h-full">
+        <div className=" w-full overflow-hidden h-full">
           <SearchBar
             closeDiaFn={() => onOpenChange(false)}
             searchTerm={searchTerm}

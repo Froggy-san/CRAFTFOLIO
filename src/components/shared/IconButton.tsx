@@ -15,7 +15,7 @@ const IconButton = ({
   style,
 }: {
   children?: ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: MouseEvent) => void;
   variant?: variant;
   className?: string;
   link?: string;
@@ -29,7 +29,7 @@ const IconButton = ({
       <Button
         type={type ? type : "button"}
         aria-label={ariaLabel}
-        onClick={onClick}
+        onClick={() => onClick?.()}
         size="sm"
         variant={variant || "default"}
         className={`p-0 w-7 h-7 ${className}`}
@@ -45,7 +45,7 @@ const IconButton = ({
       <Button
         type={type ? type : "button"}
         aria-label={ariaLabel}
-        onClick={onClick}
+        onClick={() => onClick?.()}
         size="sm"
         disabled={disabled}
         variant={variant || "default"}

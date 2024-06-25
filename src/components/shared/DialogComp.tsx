@@ -6,18 +6,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ReactNode } from "react";
-// import { useLocation } from "react-router-dom";
-
+import React, {
+  Dispatch,
+  ReactElement,
+  ReactNode,
+  SetStateAction,
+  cloneElement,
+  useState,
+} from "react";
+// Interface for button props
+interface ButtonProps {
+  onClick?: React.MouseEventHandler<HTMLElement>;
+}
 interface diaProps {
   children?: ReactNode;
-  buttonText?: string | ReactNode;
+  buttonText?: string | ReactElement<ButtonProps>;
   diaTitle?: string;
   diaDescription?: string;
   dialogTriggerStyles?: string;
   dialogContentStyles?: string;
   isOpen?: boolean;
-  setIsOpen?: (value: boolean) => void;
+  setIsOpen?: React.Dispatch<SetStateAction<boolean>>;
   showOpenButton?: boolean;
 }
 
@@ -34,12 +43,24 @@ const DialogComp = ({
 }: diaProps) => {
   // const location = useLocation();
   // console.log(location.pathname.includes("/"), "LONK");
+  const [open, setOpen] = useState(false);
+  function handleOpen() {
+    if (setIsOpen) {
+      setIsOpen((open) => !open);
+    } else setOpen((open) => !open);
+  }
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen || open} onOpenChange={handleOpen}>
       {showOpenButton ? (
-        <DialogTrigger className={`${dialogTriggerStyles}`}>
-          {buttonText || "open"}
-        </DialogTrigger>
+        buttonText && React.isValidElement(buttonText) ? (
+          // Clone the element and add onClick
+          cloneElement(buttonText, { onClick: handleOpen })
+        ) : (
+          // If not an element, render DialogTrigger with onClick
+          <DialogTrigger className={`${dialogTriggerStyles}`}>
+            {buttonText || "open"}
+          </DialogTrigger>
+        )
       ) : null}
       <DialogContent className={` ${dialogContentStyles}`}>
         <DialogHeader>

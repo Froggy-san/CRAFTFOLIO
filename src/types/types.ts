@@ -128,6 +128,13 @@ export interface editProps {
   userId: string;
 }
 
+export interface aboutMeFormProps {
+  links: string | undefined;
+  toolsAndTech: string | undefined;
+  arrowType: string | undefined;
+  arrowColor: string | undefined;
+}
+
 // shadcn button types
 export type variant =
   | "link"

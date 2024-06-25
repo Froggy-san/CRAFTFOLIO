@@ -20,7 +20,7 @@ const UserLandingProfile = ({
           setViewedImaged(profileImage);
         }}
         aria-label="user's picture in the landing page"
-        className=" w-28 h-28 xs:w-36 xs:h-36 rounded-full overflow-hidden  cursor-pointer"
+        className=" w-28 h-28 xs:w-36 xs:h-36  lg:w-40 lg:h-40 rounded-full overflow-hidden  cursor-pointer"
       >
         <img
           src={profileImage}

@@ -35,11 +35,12 @@ import useEditLandingPage from "./useEditLandingPage";
 import IconButton from "@/components/shared/IconButton";
 import _ from "lodash";
 import useObjectCompare from "@/hooks/useCompareObjects";
-import { defaultLandingPageImage } from "@/utils/constants";
+import { defaultLandingPageImage, defaultTextColor } from "@/utils/constants";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
 import { Switch } from "@/components/ui/switch";
 
 import ColorPicker from "@/components/shared/ColorPicker";
+import { colorSchema } from "@/formScehmas/colorSchema";
 const landingPageSchma = z
   .object({
     primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
@@ -47,10 +48,10 @@ const landingPageSchma = z
     }),
     secondaryText: z
       .string()
-      .max(440, { message: `Text must be no more than (150)char.` }),
+      .max(600, { message: `Text must be no more than (150)char.` }),
     tertiaryText: z
       .string()
-      .max(350, { message: `Text must be no more than (150)char.` }),
+      .max(450, { message: `Text must be no more than (150)char.` }),
     socials: z
       .string()
       .trim()
@@ -63,12 +64,7 @@ const landingPageSchma = z
       ),
     grainyTexture: z.boolean(),
     blur: z.boolean(),
-    textColor: z.object({
-      r: z.number(),
-      g: z.number(),
-      b: z.number(),
-      a: z.number(),
-    }),
+    textColor: colorSchema,
     avatar: z.custom<File[]>(),
     landingImage: z.custom<File[]>(),
   })
@@ -95,12 +91,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
     textColor:
       landingToEdit && landingToEdit.textColor
         ? JSON.parse(landingToEdit.textColor)
-        : {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 100,
-          },
+        : defaultTextColor,
     avatar: [],
     landingImage: [],
   };
@@ -110,7 +101,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
     defaultValues, // defaultValues:{...defualtValues (the one we defined up there)}
   });
 
-  console.log(form.getValues(), "from balues");
+  // console.log(form.getValues(), "from balues");
   // Check if the user changed anything about the landing page's data, to prevent any unnecessary api calls.
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
 

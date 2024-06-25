@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
+import { defaultTextColor } from "@/utils/constants";
 
 export async function deleteUser(userId: string) {
   // const serviceRoleKey =
@@ -79,6 +80,9 @@ export async function signUp({
   const aboutError = await createAboutMe({
     links: "",
     aboutMe: "",
+    toolsAndTech: "",
+    arrowType: "",
+    arrowColor: JSON.stringify(defaultTextColor),
     user_id: data.user?.id,
   });
   if (aboutError) {

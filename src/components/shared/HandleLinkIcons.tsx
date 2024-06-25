@@ -59,10 +59,14 @@ const icons: { [key: string]: JSX.Element } = {
 const HandleLinkIcons = ({
   links,
   className,
+  errorMessage,
 }: {
   links: string[];
   className?: string;
+  errorMessage?: string;
 }) => {
+  const urls = links && links.filter((el) => el !== ""); // we are filtering it because the links we are getting always has an empty string which gives us an error every time this function is called.
+
   const extractDomain = (url: string) => {
     try {
       // Create a URL object from the input URL
@@ -78,19 +82,23 @@ const HandleLinkIcons = ({
     }
   };
 
-  const iconLinks = links
-    .map((link) => extractDomain(link))
-    .filter((el) => typeof el === "string");
+  const iconLinks = urls.length
+    ? urls
+        .map((url) => extractDomain(url))
+        .filter((el) => typeof el === "string")
+    : [];
 
   return (
     <div className={`flex item-center gap-3 ${className}`}>
-      {iconLinks.map((link, i: number) => {
-        return (
-          <Link key={i} target="_blank" to={links[i]}>
-            {icons[link as string]}
-          </Link>
-        );
-      })}
+      {iconLinks.length
+        ? iconLinks.map((link, i: number) => {
+            return (
+              <Link key={i} target="_blank" to={links[i]}>
+                {icons[link as string]}
+              </Link>
+            );
+          })
+        : <p className=" w-full text-center">{errorMessage}</p> || null}
     </div>
   );
 };

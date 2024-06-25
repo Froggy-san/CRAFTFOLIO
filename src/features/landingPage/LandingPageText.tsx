@@ -13,7 +13,7 @@ const LandingPageText = ({
   return (
     <div
       style={style}
-      className={`z-10 h-full flex flex-col  gap-6 xs:gap-10   flex-1 max-w-[1000px]   ${className}`}
+      className={`z-10 h-full flex flex-col  gap-6 xs:gap-10   flex-1 max-w-[1200px] break-all whitespace-pre-wrap  ${className}`}
     >
       <h1 className="  text-xl  xs:text-1xl md:text-2xl lg:text-4xl ">
         {landingPageText.primaryText}

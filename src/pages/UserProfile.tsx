@@ -9,9 +9,10 @@ import Pagination from "@/components/shared/Pagination";
 import LandingPage from "@/features/landingPage/LandingPage";
 import ProjectControls from "@/features/projects/ProjectControls";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-import AboutMe from "@/features/userProfile/AboutMe";
 // import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import Heading from "@/components/shared/Heading";
+import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
+
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
 const UserProfile = () => {
@@ -50,6 +51,7 @@ const UserProfile = () => {
       ) : null}
 
       {/* ------------------ projects section */}
+
       <ProjectControls />
       <div className=" my-5">
         {isPostsLoading ? (
@@ -60,7 +62,7 @@ const UserProfile = () => {
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
       <div className="my-7 mb-52">
-        <Heading>About me</Heading>
+        {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
       </div>
     </div>

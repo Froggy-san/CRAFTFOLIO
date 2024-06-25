@@ -45,7 +45,7 @@ const UserTag = ({
           </Avatar>
           {showToolTip ? (
             <TooltipComp toolTipText={user.username}>
-              <p className="    flex-1 overflow-hidden whitespace-nowrap overflow-ellipsis ">
+              <p className="   w-fit max-w-[150px]  overflow-hidden whitespace-nowrap overflow-ellipsis ">
                 {isLoading ? "Loading..." : user.username || "user"}
               </p>
             </TooltipComp>

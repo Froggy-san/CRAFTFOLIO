@@ -7,6 +7,7 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 
 // Define a generic type for the FormFieldItem component
@@ -16,12 +17,14 @@ const FormFieldItem = <TFieldValues extends FieldValues>({
   children,
   fieldName,
   className,
+  description,
 }: {
   fieldName: Path<TFieldValues>;
   control: Control<TFieldValues>;
   labelText: string;
   children: ReactElement;
   className?: string;
+  description?: string;
 }) => {
   return (
     <FormField
@@ -33,6 +36,7 @@ const FormFieldItem = <TFieldValues extends FieldValues>({
           <FormControl>
             {React.cloneElement(children, { ...field })}
           </FormControl>
+          {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
         </FormItem>
       )}

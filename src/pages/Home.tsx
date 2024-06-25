@@ -3,6 +3,7 @@ import Banner from "@/components/shared/Banner";
 // import LOL from "@/components/shared/LOL";
 // import LinkBtn from "@/components/shared/LinkBtn";
 import Pagination from "@/components/shared/Pagination";
+import TagInput from "@/components/shared/TagsInput";
 // import LinksForm from "@/components/shared/Test2";
 import HomePostControlls from "@/features/home/HomePostControlls";
 import PostsList from "@/features/home/PostList";
@@ -10,11 +11,7 @@ import useGetPosts from "@/features/projects/usePosts";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 
-// const links = ["https://github.com/Froggy-san", "https://www.linkedin.com/in/youssef-osama98/","https://wuzzuf.net/jobs/careers/WUZZUF-Egypt-15061","https://www.facebook.com/profile.php?id=100005639358193"]
 const Home = () => {
-  //   const str = " link1, link2   link  3 , link4  "
-
-  // console.log(str.trim().split(/,\s*/),"STRING!")
   const { user } = useAuth();
   const { posts, isLoading, pageCount } = useGetPosts();
   useScrollUpWhenMounted();

@@ -11,7 +11,7 @@ const LandingUserInfo = ({
   icons,
 }: landingUserInfoProps) => {
   return (
-    <div className=" z-10 h-full w-[200px] flex  sm:items-end items-center flex-col gap-3 mb-auto   ">
+    <div className=" z-10 h-full f-fit flex  sm:items-end items-center flex-col gap-3 mb-auto   ">
       <div className=" flex flex-col gap-2 items-center h-full">
         <UserLandingProfile avatar={landingPageAvatarImg} />
         <HandleLinkIcons links={icons} />

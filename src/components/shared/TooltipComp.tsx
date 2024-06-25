@@ -13,7 +13,7 @@ const TooltipComp = ({
   toolTipText: string;
 }) => {
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={500}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent>

@@ -84,7 +84,7 @@ import TooltipComp from "./TooltipComp";
 const iconSize = 15;
 const imageSize = " w-[20px] h-[20px]";
 
-const icons: { [key: string]: JSX.Element } = {
+export const icons: { [key: string]: JSX.Element } = {
   git: <FaGitAlt size={iconSize} />,
   getHub: <SiGithub size={iconSize} />,
   gitlab: <SiGitlab size={iconSize} />,
@@ -177,7 +177,7 @@ const icons: { [key: string]: JSX.Element } = {
   ),
   vite: (
     <img
-      src="https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/landingImages/logo-with-shadow.png?t=2024-05-23T19%3A47%3A44.023ZZ"
+      src="https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/logo-with-shadow.png"
       className={`${imageSize} rounded-sm`}
     />
   ),
