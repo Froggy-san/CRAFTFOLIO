@@ -26,7 +26,7 @@ const SearchPopover = ({ open, onOpenChange }: searchPopoverProps) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === "k") {
         event.preventDefault(); // Prevent default browser behavior
-        onOpenChange(true);
+        onOpenChange((open) => !open);
       }
     };
 

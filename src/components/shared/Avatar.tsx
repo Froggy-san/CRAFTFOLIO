@@ -42,7 +42,7 @@ const Avatar = ({ fieldChange, mediaUrl }: AvatarProps) => {
       <input {...getInputProps()} className="cursor-pointer " />
       {fileUrl ? (
         <>
-          <div className="flex h-[350px] w-full justify-center   xs:h-[470px] xs:p-5 md:h-[550px] lg:p-10 ">
+          <div className="flex h-[300px] w-full justify-center   xs:h-[350px] sm:h-[400px] xs:p-5 md:h-[550px] lg:p-10 ">
             <img
               src={fileUrl}
               alt="image"

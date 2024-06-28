@@ -7,6 +7,9 @@ import TagInput from "@/components/shared/TagsInput";
 // import LinksForm from "@/components/shared/Test2";
 import HomePostControlls from "@/features/home/HomePostControlls";
 import PostsList from "@/features/home/PostList";
+import LandingDialogDrawer from "@/features/landingPage/LandingDialogDrawer";
+import LandingForm from "@/features/landingPage/LandingForm";
+import LandingFormRewrite from "@/features/landingPage/LandingFromRewrite";
 import useGetPosts from "@/features/projects/usePosts";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
@@ -20,19 +23,12 @@ const Home = () => {
     userId: user?.id,
     avatar: user?.avatar,
   };
-  console.log(posts, "POSTS");
+
   return (
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
 
-      {/* {user ? (
-        <LinkBtn to={`/user/${user.id}`} className="my-8  w-fit">
-          Make your own page.
-        </LinkBtn>
-      ) : null} */}
-
-      {/* <HandleIcons links={links} /> */}
       {/* <svg>
         <filter id="noiseFilter">
           <feTurbulence
@@ -55,15 +51,11 @@ const Home = () => {
         user={userObj}
       />
 
+      {/* <LandingForm /> */}
+      {/* <LandingFormRewrite /> */}
+      <LandingDialogDrawer />
       <PostsList userId={user?.id} posts={posts} isLoading={isLoading} />
       {!pageCount ? null : <Pagination pageCount={pageCount} />}
-      <div className=" my-20">
-        {/* <LinkInputForm /> */}
-
-        {/* <LinksForm />
-
-        <LOL /> */}
-      </div>
     </div>
   );
 };

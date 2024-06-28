@@ -5,7 +5,7 @@ import HandleLinkIcons from "@/components/shared/HandleLinkIcons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { defaultTextColor } from "@/utils/constants";
-import { icons } from "@/components/shared/HandleIcons";
+import { getIconForTool, icons } from "@/components/shared/HandleIcons";
 
 interface AboutMeLinksTech {
   linksAndtech: aboutMeFormProps;
@@ -107,28 +107,35 @@ export const ShowLinksAndTools = ({
             Some of the tools i can use:
           </h1>
           <div className=" flex flex-wrap gap-2  sm:justify-center">
-            {tools.map((tool: string, i) => (
-              <Button
-                key={i}
-                variant="secondary"
-                className=" gap-2    h-fit  w-fit  max-w-[100%]"
-              >
-                {" "}
-                <span
-                  style={{
-                    paddingTop: "3px",
-                    color: `rgb(${Object.values(arrowColor).join(",")})`,
-                  }}
-                  className={`${!icons[tool] && !arrowShape && "hidden"}`}
+            {tools.map((tool: string, i) => {
+              const icon = getIconForTool(tool, true);
+              return (
+                <Button
+                  key={i}
+                  variant="secondary"
+                  className=" gap-2    h-fit  w-fit  max-w-[100%]"
                 >
                   {" "}
-                  {icons[tool] || arrowShape}
-                </span>{" "}
-                <span className="max-w-[100%]  truncate"> {tool}</span>
-              </Button>
-            ))}
+                  <span
+                    style={{
+                      paddingTop: "3px",
+                      color: `rgb(${Object.values(arrowColor).join(",")})`,
+                    }}
+                    className={`${!icon && !arrowShape && "hidden"}`}
+                  >
+                    {" "}
+                    {icon || arrowShape}
+                  </span>{" "}
+                  <span className="max-w-[100%]  truncate"> {tool}</span>
+                </Button>
+              );
+            })}
           </div>
         </div>
+      ) : isAuthenticated ? (
+        <h1 className=" text-center font-semibold border py-3 rounded-md  mt-24">
+          Add the tools you use in your work.
+        </h1>
       ) : null}
     </div>
   );

@@ -46,7 +46,7 @@ import React, { forwardRef, useEffect, useState } from "react";
 import { ClickAwayListener } from "@mui/material";
 import { handleText } from "@/utils/helper";
 import TagsInput from "@/components/shared/TagsInput";
-import useEditAboutMe from "../useEditAboutMe";
+import useEditAboutMe from "./useEditAboutMe";
 import AboutMePreview from "./AboutMePreview";
 import FormButtons from "@/components/shared/FormButtons";
 import useObjectCompare from "@/hooks/useCompareObjects";
@@ -146,8 +146,8 @@ const AboutMeFrom = React.forwardRef(function (
 
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
   const chosenColor = Object.values(form.getValues().arrowColor).join(",");
-  const isArrowChosen = form.getValues().arrowType !== "none";
-
+  const isTools = form.getValues().toolsAndTech.length;
+  const isArrowChosen = form.getValues().arrowType !== "none" && isTools;
   console.log(form.getValues(), "ABOUT ME FORM VALUES");
 
   function onSubmit(values: aboutMeFormTypes) {
@@ -212,7 +212,13 @@ const AboutMeFrom = React.forwardRef(function (
             control={form.control}
             name="arrowType"
             render={({ field }) => (
-              <FormItem className="flex flex-col xs:flex-row items-center justify-between rounded-lg border p-4">
+              <FormItem
+                className={`flex flex-col xs:flex-row items-center justify-between rounded-lg border transition-all duration-500   p-4 ${
+                  isTools
+                    ? "opacity-1 visible z-auto relative "
+                    : "opacity-0 invisible  z-[-55] absolute"
+                }`}
+              >
                 <div className="space-y-0.5 text-center xs:text-left">
                   <FormLabel className="text-base ">Arrow Shape</FormLabel>
                   <FormDescription>

@@ -9,6 +9,7 @@ import { SiIndeed, SiGlassdoor } from "react-icons/si";
 import { PiOfficeChairFill } from "react-icons/pi";
 import { BiLogoDiscord } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { isNull, isUndefined } from "lodash";
 
 const wuzzuf =
   "https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/17177931064d0fb05e3afb.png";
@@ -82,11 +83,13 @@ const HandleLinkIcons = ({
     }
   };
 
-  const iconLinks = urls.length
-    ? urls
-        .map((url) => extractDomain(url))
-        .filter((el) => typeof el === "string")
+  const linkDomains = urls.length
+    ? urls.map((url) => extractDomain(url)).filter((el) => !isNull(el))
     : [];
+
+  const iconLinks = linkDomains
+    .map((link) => icons[link as string])
+    .filter((el) => !isUndefined(el));
 
   return (
     <div className={`flex item-center gap-3 ${className}`}>
@@ -94,7 +97,7 @@ const HandleLinkIcons = ({
         ? iconLinks.map((link, i: number) => {
             return (
               <Link key={i} target="_blank" to={links[i]}>
-                {icons[link as string]}
+                {link}
               </Link>
             );
           })

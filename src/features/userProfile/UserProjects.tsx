@@ -1,11 +1,12 @@
 import { Project } from "@/types/types";
-import ProjectItem from "./ProjectItem";
+
 import Empty from "@/components/shared/Empty";
 import ErrorComp from "@/components/shared/ErrorComp";
 import UnorderedListGrid from "@/components/shared/UnorderedListGrid";
 import { useSearchParams } from "react-router-dom";
+import PostsGrid from "../../components/shared/posts/PostsGrid";
 
-const ProjectList = ({
+const UserProjects = ({
   userProjects,
 }: {
   userProjects: Project[] | undefined;
@@ -20,29 +21,30 @@ const ProjectList = ({
   if (!userProjects.length && searchTerm)
     return (
       <Empty
-        className=" h-[500px] flex justify-center items-center font-semibold"
+        className=" h-[300px] flex justify-center items-center font-semibold"
         message={`No matches for "${searchTerm}"`}
       />
     );
   if (!userProjects.length)
     return (
       <Empty
-        className=" h-[500px] flex justify-center items-center font-semibold"
+        className=" h-[300px] flex justify-center items-center font-semibold"
         message="There are no posts, be the first to post."
       />
     );
 
   return (
     <div className=" my-6">
-      <UnorderedListGrid>
+      <PostsGrid posts={userProjects} />
+      {/* <UnorderedListGrid>
         {userProjects
           ? userProjects.map((project) => (
-              <ProjectItem project={project} key={project.id} />
+              <PostsGrid project={project} key={project.id} />
             ))
           : null}
-      </UnorderedListGrid>
+      </UnorderedListGrid> */}
     </div>
   );
 };
 
-export default ProjectList;
+export default UserProjects;

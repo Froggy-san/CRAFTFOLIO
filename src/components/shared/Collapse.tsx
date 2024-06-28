@@ -118,7 +118,7 @@ const CollapseContent = function ({
     <p
       onClick={() => onClick?.()}
       aria-label={ariaLabel}
-      className={`mt-5  ${className}`}
+      className={`mt-5 break-all  ${className}`}
       style={style}
     >
       {isString ? text : children}

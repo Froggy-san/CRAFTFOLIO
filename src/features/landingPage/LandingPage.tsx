@@ -14,6 +14,7 @@ import LandingPageText from "./LandingPageText";
 import LandingUserInfo from "./LandingUserInfo";
 import LandingPageImage from "./LandingPageImage";
 import { landingProps } from "@/types/types";
+import LandingDialogDrawer from "./LandingDialogDrawer";
 const theColorBlack = "0,0,0,1";
 const LandingPage = ({
   isUser,
@@ -30,6 +31,9 @@ const LandingPage = ({
     landingPage && landingPage.textColor
       ? Object.values(JSON.parse(landingPage.textColor)).join(",")
       : theColorBlack;
+  const icons =
+    landingPage && landingPage.socials ? JSON.parse(landingPage.socials) : [];
+  if (isLoading) return <FullSnLoading />;
   console.log(landingPage, "landing pagessssssssssssssss");
   const landingPageText = {
     primaryText: landingPage?.primaryText || defaultText.title,
@@ -37,13 +41,14 @@ const LandingPage = ({
     tertiaryText: landingPage?.tertiaryText || defaultText.about,
   };
 
-  if (isLoading) return <FullSnLoading />;
-
   return (
     <div className=" select-none">
-      {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null}
+      {isUser && isOwner ? (
+        <LandingDialogDrawer landingPage={landingPage} />
+      ) : null}
+      {/* {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null} */}
 
-      <div className="  max-h-[83vh] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10">
+      <div className="  max-h-[1450px]  xs::max-h-[83vh] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10">
         {!landingPage || landingPage.grainyTexture ? <GrainyImg /> : null}
 
         <LandingPageImage
@@ -59,7 +64,7 @@ const LandingPage = ({
           landingPageAvatarImg={
             landingPage?.avatarImage || userAvatar?.[0].avatar || ""
           }
-          icons={landingPage?.socials.split(",") || []}
+          icons={icons}
         />
       </div>
     </div>

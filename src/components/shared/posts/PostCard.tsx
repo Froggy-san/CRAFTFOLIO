@@ -9,17 +9,20 @@ import {
 } from "@/components/ui/carousel";
 
 import { Link } from "react-router-dom";
-import UserTag from "./UserTag";
-import HandleIcons from "./HandleIcons";
-import CardControls from "./CardControls";
+import UserTag from "../UserTag";
+import HandleIcons from "../HandleIcons";
+import CardControls from "./PostCardControls";
 import useDeletePost from "@/features/projects/useDeletePost";
 import { useAuth } from "@/hooks/useAuth";
-import Loading from "./Loading";
-import TooltipComp from "./TooltipComp";
-import { Button } from "../ui/button";
+import Loading from "../Loading";
+import TooltipComp from "../TooltipComp";
+import { Button } from "../../ui/button";
 import { BsArrowUpRight } from "react-icons/bs";
 // import { MdArrowOutward } from "react-icons/md";
 import { findPreviewLink } from "@/utils/helper";
+import PostCardCarousel from "./PostCardCarousel";
+import { format } from "date-fns";
+import ToolsUsed from "./ToolsUsed";
 const previewRegex = /pre[av]iew/i;
 
 // function extractPreviewLink(text: string) {
@@ -27,7 +30,7 @@ const previewRegex = /pre[av]iew/i;
 //   const match = text.match(/pre[av]iew:.*?(https:\/\/\S+)/i);
 //   return match ? match[1] : null;
 // }
-const CardItem = ({ post }: { post: Project }) => {
+const PostCard = ({ post }: { post: Project }) => {
   const { isDeleting, deletePost } = useDeletePost();
   const { user: loggedInUser } = useAuth();
   const user = {
@@ -36,6 +39,8 @@ const CardItem = ({ post }: { post: Project }) => {
     avatar: post.publicUsers?.avatar,
   };
 
+  const postTech =
+    post && post.technologies ? JSON.parse(post.technologies) : [];
   const previewLink = JSON.parse(post.links).find(
     (link: { description: string; url: string }) =>
       previewRegex.test(link.description)
@@ -45,6 +50,9 @@ const CardItem = ({ post }: { post: Project }) => {
     (image: imageObject) => image.imageUrl.split("projects/")[1]
   );
 
+  const postImages = post.projectImages.map(
+    (image: imageObject) => image.imageUrl
+  );
   const currentOwner =
     loggedInUser?.role === "admin" || post.user_id === loggedInUser?.id;
   //bg-[#ffffff]
@@ -63,55 +71,14 @@ const CardItem = ({ post }: { post: Project }) => {
         />
       ) : null}
 
-      <Carousel id="carousel" className="w-full    rounded-lg ">
-        {isDeleting && (
-          <Loading className=" center-abslute z-20 text-black" size={30} />
-        )}
-        <Link to={`/project/${post.id}`}>
-          <CarouselContent
-            id="carousel-Content"
-            className=" p-0 bg-transparent"
-          >
-            {post.projectImages.map((imageObj, index) => (
-              <CarouselItem id="carousel item" key={index} className=" ">
-                <div id="carousel div" className=" ">
-                  <Card
-                    id="carousel card"
-                    className=" w-full border-none bg-[transparent] overflow-hidden rounded-lg"
-                  >
-                    {/* xs:h-[23rem] */}
-                    <CardContent
-                      id="carousel card content"
-                      className="flex  h-[200px] xs:h-[250px] sm:h-[350px]   items-center justify-center p-0 "
-                    >
-                      {/* <ImagePortrait image={imageObj.imageUrl} /> */}
+      <PostCardCarousel
+        postId={post.id}
+        postImages={postImages}
+        isDeleting={isDeleting}
+      />
 
-                      <img
-                        src={imageObj.imageUrl}
-                        alt={imageObj.imageUrl}
-                        className=" w-full h-full object-cover"
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Link>
-        <CarouselPrevious className=" left-2   w-6 h-6 disabled:z-20" />
-        <CarouselNext className="  right-2  w-6 h-6  disabled:z-20" />
-      </Carousel>
       <Link to={`/project/${post.id}`}>
         <div className=" p-2 ">
-          {/* <div aria-label={post.name} className="tool-tip">
-            <h1
-              aria-label="project name"
-              className="overflow-hidden text-lg font-semibold whitespace-nowrap overflow-ellipsis"
-            >
-              {post.name}
-            </h1>
-          </div> */}
-
           <TooltipComp toolTipText={post.name}>
             <h1
               aria-label="project name"
@@ -129,8 +96,16 @@ const CardItem = ({ post }: { post: Project }) => {
           /> */}
           <div className=" text-[10px]">
             <p>
-              From:<span className=" text-red-500"> {post.startDate}</span> -
-              To:<span className=" text-red-500"> {post.endDate}</span>
+              From:
+              <span className=" text-red-500">
+                {" "}
+                {format(new Date(post.startDate), "LLLL/dd/yyyy")}
+              </span>{" "}
+              - To:
+              <span className=" text-red-500">
+                {" "}
+                {format(new Date(post.endDate), "LLLL/dd/yyyy")}
+              </span>
             </p>
             <TooltipComp toolTipText={post.type}>
               <p className="overflow-hidden  w-fit max-w-full   whitespace-nowrap overflow-ellipsis">{`Type: ${
@@ -139,7 +114,8 @@ const CardItem = ({ post }: { post: Project }) => {
             </TooltipComp>
 
             {/* <p className=" break-words">Technologies: [{post.technologies}]</p> */}
-            <HandleIcons toolsArr={post.technologies.split(",")} />
+            <ToolsUsed toolsArr={postTech} />
+            {/* <HandleIcons toolsArr={post.technologies.split(",")} /> */}
           </div>
         </div>
       </Link>
@@ -169,4 +145,46 @@ const CardItem = ({ post }: { post: Project }) => {
   );
 };
 
-export default CardItem;
+export default PostCard;
+
+/*
+     <Carousel id="carousel" className="w-full    rounded-lg ">
+        {isDeleting && (
+          <Loading className=" center-abslute z-20 text-black" size={30} />
+        )}
+        <Link to={`/project/${post.id}`}>
+          <CarouselContent
+            id="carousel-Content"
+            className=" p-0 bg-transparent"
+          >
+            {post.projectImages.map((imageObj, index) => (
+              <CarouselItem id="carousel item" key={index} className=" ">
+                <div id="carousel div" className=" ">
+                  <Card
+                    id="carousel card"
+                    className=" w-full border-none bg-[transparent] overflow-hidden rounded-lg"
+                  >
+                    
+                    <CardContent
+                      id="carousel card content"
+                      className="flex  h-[200px] xs:h-[250px] sm:h-[350px]   items-center justify-center p-0 "
+                    >
+                       <ImagePortrait image={imageObj.imageUrl} /> 
+
+                      <img
+                        src={imageObj.imageUrl}
+                        alt={imageObj.imageUrl}
+                        className=" w-full h-full object-cover"
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Link>
+        <CarouselPrevious className=" left-2   w-6 h-6 disabled:z-20" />
+        <CarouselNext className="  right-2  w-6 h-6  disabled:z-20" />
+      </Carousel>
+
+*/

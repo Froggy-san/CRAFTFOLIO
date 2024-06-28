@@ -1,10 +1,8 @@
 import Loading from "@/components/shared/Loading";
-import { Button } from "@/components/ui/button";
 import DeleteAllPost from "@/features/authentication/DeleteAllPost";
 import UpdatePasswordForm from "@/features/authentication/UpdatePasswordForm";
 import UpdateUserForm from "@/features/authentication/UpdateUserForm";
 import UserOverview from "@/features/authentication/UserOverview";
-import useDeleteUserPosts from "@/features/projects/useDeleteUserPosts";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 

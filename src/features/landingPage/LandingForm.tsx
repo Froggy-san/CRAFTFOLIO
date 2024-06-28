@@ -41,6 +41,7 @@ import { Switch } from "@/components/ui/switch";
 
 import ColorPicker from "@/components/shared/ColorPicker";
 import { colorSchema } from "@/formScehmas/colorSchema";
+import TagsInput from "@/components/shared/TagsInput";
 const landingPageSchma = z
   .object({
     primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
@@ -52,23 +53,24 @@ const landingPageSchma = z
     tertiaryText: z
       .string()
       .max(450, { message: `Text must be no more than (150)char.` }),
-    socials: z
-      .string()
-      .trim()
-      .transform((str) => str.split(/,\s*/))
-      .transform((data) =>
-        data
-          .map((str) => str.trim())
-          .filter((str) => str !== "")
-          .join(",")
-      ),
+    socials: z.string().array().default([]),
+    // z
+    //   .string()
+    //   .trim()
+    //   .transform((str) => str.split(/,\s*/))
+    //   .transform((data) =>
+    //     data
+    //       .map((str) => str.trim())
+    //       .filter((str) => str !== "")
+    //       .join(",")
+    //   ),
     grainyTexture: z.boolean(),
     blur: z.boolean(),
     textColor: colorSchema,
     avatar: z.custom<File[]>(),
     landingImage: z.custom<File[]>(),
   })
-  .refine((data) => data.socials.split(",").length <= 5, {
+  .refine((data) => data.socials.length <= 5, {
     message: "You can add a maximum of 5 social media links.",
     path: ["socials"], // Specify the path for targeted error display
   });
@@ -85,7 +87,10 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
     primaryText: landingToEdit?.primaryText || "",
     secondaryText: landingToEdit?.secondaryText || "",
     tertiaryText: landingToEdit?.tertiaryText || "",
-    socials: landingToEdit?.socials || "",
+    socials:
+      landingToEdit && landingToEdit.socials
+        ? JSON.parse(landingToEdit.socials)
+        : "",
     grainyTexture: landingToEdit ? landingToEdit?.grainyTexture : true,
     blur: landingToEdit ? landingToEdit?.blur : true,
     textColor:
@@ -160,6 +165,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
           user_id: user?.id || "",
           avatarImageToDelete: avatarImageToRemove,
           landingImageToDelete: landingImageToRemove,
+          socials: JSON.stringify(values.socials),
           textColor: JSON.stringify(values.textColor),
         },
         { onSuccess: () => setIsOpen(false) }
@@ -179,6 +185,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
             typeof values.landingImage[0] === "string"
               ? ""
               : values.landingImage,
+          socials: JSON.stringify(values.socials),
           textColor: JSON.stringify(values.textColor),
           user_id: user?.id || "",
         },
@@ -209,18 +216,18 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
             <TbPhotoEdit className="h-4 w-4" />
           </button>
         </DialogTrigger> */}
-        <DialogContent className=" overflow-y-scroll h-[80dvb] max-w-[800px]">
+        <DialogContent className=" overflow-y-scroll h-[80dvb] max-w-[800px] px-1 xs:px-6">
           <DialogHeader>
             <DialogTitle>Create Your landing page.</DialogTitle>
             <DialogDescription>
               Talk about your self and what you do.
             </DialogDescription>
           </DialogHeader>
-          <div className="   w-[94%]  mx-auto   px-1">
+          <div className="  w-full  max-w-[100%]  mx-auto   px-1">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
+                className="space-y-8 w-full max-w-[100%]"
               >
                 <FormField
                   control={form.control}
@@ -284,21 +291,27 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   control={form.control}
                   name="socials"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="">
                       <FormLabel>Socials.</FormLabel>
                       <FormControl>
-                        <Textarea
+                        <TagsInput
+                          className=" mx-auto min-w-[250px] max-w-[250px] xs:max-w-[400px] md:max-w-[700px]"
+                          tags={field.value}
+                          onChange={field.onChange}
+                        />
+                        {/* <Textarea
                           className=" h-[150px]"
                           placeholder="how can people reach you."
                           {...field}
                           disabled={isCreanting || isEditting}
-                        />
+                        /> */}
                       </FormControl>
 
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
                   name="grainyTexture"

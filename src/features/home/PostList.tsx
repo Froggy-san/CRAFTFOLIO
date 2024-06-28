@@ -1,11 +1,10 @@
 import Loading from "@/components/shared/Loading";
-import PostItem from "./PostItem";
 import { Project } from "@/types/types";
 import Empty from "@/components/shared/Empty";
 import LinkBtn from "@/components/shared/LinkBtn";
 import ErrorComp from "@/components/shared/ErrorComp";
-import UnorderedListGrid from "@/components/shared/UnorderedListGrid";
 import { useSearchParams } from "react-router-dom";
+import PostsGrid from "@/components/shared/posts/PostsGrid";
 
 const PostsList = ({
   userId,
@@ -70,11 +69,7 @@ const PostsList = ({
   // console.log(posts, "posts!!");
   return (
     <div className=" mb-24">
-      <UnorderedListGrid>
-        {posts
-          ? posts.map((post) => <PostItem post={post} key={post.id} />)
-          : null}
-      </UnorderedListGrid>
+      <PostsGrid posts={posts} />
     </div>
   );
 };

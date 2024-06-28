@@ -4,8 +4,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useRef, useState } from "react";
 
 import Collapse from "@/components/shared/Collapse";
-import useAboutMe from "../useAboutMe";
-import useEditAboutMe from "../useEditAboutMe";
+import useAboutMe from "./useAboutMe";
+import useEditAboutMe from "./useEditAboutMe";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 // import { Link } from "react-router-dom";
 // import EditAboutMe from "./EditAboutMe";

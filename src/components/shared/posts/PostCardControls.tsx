@@ -15,11 +15,12 @@ import {
   // DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DialogComp from "./DialogComp";
+
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlineEditNote } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
+import DialogComp from "../DialogComp";
 
 interface CartControlsProps {
   className?: string;
@@ -27,7 +28,11 @@ interface CartControlsProps {
   postId: string;
 }
 
-const CardControls = ({ className, deletePost, postId }: CartControlsProps) => {
+const PostCardControls = ({
+  className,
+  deletePost,
+  postId,
+}: CartControlsProps) => {
   const [isDiaOpen, setIsDiaOpen] = useState(false);
 
   return (
@@ -83,4 +88,4 @@ const CardControls = ({ className, deletePost, postId }: CartControlsProps) => {
   );
 };
 
-export default CardControls;
+export default PostCardControls;

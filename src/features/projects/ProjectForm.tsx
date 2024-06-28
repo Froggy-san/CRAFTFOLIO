@@ -46,6 +46,7 @@ import useObjectCompare from "@/hooks/useCompareObjects";
 import ErrorComp from "@/components/shared/ErrorComp";
 import FormDialog from "./FormDialog";
 import { handleText } from "@/utils/helper";
+import TagsInput from "@/components/shared/TagsInput";
 
 const projectSchema = z.object({
   name: z.string().min(2).max(50),
@@ -55,16 +56,17 @@ const projectSchema = z.object({
     .max(55, { message: `password is too long.` }),
 
   description: z.string().min(6, { message: `password is too short` }),
-  technologies: z
-    .string()
-    .trim()
-    .transform((string) =>
-      string
-        .split(",")
-        .map((el) => el.trim())
-        .filter((el) => el !== "")
-        .join(",")
-    ),
+  technologies: z.string().array().default([]),
+  //  z
+  //   .string()
+  //   .trim()
+  //   .transform((string) =>
+  //     string
+  //       .split(",")
+  //       .map((el) => el.trim())
+  //       .filter((el) => el !== "")
+  //       .join(",")
+  //   ),
   links: z
     .object({
       description: z.string().min(4, {
@@ -128,7 +130,8 @@ const ProjectForm = ({
     type: post?.type || "",
     startDate: post ? new Date(post.startDate) : undefined,
     endDate: post ? new Date(post.endDate) : undefined,
-    technologies: post?.technologies || "",
+    technologies:
+      post && post.technologies ? JSON.parse(post.technologies) : [],
     contributors: post?.contributors || "",
     links: post ? JSON.parse(post.links) : [],
     description: post?.description || "",
@@ -171,7 +174,10 @@ const ProjectForm = ({
       // this code if for the validation of the links.
       if (activeStep === 1 && Array.isArray(fieldsPerStep[0])) {
         for (let i = 0; i < fieldsPerStep[0].length; i++) {
-          const item = fieldsPerStep[0][i];
+          const item = fieldsPerStep[0][i] as {
+            description: string;
+            url: string;
+          };
           if (item.description === "" || item.url === "") {
             return true;
           }
@@ -243,7 +249,12 @@ const ProjectForm = ({
   function onSubmit(values: projectSchemaTypes) {
     if (post) {
       editPost({
-        postToEdit: { ...values, links: JSON.stringify(values.links) },
+        postToEdit: {
+          ...values,
+          links: JSON.stringify(values.links),
+          technologies: JSON.stringify(values.technologies),
+        },
+
         postId: post.id,
         imagesToDelete: deletedImages,
         userId: user?.id || "",
@@ -255,6 +266,7 @@ const ProjectForm = ({
       createProject({
         ...values,
         links: JSON.stringify(values.links),
+        technologies: JSON.stringify(values.technologies),
         user_id: user?.id || "",
       });
     }
@@ -476,12 +488,16 @@ const ProjectForm = ({
                         <FormItem>
                           <FormLabel>Tools used</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <TagsInput
+                              tags={field.value}
+                              onChange={field.onChange}
+                            />
+                            {/* <Textarea
                               disabled={isCreating || isEditing}
                               className=" h-[175px]"
                               placeholder="Tools used to create the project such as , React, typescript, etc..."
                               {...field}
-                            />
+                            /> */}
                           </FormControl>
                           <FormMessage />
                         </FormItem>

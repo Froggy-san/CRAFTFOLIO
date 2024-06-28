@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link, useParams } from "react-router-dom";
-// import GranyImg from "@/components/shared/GrainyImg";
-// import Loading from "@/components/shared/Loading";
 import { useAuth } from "@/hooks/useAuth";
-import ProjectList from "@/features/projects/ProjectList";
 import useUserPosts from "@/features/projects/useUserPosts";
 import Pagination from "@/components/shared/Pagination";
 import LandingPage from "@/features/landingPage/LandingPage";
@@ -12,6 +9,7 @@ import FullSnLoading from "@/components/shared/FullSnLoading";
 // import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import Heading from "@/components/shared/Heading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
+import UserProjects from "@/features/userProfile/UserProjects";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -57,7 +55,7 @@ const UserProfile = () => {
         {isPostsLoading ? (
           <FullSnLoading />
         ) : (
-          <ProjectList userProjects={userPosts} />
+          <UserProjects userProjects={userPosts} />
         )}
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
