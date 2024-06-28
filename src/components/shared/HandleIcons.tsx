@@ -204,33 +204,33 @@ export const getIconForTool = (toolName: string, showTheIconOnly?: boolean) => {
   }
 };
 
-// const HandleIcons = ({
-//   toolName,
-//   showTheIconOnly,
-//   className,
-// }: {
-//   toolName: string;
-//   showTheIconOnly?: boolean;
-//   className?: string;
-// }) => {
-//   // const getIconForTool = () => {
-//   //   const results = fuse.search(toolName);
-//   //   if (results.length > 0) {
-//   //     // Sort the results by score in ascending order (lowest score first)
-//   //     results.sort((a, b) => (a.score ?? 0) - (b.score ?? 0));
-//   //     // Return the icon for the best match (lowest score)
-//   //     return icons[results[0].item];
-//   //   } else {
-//   //     // If no match, return a default icon or the misspelled tool name
-//   //     return showTheIconOnly ? null : toolName; // Replace with your default icon
-//   //   }
-//   // };
+const HandleIcons = ({
+  toolName,
+  showTheIconOnly,
+  className,
+}: {
+  toolName: string;
+  showTheIconOnly?: boolean;
+  className?: string;
+}) => {
+  const getIconForTool = () => {
+    const results = fuse.search(toolName);
+    if (results.length > 0) {
+      // Sort the results by score in ascending order (lowest score first)
+      results.sort((a, b) => (a.score ?? 0) - (b.score ?? 0));
+      // Return the icon for the best match (lowest score)
+      return icons[results[0].item];
+    } else {
+      // If no match, return a default icon or the misspelled tool name
+      return showTheIconOnly ? null : toolName; // Replace with your default icon
+    }
+  };
 
-//   const icon = getIconForTool(toolName);
-//   return icon ? <span className={className || ""}>{icon}</span> : null;
-// };
+  const icon = getIconForTool();
+  return icon ? <span className={className || ""}>{icon}</span> : null;
+};
 
-// export default HandleIcons;
+export default HandleIcons;
 
 /*
 

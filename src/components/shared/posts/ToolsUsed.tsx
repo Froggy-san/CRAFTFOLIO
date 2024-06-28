@@ -1,6 +1,5 @@
-import React from "react";
+import { getIconForTool } from "../HandleIcons";
 import TooltipComp from "../TooltipComp";
-import HandleIcons, { getIconForTool } from "../HandleIcons";
 
 const ToolsUsed = ({ toolsArr }: { toolsArr: string[] }) => {
   if (!toolsArr.filter((el) => el !== "").length)

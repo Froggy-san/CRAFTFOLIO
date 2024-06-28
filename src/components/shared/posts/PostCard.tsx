@@ -1,25 +1,13 @@
 import { Project, imageObject } from "@/types/types";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 import { Link } from "react-router-dom";
 import UserTag from "../UserTag";
-import HandleIcons from "../HandleIcons";
 import CardControls from "./PostCardControls";
 import useDeletePost from "@/features/projects/useDeletePost";
 import { useAuth } from "@/hooks/useAuth";
-import Loading from "../Loading";
 import TooltipComp from "../TooltipComp";
 import { Button } from "../../ui/button";
 import { BsArrowUpRight } from "react-icons/bs";
-// import { MdArrowOutward } from "react-icons/md";
-import { findPreviewLink } from "@/utils/helper";
 import PostCardCarousel from "./PostCardCarousel";
 import { format } from "date-fns";
 import ToolsUsed from "./ToolsUsed";
