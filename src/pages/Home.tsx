@@ -29,7 +29,7 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
-      <CarouselSpacing />
+      {/* <CarouselSpacing /> */}
       {/* <svg>
         <filter id="noiseFilter">
           <feTurbulence
