@@ -11,6 +11,7 @@ import LandingDialogDrawer from "@/features/landingPage/LandingDialogDrawer";
 import LandingForm from "@/features/landingPage/LandingForm";
 import LandingFormRewrite from "@/features/landingPage/LandingFromRewrite";
 import useGetPosts from "@/features/projects/usePosts";
+import { CarouselSpacing } from "@/features/userProfile/AboutMeSection/Test";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 
@@ -28,7 +29,7 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
-
+      <CarouselSpacing />
       {/* <svg>
         <filter id="noiseFilter">
           <feTurbulence

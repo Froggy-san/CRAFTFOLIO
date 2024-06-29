@@ -33,8 +33,8 @@ import LandingFormRewrite from "./LandingFromRewrite";
 import { landingProps } from "@/types/types";
 function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
   const [open, setOpen] = useState(false);
-  const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false);
-
+  const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false); // To prevent the drawer from moving while the user is scrolling inside the drawr content.
+  const [disableDrag, selectDisabled] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const dialogDescriptionText = `Talk about your self and what you do.`;
@@ -91,7 +91,7 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer handleOnly={disableDrag} open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <div className="flex items-end">
           <Button
@@ -106,12 +106,17 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
           </Button>
         </div>
       </DrawerTrigger>
-      <DrawerContent className=" h-[90dvh]">
+      <DrawerContent className=" h-[95dvh]">
         <DrawerHeader className="text-center sm:text-center">
           <DrawerTitle>Create Your landing page</DrawerTitle>
           <DrawerDescription>{dialogDescriptionText}</DrawerDescription>
         </DrawerHeader>
-        <div className=" px-2  overflow-y-auto">
+        {/* The div i am talking about */}
+        <div
+          onTouchStart={() => selectDisabled(true)}
+          onTouchEnd={() => selectDisabled(false)}
+          className=" px-2  overflow-y-auto"
+        >
           <LandingFormRewrite
             setHasTheFormDataChanged={setHasTheFormDataChanged}
             setOpen={setOpen}
@@ -119,6 +124,8 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
             landingToEdit={landingPage}
           />
         </div>
+        {/* The div i am talking about */}
+
         <DrawerFooter className="pt-2">
           <Button
             disabled={hasTheFormDataChanged}

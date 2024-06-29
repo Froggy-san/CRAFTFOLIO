@@ -41,7 +41,7 @@ const ImageView = ({
   return (
     <>
       {image ? (
-        <div className="fixed flex items-center justify-center z-[9999] left-0 top-0 w-full h-[100vh] bg-red-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50">
+        <div className="fixed flex items-center justify-center z-[9999] left-0 top-0 w-full h-[100dvh] bg-red-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50">
           <Button
             variant="secondary"
             className="absolute right-5 top-10 rounded-full w-7 h-7 p-0 text-gray-800 hover:text-black"
@@ -60,7 +60,7 @@ const ImageView = ({
             <img
               src={image}
               alt="Enlarged view"
-              className="max-w-[100%] max-h-[75vh] sm:max-h-[95vh] object-contain"
+              className="max-w-[100%] max-h-[75%] sm:max-h-[95%] object-contain"
             />
           </ClickAwayListener>
         </div>
