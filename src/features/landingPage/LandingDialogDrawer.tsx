@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,12 +25,7 @@ import { useRef, useState } from "react";
 import { TbPhotoEdit } from "react-icons/tb";
 import LandingFormRewrite from "./LandingFromRewrite";
 import { landingProps } from "@/types/types";
-import useLandingPage from "./useLandingPage";
-
-function LandingDialogDrawer() {
-  const { userLandingPage, userAvatar } = useLandingPage();
-
-  const landingPage: landingProps | undefined = userLandingPage?.[0];
+function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
   const [open, setOpen] = useState(false);
   const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false); // To prevent the drawer from moving while the user is scrolling inside the drawr content.
   const [disableDrag, selectDisabled] = useState(false);

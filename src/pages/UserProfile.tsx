@@ -11,7 +11,6 @@ import Heading from "@/components/shared/Heading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
-import LandingDialogDrawer from "@/features/landingPage/LandingDialogDrawer";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -43,7 +42,6 @@ const UserProfile = () => {
         <p>Preview link</p>
       </div>
       <div></div> */}
-      {user && isTheOwnerOfPage ? <LandingDialogDrawer /> : null}
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
 
       {user && isTheOwnerOfPage ? (
@@ -53,7 +51,7 @@ const UserProfile = () => {
       ) : null}
 
       {/* ------------------ projects section */}
-      {user && isTheOwnerOfPage ? <LandingDialogDrawer /> : null}
+
       <ProjectControls />
       <div className=" my-5">
         {isPostsLoading ? (
@@ -63,7 +61,7 @@ const UserProfile = () => {
         )}
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
-      {user && isTheOwnerOfPage ? <LandingDialogDrawer /> : null}
+      <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
       <div className="my-7 mb-52">
         {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
