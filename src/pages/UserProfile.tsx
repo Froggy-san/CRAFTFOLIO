@@ -11,9 +11,6 @@ import Heading from "@/components/shared/Heading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
-import LandingDialogDrawer from "@/features/landingPage/LandingDialogDrawer";
-import useLandingPage from "@/features/landingPage/useLandingPage";
-import { landingProps } from "@/types/types";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -21,9 +18,7 @@ const UserProfile = () => {
   const { user, isLoading } = useAuth();
   const { isLoading: isPostsLoading, pageCount, userPosts } = useUserPosts();
   // useScrollUpWhenMounted();
-  const { userLandingPage, userAvatar } = useLandingPage();
 
-  const landingPage: landingProps | undefined = userLandingPage?.[0];
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
 
@@ -66,7 +61,6 @@ const UserProfile = () => {
         )}
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
-      <LandingDialogDrawer landingPage={landingPage} />
       <div className="my-7 mb-52">
         {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />

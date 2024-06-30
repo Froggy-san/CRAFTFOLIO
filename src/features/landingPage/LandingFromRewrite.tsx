@@ -120,9 +120,9 @@ const LandingFormRewrite = React.forwardRef(function (
   // Check if the user changed anything about the landing page's data, to prevent any unnecessary api calls.
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
 
-  useEffect(() => {
-    setHasTheFormDataChanged?.(isEqual);
-  }, [isEqual]);
+  // useEffect(() => {
+  //   setHasTheFormDataChanged?.(isEqual);
+  // }, [isEqual]);
   // everytime the ladningToEdit data change change rest the value in the form's input fields.
 
   //   useEffect(() => {

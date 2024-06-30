@@ -34,7 +34,7 @@ const LandingPage = ({
   const icons =
     landingPage && landingPage.socials ? JSON.parse(landingPage.socials) : [];
   if (isLoading) return <FullSnLoading />;
-  console.log(landingPage, "landing pagessssssssssssssss");
+
   const landingPageText = {
     primaryText: landingPage?.primaryText || defaultText.title,
     secondaryText: landingPage?.secondaryText || defaultText.about,

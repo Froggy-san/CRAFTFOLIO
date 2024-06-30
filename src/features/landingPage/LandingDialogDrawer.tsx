@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,18 +18,13 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { useRef, useState } from "react";
-import DialogComp from "@/components/shared/DialogComp";
-import AlertDialogComp from "@/components/shared/AlertDialogComp";
-import useDeleteUserPosts from "../projects/useDeleteUserPosts";
-import useGetNumOfProjects from "../projects/useGetNumOfProjects";
-import Loading from "@/components/shared/Loading";
-import IconButton from "@/components/shared/IconButton";
+
 import { TbPhotoEdit } from "react-icons/tb";
 import LandingFormRewrite from "./LandingFromRewrite";
 import { landingProps } from "@/types/types";
+
 function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
   const [open, setOpen] = useState(false);
   const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false); // To prevent the drawer from moving while the user is scrolling inside the drawr content.
@@ -64,18 +58,7 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
             <TbPhotoEdit className="h-4 w-4" />
           </Button>
         </div>
-        {/* <DialogTrigger className=" ml-auto block my-3">
-          <Button size="sm" variant="ghost" className="p-0 w-7 h-7">
-            <TbPhotoEdit className="h-4 w-4" />
-          </Button>
-          <IconButton variant="ghost">
-            <TbPhotoEdit className="h-4 w-4" />
-          </IconButton>
-          <button className="p-0 w-7 h-7">
-            {" "}
-            <TbPhotoEdit className="h-4 w-4" />
-          </button>
-        </DialogTrigger> */}
+
         <DialogContent className=" overflow-x-hidden overflow-y-scroll h-[80dvb] max-w-[800px] px-1 xs:px-6">
           <DialogHeader>
             <DialogTitle>Create Your landing page.</DialogTitle>
