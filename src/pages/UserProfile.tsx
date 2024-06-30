@@ -53,7 +53,7 @@ const UserProfile = () => {
       ) : null}
 
       {/* ------------------ projects section */}
-
+      {user && isTheOwnerOfPage ? <LandingDialogDrawer /> : null}
       <ProjectControls />
       <div className=" my-5">
         {isPostsLoading ? (
@@ -63,6 +63,7 @@ const UserProfile = () => {
         )}
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
+      {user && isTheOwnerOfPage ? <LandingDialogDrawer /> : null}
       <div className="my-7 mb-52">
         {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
