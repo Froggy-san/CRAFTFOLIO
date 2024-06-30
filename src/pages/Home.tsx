@@ -30,6 +30,7 @@ const Home = () => {
     avatar: user?.avatar,
   };
 
+  console.log(landingPage, "Landing page home .1");
   return (
     <div>
       {/* <div className=" ball"></div> */}
@@ -52,6 +53,7 @@ const Home = () => {
         </filter>
       </svg> */}
 
+      <LandingDialogDrawer landingPage={landingPage} />
       <HomePostControlls
         selectDisabled={posts && !posts.length ? true : false}
         user={userObj}
@@ -59,7 +61,6 @@ const Home = () => {
 
       {/* <LandingForm /> */}
       {/* <LandingFormRewrite /> */}
-      <LandingDialogDrawer landingPage={landingPage} />
       <PostsList userId={user?.id} posts={posts} isLoading={isLoading} />
       {!pageCount ? null : <Pagination pageCount={pageCount} />}
     </div>

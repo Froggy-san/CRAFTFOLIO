@@ -61,6 +61,7 @@ const UserProfile = () => {
         )}
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
+
       <div className="my-7 mb-52">
         {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
