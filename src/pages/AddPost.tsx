@@ -1,3 +1,4 @@
+import BackButton from "@/components/shared/BackButton";
 import ErrorComp from "@/components/shared/ErrorComp";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import LinkBtn from "@/components/shared/LinkBtn";
@@ -26,7 +27,8 @@ const AddPost = () => {
     );
 
   return (
-    <div className=" flex flex-col h-[91dvb]">
+    <div className=" flex flex-col h-[91dvh] relative">
+      <BackButton />
       {/* <h1 className=" text-4xl">Create Project</h1> */}
       <ProjectForm user={user} />
     </div>

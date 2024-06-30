@@ -10,6 +10,7 @@ import FullSnLoading from "@/components/shared/FullSnLoading";
 import Heading from "@/components/shared/Heading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
+import BackButton from "@/components/shared/BackButton";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -35,6 +36,7 @@ const UserProfile = () => {
 
   return (
     <div className=" relative ">
+      <BackButton />
       {/* <div className=" flex items-center gap-3 fixed bottom-[70px] left-[500px]">
         <FaArrowLeftLong size={20} />
         <p>Preview link</p>

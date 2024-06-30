@@ -10,12 +10,17 @@ import PostsList from "@/features/home/PostList";
 import LandingDialogDrawer from "@/features/landingPage/LandingDialogDrawer";
 import LandingForm from "@/features/landingPage/LandingForm";
 import LandingFormRewrite from "@/features/landingPage/LandingFromRewrite";
+import useLandingPage from "@/features/landingPage/useLandingPage";
 import useGetPosts from "@/features/projects/usePosts";
 import { CarouselSpacing } from "@/features/userProfile/AboutMeSection/Test";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
+import { landingProps } from "@/types/types";
 
 const Home = () => {
+  const { userLandingPage, userAvatar } = useLandingPage();
+
+  const landingPage: landingProps | undefined = userLandingPage?.[0];
   const { user } = useAuth();
   const { posts, isLoading, pageCount } = useGetPosts();
   useScrollUpWhenMounted();
@@ -54,7 +59,7 @@ const Home = () => {
 
       {/* <LandingForm /> */}
       {/* <LandingFormRewrite /> */}
-      <LandingDialogDrawer />
+      <LandingDialogDrawer landingPage={landingPage} />
       <PostsList userId={user?.id} posts={posts} isLoading={isLoading} />
       {!pageCount ? null : <Pagination pageCount={pageCount} />}
     </div>

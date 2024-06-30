@@ -1,3 +1,4 @@
+import BackButton from "@/components/shared/BackButton";
 import ErrorComp from "@/components/shared/ErrorComp";
 import LinkBtn from "@/components/shared/LinkBtn";
 import Loading from "@/components/shared/Loading";
@@ -24,7 +25,7 @@ const EditPost = () => {
 
   if (isLoading || isUserLaoding)
     return (
-      <div className=" h-[91dvb] flex items-center justify-center">
+      <div className=" h-[91dvh] flex items-center justify-center">
         <Loading size={30} />
       </div>
     );
@@ -48,7 +49,8 @@ const EditPost = () => {
     );
 
   return (
-    <div className=" flex justify-center items-center h-[91dvb]">
+    <div className=" flex justify-center items-center h-[91dvh] relative">
+      <BackButton />
       <ProjectForm user={user} post={project?.[0]} />
     </div>
   );
