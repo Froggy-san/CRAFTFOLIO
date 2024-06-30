@@ -15,7 +15,7 @@ const BackButton = ({ variant, className }: BackButtonProps) => {
       size="sm"
       onClick={() => navigate(-1)}
       variant={variant || "ghost"}
-      className={` absolute left-5 top-5 z-50 opacity-80 ${className || ""}`}
+      className={` absolute left-5 top-5 z-[9] opacity-80 ${className || ""}`}
     >
       <IoReturnDownBack size={20} />
     </Button>
