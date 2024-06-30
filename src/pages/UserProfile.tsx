@@ -43,7 +43,7 @@ const UserProfile = () => {
         <p>Preview link</p>
       </div>
       <div></div> */}
-      <LandingDialogDrawer />
+      {user && isTheOwnerOfPage ? <LandingDialogDrawer /> : null}
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
 
       {user && isTheOwnerOfPage ? (

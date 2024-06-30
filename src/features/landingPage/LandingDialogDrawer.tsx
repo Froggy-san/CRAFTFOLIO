@@ -24,8 +24,12 @@ import { useRef, useState } from "react";
 import { TbPhotoEdit } from "react-icons/tb";
 import LandingFormRewrite from "./LandingFromRewrite";
 import { landingProps } from "@/types/types";
+import useLandingPage from "./useLandingPage";
 
-function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
+function LandingDialogDrawer() {
+  const { userLandingPage, userAvatar } = useLandingPage();
+
+  const landingPage: landingProps | undefined = userLandingPage?.[0];
   const [open, setOpen] = useState(false);
   const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false); // To prevent the drawer from moving while the user is scrolling inside the drawr content.
   const [disableDrag, selectDisabled] = useState(false);

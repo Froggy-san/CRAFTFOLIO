@@ -53,7 +53,7 @@ const Home = () => {
         </filter>
       </svg> */}
 
-      <LandingDialogDrawer landingPage={landingPage} />
+      <LandingDialogDrawer />
       <HomePostControlls
         selectDisabled={posts && !posts.length ? true : false}
         user={userObj}
