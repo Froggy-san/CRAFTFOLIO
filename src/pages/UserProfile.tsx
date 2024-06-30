@@ -12,8 +12,6 @@ import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
 import LandingDialogDrawer from "@/features/landingPage/LandingDialogDrawer";
-import useLandingPage from "@/features/landingPage/useLandingPage";
-import { landingProps } from "@/types/types";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -24,9 +22,7 @@ const UserProfile = () => {
 
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
-  const { userLandingPage, userAvatar } = useLandingPage();
 
-  const landingPage: landingProps | undefined = userLandingPage?.[0];
   // const userProfileId = userId || "";
   // const { isLoading: isUserProfileLoading, userProfile } = useGetUserProfile();
 
@@ -47,9 +43,7 @@ const UserProfile = () => {
         <p>Preview link</p>
       </div>
       <div></div> */}
-      {user && isTheOwnerOfPage ? (
-        <LandingDialogDrawer landingPage={landingPage} />
-      ) : null}
+      <LandingDialogDrawer />
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
 
       {user && isTheOwnerOfPage ? (
