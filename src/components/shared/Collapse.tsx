@@ -164,12 +164,12 @@ const CollapseButton = function ({
     </>
   );
 };
-Collapse.CollapseContent = CollapseContent;
-Collapse.CollapseButton = CollapseButton;
+
 export function useCollapse() {
   const context = useContext(CollapseContext);
   if (!context) throw new Error(`you have used the SearchContext wrong`);
   return context;
 }
-
+Collapse.CollapseContent = CollapseContent;
+Collapse.CollapseButton = CollapseButton;
 export default Collapse;

@@ -148,4 +148,5 @@ export type variant =
 
 // button types
 
+export type buttonSize = "default" | "sm" | "lg" | "icon" | null | undefined;
 export type buttonType = "button" | "submit" | "reset" | undefined;

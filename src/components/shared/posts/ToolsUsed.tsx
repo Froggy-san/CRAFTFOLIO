@@ -10,7 +10,7 @@ const ToolsUsed = ({ toolsArr }: { toolsArr: string[] }) => {
     );
 
   return (
-    <div className=" flex items-center flex-wrap  h-[25px] overflow-hidden">
+    <div className=" flex items-center flex-wrap  h-[25px] overflow-hidden gap-y-36">
       Tools: <span className=" text-lg  pb-[2px]">[</span>{" "}
       {toolsArr.map((tool, i: number) => {
         const lastITem = i + 1 === toolsArr.length;

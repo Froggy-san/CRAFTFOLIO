@@ -82,6 +82,12 @@
     @apply w-8  xs:w-10 sm:w-7 md:w-8 lg:w-10;
   }
 
+  .project-form-h {
+    height: calc(100dvh - (50px + 0.75rem));
+  }
+  .project-form-hh {
+    max-height: calc(100% - (40px + 44px + 1.5rem + 16px + 56px));
+  }
   @keyframes showTag {
     from {
       opacity: 0;

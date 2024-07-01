@@ -46,7 +46,8 @@ import useObjectCompare from "@/hooks/useCompareObjects";
 import ErrorComp from "@/components/shared/ErrorComp";
 import FormDialog from "./FormDialog";
 import { handleText } from "@/utils/helper";
-import TagsInput from "@/components/shared/TagsInput";
+import TagsInput from "@/components/shared/TagsInputRewrite";
+// import TagsInput from "@/components/shared/TagsInput";
 
 const projectSchema = z.object({
   name: z.string().min(2).max(50),
@@ -281,9 +282,16 @@ const ProjectForm = ({
       sx={{
         width: "100%",
         maxWidth: "1000px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "",
+        height: "98%",
         // marginInline: "auto",
         // marginTop: "30px",
         margin: "auto",
+        "@media (min-width: 550px)": {
+          height: "76dvh", // Adjust height based on content
+        },
       }}
     >
       {/*  TITLE. start */}
@@ -337,65 +345,109 @@ const ProjectForm = ({
         </>
       ) : (
         <>
-          <div>
-            <div className="   mx-auto  overflow-y-auto h-[60dvb]  px-3">
-              <Form {...form}>
-                <form
-                  ref={formRef}
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8"
+          <div className="    overflow-y-auto h-full  flex   w-full px-3">
+            <Form {...form}>
+              <form
+                ref={formRef}
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8  h-fit w-full"
+              >
+                {/* {renderComponent()} */}
+
+                <div
+                  className={`${
+                    activeStep === 0 ? "block" : "hidden"
+                  }    mt-5 space-y-4 pb-1`}
                 >
-                  {/* {renderComponent()} */}
+                  <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              disabled={isCreating || isEditing}
+                              placeholder="Project's name"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="type"
+                      render={({ field }) => (
+                        <FormItem className=" w-full">
+                          <FormLabel>Type</FormLabel>
+                          <FormControl>
+                            <Input
+                              disabled={isCreating || isEditing}
+                              placeholder="type"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </FormRow>
 
-                  <div
-                    className={`${
-                      activeStep === 0 ? "block" : "hidden"
-                    }    mt-5 space-y-4 pb-1`}
-                  >
-                    <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem className="w-full">
-                            <FormLabel>Name</FormLabel>
-                            <FormControl>
-                              <Input
-                                disabled={isCreating || isEditing}
-                                placeholder="Project's name"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="type"
-                        render={({ field }) => (
-                          <FormItem className=" w-full">
-                            <FormLabel>Type</FormLabel>
-                            <FormControl>
-                              <Input
-                                disabled={isCreating || isEditing}
-                                placeholder="type"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </FormRow>
+                  <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
+                    <FormField
+                      control={form.control}
+                      name="startDate"
+                      render={({ field }) => (
+                        <FormItem className=" w-full">
+                          <FormLabel>Start Date</FormLabel>
+                          <FormControl>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  disabled={isCreating || isEditing}
+                                  variant={"outline"}
+                                  className={cn(
+                                    "w-full justify-start text-left font-normal",
+                                    !form.getValues().startDate &&
+                                      "text-muted-foreground"
+                                  )}
+                                >
+                                  <CalendarIcon className="mr-2 h-4 w-4" />
+                                  {form.getValues().startDate ? (
+                                    format(form.getValues().startDate, "PPP")
+                                  ) : (
+                                    <span>Pick a date</span>
+                                  )}
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent
+                                className="w-auto p-0"
+                                align="start"
+                              >
+                                <Calendar
+                                  mode="single"
+                                  selected={form.getValues().startDate}
+                                  onSelect={field.onChange}
+                                  initialFocus
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                    <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
-                      <FormField
-                        control={form.control}
-                        name="startDate"
-                        render={({ field }) => (
-                          <FormItem className=" w-full">
-                            <FormLabel>Start Date</FormLabel>
+                    <FormField
+                      control={form.control}
+                      name="endDate"
+                      render={({ field }) => (
+                        <FormItem className=" w-full">
+                          <FormLabel>End date</FormLabel>
+                          <FormControl>
                             <FormControl>
                               <Popover>
                                 <PopoverTrigger asChild>
@@ -404,13 +456,13 @@ const ProjectForm = ({
                                     variant={"outline"}
                                     className={cn(
                                       "w-full justify-start text-left font-normal",
-                                      !form.getValues().startDate &&
+                                      !form.getValues().endDate &&
                                         "text-muted-foreground"
                                     )}
                                   >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
-                                    {form.getValues().startDate ? (
-                                      format(form.getValues().startDate, "PPP")
+                                    {form.getValues().endDate ? (
+                                      format(form.getValues().endDate, "PPP")
                                     ) : (
                                       <span>Pick a date</span>
                                     )}
@@ -422,246 +474,212 @@ const ProjectForm = ({
                                 >
                                   <Calendar
                                     mode="single"
-                                    selected={form.getValues().startDate}
+                                    selected={form.getValues().endDate}
                                     onSelect={field.onChange}
                                     initialFocus
                                   />
                                 </PopoverContent>
                               </Popover>
                             </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </FormRow>
 
-                      <FormField
-                        control={form.control}
-                        name="endDate"
-                        render={({ field }) => (
-                          <FormItem className=" w-full">
-                            <FormLabel>End date</FormLabel>
-                            <FormControl>
-                              <FormControl>
-                                <Popover>
-                                  <PopoverTrigger asChild>
-                                    <Button
-                                      disabled={isCreating || isEditing}
-                                      variant={"outline"}
-                                      className={cn(
-                                        "w-full justify-start text-left font-normal",
-                                        !form.getValues().endDate &&
-                                          "text-muted-foreground"
-                                      )}
-                                    >
-                                      <CalendarIcon className="mr-2 h-4 w-4" />
-                                      {form.getValues().endDate ? (
-                                        format(form.getValues().endDate, "PPP")
-                                      ) : (
-                                        <span>Pick a date</span>
-                                      )}
-                                    </Button>
-                                  </PopoverTrigger>
-                                  <PopoverContent
-                                    className="w-auto p-0"
-                                    align="start"
-                                  >
-                                    <Calendar
-                                      mode="single"
-                                      selected={form.getValues().endDate}
-                                      onSelect={field.onChange}
-                                      initialFocus
-                                    />
-                                  </PopoverContent>
-                                </Popover>
-                              </FormControl>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </FormRow>
-
-                    <FormField
-                      control={form.control}
-                      name="technologies"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Tools used</FormLabel>
-                          <FormControl>
-                            <TagsInput
-                              tags={field.value}
-                              onChange={field.onChange}
-                            />
-                            {/* <Textarea
+                  <FormField
+                    control={form.control}
+                    name="technologies"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tools used</FormLabel>
+                        <FormControl>
+                          <TagsInput
+                            tags={field.value}
+                            onChange={field.onChange}
+                          >
+                            <div className=" relative">
+                              <TagsInput.TagsContainer className=" items-start m-0">
+                                <TagsInput.TagsInputField />
+                              </TagsInput.TagsContainer>
+                              <TagsInput.SendBtn className=" absolute right-0 top-[105%]" />
+                            </div>
+                          </TagsInput>
+                          {/* <TagsInput
+                            tags={field.value}
+                            onChange={field.onChange}
+                          /> */}
+                          {/* <Textarea
                               disabled={isCreating || isEditing}
                               className=" h-[175px]"
                               placeholder="Tools used to create the project such as , React, typescript, etc..."
                               {...field}
                             /> */}
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      activeStep === 1 ? "  block" : " hidden"
-                    }     mt-5 space-y-4 pb-2`}
-                  >
-                    {/* LINKS START */}
-                    <div className="   space-y-5">
-                      {!fields.length ? (
-                        <div
-                          onClick={() => append({ description: "", url: "" })}
-                          className=" flex justify-center items-center  min-h-[140px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm   ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer gap-2  font-semibold tracking-wider"
-                        >
-                          Add Links <FiLink size={20} />
-                        </div>
-                      ) : (
-                        fields.map((field, index) => (
-                          <React.Fragment key={field.id}>
-                            {index !== 0 && (
-                              <div className=" my-5">
-                                <div className="w-[90%] mx-auto h-[1px] bg-gray-300"></div>
-                              </div>
-                            )}
-
-                            <div className=" flex flex-col sm:flex-row items-center gap-3 h-fit mt-10">
-                              <FormField
-                                control={form.control}
-                                name={`links.${index}.description`}
-                                render={({ field }) => (
-                                  <FormItem className=" w-full sm:w-40">
-                                    <FormLabel>What the URL for</FormLabel>
-                                    <FormControl>
-                                      <Input
-                                        placeholder="React form hook"
-                                        {...field}
-                                      />
-                                    </FormControl>
-                                    <FormDescription>
-                                      Enter what the URL is for.
-                                    </FormDescription>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-
-                              <FormField
-                                control={form.control}
-                                name={`links.${index}.url`}
-                                render={({ field }) => (
-                                  <FormItem className=" w-full  sm:flex-1">
-                                    <FormLabel>URL</FormLabel>
-                                    <FormControl>
-                                      <Input
-                                        placeholder="https://www.react-hook-form.com/api/usefieldarray/"
-                                        {...field}
-                                      />
-                                    </FormControl>
-                                    <FormDescription>
-                                      Enter the URL.
-                                    </FormDescription>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-                              <Button
-                                type="button"
-                                variant="secondary"
-                                onClick={() => remove(index)}
-                              >
-                                Remove
-                              </Button>
-                            </div>
-                          </React.Fragment>
-                        ))
-                      )}
-                      <div>
-                        <FormDescription className="  font-semibold text-xs text-green-500 pr-6">
-                          Enter any post-related links below. To display a
-                          preview link on the post, type 'preview' in the "What
-                          the URL for" field and enter 'your link' in the URL
-                          field. <FormDialog />
-                        </FormDescription>
-                        <Button
-                          className=" float-right my-2"
-                          type="button"
-                          onClick={() => append({ description: "", url: "" })}
-                        >
-                          Add a link
-                        </Button>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div
+                  className={`${
+                    activeStep === 1 ? "  block" : " hidden"
+                  }     mt-5 space-y-4 pb-2`}
+                >
+                  {/* LINKS START */}
+                  <div className="   space-y-5">
+                    {!fields.length ? (
+                      <div
+                        onClick={() => append({ description: "", url: "" })}
+                        className=" flex justify-center items-center  min-h-[140px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm   ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer gap-2  font-semibold tracking-wider"
+                      >
+                        Add Links <FiLink size={20} />
                       </div>
+                    ) : (
+                      fields.map((field, index) => (
+                        <React.Fragment key={field.id}>
+                          {index !== 0 && (
+                            <div className=" my-5">
+                              <div className="w-[90%] mx-auto h-[1px] bg-gray-300"></div>
+                            </div>
+                          )}
+
+                          <div className=" flex flex-col sm:flex-row items-center gap-3 h-fit mt-10">
+                            <FormField
+                              control={form.control}
+                              name={`links.${index}.description`}
+                              render={({ field }) => (
+                                <FormItem className=" w-full sm:w-40">
+                                  <FormLabel>What the URL for</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="React form hook"
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormDescription>
+                                    Enter what the URL is for.
+                                  </FormDescription>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name={`links.${index}.url`}
+                              render={({ field }) => (
+                                <FormItem className=" w-full  sm:flex-1">
+                                  <FormLabel>URL</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="https://www.react-hook-form.com/api/usefieldarray/"
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormDescription>
+                                    Enter the URL.
+                                  </FormDescription>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <Button
+                              type="button"
+                              variant="secondary"
+                              onClick={() => remove(index)}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+                        </React.Fragment>
+                      ))
+                    )}
+                    <div>
+                      <FormDescription className="  font-semibold text-xs text-green-500 pr-6">
+                        Enter any post-related links below. To display a preview
+                        link on the post, type 'preview' in the "What the URL
+                        for" field and enter 'your link' in the URL field.{" "}
+                        <FormDialog />
+                      </FormDescription>
+                      <Button
+                        className=" float-right my-2"
+                        type="button"
+                        onClick={() => append({ description: "", url: "" })}
+                      >
+                        Add a link
+                      </Button>
                     </div>
-                    {/* LINKS END */}
-                    <FormField
-                      control={form.control}
-                      name="contributors"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Contributors</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              disabled={isCreating || isEditing}
-                              className=" h-[140px]"
-                              placeholder="Name or links of people have helped or contributed in creating this project."
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </div>
+                  {/* LINKS END */}
+                  <FormField
+                    control={form.control}
+                    name="contributors"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Contributors</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            disabled={isCreating || isEditing}
+                            className=" h-[140px]"
+                            placeholder="Name or links of people have helped or contributed in creating this project."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-                  <div
-                    className={`${
-                      activeStep === 2 ? "block" : "hidden"
-                    }    mt-5 space-y-4`}
-                  >
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Description</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              className=" h-[140px]"
-                              disabled={isCreating || isEditing}
-                              placeholder="Talk about the project."
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                <div
+                  className={`${
+                    activeStep === 2 ? "block" : "hidden"
+                  }    mt-5 space-y-4`}
+                >
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            className=" h-[140px]"
+                            disabled={isCreating || isEditing}
+                            placeholder="Talk about the project."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                    <FormField
-                      control={form.control}
-                      name="projectImages"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Post images</FormLabel>
-                          <FormControl>
-                            <MultipleFileUploader
-                              fieldChange={field.onChange}
-                              handleDeleteImage={handleDeleteImage}
-                              handleDeleteAllImages={handleDelteAllImgs}
-                              mediaUrl={viewedImages}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </form>
-              </Form>
-            </div>
+                  <FormField
+                    control={form.control}
+                    name="projectImages"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Post images</FormLabel>
+                        <FormControl>
+                          <MultipleFileUploader
+                            fieldChange={field.onChange}
+                            handleDeleteImage={handleDeleteImage}
+                            handleDeleteAllImages={handleDelteAllImgs}
+                            mediaUrl={viewedImages}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </form>
+            </Form>
           </div>
+
           <Box
             sx={{ display: "flex", flexDirection: "row", pt: 2, gap: "10px" }}
           >

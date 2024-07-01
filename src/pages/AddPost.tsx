@@ -27,7 +27,7 @@ const AddPost = () => {
     );
 
   return (
-    <div className=" flex flex-col h-[91dvh] relative">
+    <div className=" flex flex-col project-form-h relative">
       <BackButton />
       {/* <h1 className=" text-4xl">Create Project</h1> */}
       <ProjectForm user={user} />

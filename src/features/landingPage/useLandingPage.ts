@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function useLandingPage() {
   const { userId } = useParams();
-  const id = userId || "6345e9d7-df41-47da-af29-a723b1a6afbb";
+  const id = userId || "";
 
   const { isLoading, data: { userLandingPage, userAvatar } = {} } = useQuery({
     queryFn: () => getUserLandingPage(id),

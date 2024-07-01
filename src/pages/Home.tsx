@@ -4,6 +4,7 @@ import Banner from "@/components/shared/Banner";
 // import LinkBtn from "@/components/shared/LinkBtn";
 import Pagination from "@/components/shared/Pagination";
 import TagInput from "@/components/shared/TagsInput";
+import TagsInput from "@/components/shared/TagsInputRewrite";
 // import LinksForm from "@/components/shared/Test2";
 import HomePostControlls from "@/features/home/HomePostControlls";
 import PostsList from "@/features/home/PostList";
@@ -16,10 +17,11 @@ import { CarouselSpacing } from "@/features/userProfile/AboutMeSection/Test";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import { landingProps } from "@/types/types";
+import { useState } from "react";
 
 const Home = () => {
   const { userLandingPage, userAvatar } = useLandingPage();
-
+  const [tags, setTags] = useState<string[]>([]);
   const landingPage: landingProps | undefined = userLandingPage?.[0];
   const { user } = useAuth();
   const { posts, isLoading, pageCount } = useGetPosts();
@@ -34,6 +36,14 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
+      <TagsInput tags={tags} onChange={setTags}>
+        <TagsInput.TagsContainer className=" items-start">
+          <TagsInput.TagsInputField
+            className={tags.length >= 6 ? "h-[30px]" : "h-[120px] pb-[100px]"}
+          />
+        </TagsInput.TagsContainer>
+        <TagsInput.SendBtn />
+      </TagsInput>
       {/* <CarouselSpacing /> */}
       {/* <svg>
         <filter id="noiseFilter">
