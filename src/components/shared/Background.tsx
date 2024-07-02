@@ -2,7 +2,7 @@ import React from "react";
 
 const Background = () => {
   return (
-    <div className="fixed top-0 -z-10 size-full bg-white">
+    <div className="fixed top-0 -z-10 inset-0 size-full bg-white">
       <div className="absolute bottom-auto left-auto right-0 top-0 size-[500px] translate-x-[-30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]" />
     </div>
 

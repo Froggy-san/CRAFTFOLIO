@@ -59,7 +59,10 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
           </Button>
         </div>
 
-        <DialogContent className=" overflow-x-hidden overflow-y-scroll h-[80dvb] max-w-[800px] px-1 xs:px-6">
+        <DialogContent
+          style={{ borderRadius: "1rem" }}
+          className=" overflow-x-hidden overflow-y-scroll scroll-gutter-both scroll h-[80dvb] max-w-[950px] px-1 xs:px-6   "
+        >
           <DialogHeader>
             <DialogTitle>Create Your landing page.</DialogTitle>
             <DialogDescription>

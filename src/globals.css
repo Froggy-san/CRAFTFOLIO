@@ -75,13 +75,26 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-}
-
-@layer utilities {
   .phone-fields {
     @apply w-8  xs:w-10 sm:w-7 md:w-8 lg:w-10;
   }
+}
 
+@layer utilities {
+  .scroll-gutter-both {
+    scrollbar-gutter: stable both-edges;
+  }
+
+  .scroll::-webkit-scrollbar {
+    width: 7px; /* Set the width of the scrollbar */
+  }
+  .scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: gray; /* Customize the thumb color */
+  }
+  .scroll::-webkit-scrollbar-track {
+    background-color: transparent; /* Customize the track color */
+  }
   .project-form-h {
     height: calc(100dvh - (50px + 0.75rem));
   }

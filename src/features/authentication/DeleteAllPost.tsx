@@ -40,7 +40,7 @@ const DeleteAllPost = ({
     <div
       className={`flex flex-col  xs:flex-row gap-y-6 items-center justify-between rounded-lg border p-4 w-[90%] mx-auto mb-3 ${className}`}
     >
-      <div className="space-y-0.5  w-full xs:w-fit">
+      <div className="space-y-0.5 text-center xs:text-left  w-full xs:w-fit">
         <div className="text-base font-semibold">Delete all of your posts</div>
         <div>Remove all posts on your account.</div>
       </div>

@@ -48,7 +48,7 @@ const LandingPage = ({
       ) : null}
       {/* {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null} */}
 
-      <div className="  max-h-[1450px]  xs::max-h-[83vh] rounded-md mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10">
+      <div className="  max-h-[1450px]  xs::max-h-[83vh] rounded-lg mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10">
         {!landingPage || landingPage.grainyTexture ? <GrainyImg /> : null}
 
         <LandingPageImage

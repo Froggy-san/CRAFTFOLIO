@@ -13,7 +13,7 @@ const Header = () => {
     avatar: user?.avatar,
   };
   return (
-    <header className=" flex items-center justify-between  border shadow-md rounded-sm  mt-3 py-1 px-2">
+    <header className=" flex items-center justify-between  border shadow-md rounded-lg  mt-3 py-1 px-2">
       <Logo />
 
       <div className=" flex flex-1 justify-end ml-3 sm:flex-none items-center gap-1">

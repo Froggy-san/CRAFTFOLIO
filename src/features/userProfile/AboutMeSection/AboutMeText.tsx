@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { handleText } from "@/utils/helper";
 import { defaultAboutMeText } from "@/utils/constants";
 import Heading from "@/components/shared/Heading";
+import { HiCursorClick } from "react-icons/hi";
 
 const AboutMeText = ({
   aboutText,
@@ -70,18 +71,23 @@ const AboutMeText = ({
           />
         </div>
       ) : (
-        <>
+        <div className=" relative">
           <Collapse textLenght={1200}>
             <Collapse.CollapseContent
               onClick={handleEditting}
-              className="md:px-10 text-lg mt-16  break-words"
+              className="md:px-10 text-lg mt-16  break-words pb-7"
               style={{ whiteSpace: "pre-wrap" }}
             >
               {aboutMeValue || defaultAboutMeText}
             </Collapse.CollapseContent>
             <Collapse.CollapseButton arrowPositionX="right" />
           </Collapse>
-        </>
+          <div className=" absolute right-[120px] gap-3 bottom-0 flex items-center text-sm font-semibold z-[55]">
+            <HiCursorClick size={20} className=" animate-pulse " />
+
+            <p className=" text-red-400">Double tap to edit.</p>
+          </div>
+        </div>
       )}
     </div>
   );

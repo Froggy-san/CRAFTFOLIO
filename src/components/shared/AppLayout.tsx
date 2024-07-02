@@ -4,7 +4,7 @@ import Background from "./Background";
 // bg-[#111827]
 const AppLayout = () => {
   return (
-    <div className=" container">
+    <div vaul-drawer-wrapper="" className=" container">
       <Background />
       <Header />
       <Outlet />

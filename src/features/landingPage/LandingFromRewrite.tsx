@@ -206,13 +206,13 @@ const LandingFormRewrite = React.forwardRef(function (
       );
   }
   return (
-    <div>
-      <div className="  w-full   max-w-[100%]  mx-auto   px-1">
+    <div className=" min-w-[120px] m-auto  w-full  max-w-[1000px]">
+      <div className="   px-1">
         <Form {...form}>
           <form
             ref={ref}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 w-full max-w-[100%]"
+            className="space-y-8 "
           >
             <FormField
               control={form.control}
@@ -276,12 +276,12 @@ const LandingFormRewrite = React.forwardRef(function (
               control={form.control}
               name="socials"
               render={({ field }) => (
-                <FormItem className="">
+                <FormItem className=" ">
                   <FormLabel>Socials.</FormLabel>
                   <FormControl>
-                    {/* mx-auto min-w-[250px] max-w-[250px] xs:max-w-[400px] md:max-w-[700px] */}
+                    {/* mx-auto min-w-[250px] max-w-[250px] xs:max-w-[400px] md:max-w-[700px] max-w-[730px] */}
                     <TagsInput
-                      className=" max-w-[730px] mx-auto "
+                      className=" "
                       tags={field.value}
                       onChange={field.onChange}
                     />
