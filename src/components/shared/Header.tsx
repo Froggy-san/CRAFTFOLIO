@@ -19,7 +19,7 @@ const Header = () => {
       <div className=" flex flex-1 justify-end ml-3 sm:flex-none items-center gap-1">
         <HeaderSearchBar />
 
-        {user ? null : (
+        {user || isLoading ? null : (
           <LinkBtn variant="ghost" size="sm" to="/login">
             Login
           </LinkBtn>

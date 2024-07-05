@@ -60,7 +60,7 @@ const ImageView = ({
             <img
               src={image}
               alt="Enlarged view"
-              className="max-w-[100%] max-h-[75%] sm:max-h-[95%] object-contain"
+              className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain"
             />
           </ClickAwayListener>
         </div>

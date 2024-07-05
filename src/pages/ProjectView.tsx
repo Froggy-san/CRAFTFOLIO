@@ -7,12 +7,13 @@ import ProjectViewCaro from "@/features/projects/ProjectViewCaro";
 
 import CollapsibleText from "@/components/shared/CollapsibleText";
 import { useAuth } from "@/hooks/useAuth";
-import { imageObject } from "@/types/types";
+import { imageObject, Project, publicUser } from "@/types/types";
 import ProjectViewControls from "@/features/projects/ProjectViewControls";
 // import ProjectControls from "@/features/projects/ProjectControls";
 import ErrorComp from "@/components/shared/ErrorComp";
 import CopyClipboard from "@/components/shared/CopyClipboard";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
+import UserTag from "@/components/shared/UserTag";
 const ProjectView = () => {
   const { projectId } = useParams();
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
@@ -23,8 +24,10 @@ const ProjectView = () => {
     user: userById,
   } = useGetProjectById(projectId || "");
 
-  const project = projectById?.[0];
+  const project: Project = projectById?.[0];
   const relatedUser = userById?.[0]; // user that owns the related project.
+  const contrbiutersTags =
+    project && project.contributors ? JSON.parse(project.contributors) : [];
   const isProjectOwner =
     user?.role === "admin" ||
     (isAuthenticated && user?.id === relatedUser?.userId); // is the current viewer the same person as the owner of the post?
@@ -56,6 +59,24 @@ const ProjectView = () => {
       <ProjectViewCaro imageObjs={project.projectImages} />
 
       {/* ----------- */}
+
+      <div>
+        {contrbiutersTags.length
+          ? contrbiutersTags.map((el: publicUser, i: number) => (
+              <UserTag
+                key={i}
+                user={{
+                  userId: el.userId,
+                  username: el.username,
+                  avatar: el.avatar,
+                }}
+                link={
+                  el.userId ? `http://localhost:5173/user/${el.userId} ` : ""
+                }
+              />
+            ))
+          : null}
+      </div>
 
       <div className=" mt-6 break-words">
         <h1 className=" text-3xl" aria-label="project name">

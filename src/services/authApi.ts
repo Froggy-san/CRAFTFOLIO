@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
 import { defaultTextColor } from "@/utils/constants";
+import { publicUser } from "@/types/types";
 
 export async function deleteUser(userId: string) {
   // const serviceRoleKey =
@@ -144,6 +145,7 @@ export async function updateUser({
 }: userToBeUpdatedProps) {
   //https://ixzmsptjfugshygjmvmh.supabase.co/storage/v1/object/public/avatars/ab67616d0000b273a5151f2ffeb8510131c4af81.jpg?t=2024-04-06T09%3A44%3A53.245Z
 
+  console.log("____________");
   const { data, error } = await supabase.auth.updateUser({
     data: { username, phone, speciality, socials, resumeUrl },
   });
@@ -158,6 +160,12 @@ export async function updateUser({
     .select();
 
   if (publicUserError) throw new Error(publicUserError.message);
+
+  if (typeof avatar === "string" || !avatar)
+    await editContributorsTags({
+      userId,
+      username,
+    });
 
   // ---
   if (typeof avatar === "string" || !avatar) return data;
@@ -187,6 +195,12 @@ export async function updateUser({
 
   if (publicUserErrorImage) throw new Error("publicUserErrorImage.message");
 
+  await editContributorsTags({
+    userId,
+    avatar: filePath,
+    username,
+  });
+
   if (!storageError && avatarImageToDelete) {
     const { error } = await supabase.storage
       .from("avatars")
@@ -195,6 +209,60 @@ export async function updateUser({
   }
 
   return dataWithImage;
+}
+
+interface TagsToEdit {
+  userId: string;
+  username: string;
+  avatar?: string;
+}
+
+interface ProjectData {
+  id: number;
+  user_id: string;
+  created_at: string;
+  description: string;
+  type: string;
+  technologies: string;
+  startDate: string;
+  endDate: string;
+  name: string;
+  links: string;
+  contributors: string;
+} // to be removed and refactored later
+
+export async function editContributorsTags({
+  userId,
+
+  avatar,
+  username,
+}: TagsToEdit) {
+  const { data: projects, error: errorFromContributors } = await supabase
+    .from("projects")
+    .select("*")
+    .or(`contributors.ilike.%${userId}%`);
+
+  if (errorFromContributors) console.warn(errorFromContributors.message);
+
+  if (!projects) return;
+
+  for (let i = 0; i < projects.length; i++) {
+    const item: ProjectData = projects[i];
+    const contributors: publicUser[] = JSON.parse(item.contributors);
+    const TagsToEdit = contributors.find((tag) => tag.userId === userId);
+
+    if (TagsToEdit) {
+      TagsToEdit.username = username;
+
+      if (avatar) TagsToEdit.avatar = avatar;
+
+      const { data, error } = await supabase
+        .from("projects")
+        .update({ contributors: JSON.stringify(contributors) })
+        .eq("id", item.id)
+        .select();
+    }
+  }
 }
 
 export async function getUserById(userId: string) {

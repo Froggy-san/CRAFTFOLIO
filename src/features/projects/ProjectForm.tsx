@@ -47,6 +47,7 @@ import ErrorComp from "@/components/shared/ErrorComp";
 import FormDialog from "./FormDialog";
 import { handleText } from "@/utils/helper";
 import TagsInput from "@/components/shared/TagsInputRewrite";
+import ContributorsTags from "./contribuorsInputField/ContributorsTags";
 // import TagsInput from "@/components/shared/TagsInput";
 
 const projectSchema = z.object({
@@ -80,7 +81,14 @@ const projectSchema = z.object({
     .array(),
   startDate: z.date(),
   endDate: z.date(),
-  contributors: z.string(),
+  contributors: z
+    .object({
+      avatar: z.string(),
+      userId: z.string(),
+      email: z.string(),
+      username: z.string(),
+    })
+    .array(),
 
   projectImages: z.custom<File[]>(),
 });
@@ -133,7 +141,8 @@ const ProjectForm = ({
     endDate: post ? new Date(post.endDate) : undefined,
     technologies:
       post && post.technologies ? JSON.parse(post.technologies) : [],
-    contributors: post?.contributors || "",
+    contributors:
+      post && post.contributors ? JSON.parse(post.contributors) : [],
     links: post ? JSON.parse(post.links) : [],
     description: post?.description || "",
     projectImages: [],
@@ -247,6 +256,7 @@ const ProjectForm = ({
     setActiveStep(0);
   };
 
+  console.log(form.getValues(), "FORM VALUES>!!@!@");
   function onSubmit(values: projectSchemaTypes) {
     if (post) {
       editPost({
@@ -254,6 +264,7 @@ const ProjectForm = ({
           ...values,
           links: JSON.stringify(values.links),
           technologies: JSON.stringify(values.technologies),
+          contributors: JSON.stringify(values.contributors),
         },
 
         postId: post.id,
@@ -268,6 +279,7 @@ const ProjectForm = ({
         ...values,
         links: JSON.stringify(values.links),
         technologies: JSON.stringify(values.technologies),
+        contributors: JSON.stringify(values.contributors),
         user_id: user?.id || "",
       });
     }
@@ -620,12 +632,16 @@ const ProjectForm = ({
                       <FormItem>
                         <FormLabel>Contributors</FormLabel>
                         <FormControl>
-                          <Textarea
+                          <ContributorsTags
+                            contrbiutersTag={field.value}
+                            onChange={field.onChange}
+                          />
+                          {/* <Textarea
                             disabled={isCreating || isEditing}
                             className=" h-[140px]"
                             placeholder="Name or links of people have helped or contributed in creating this project."
                             {...field}
-                          />
+                          /> */}
                         </FormControl>
                         <FormMessage />
                       </FormItem>
