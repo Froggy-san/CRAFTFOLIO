@@ -70,9 +70,7 @@ const ProjectView = () => {
                   username: el.username,
                   avatar: el.avatar,
                 }}
-                link={
-                  el.userId ? `http://localhost:5173/user/${el.userId} ` : ""
-                }
+                link={el.userId ? `/user/${el.userId}` : ""}
               />
             ))
           : null}
