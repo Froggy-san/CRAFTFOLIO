@@ -66,7 +66,7 @@ const PostCardControls = ({
         <DropdownMenuTrigger asChild>
           <Button
             variant="secondary"
-            className=" absolute right-4  opacity-90 top-5  z-[2] p-0 w-7 h-7 rounded-md "
+            className=" absolute right-4  opacity-90 top-5 z-[4] p-0 w-7 h-7 rounded-md "
           >
             <IoIosMore size={22} />
           </Button>

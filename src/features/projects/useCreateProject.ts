@@ -22,7 +22,8 @@ export default function useCreateProject() {
     onSuccess: (data) => {
       toast.dismiss();
       toast.success(`a new project has been created.`);
-      navigate(`/user/${data[0].user_id}`, { replace: true });
+      // navigate(`/user/${data[0].user_id}`, { replace: true });
+      navigate(-1);
       queryClient.invalidateQueries({ queryKey: ["userPosts", id] });
     },
 

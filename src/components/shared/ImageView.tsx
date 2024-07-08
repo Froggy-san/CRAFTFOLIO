@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ClickAwayListener } from "@mui/base";
 import { Button } from "../ui/button";
 import { IoIosClose } from "react-icons/io";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ImageView = ({
   handleClose,
@@ -39,9 +40,14 @@ const ImageView = ({
   }, [image]);
 
   return (
-    <>
+    <AnimatePresence>
       {image ? (
-        <div className="fixed flex items-center justify-center z-[9999] left-0 top-0 w-full h-[100dvh] bg-red-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50">
+        <motion.div
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, type: "spring" }}
+          key="container"
+          className="fixed flex items-center justify-center z-[9999] left-0 top-0 w-full h-[100dvh] bg-red-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50"
+        >
           <Button
             variant="secondary"
             className="absolute right-5 top-10 rounded-full w-7 h-7 p-0 text-gray-800 hover:text-black"
@@ -57,15 +63,19 @@ const ImageView = ({
               handleClose();
             }}
           >
-            <img
+            <motion.img
               src={image}
+              key="image"
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.7, opacity: 0 }}
               alt="Enlarged view"
               className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain"
             />
           </ClickAwayListener>
-        </div>
+        </motion.div>
       ) : null}
-    </>
+    </AnimatePresence>
   );
 };
 

@@ -11,6 +11,8 @@ import { BsArrowUpRight } from "react-icons/bs";
 import PostCardCarousel from "./PostCardCarousel";
 import { format } from "date-fns";
 import ToolsUsed from "./ToolsUsed";
+import { motion } from "framer-motion";
+import GrainyImg from "../GrainyImg";
 const previewRegex = /pre[av]iew/i;
 
 // function extractPreviewLink(text: string) {
@@ -45,7 +47,16 @@ const PostCard = ({ post }: { post: Project }) => {
     loggedInUser?.role === "admin" || post.user_id === loggedInUser?.id;
   //bg-[#ffffff]
   return (
-    <li
+    <motion.li
+      layout
+      variants={{
+        hidden: { opacity: 0, y: -20 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      // exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.7, type: "spring" }}
       className={`p-1 relative    rounded-lg h-fit break-words ${
         isDeleting && "opacity-60 cursor-not-allowed"
       }`}
@@ -59,11 +70,18 @@ const PostCard = ({ post }: { post: Project }) => {
         />
       ) : null}
 
-      <PostCardCarousel
-        postId={post.id}
-        postImages={postImages}
-        isDeleting={isDeleting}
-      />
+      {postImages.length ? (
+        <PostCardCarousel
+          postId={post.id}
+          postImages={postImages}
+          isDeleting={isDeleting}
+        />
+      ) : (
+        <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
+          No images.
+          <GrainyImg />
+        </div>
+      )}
 
       <Link to={`/project/${post.id}`}>
         <div className=" p-2 ">
@@ -118,7 +136,7 @@ const PostCard = ({ post }: { post: Project }) => {
           <span></span>
         )}
         {previewLink ? (
-          <Button variant="link" className=" group " asChild>
+          <Button variant="link" className=" group  pr-0" asChild>
             <Link target="_blank" to={previewLink}>
               {" "}
               <BsArrowUpRight
@@ -129,7 +147,7 @@ const PostCard = ({ post }: { post: Project }) => {
           </Button>
         ) : null}
       </div>
-    </li>
+    </motion.li>
   );
 };
 

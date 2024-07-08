@@ -11,7 +11,7 @@ import UserPorfolio from "./pages/UserProfile";
 import Home from "./pages/Home";
 import UserSettings from "./pages/UserSettings";
 
-import AuthContextProvidor from "./context/AuthContext";
+import AuthContextProvidor from "./store/AuthContext";
 import ProjectView from "./pages/ProjectView";
 import EditPost from "./pages/EditPost";
 import AddPost from "./pages/AddPost";

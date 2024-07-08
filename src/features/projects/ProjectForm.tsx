@@ -59,16 +59,7 @@ const projectSchema = z.object({
 
   description: z.string().min(6, { message: `password is too short` }),
   technologies: z.string().array().default([]),
-  //  z
-  //   .string()
-  //   .trim()
-  //   .transform((string) =>
-  //     string
-  //       .split(",")
-  //       .map((el) => el.trim())
-  //       .filter((el) => el !== "")
-  //       .join(",")
-  //   ),
+
   links: z
     .object({
       description: z.string().min(4, {
@@ -135,8 +126,8 @@ const ProjectForm = ({
   const formRef = useRef<HTMLFormElement>(null);
 
   const defaultValues = {
-    name: post?.name || "",
-    type: post?.type || "",
+    name: post?.name || "asdadasdasd",
+    type: post?.type || "asdadadadadd",
     startDate: post ? new Date(post.startDate) : undefined,
     endDate: post ? new Date(post.endDate) : undefined,
     technologies:
@@ -144,7 +135,7 @@ const ProjectForm = ({
     contributors:
       post && post.contributors ? JSON.parse(post.contributors) : [],
     links: post ? JSON.parse(post.links) : [],
-    description: post?.description || "",
+    description: post?.description || "asdadasdadas",
     projectImages: [],
   };
   const handleDeleteImage = React.useCallback((link: string) => {

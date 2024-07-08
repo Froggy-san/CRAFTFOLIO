@@ -54,8 +54,8 @@ const PostCardCarousel = ({
           ))}
         </CarouselContent>
       </Link>
-      <CarouselPrevious className=" left-2   w-6 h-6 disabled:z-20" />
-      <CarouselNext className="  right-2  w-6 h-6  disabled:z-20" />
+      <CarouselPrevious className=" left-2   w-6 h-6 " />
+      <CarouselNext className="  right-2  w-6 h-6  " />
     </Carousel>
   );
 };
