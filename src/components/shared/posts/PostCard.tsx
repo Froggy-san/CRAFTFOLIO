@@ -57,7 +57,7 @@ const PostCard = ({ post }: { post: Project }) => {
       animate={{ opacity: 1, y: 0 }}
       // exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.7, type: "spring" }}
-      className={`p-1 relative    rounded-lg h-fit break-words ${
+      className={` relative    rounded-lg h-fit break-words ${
         isDeleting && "opacity-60 cursor-not-allowed"
       }`}
     >
@@ -77,10 +77,12 @@ const PostCard = ({ post }: { post: Project }) => {
           isDeleting={isDeleting}
         />
       ) : (
-        <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
-          No images.
-          <GrainyImg />
-        </div>
+        <Link to={`/project/${post.id}`}>
+          <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
+            No images.
+            <GrainyImg />
+          </div>
+        </Link>
       )}
 
       <Link to={`/project/${post.id}`}>

@@ -42,16 +42,15 @@ import {
   SliderPicker,
   TwitterPicker,
 } from "react-color";
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ClickAwayListener } from "@mui/material";
-import { handleText } from "@/utils/helper";
 import TagsInput from "@/components/shared/TagsInput";
 import useEditAboutMe from "./useEditAboutMe";
 import AboutMePreview from "./AboutMePreview";
 import FormButtons from "@/components/shared/FormButtons";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import { aboutMeFormProps } from "@/types/types";
-
+import { motion } from "framer-motion";
 const arrowSize = 21;
 
 export const options: { label: JSX.Element; value: string }[] = [
@@ -148,7 +147,6 @@ const AboutMeFrom = React.forwardRef(function (
   const chosenColor = Object.values(form.getValues().arrowColor).join(",");
   const isTools = form.getValues().toolsAndTech.length;
   const isArrowChosen = form.getValues().arrowType !== "none" && isTools;
-  console.log(form.getValues(), "ABOUT ME FORM VALUES");
 
   function onSubmit(values: aboutMeFormTypes) {
     editAboutMe(
@@ -165,7 +163,13 @@ const AboutMeFrom = React.forwardRef(function (
   }
 
   return (
-    <div ref={ref} className=" mt-14">
+    <motion.div
+      initial={{ y: -120, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -120, opacity: 0 }}
+      ref={ref}
+      className=" mt-14"
+    >
       {" "}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -343,7 +347,7 @@ const AboutMeFrom = React.forwardRef(function (
           {/* <Button type="submit">Submit</Button> */}
         </form>
       </Form>
-    </div>
+    </motion.div>
   );
 });
 

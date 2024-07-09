@@ -14,11 +14,12 @@ const container = {
 const UnorderedListGrid = ({ children }: { children: ReactNode }) => {
   return (
     <motion.ul
+      id="posts-container"
       variants={container}
       // initial="hidden"
       animate="visible"
       exit={{ opacity: 1, scale: 0 }}
-      className="grid grid-cols-2 lg:px-20 xl:grid-cols-3 xl:px-0 gap-1 lg:gap-2  mb-7 "
+      className="grid grid-cols-2 lg:px-20 xl:grid-cols-3 xl:px-0 gap-2 lg:gap-2  mb-7 "
     >
       {children}
     </motion.ul>

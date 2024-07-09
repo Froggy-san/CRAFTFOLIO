@@ -14,6 +14,7 @@ import ErrorComp from "@/components/shared/ErrorComp";
 import CopyClipboard from "@/components/shared/CopyClipboard";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import UserTag from "@/components/shared/UserTag";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 const ProjectView = () => {
   const { projectId } = useParams();
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
@@ -25,6 +26,7 @@ const ProjectView = () => {
   } = useGetProjectById(projectId || "");
 
   const project: Project = projectById?.[0];
+  useDocumentTitle(project?.name || "");
   const relatedUser = userById?.[0]; // user that owns the related project.
   const contrbiutersTags =
     project && project.contributors ? JSON.parse(project.contributors) : [];
@@ -43,9 +45,10 @@ const ProjectView = () => {
   const imagesToDelete = project.projectImages.map(
     (image: imageObject) => image.imageUrl.split("projects/")[1]
   );
+  const images = project.projectImages.map((imageObj) => imageObj.imageUrl);
 
   return (
-    <div className=" mb-40 mt-6">
+    <div id="project-view" className=" mb-40 mt-6">
       {isAuthLoading ? (
         <Loading />
       ) : (
@@ -56,7 +59,7 @@ const ProjectView = () => {
           />
         )
       )}
-      <ProjectViewCaro imageObjs={project.projectImages} />
+      <ProjectViewCaro images={images} />
 
       {/* ----------- */}
 

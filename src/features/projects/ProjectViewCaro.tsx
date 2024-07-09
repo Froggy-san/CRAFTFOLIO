@@ -11,19 +11,23 @@ import {
 import { imageObject } from "@/types/types";
 import ImagePortrait from "@/components/shared/ImagePortrait";
 import ImageView from "@/components/shared/ImageView";
+import ViewCarousel from "./ViewCarousel";
+import { AnimatePresence } from "framer-motion";
 
-const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
-  const [viewedImage, setViewedImaged] = useState<null | string>(null);
+const ProjectViewCaro = ({ images }: { images: string[] }) => {
+  // const [viewedImage, setViewedImaged] = useState<null | string>(null);
+  const [viewedIndex, setViewedIndex] = useState<number | undefined>(undefined);
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
-  const handleViewImage = useCallback(function (imageName: string) {
-    setViewedImaged(imageName);
-  }, []);
-  const handleCloseView = useCallback(function () {
-    setViewedImaged(null);
-  }, []);
+  // const handleViewImage = useCallback(function (imageName: string) {
+  //   setViewedImaged(imageName);
+  // }, []);
+  // const handleCloseView = useCallback(function () {
+  //   setViewedImaged(null);
+  // }, []);
 
+  console.log(viewedIndex, "index");
   React.useEffect(() => {
     if (!api) {
       return;
@@ -41,7 +45,7 @@ const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
       <div className=" flex justify-center items-center">
         <Carousel setApi={setApi} className=" w-full lg:w-[93%]  ">
           <CarouselContent className="">
-            {imageObjs.map((imageObj, index) => (
+            {images.map((image, index) => (
               <CarouselItem key={index} className="">
                 <Card className="">
                   <CardContent
@@ -49,12 +53,13 @@ const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
              h-[350px] xs:h-[450px] md:h-[80dvb]  items-center justify-center p-0  rounded-lg overflow-hidden select-none"
                   >
                     <ImagePortrait
-                      handleViewImage={handleViewImage}
-                      image={imageObj.imageUrl}
+                      handleViewImage={() => setViewedIndex(index)}
+                      image={image}
                     />
                     <img
-                      onClick={() => setViewedImaged(imageObj.imageUrl)}
-                      src={imageObj.imageUrl}
+                      // onClick={() => setViewedImaged(image)}
+                      onClick={() => setViewedIndex(index)}
+                      src={image}
                       alt="image"
                       className=" w-full h-full object-cover cursor-pointer md:hidden"
                     />
@@ -68,9 +73,18 @@ const ProjectViewCaro = ({ imageObjs }: { imageObjs: imageObject[] }) => {
         </Carousel>
       </div>
       <div className="py-2 text-center text-sm text-muted-foreground">
-        Slide {current} of {imageObjs.length}
+        Slide {current} of {images.length}
       </div>
-      <ImageView handleClose={handleCloseView} image={viewedImage} />
+      <AnimatePresence>
+        {viewedIndex !== undefined && (
+          <ViewCarousel
+            closeFunction={() => setViewedIndex(undefined)}
+            images={images}
+            index={viewedIndex}
+          />
+        )}
+      </AnimatePresence>
+      {/* <ImageView handleClose={handleCloseView} image={viewedImage} /> */}
     </div>
   );
 };

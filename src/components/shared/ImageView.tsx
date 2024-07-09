@@ -44,9 +44,9 @@ const ImageView = ({
       {image ? (
         <motion.div
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, type: "spring" }}
+          transition={{ duration: 0.2, type: "spring" }}
           key="container"
-          className="fixed flex items-center justify-center z-[9999] left-0 top-0 w-full h-[100dvh] bg-red-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50"
+          className="fixed flex items-center justify-center z-[9999] left-0 top-0 w-full h-[100dvh] bg-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50"
         >
           <Button
             variant="secondary"
@@ -69,6 +69,7 @@ const ImageView = ({
               initial={{ scale: 0.7, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
+              transition={{ duration: 0.3, type: "spring" }}
               alt="Enlarged view"
               className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain"
             />

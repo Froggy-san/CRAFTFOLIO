@@ -3,6 +3,10 @@ import { TiArrowLeftThick } from "react-icons/ti";
 import { TiArrowRightThick } from "react-icons/ti";
 import IconButton from "./IconButton";
 import { PaginationEllipsis } from "../ui/pagination";
+import { Link } from "react-scroll";
+
+const scrollOffest = -50;
+const scrollDuraiton = 200;
 
 const Pagination = ({ pageCount }: { pageCount: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -50,36 +54,57 @@ const Pagination = ({ pageCount }: { pageCount: number }) => {
 
   return (
     <div className=" flex justify-between items-center">
-      <IconButton
-        disabled={currentPage === 1}
-        variant="ghost"
-        onClick={handlePrev}
+      <Link
+        to={currentPage === 1 ? "" : "posts-container"}
+        smooth
+        duration={scrollDuraiton}
+        offset={scrollOffest}
       >
-        <TiArrowLeftThick size={20} />
-      </IconButton>
+        <IconButton
+          disabled={currentPage === 1}
+          variant="ghost"
+          onClick={handlePrev}
+        >
+          <TiArrowLeftThick size={20} />
+        </IconButton>
+      </Link>
       <div className=" flex items-center ">
         {currentPage > 3 && <PaginationEllipsis />}
         {pageNumbers.map((page) => (
-          <IconButton
+          <Link
+            to={currentPage === page ? "" : "posts-container"}
+            smooth
+            offset={scrollOffest}
+            duration={scrollDuraiton}
             key={page}
-            variant="ghost"
-            disabled={currentPage === page}
-            onClick={() => handleGoToPage(page as number)}
           >
-            {" "}
-            {page}
-          </IconButton>
+            <IconButton
+              variant="ghost"
+              disabled={currentPage === page}
+              onClick={() => handleGoToPage(page as number)}
+            >
+              {" "}
+              {page}
+            </IconButton>
+          </Link>
         ))}
         {currentPage < pageCount - 2 && <PaginationEllipsis />}
       </div>
-      <IconButton
-        disabled={currentPage === pageCount}
-        variant="ghost"
-        onClick={handleNext}
+      <Link
+        to={currentPage === pageCount ? "" : "posts-container"}
+        smooth
+        offset={scrollOffest}
+        duration={scrollDuraiton}
       >
-        {" "}
-        <TiArrowRightThick size={20} />
-      </IconButton>
+        <IconButton
+          disabled={currentPage === pageCount}
+          variant="ghost"
+          onClick={handleNext}
+        >
+          {" "}
+          <TiArrowRightThick size={20} />
+        </IconButton>
+      </Link>
     </div>
   );
 };

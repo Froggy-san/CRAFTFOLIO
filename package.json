@@ -50,6 +50,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
+    "react-scroll": "^1.9.0",
     "vaul": "^0.9.1",
     "zod": "^3.23.8"
   },
@@ -58,6 +59,7 @@
     "@types/react": "^18.2.66",
     "@types/react-color": "^3.0.12",
     "@types/react-dom": "^18.2.22",
+    "@types/react-scroll": "^1.8.10",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
