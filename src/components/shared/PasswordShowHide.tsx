@@ -6,6 +6,7 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import IconButton from "./IconButton";
@@ -16,6 +17,7 @@ const PasswordShowHide = <TFieldValues extends FieldValues>({
   disabled,
   fieldName,
   className,
+  description,
   onChange,
   show,
 }: {
@@ -24,6 +26,7 @@ const PasswordShowHide = <TFieldValues extends FieldValues>({
   labelText: string;
   disabled?: boolean;
   className?: string;
+  description?: string;
   onChange?: React.Dispatch<SetStateAction<boolean>>;
   show?: boolean;
 }) => {
@@ -66,6 +69,9 @@ const PasswordShowHide = <TFieldValues extends FieldValues>({
                   </IconButton>
                 </div>
               </FormControl>
+              {description ? (
+                <FormDescription>{description}</FormDescription>
+              ) : null}
               <FormMessage />
             </FormItem>
           )}
@@ -97,6 +103,9 @@ const PasswordShowHide = <TFieldValues extends FieldValues>({
                   </IconButton>
                 </div>
               </FormControl>
+              {description ? (
+                <FormDescription>{description}</FormDescription>
+              ) : null}
               <FormMessage />
             </FormItem>
           )}

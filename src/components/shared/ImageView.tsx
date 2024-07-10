@@ -69,7 +69,7 @@ const ImageView = ({
               initial={{ scale: 0.7, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
-              transition={{ duration: 0.3, type: "spring" }}
+              transition={{ duration: 0.2, type: "spring" }}
               alt="Enlarged view"
               className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain"
             />

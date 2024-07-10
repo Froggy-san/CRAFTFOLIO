@@ -1,3 +1,4 @@
+import { getPhoneData } from "@/components/shared/phomeInput/PhoneInput";
 import { validateEgyptianPhoneNumber } from "@/utils/helper";
 import { z } from "zod";
 
@@ -20,12 +21,10 @@ const updateUserSchema = z
   })
   .refine(
     (data) => {
-      return validateEgyptianPhoneNumber(data.phone);
+      const { isValid } = getPhoneData(data.phone);
+      return isValid;
     },
-    {
-      message: `Phone number must match the patterns of Egyptian phone numbers`,
-      path: ["phone"],
-    }
+    { message: "Please put a vaild number", path: ["phone"] }
   );
 
 export default updateUserSchema;

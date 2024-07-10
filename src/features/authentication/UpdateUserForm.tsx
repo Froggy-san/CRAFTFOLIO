@@ -28,6 +28,7 @@ import FormFieldItem from "@/components/shared/FormFieldItem";
 import { User } from "@/types/types";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
 import useObjectCompare from "@/hooks/useCompareObjects";
+import { PhoneInput } from "@/components/shared/phomeInput/PhoneInput";
 
 type updateUserSchemaTypes = z.infer<typeof updateUserSchema>;
 
@@ -153,6 +154,24 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Phone</FormLabel>
+                    <FormControl>
+                      <PhoneInput
+                        defaultCountry="EG"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormDescription>Your phone number.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
                     <FormLabel>Phone number</FormLabel>
                     <FormControl>
                       <InputOTP
@@ -185,7 +204,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormFieldItem<updateUserSchemaTypes>
                 labelText="Socials"
                 fieldName="socials"
