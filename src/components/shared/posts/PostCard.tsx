@@ -90,11 +90,12 @@ const PostCard = ({ post }: { post: Project }) => {
           <TooltipComp toolTipText={post.name}>
             <h1
               aria-label="project name"
-              className="overflow-hidden  w-fit max-w-full text-lg font-semibold whitespace-nowrap overflow-ellipsis"
+              className="  w-fit max-w-full text-lg font-semibold line-clamp-1"
             >
               {post.name}
             </h1>
           </TooltipComp>
+          {/* <h2 className=" line-clamp-2">{post.description}</h2> */}
 
           {/* <TruncateText
             text={`Description: ${post.description}`}

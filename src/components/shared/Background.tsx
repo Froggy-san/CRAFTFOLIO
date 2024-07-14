@@ -1,7 +1,22 @@
 import React from "react";
+import { BackgroundGradientAnimation } from "../ui/BackgroundGradientAnimation";
 
 const Background = () => {
   return (
+    // <div className="fixed top-0 -z-10 inset-0 size-full bg-white">
+    //   <BackgroundGradientAnimation
+    //     gradientBackgroundStart="rgba(255,255,255,0)"
+    //     gradientBackgroundEnd="rgba(255,255,255,0)"
+    //     firstColor="237,183,77"
+    //     secondColor="235,102,102"
+    //     thirdColor="111,177,138"
+    //     fourthColor="235,102,102"
+    //     fifthColor="154,63,251"
+    //     pointerColor="237,183,77"
+    //     className="  z-[10]"
+    //   />
+    // </div>
+
     <div className="fixed top-0 -z-10 inset-0 size-full bg-white">
       <div className="absolute bottom-auto left-auto right-0 top-0 size-[500px] translate-x-[-30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]" />
     </div>

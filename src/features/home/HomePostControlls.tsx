@@ -19,12 +19,18 @@ const Options = [
 const HomePostControlls = ({
   user,
   selectDisabled,
+  className,
 }: {
   selectDisabled?: boolean;
   user?: UserTagProps;
+  className?: string;
 }) => {
   return (
-    <div className=" relative flex justify-around xs:flex-row  items-center  gap-3  my-5">
+    <div
+      className={`relative flex justify-around xs:flex-row  items-center  gap-3  my-5 ${
+        className || ""
+      }`}
+    >
       <h1 className=" font-semibold text-2xl sm:text-3xl">Posts</h1>
       <Search className="   w-[60%] max-w-[500px]" />
       <div className=" flex items-center gap-2">

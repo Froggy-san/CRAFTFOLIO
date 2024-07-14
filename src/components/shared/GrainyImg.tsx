@@ -1,6 +1,6 @@
-const GrainyImg = () => {
+const GrainyImg = ({ className }: { className?: string }) => {
   return (
-    <svg className=" absolute">
+    <svg className={`absolute ${className || ""}`}>
       <filter id="noiseFilter">
         <feTurbulence
           type="fractalNoise"
