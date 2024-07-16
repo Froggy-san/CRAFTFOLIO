@@ -11,8 +11,9 @@ import {
 import { imageObject } from "@/types/types";
 import ImagePortrait from "@/components/shared/ImagePortrait";
 import ImageView from "@/components/shared/ImageView";
-import ViewCarousel from "./ViewCarousel";
+
 import { AnimatePresence } from "framer-motion";
+import ViewCarousel from "../projects/ViewCarousel";
 
 const ProjectViewCaro = ({ images }: { images: string[] }) => {
   // const [viewedImage, setViewedImaged] = useState<null | string>(null);
@@ -43,7 +44,7 @@ const ProjectViewCaro = ({ images }: { images: string[] }) => {
   return (
     <div>
       <div className=" flex justify-center items-center">
-        <Carousel setApi={setApi} className=" w-full lg:w-[93%]  ">
+        <Carousel setApi={setApi} className=" w-full   ">
           <CarouselContent className="">
             {images.map((image, index) => (
               <CarouselItem key={index} className="">

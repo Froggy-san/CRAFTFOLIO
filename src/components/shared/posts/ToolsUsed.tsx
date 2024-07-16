@@ -15,7 +15,7 @@ const ToolsUsed = ({ toolsArr }: { toolsArr: string[] }) => {
       {toolsArr.map((tool, i: number) => {
         const lastITem = i + 1 === toolsArr.length;
         const icon = getIconForTool(tool);
-        console.log(icon, "icon");
+
         return (
           <TooltipComp key={i} toolTipText={tool}>
             <span className=" h-full flex justify-center items-center  ">

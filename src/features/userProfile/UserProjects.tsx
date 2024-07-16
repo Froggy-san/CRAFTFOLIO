@@ -1,8 +1,6 @@
 import { Project } from "@/types/types";
-
 import Empty from "@/components/shared/Empty";
 import ErrorComp from "@/components/shared/ErrorComp";
-import UnorderedListGrid from "@/components/shared/UnorderedListGrid";
 import { useSearchParams } from "react-router-dom";
 import PostsGrid from "../../components/shared/posts/PostsGrid";
 

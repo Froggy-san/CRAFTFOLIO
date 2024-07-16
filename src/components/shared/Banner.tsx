@@ -1,3 +1,4 @@
+import { useTheme } from "@/store/ThemeProvidor";
 import { BackgroundGradientAnimation } from "../ui/BackgroundGradientAnimation";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
@@ -7,21 +8,27 @@ import GrainyImg from "./GrainyImg";
 import { IoIosBuild } from "react-icons/io";
 
 const Banner = () => {
+  const { theme } = useTheme();
+  console.log(theme, "theme");
   return (
     <Card className=" h-[500px] lg:h-[95vh] w-full  grany overflow-hidden   mt-3 relative">
       <GrainyImg className=" " />
       <BackgroundGradientAnimation
-        gradientBackgroundStart="  rgba(240,219,165,1)"
-        gradientBackgroundEnd=" rgba(240,219,165,1)"
-        firstColor="237,183,77"
-        secondColor="235,102,102"
-        thirdColor="111,177,138"
-        fourthColor="235,102,102"
-        fifthColor="154,63,251"
-        pointerColor="237,183,77"
+        gradientBackgroundStart={
+          theme === "dark" ? "rgb(108, 0, 162)" : "rgba(240,219,165,1)"
+        }
+        gradientBackgroundEnd={
+          theme === "dark" ? "rgb(0, 17, 82)" : "rgba(240,219,165,1)"
+        }
+        firstColor={theme === "dark" ? "18, 113, 255" : "237,183,77"}
+        secondColor={theme === "dark" ? "221, 74, 255" : "235,102,102"}
+        thirdColor={theme === "dark" ? "100, 220, 255" : "111,177,138"}
+        fourthColor={theme === "dark" ? "200, 50, 50" : "235,102,102"}
+        fifthColor={theme === "dark" ? "180, 180, 50" : "154,63,251"}
+        pointerColor={theme === "dark" ? "140, 100, 255" : "237,183,77"}
         className="  z-[10]"
       />
-      <div className=" absolute inset-0 flex flex-col items-center justify-center w-full h-full z-50 text-center text-[25px] sm:text-3xl  md:text-4xl lg:text-5xl xl:text-6xl px-3  ">
+      <div className=" absolute inset-0 flex flex-col items-center justify-center w-full h-full z-50 text-center text-[25px] sm:text-3xl  md:text-4xl lg:text-4xl xl:text-[3.2rem] px-3  ">
         <TextGenerateEffect
           className=" text-center mb-3  w-full   leading-10 "
           words="Craftfolio is where your career starts."

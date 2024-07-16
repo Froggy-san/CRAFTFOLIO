@@ -39,7 +39,7 @@ const UserTag = ({
           <Avatar className="w-7 h-7">
             <AvatarImage
               src={user.avatar || defaultProfilePicture}
-              className=" object-cover"
+              className=" object-fill"
             />
             <AvatarFallback>image</AvatarFallback>
           </Avatar>

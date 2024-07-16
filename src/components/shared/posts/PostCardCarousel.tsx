@@ -24,7 +24,7 @@ const PostCardCarousel = ({
   return (
     <Carousel id="carousel" className="w-full    rounded-lg ">
       {isDeleting && (
-        <Loading className=" center-abslute z-20 text-black" size={30} />
+        <Loading className=" center-abslute z-30 !opacity-100" size={30} />
       )}
       <Link to={`/project/${postId}`}>
         <CarouselContent id="carousel-Content" className=" p-0 bg-transparent">

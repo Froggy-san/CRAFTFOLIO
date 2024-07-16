@@ -31,19 +31,31 @@ const DeletePost = ({
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       buttonText={
-        <IconButton disabled={disabled} variant="ghost">
-          <HiOutlineTrash size={20} />
-        </IconButton>
+        <Button
+          className=" gap-1 w-full xs:w-fit tracking-wide"
+          variant="destructive"
+          size="sm"
+        >
+          Delete <HiOutlineTrash size={20} />
+        </Button>
+        // <IconButton disabled={disabled} variant="ghost">
+        //   <HiOutlineTrash size={20} />
+        // </IconButton>
       }
     >
-      <div className=" flex items-center gap-3">
+      <div className=" flex flex-col pt-2 sm:py-0 sm:flex-row-reverse  justify-start items-center gap-2 sm:gap-2">
         <Button
+          className="  w-full sm:w-24 "
           onClick={() => deletePost({ postId, imagesToDelete })}
           variant="destructive"
         >
           Delete
         </Button>
-        <Button onClick={() => setIsOpen(false)} variant="secondary">
+        <Button
+          className="  w-full sm:w-24 "
+          onClick={() => setIsOpen(false)}
+          variant="secondary"
+        >
           Cancel
         </Button>
       </div>

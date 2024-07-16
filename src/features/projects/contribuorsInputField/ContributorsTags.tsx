@@ -18,6 +18,7 @@ import { publicUser } from "@/types/types";
 import ContriburosPopover from "./ContriburosPopover";
 import { defaultProfilePicture } from "@/utils/constants";
 import { ClickAwayListener } from "@mui/material";
+import { v6 as uuidv6 } from "uuid";
 
 interface TagInputProps {
   onChange: React.Dispatch<SetStateAction<publicUser[]>>;
@@ -26,6 +27,8 @@ interface TagInputProps {
   style?: CSSProperties;
   children?: ReactElement;
 }
+
+// Example using uuid library
 
 const ContributorsTags = ({
   onChange,
@@ -56,7 +59,7 @@ const ContributorsTags = ({
       const trimmedValue = inputedValue.trim();
       if (trimmedValue) {
         handleAddTag({
-          userId: "",
+          userId: uuidv6() + "-any",
           avatar: "",
           username: trimmedValue,
           email: "",

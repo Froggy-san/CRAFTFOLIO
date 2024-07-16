@@ -1,5 +1,6 @@
 import React, {
   Dispatch,
+  ReactElement,
   ReactNode,
   SetStateAction,
   createContext,
@@ -87,7 +88,7 @@ const CollapseContent = function ({
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const { isOpen, textLenght, setShowCollapseBtn } =
+  const { isOpen, setIsOpen, textLenght, setShowCollapseBtn } =
     useContext(CollapseContext);
 
   const isString = typeof children === "string";
@@ -106,8 +107,10 @@ const CollapseContent = function ({
   useEffect(() => {
     if (isBigEnough) {
       setShowCollapseBtn(true);
+    } else {
+      setShowCollapseBtn(false);
     } // when ever changing the textLenght refresh the page in order for this state to take effect.
-  }, []);
+  }, [isBigEnough]);
 
   // // Separate components from text
   // const components = React.Children.toArray(children).filter((child) =>
@@ -116,7 +119,10 @@ const CollapseContent = function ({
 
   return (
     <p
-      onClick={() => onClick?.()}
+      onClick={() => {
+        if (isOpen) setIsOpen(false);
+        onClick?.();
+      }}
       aria-label={ariaLabel}
       className={`mt-5 break-all  ${className}`}
       style={style}
@@ -135,6 +141,8 @@ interface CollapseButtonProps {
   onClick?: (e?: MouseEvent) => void;
   variant?: variant;
   style?: React.CSSProperties;
+  buttonTextWhenOpen?: string | ReactNode;
+  buttonTextWhenClosed?: string | ReactNode;
 }
 
 const CollapseButton = function ({
@@ -143,6 +151,8 @@ const CollapseButton = function ({
   arrowPositionY,
   variant,
   style,
+  buttonTextWhenClosed,
+  buttonTextWhenOpen,
   onClick,
 }: CollapseButtonProps) {
   const { showCollapseBtn, isOpen, setIsOpen } = useContext(CollapseContext);
@@ -158,7 +168,18 @@ const CollapseButton = function ({
             setIsOpen((is) => !is);
           }}
         >
-          {!isOpen ? <IoIosArrowDown size={20} /> : <IoIosArrowUp size={20} />}
+          {buttonTextWhenClosed || buttonTextWhenOpen ? (
+            <>{!isOpen ? buttonTextWhenClosed : buttonTextWhenOpen}</>
+          ) : (
+            <>
+              {" "}
+              {!isOpen ? (
+                <IoIosArrowDown size={20} />
+              ) : (
+                <IoIosArrowUp size={20} />
+              )}
+            </>
+          )}
         </IconButton>
       )}
     </>

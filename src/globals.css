@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --toast-background: 222.2 84% 4.9%;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -35,8 +36,6 @@
     --radius: 0.5rem;
   }
 
-  .phone-fields {
-  }
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -125,6 +124,7 @@
       top: 120%;
     }
   }
+
   .transtion-handle {
     transition: all;
     transition-duration: 5s;

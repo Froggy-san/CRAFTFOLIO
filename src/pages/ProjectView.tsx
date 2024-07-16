@@ -3,18 +3,23 @@ import { useParams } from "react-router-dom";
 
 import Loading from "@/components/shared/Loading";
 
-import ProjectViewCaro from "@/features/projects/ProjectViewCaro";
-
 import CollapsibleText from "@/components/shared/CollapsibleText";
 import { useAuth } from "@/hooks/useAuth";
 import { imageObject, Project, publicUser } from "@/types/types";
-import ProjectViewControls from "@/features/projects/ProjectViewControls";
+
 // import ProjectControls from "@/features/projects/ProjectControls";
 import ErrorComp from "@/components/shared/ErrorComp";
 import CopyClipboard from "@/components/shared/CopyClipboard";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import UserTag from "@/components/shared/UserTag";
 import { useDocumentTitle } from "@uidotdev/usehooks";
+
+import ProjectViewControls from "@/features/projectView/ProjectViewControls";
+import ProjectViewCaro from "@/features/projectView/ProjectViewCaro";
+import Contributors from "@/features/projectView/Contributors";
+import Heading from "@/components/shared/Heading";
+import Description from "@/features/projectView/Description";
+
 const ProjectView = () => {
   const { projectId } = useParams();
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
@@ -25,8 +30,10 @@ const ProjectView = () => {
     user: userById,
   } = useGetProjectById(projectId || "");
 
-  const project: Project = projectById?.[0];
+  const project: Project | undefined = projectById?.[0];
+
   useDocumentTitle(project?.name || "");
+
   const relatedUser = userById?.[0]; // user that owns the related project.
   const contrbiutersTags =
     project && project.contributors ? JSON.parse(project.contributors) : [];
@@ -48,7 +55,7 @@ const ProjectView = () => {
   const images = project.projectImages.map((imageObj) => imageObj.imageUrl);
 
   return (
-    <div id="project-view" className=" mb-40 mt-6">
+    <div id="project-view" className=" mb-40 mt-6 md:px-10">
       {isAuthLoading ? (
         <Loading />
       ) : (
@@ -63,31 +70,24 @@ const ProjectView = () => {
 
       {/* ----------- */}
 
-      <div>
-        {contrbiutersTags.length
-          ? contrbiutersTags.map((el: publicUser, i: number) => (
-              <UserTag
-                key={i}
-                user={{
-                  userId: el.userId,
-                  username: el.username,
-                  avatar: el.avatar,
-                }}
-                link={el.userId ? `/user/${el.userId}` : ""}
-              />
-            ))
-          : null}
-      </div>
-
-      <div className=" mt-6 break-words">
-        <h1 className=" text-3xl" aria-label="project name">
-          {project.name}
-        </h1>
-        <CollapsibleText
-          arrowPositionX="right"
-          text={`${project.description}`}
+      <div className=" mt-10 space-y-3">
+        <Heading
+          as="h1"
+          Text={project.name}
+          ariaLabel="project name"
+          className=" font-semibold text-3xl text-center"
         />
+
+        <Description Text={project.description} />
+        <Contributors contrbiutersTags={contrbiutersTags} />
       </div>
+    </div>
+  );
+};
+
+export default ProjectView;
+
+/*
       <div className=" my-6  ">
         <h1 className=" font-semibold text-lg">Links:</h1>
         <div className="">
@@ -114,8 +114,4 @@ const ProjectView = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default ProjectView;
+*/

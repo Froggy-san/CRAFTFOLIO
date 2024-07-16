@@ -7,7 +7,7 @@ import { AnimatePresence } from "framer-motion";
 const PostsGrid = ({ posts }: { posts: Project[] | undefined }) => {
   return (
     <UnorderedListGrid>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {posts
           ? posts.map((post) => <PostCard post={post} key={post.id} />)
           : null}

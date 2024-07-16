@@ -1,21 +1,23 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 const Heading = ({
   children,
   className,
   ariaLabel,
+  as: Componant = "h1",
+  Text,
 }: {
-  children: ReactNode;
+  children?: ReactNode | ReactElement | string;
+  Text?: ReactNode | ReactElement | string;
   className?: string;
   ariaLabel?: string;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }) => {
   return (
-    <h1
-      aria-label={ariaLabel}
-      className={`font-semibold text-2xl sm:text-3xl ${className}`}
-    >
+    <Componant aria-label={ariaLabel} className={className || ""}>
+      {Text}
       {children}
-    </h1>
+    </Componant>
   );
 };
 

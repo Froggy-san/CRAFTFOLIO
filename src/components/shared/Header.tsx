@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 import LinkBtn from "./LinkBtn";
 import HeaderSearchBar from "./headerSearchBar/HeaderSearchBar";
+import { ModeToggle } from "./DarkMode";
 
 const Header = () => {
   const { user, isLoading } = useAuth();
@@ -13,9 +14,9 @@ const Header = () => {
     avatar: user?.avatar,
   };
   return (
-    <header className=" flex items-center justify-between  border shadow-md rounded-lg  mt-3 py-1 px-2">
+    <header className=" flex items-center justify-between bg-background/80 border border-border shadow-md rounded-lg   py-1 px-2 ">
       <Logo />
-
+      <ModeToggle />
       <div className=" flex flex-1 justify-end ml-3 sm:flex-none items-center gap-1">
         <HeaderSearchBar />
 

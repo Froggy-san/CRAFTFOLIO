@@ -16,6 +16,7 @@ import ProjectView from "./pages/ProjectView";
 import EditPost from "./pages/EditPost";
 import AddPost from "./pages/AddPost";
 import "./globals.css";
+import { ThemeProvider } from "./store/ThemeProvidor";
 
 const router = createBrowserRouter([
   {
@@ -50,31 +51,34 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <AuthContextProvidor>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider router={router} />
+      <ThemeProvider defaultTheme="light">
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <RouterProvider router={router} />
 
-        <Toaster
-          position="bottom-center"
-          gutter={12}
-          containerStyle={{ margin: "8px" }}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 5000,
-            },
-            style: {
-              fontSize: "16px",
-              maxWidth: "500px",
-              padding: "7px 17px",
-              // backgroundColor: "var(--color-grey-0)",
-              // color: "var(--color-grey-700)",
-            },
-          }}
-        />
-      </QueryClientProvider>
+          <Toaster
+            position="bottom-center"
+            gutter={12}
+            containerStyle={{ margin: "8px" }}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 5000,
+              },
+              style: {
+                fontSize: "16px",
+                maxWidth: "500px",
+                padding: "7px 17px",
+
+                // backgroundColor: "var(--color-grey-0)",
+                // color: "var(--color-grey-700)",
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </ThemeProvider>
     </AuthContextProvidor>
   );
 }

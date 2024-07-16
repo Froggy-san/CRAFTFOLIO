@@ -8,12 +8,14 @@ import {
 const TooltipComp = ({
   children,
   toolTipText,
+  duration,
 }: {
   children: ReactNode;
   toolTipText: string;
+  duration?: number;
 }) => {
   return (
-    <TooltipProvider delayDuration={500}>
+    <TooltipProvider delayDuration={duration || 500}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent>

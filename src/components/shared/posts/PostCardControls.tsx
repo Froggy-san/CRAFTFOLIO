@@ -62,6 +62,11 @@ const PostCardControls = ({
           </Button>
         </div>
       </DialogComp>
+      {/* <DeletePostDiaDrawer
+        open={isDiaOpen}
+        setOpen={setIsDiaOpen}
+        handleDelete={deletePost}
+      /> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button

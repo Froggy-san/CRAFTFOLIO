@@ -11,8 +11,13 @@ import { BsArrowUpRight } from "react-icons/bs";
 import PostCardCarousel from "./PostCardCarousel";
 import { format } from "date-fns";
 import ToolsUsed from "./ToolsUsed";
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import GrainyImg from "../GrainyImg";
+import { AnimatedTooltip } from "../AnimatedTooltops";
+import DisplayedContributors from "./DisplayedContributors";
+import PostCardContributors from "./PostCardContributors";
+import Loading from "../Loading";
+
 const previewRegex = /pre[av]iew/i;
 
 // function extractPreviewLink(text: string) {
@@ -28,7 +33,7 @@ const PostCard = ({ post }: { post: Project }) => {
     userId: post.publicUsers?.userId,
     avatar: post.publicUsers?.avatar,
   };
-
+  const x = useMotionValue(0);
   const postTech =
     post && post.technologies ? JSON.parse(post.technologies) : [];
   const previewLink = JSON.parse(post.links).find(
@@ -43,6 +48,8 @@ const PostCard = ({ post }: { post: Project }) => {
   const postImages = post.projectImages.map(
     (image: imageObject) => image.imageUrl
   );
+  const contrbiutersTags =
+    post && post.contributors ? JSON.parse(post.contributors) : [];
   const currentOwner =
     loggedInUser?.role === "admin" || post.user_id === loggedInUser?.id;
   //bg-[#ffffff]
@@ -50,16 +57,16 @@ const PostCard = ({ post }: { post: Project }) => {
     <motion.li
       layout
       variants={{
-        hidden: { opacity: 0, y: -20 },
-        visible: { opacity: 1, y: 0 },
+        // hidden: { opacity: 0, y: -20 },
+        // visible: { opacity: 1, y: 0 },
+        deleting: { opacity: 0.6, y: -20 }, // Added variant for deleting state
       }}
       initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={isDeleting && "deleting"}
       // exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.7, type: "spring" }}
-      className={` relative    rounded-lg h-fit break-words ${
-        isDeleting && "opacity-60 cursor-not-allowed"
-      }`}
+      // transition={{ duration: 0.3, type: "spring" }}
+      className={` relative    rounded-lg h-fit break-words
+        `}
     >
       {currentOwner ? (
         <CardControls
@@ -80,6 +87,12 @@ const PostCard = ({ post }: { post: Project }) => {
         <Link to={`/project/${post.id}`}>
           <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
             No images.
+            {isDeleting && (
+              <Loading
+                className=" center-abslute z-30 !opacity-100"
+                size={30}
+              />
+            )}
             <GrainyImg />
           </div>
         </Link>
@@ -122,6 +135,12 @@ const PostCard = ({ post }: { post: Project }) => {
               }`}</p>
             </TooltipComp>
 
+            <PostCardContributors items={contrbiutersTags} />
+            {/* <DisplayedContributors contributors={contrbiutersTags} /> */}
+            {/* <div className=" flex flex-nowrap gap-1 items-center">
+              <span>Contributors: </span>
+              <DisplayedContributors contributors={contrbiutersTags} />
+            </div> */}
             {/* <p className=" break-words">Technologies: [{post.technologies}]</p> */}
             <ToolsUsed toolsArr={postTech} />
             {/* <HandleIcons toolsArr={post.technologies.split(",")} /> */}
