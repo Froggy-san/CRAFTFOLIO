@@ -19,7 +19,7 @@ const SearchBar = ({
 }: searchBarProps) => {
   return (
     <div
-      className={`relative ${className} flex  w-full items-center border-b px-3 z-50 bg-white`}
+      className={`relative ${className} flex  w-full items-center border-b px-3 z-50 bg-background`}
     >
       <IoIosSearch className=" mr-2 opacity-50 mt-1" size={20} />
       <input
@@ -30,13 +30,13 @@ const SearchBar = ({
         placeholder="Search for people..."
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <IconButton
+      {/* <IconButton
         onClick={closeDiaFn}
         variant="link"
         className=" hover:opacity-80 duration-200"
       >
         <IoClose size={17} />
-      </IconButton>
+      </IconButton> */}
     </div>
   );
 };

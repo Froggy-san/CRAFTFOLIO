@@ -57,14 +57,14 @@ const PostCard = ({ post }: { post: Project }) => {
     <motion.li
       layout
       variants={{
-        // hidden: { opacity: 0, y: -20 },
-        // visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: -20 },
+        visible: { opacity: 1, y: 0 },
         deleting: { opacity: 0.6, y: -20 }, // Added variant for deleting state
       }}
       initial={{ opacity: 0, y: -20 }}
-      animate={isDeleting && "deleting"}
+      animate={isDeleting ? "deleting" : "visible"}
       // exit={{ opacity: 0, y: -20 }}
-      // transition={{ duration: 0.3, type: "spring" }}
+      transition={{ duration: 0.5, type: "spring" }}
       className={` relative    rounded-lg h-fit break-words
         `}
     >

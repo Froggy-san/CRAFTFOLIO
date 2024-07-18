@@ -21,6 +21,7 @@ import { MdOutlineEditNote } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
 import DialogComp from "../DialogComp";
+import DeletePostDiaDrawer from "./DeletePostDiaDrawer";
 
 interface CartControlsProps {
   className?: string;
@@ -37,7 +38,15 @@ const PostCardControls = ({
 
   return (
     <>
-      <DialogComp
+      <DeletePostDiaDrawer
+        open={isDiaOpen}
+        setOpen={setIsDiaOpen}
+        onSubmit={deletePost}
+        Description="This action cannot be undone. This will permanently delete this post from our servers."
+        primaryTextBtn="Continue"
+        showTriggerBtn={false}
+      />
+      {/* <DialogComp
         isOpen={isDiaOpen}
         setIsOpen={setIsDiaOpen}
         showOpenButton={false}
@@ -61,7 +70,7 @@ const PostCardControls = ({
             Cancel
           </Button>
         </div>
-      </DialogComp>
+      </DialogComp> */}
       {/* <DeletePostDiaDrawer
         open={isDiaOpen}
         setOpen={setIsDiaOpen}

@@ -1,14 +1,15 @@
 import { Input } from "@/components/ui/input";
 import { BiSearchAlt } from "react-icons/bi";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import useSetParams from "@/hooks/useSetParams";
 import useDeleteParam from "@/hooks/useDeleteParam";
 const Search = ({ className }: { className?: string }) => {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const deleteParam = useDeleteParam();
+  const url = useLocation();
   const setParam = useSetParams();
-
+  const hasTheUserSearched = url.search.includes("search");
   return (
     <div className={`  ${className}`}>
       <div className={` relative `}>
@@ -19,8 +20,9 @@ const Search = ({ className }: { className?: string }) => {
           placeholder="Search..."
           aria-label="search"
           onChange={(e) => {
-            setParam("search", e.target.value);
-            if (e.target.value === "") deleteParam("search");
+            if (e.target.value.trim().length)
+              setParam("search", e.target.value, hasTheUserSearched);
+            if (e.target.value === "") deleteParam("search", true); // the True here is setting the replace parameter to true. so when deleting we are replaceing it with a new url.
           }}
         />
         <label

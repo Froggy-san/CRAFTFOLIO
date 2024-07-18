@@ -390,7 +390,9 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                           fieldChange={field.onChange}
                         />
                       </FormControl>
-
+                      <FormDescription>
+                        Add an image to your liking.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -401,7 +403,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   name="landingImage"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Profile image</FormLabel>
+                      <FormLabel>Edit cover photo</FormLabel>
                       <FormControl>
                         <Avatar
                           mediaUrl={
@@ -411,7 +413,9 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                           fieldChange={field.onChange}
                         />
                       </FormControl>
-
+                      <FormDescription>
+                        Pick a background image for your landing page.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}

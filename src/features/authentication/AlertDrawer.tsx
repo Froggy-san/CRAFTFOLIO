@@ -27,7 +27,13 @@ import AlertDialogComp from "@/components/shared/AlertDialogComp";
 import useDeleteUserPosts from "../projects/useDeleteUserPosts";
 import useGetNumOfProjects from "../projects/useGetNumOfProjects";
 import Loading from "@/components/shared/Loading";
-function DialogDrawer({ userId }: { userId: string }) {
+
+interface DialogDrawerProps {
+  dialogDescription?: string;
+  dialogTitle?: string;
+}
+
+function AlertDrawer({ userId }: { userId: string }) {
   const [open, setOpen] = useState(false);
   const { isDeletingPosts, deleteAllPosts } = useDeleteUserPosts();
   const { count } = useGetNumOfProjects(userId);
@@ -49,10 +55,9 @@ function DialogDrawer({ userId }: { userId: string }) {
         isLoading={isDeletingPosts}
         continueBtnOnClick={handleDelete}
         dialogDescription={dialogDescriptionText}
-        triggerBtnText="Delete all posts"
+        triggerBtnText={`${!count ? "No posts to delete" : "Delete all posts"}`}
         triggerVariant="destructive"
         triggerDisabled={!count || isDeletingPosts}
-        count={count || 0}
       />
     );
   }
@@ -87,4 +92,4 @@ function DialogDrawer({ userId }: { userId: string }) {
   );
 }
 
-export default DialogDrawer;
+export default AlertDrawer;

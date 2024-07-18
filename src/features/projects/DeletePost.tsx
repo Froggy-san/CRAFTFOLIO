@@ -1,5 +1,6 @@
 import DialogComp from "@/components/shared/DialogComp";
 import IconButton from "@/components/shared/IconButton";
+import DeletePostDiaDrawer from "@/components/shared/posts/DeletePostDiaDrawer";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -27,10 +28,11 @@ const DeletePost = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <DialogComp
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-      buttonText={
+    <DeletePostDiaDrawer
+      setOpen={setIsOpen}
+      open={isOpen}
+      onSubmit={() => deletePost({ postId, imagesToDelete })}
+      triggerBtnText={
         <Button
           className=" gap-1 w-full xs:w-fit tracking-wide"
           variant="destructive"
@@ -38,28 +40,41 @@ const DeletePost = ({
         >
           Delete <HiOutlineTrash size={20} />
         </Button>
-        // <IconButton disabled={disabled} variant="ghost">
-        //   <HiOutlineTrash size={20} />
-        // </IconButton>
       }
-    >
-      <div className=" flex flex-col pt-2 sm:py-0 sm:flex-row-reverse  justify-start items-center gap-2 sm:gap-2">
-        <Button
-          className="  w-full sm:w-24 "
-          onClick={() => deletePost({ postId, imagesToDelete })}
-          variant="destructive"
-        >
-          Delete
-        </Button>
-        <Button
-          className="  w-full sm:w-24 "
-          onClick={() => setIsOpen(false)}
-          variant="secondary"
-        >
-          Cancel
-        </Button>
-      </div>
-    </DialogComp>
+    />
+    // <DialogComp
+    //   isOpen={isOpen}
+    //   setIsOpen={setIsOpen}
+    //   triggerBtnText={
+    //     <Button
+    //       className=" gap-1 w-full xs:w-fit tracking-wide"
+    //       variant="destructive"
+    //       size="sm"
+    //     >
+    //       Delete <HiOutlineTrash size={20} />
+    //     </Button>
+    //     // <IconButton disabled={disabled} variant="ghost">
+    //     //   <HiOutlineTrash size={20} />
+    //     // </IconButton>
+    //   }
+    // >
+    //   <div className=" flex flex-col pt-2 sm:py-0 sm:flex-row-reverse  justify-start items-center gap-2 sm:gap-2">
+    //     <Button
+    //       className="  w-full sm:w-24 "
+    //       onClick={() => deletePost({ postId, imagesToDelete })}
+    //       variant="destructive"
+    //     >
+    //       Delete
+    //     </Button>
+    //     <Button
+    //       className="  w-full sm:w-24 "
+    //       onClick={() => setIsOpen(false)}
+    //       variant="secondary"
+    //     >
+    //       Cancel
+    //     </Button>
+    //   </div>
+    // </DialogComp>
   );
 };
 

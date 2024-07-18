@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import useSetParams from "@/hooks/useSetParams";
 
 import { Button } from "@/components/ui/button";
@@ -57,14 +57,18 @@ const SelectComp = ({
 }: SelectProps) => {
   const [searchParams] = useSearchParams();
   const selectedValue = searchParams.get("sort") || "";
+  const url = useLocation();
   const setParam = useSetParams();
 
+  const doesTheUrlHasTheSortProp = url.search.includes("sort"); // Because we don't want the sort results to stack over each other to not make the user press the back button in the browser multiple time to navigate to the previous page.
   return (
     <div>
       <Select
         disabled={disabled}
         value={selectedValue}
-        onValueChange={(value) => setParam(paramName, value)}
+        onValueChange={(value) =>
+          setParam(paramName, value, doesTheUrlHasTheSortProp)
+        }
       >
         <SelectTrigger className={`w-[280px] hidden sm:flex ${className}`}>
           <SelectValue placeholder={selectPlaceholer || "Select"} />

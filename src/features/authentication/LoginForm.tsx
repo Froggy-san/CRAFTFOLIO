@@ -139,7 +139,7 @@ const LoginForm = () => {
             </Link>
           </p>
           <Button disabled={isSigningIn} type="submit">
-            Submit
+            Login
           </Button>
         </form>
       </Form>

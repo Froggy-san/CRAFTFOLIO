@@ -63,7 +63,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
     });
   }
   return (
-    <div className="   w-[94%]  mx-auto    overflow-x-hidden   mt-12 sm:px-3">
+    <div className="   w-full sm:w-[94%]  mx-auto    overflow-x-hidden   mt-12 sm:px-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className=" flex flex-col md:flex-row gap-5 px-2">

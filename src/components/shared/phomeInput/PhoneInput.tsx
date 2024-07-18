@@ -169,7 +169,7 @@ export function PhoneInput({
                   title={selectedCountry.name}
                   alt={selectedCountry.name}
                 />
-                <span className="relative top-0.5">
+                <span className="relative  hidden xs:block top-0.5">
                   {selectedCountry.emoji}
                 </span>
               </>

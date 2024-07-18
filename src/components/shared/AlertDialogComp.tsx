@@ -1,4 +1,10 @@
-import React, { SetStateAction, useCallback, useState } from "react";
+import React, {
+  ReactElement,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useState,
+} from "react";
 
 import {
   AlertDialog,
@@ -18,16 +24,16 @@ import { variant } from "@/types/types";
 interface alertDialogProps {
   open?: boolean;
   onOpenChange?: React.Dispatch<SetStateAction<boolean>>;
-  triggerBtnText?: string;
-  dialogTitle?: string;
-  dialogDescription?: string;
+  triggerBtnText?: string | ReactNode | ReactElement;
+  dialogTitle?: string | ReactNode | ReactElement;
+  dialogDescription?: string | ReactNode | ReactElement;
   cancelBtnOnClick?: () => void;
   continueBtnOnClick?: () => void;
   triggerBtnOnClick?: () => void;
   isLoading?: boolean;
   triggerVariant?: variant;
   triggerDisabled?: boolean;
-  count?: number;
+  showOpenBtn?: boolean;
 }
 
 const AlertDialogComp = ({
@@ -42,7 +48,7 @@ const AlertDialogComp = ({
   isLoading,
   triggerVariant,
   triggerDisabled,
-  count,
+  showOpenBtn = true,
 }: alertDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,12 +58,14 @@ const AlertDialogComp = ({
 
   return (
     <AlertDialog onOpenChange={handleOpen} open={open || isOpen}>
-      <AlertDialogTrigger onClick={triggerBtnOnClick} asChild>
-        <Button disabled={triggerDisabled} variant={triggerVariant}>
-          {" "}
-          {!count ? "No posts to delete" : triggerBtnText || "Open"}
-        </Button>
-      </AlertDialogTrigger>
+      {showOpenBtn ? (
+        <AlertDialogTrigger onClick={triggerBtnOnClick} asChild>
+          <Button disabled={triggerDisabled} variant={triggerVariant}>
+            {" "}
+            {triggerBtnText || "Open"}
+          </Button>
+        </AlertDialogTrigger>
+      ) : null}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>

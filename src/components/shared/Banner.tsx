@@ -9,7 +9,7 @@ import { IoIosBuild } from "react-icons/io";
 
 const Banner = () => {
   const { theme } = useTheme();
-  console.log(theme, "theme");
+
   return (
     <Card className=" h-[500px] lg:h-[95vh] w-full  grany overflow-hidden   mt-3 relative">
       <GrainyImg className=" " />

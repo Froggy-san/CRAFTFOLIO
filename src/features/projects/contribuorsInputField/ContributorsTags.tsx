@@ -19,6 +19,7 @@ import ContriburosPopover from "./ContriburosPopover";
 import { defaultProfilePicture } from "@/utils/constants";
 import { ClickAwayListener } from "@mui/material";
 import { v6 as uuidv6 } from "uuid";
+import { Badge } from "@/components/ui/badge";
 
 interface TagInputProps {
   onChange: React.Dispatch<SetStateAction<publicUser[]>>;
@@ -99,8 +100,13 @@ const ContributorsTags = ({
               value={inputedValue}
               onChange={(e) => setInputedValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              className=" h-7 focus:outline-none pl-3  w-full"
+              className=" h-7 focus:outline-none pl-3  w-full bg-background"
             />
+            {inputedValue ? (
+              <Badge className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex  text-foreground   show-tag">
+                Enter
+              </Badge>
+            ) : null}
             <ContriburosPopover
               alreadyAddedTags={contrbiutersTag}
               handleAddTag={handleAddTag}

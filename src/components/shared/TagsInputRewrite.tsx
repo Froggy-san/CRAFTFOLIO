@@ -12,6 +12,7 @@ import { IoClose } from "react-icons/io5";
 import { Button } from "../ui/button";
 import { buttonSize, variant } from "@/types/types";
 import { BsSendFill } from "react-icons/bs";
+import { Badge } from "../ui/badge";
 
 interface TagsInputContextValues {
   onChange: React.Dispatch<SetStateAction<string[]>>;
@@ -104,7 +105,7 @@ function TagItem({
 }) {
   return (
     <div
-      className={`border flex  justify-between items-center pl-2   max-w-[100%]  bg-primary hover:bg-primary/90 transition-all text-[#fafafa] text-sm h-8 rounded-md border-solid font-semibold  show-tag ${
+      className={`border flex  justify-between items-center pl-2   max-w-[100%]  bg-primary hover:bg-primary/90 text-primary-foreground  transition-all text-sm h-8 rounded-md border-solid font-semibold  show-tag ${
         className || ""
       }`}
     >
@@ -137,17 +138,24 @@ function TagsInputField({
     }
   }
   return (
-    <input
-      type="text"
-      placeholder="Enter tools you use..."
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      onKeyDown={handleKeyDown}
-      style={style}
-      className={` h-7 focus:outline-none pl-3 flex-1 min-w-[250px] ${
-        className || ""
-      }`}
-    />
+    <div className=" relative pl-3 bg-background  text-foreground   flex-1 min-w-[250px]  h-7">
+      <input
+        type="text"
+        placeholder="Enter tools you use..."
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        style={style}
+        className={` focus:outline-none w-full h-full bg-background  ${
+          className || ""
+        }`}
+      />
+      {value && (
+        <Badge className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex  text-foreground   show-tag">
+          Enter
+        </Badge>
+      )}
+    </div>
   );
 }
 

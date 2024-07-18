@@ -82,7 +82,7 @@ const AboutMeText = ({
             </Collapse.CollapseContent>
             <Collapse.CollapseButton arrowPositionX="right" />
           </Collapse>
-          <div className=" absolute right-[120px] gap-3 bottom-0 flex items-center text-sm font-semibold z-[55]">
+          <div className=" absolute right-[120px] gap-3 bottom-0 flex items-center text-sm font-semibold z-[2]">
             <HiCursorClick size={20} className=" animate-pulse " />
 
             <p className=" text-red-400">Double tap to edit.</p>

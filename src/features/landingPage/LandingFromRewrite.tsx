@@ -2,14 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  // DialogTrigger,
-} from "@/components/ui/dialog";
 
 import {
   Form,
@@ -41,7 +33,8 @@ import { Switch } from "@/components/ui/switch";
 
 import ColorPicker from "@/components/shared/ColorPicker";
 import { colorSchema } from "@/formScehmas/colorSchema";
-import TagsInput from "@/components/shared/TagsInput";
+import TagsInput from "@/components/shared/TagsInputRewrite";
+// import TagsInput from "@/components/shared/TagsInput";
 const landingPageSchma = z
   .object({
     primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
@@ -279,20 +272,23 @@ const LandingFormRewrite = React.forwardRef(function (
                 <FormItem className=" ">
                   <FormLabel>Socials.</FormLabel>
                   <FormControl>
+                    <TagsInput tags={field.value} onChange={field.onChange}>
+                      <TagsInput.TagsContainer>
+                        <TagsInput.TagsInputField />
+                      </TagsInput.TagsContainer>
+                    </TagsInput>
+
                     {/* mx-auto min-w-[250px] max-w-[250px] xs:max-w-[400px] md:max-w-[700px] max-w-[730px] */}
-                    <TagsInput
+                    {/* <TagsInput
                       className=" "
                       tags={field.value}
                       onChange={field.onChange}
-                    />
-                    {/* <Textarea
-                          className=" h-[150px]"
-                          placeholder="how can people reach you."
-                          {...field}
-                          disabled={isCreanting || isEditting}
-                        /> */}
+                    /> */}
                   </FormControl>
-
+                  <FormDescription>
+                    Add up to 5 social media links to connect with your
+                    audience.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -304,9 +300,10 @@ const LandingFormRewrite = React.forwardRef(function (
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
-                    <FormLabel className="text-base">Grany image</FormLabel>
+                    <FormLabel className="text-base">Grainy image</FormLabel>
                     <FormDescription>
-                      Receive emails about your account security.
+                      For a vintage look, consider adding a grainy / old TV
+                      effect to the background image on your landing page.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -330,7 +327,7 @@ const LandingFormRewrite = React.forwardRef(function (
                       Blur landing image
                     </FormLabel>
                     <FormDescription>
-                      Receive emails about your account security.
+                      Create a blurred background effect for your landing page.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -349,9 +346,10 @@ const LandingFormRewrite = React.forwardRef(function (
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 relative">
                   <div className="space-y-0.5">
-                    <FormLabel className="text-base">Grany image</FormLabel>
+                    <FormLabel className="text-base">Text color</FormLabel>
                     <FormDescription>
-                      Receive emails about your account security.
+                      Update the text color on your landing page for a fresh
+                      look.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -369,14 +367,16 @@ const LandingFormRewrite = React.forwardRef(function (
               name="avatar"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Profile image</FormLabel>
+                  <FormLabel>Landing photo</FormLabel>
                   <FormControl>
                     <ProfileImageUploader
                       mediaUrl={landingToEdit?.avatarImage || user?.avatar}
                       fieldChange={field.onChange}
                     />
                   </FormControl>
-
+                  <FormDescription>
+                    Add an image to your liking.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -387,7 +387,7 @@ const LandingFormRewrite = React.forwardRef(function (
               name="landingImage"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Profile image</FormLabel>
+                  <FormLabel>Cover photo</FormLabel>
                   <FormControl>
                     <Avatar
                       mediaUrl={
@@ -396,7 +396,9 @@ const LandingFormRewrite = React.forwardRef(function (
                       fieldChange={field.onChange}
                     />
                   </FormControl>
-
+                  <FormDescription>
+                    Pick a cover photo to your landing page.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

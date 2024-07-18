@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -20,9 +21,9 @@ interface ButtonProps {
 }
 interface diaProps {
   children?: ReactNode;
-  buttonText?: string | ReactElement<ButtonProps>;
-  diaTitle?: string;
-  diaDescription?: string;
+  triggerBtnText?: string | ReactElement<ButtonProps>;
+  diaTitle?: string | ReactNode | ReactElement;
+  diaDescription?: string | ReactNode | ReactElement;
   dialogTriggerStyles?: string;
   dialogContentStyles?: string;
   isOpen?: boolean;
@@ -34,10 +35,11 @@ const DialogComp = ({
   children,
   diaTitle,
   diaDescription,
-  buttonText,
+  triggerBtnText,
   dialogTriggerStyles,
   dialogContentStyles,
   isOpen,
+
   showOpenButton = true,
   setIsOpen,
 }: diaProps) => {
@@ -52,13 +54,13 @@ const DialogComp = ({
   return (
     <Dialog open={isOpen || open} onOpenChange={handleOpen}>
       {showOpenButton ? (
-        buttonText && React.isValidElement(buttonText) ? (
+        triggerBtnText && React.isValidElement(triggerBtnText) ? (
           // Clone the element and add onClick
-          cloneElement(buttonText, { onClick: handleOpen })
+          cloneElement(triggerBtnText, { onClick: handleOpen })
         ) : (
           // If not an element, render DialogTrigger with onClick
           <DialogTrigger className={`${dialogTriggerStyles}`}>
-            {buttonText || "open"}
+            {triggerBtnText || "open"}
           </DialogTrigger>
         )
       ) : null}
@@ -67,10 +69,10 @@ const DialogComp = ({
           <DialogTitle>{diaTitle || "Are you absolutely sure?"}</DialogTitle>
           <DialogDescription>
             {diaDescription ||
-              " This action cannot be undone. This will permanently delete youraccount and remove your data from our servers."}
+              " This action cannot be undone. This will permanently delete your account and remove your data from our servers."}
           </DialogDescription>
-          {children}
         </DialogHeader>
+        <DialogFooter>{children}</DialogFooter>
       </DialogContent>
     </Dialog>
   );

@@ -31,7 +31,7 @@ const UserMenu = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" className=" px-2 md:px-4 ">
           {" "}
           <UserTag
             showToolTip={false}

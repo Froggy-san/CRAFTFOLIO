@@ -19,7 +19,7 @@ const AuroraBgComp = () => {
         }}
         className="relative flex flex-col gap-4 items-center justify-center px-4  "
       >
-        <div className="text-3xl  md:text-3xl lg:text-7xl font-bold dark:text-white text-center">
+        <div className="text-3xl  md:text-6xl lg:text-7xl font-bold dark:text-white text-center">
           {location.pathname === "/Login" ? (
             <div>
               <div className="-skew-x-2 pr-10">CRAFT</div>
@@ -29,7 +29,7 @@ const AuroraBgComp = () => {
             <div> You are one step closer to a new beginning.</div>
           )}
         </div>
-        <div className="font-extralight text-base md:Text-2xl lg:text-4xl dark:text-neutral-200 py-4">
+        <div className="font-extralight  text-3xl   dark:text-neutral-200 py-4">
           {location.pathname === "/Login"
             ? "Where careers start"
             : "Let's get you setup."}

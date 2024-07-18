@@ -59,7 +59,7 @@ const UpdatePasswordForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 px-6 py-3  rounded-md  "
+          className="space-y-4  px-1 py-3  rounded-md  "
         >
           <PasswordShowHide<updatePasswordTypes>
             disabled={isUpdatingPassword}

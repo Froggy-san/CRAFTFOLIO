@@ -11,7 +11,7 @@ const LandingPageImage = ({
     <img
       src={landingImage}
       alt="asa"
-      className={`absolute w-full h-full inset-0 object-cover ${
+      className={`absolute w-full h-full inset-0 object-cover    ${
         imageEffects && "blur-[3px]"
       } `}
     />
