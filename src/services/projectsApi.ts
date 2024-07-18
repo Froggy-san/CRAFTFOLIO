@@ -86,7 +86,7 @@ export async function getUserLandingPage(userId: string) {
 
   let { data: userAvatar, error: userAvatarError } = await supabase
     .from("publicUsers")
-    .select("avatar")
+    .select("avatar,username")
     .eq("userId", userId);
 
   if (userAvatarError) throw new Error(userAvatarError.message);

@@ -11,7 +11,7 @@ const updateUserSchema = z
     email: z.string().min(2).max(50),
 
     speciality: z.string(),
-    socials: z.string(),
+    socials: z.string().array().default([]),
     resumeUrl: z.string(),
     phone: z
       .string()

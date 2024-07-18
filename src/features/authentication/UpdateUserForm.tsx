@@ -29,6 +29,7 @@ import { User } from "@/types/types";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import { PhoneInput } from "@/components/shared/phomeInput/PhoneInput";
+import TagsInput from "@/components/shared/TagsInputRewrite";
 
 type updateUserSchemaTypes = z.infer<typeof updateUserSchema>;
 
@@ -39,7 +40,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
     email: user?.email || "",
     phone: user?.phone || "",
     speciality: user?.speciality || "",
-    socials: user?.socials || "",
+    socials: user && user.socials ? JSON.parse(user.socials) : [],
     username: user?.username || "",
     resumeUrl: user?.resumeUrl || "",
     avatar: [],
@@ -60,6 +61,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
           : values.avatar,
       userId: user?.id || "1",
       avatarImageToDelete: user?.avatar ? user.avatar.split("avatars/")[1] : "",
+      socials: JSON.stringify(values.socials),
     });
   }
   return (
@@ -85,7 +87,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 </FormItem>
               )}
             />
-            <div className=" flex-1 space-y-3">
+            <div className=" flex-1 space-y-3 max-w-full min-w-[330px]">
               <FormRow className=" justify-between  items-center">
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Username"
@@ -105,7 +107,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                   className=" w-full"
                   control={form.control}
                 >
-                  <Input placeholder="Mohammed Osama" disabled />
+                  <Input placeholder="User email" disabled />
                 </FormFieldItem>
               </FormRow>
               <FormRow className=" justify-between  items-center">
@@ -113,6 +115,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                   labelText="Speciality"
                   fieldName="speciality"
                   className=" w-full"
+                  description="Enter what you specialized in."
                   control={form.control}
                 >
                   <Input
@@ -125,6 +128,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                   labelText="Resume URL"
                   fieldName="resumeUrl"
                   className=" w-full"
+                  description="Include your resume link."
                   control={form.control}
                 >
                   <Input type="text" disabled={isUpdatingUser} />
@@ -205,7 +209,25 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                   </FormItem>
                 )}
               /> */}
-              <FormFieldItem<updateUserSchemaTypes>
+              <FormField
+                control={form.control}
+                name="socials"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Socials</FormLabel>
+                    <FormControl>
+                      <TagsInput tags={field.value} onChange={field.onChange}>
+                        <TagsInput.TagsContainer>
+                          <TagsInput.TagsInputField />
+                        </TagsInput.TagsContainer>
+                      </TagsInput>
+                    </FormControl>
+                    <FormDescription>Your phone number.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* <FormFieldItem<updateUserSchemaTypes>
                 labelText="Socials"
                 fieldName="socials"
                 control={form.control}
@@ -215,7 +237,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                   placeholder="how can people reach you."
                   disabled={isUpdatingUser}
                 />
-              </FormFieldItem>
+              </FormFieldItem> */}
             </div>
           </div>
           <div className="flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 pb-10">

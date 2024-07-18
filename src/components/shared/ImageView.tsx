@@ -55,7 +55,7 @@ const ImageView = ({
               >
                 <Button
                   variant="secondary"
-                  className="absolute right-5 top-10 rounded-full w-7 h-7 p-0  bg-muted "
+                  className="absolute right-5 top-10 rounded-full w-7 h-7 p-0  z-[99999] bg-muted "
                   onClick={handleClose} // Ensure this button calls the handleClose function
                 >
                   <IoIosClose size={50} />
@@ -76,7 +76,7 @@ const ImageView = ({
                     exit={{ scale: 0.9, opacity: 0 }}
                     transition={{ duration: 0.2, type: "spring" }}
                     alt="Enlarged view"
-                    className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain   z-[99999]"
+                    className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain   "
                   />
                 </ClickAwayListener>
               </motion.div>

@@ -146,7 +146,7 @@ function TagsInputField({
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         style={style}
-        className={` focus:outline-none w-full h-full bg-background  ${
+        className={` focus:outline-none w-full h-full bg-background pr-16  ${
           className || ""
         }`}
       />

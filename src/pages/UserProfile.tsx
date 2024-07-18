@@ -11,6 +11,10 @@ import Heading from "@/components/shared/Heading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
+import { FloatingNav } from "@/components/ui/FloatingNavBar";
+import { defaultProfilePicture } from "@/utils/constants";
+import useLandingPage from "@/features/landingPage/useLandingPage";
+import TooltipComp from "@/components/shared/TooltipComp";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -21,7 +25,8 @@ const UserProfile = () => {
 
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
-
+  const { userAvatar } = useLandingPage();
+  console.log(userAvatar, "user avatar");
   // const userProfileId = userId || "";
   // const { isLoading: isUserProfileLoading, userProfile } = useGetUserProfile();
 
@@ -42,6 +47,25 @@ const UserProfile = () => {
         <p>Preview link</p>
       </div>
       <div></div> */}
+      <FloatingNav
+        navItems={[
+          { name: "Projects", link: "posts-container" },
+          { name: "About", link: "about" },
+          { name: "Contact", link: "contact" },
+          {
+            name: (
+              <TooltipComp toolTipText={userAvatar?.at(0)?.username}>
+                <img
+                  className="w-7 h-7 rounded-full"
+                  src={userAvatar?.at(0)?.avatar || defaultProfilePicture}
+                  alt="asa"
+                />
+              </TooltipComp>
+            ),
+            link: "",
+          },
+        ]}
+      />
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
 
       {user && isTheOwnerOfPage ? (

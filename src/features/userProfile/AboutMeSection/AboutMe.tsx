@@ -42,7 +42,7 @@ const AboutMe = ({ isAuthenticated, userId }: aboutMeProps) => {
   if (!isAuthenticated)
     // if the current vistor isn't the owner of the page return the text only.
     return (
-      <div className="md:px-10 space-y-7 ">
+      <div id="about" className="md:px-10 space-y-7 ">
         {data?.aboutMe && (
           <div>
             <Heading>About me</Heading>
@@ -74,7 +74,7 @@ const AboutMe = ({ isAuthenticated, userId }: aboutMeProps) => {
     );
 
   return (
-    <div>
+    <div id="about">
       <AboutMeText aboutText={data?.aboutMe} userId={userId} />
 
       <AboutMeLinksTech
