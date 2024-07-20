@@ -2,7 +2,7 @@ export interface User {
   aud: string;
   email: string | undefined;
   id: string;
-  userId: string;
+  userId?: string;
   avatar: string;
   phone: string;
   socials: string;
