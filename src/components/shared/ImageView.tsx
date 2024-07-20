@@ -43,46 +43,43 @@ const ImageView = ({
   return (
     <>
       {createPortal(
-        <>
-          {" "}
-          <AnimatePresence>
-            {image ? (
-              <motion.div
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, type: "spring" }}
-                key="container"
-                className="fixed flex items-center justify-center  left-0 top-0 w-full h-[100dvh] bg-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50 z-[99999]"
+        <AnimatePresence>
+          {image ? (
+            <motion.div
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, type: "spring" }}
+              key="container"
+              className="fixed flex items-center justify-center  left-0 top-0 w-full h-[100dvh] bg-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50 z-[99999]"
+            >
+              <Button
+                variant="secondary"
+                className="absolute right-5 top-10 rounded-full w-7 h-7 p-0  z-[99999] bg-muted "
+                onClick={handleClose} // Ensure this button calls the handleClose function
               >
-                <Button
-                  variant="secondary"
-                  className="absolute right-5 top-10 rounded-full w-7 h-7 p-0  z-[99999] bg-muted "
-                  onClick={handleClose} // Ensure this button calls the handleClose function
-                >
-                  <IoIosClose size={50} />
-                </Button>
-                <ClickAwayListener
-                  mouseEvent="onMouseUp"
-                  touchEvent="onTouchEnd"
-                  onClickAway={(e) => {
-                    e.preventDefault();
-                    handleClose();
-                  }}
-                >
-                  <motion.img
-                    src={image}
-                    key="image"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    transition={{ duration: 0.2, type: "spring" }}
-                    alt="Enlarged view"
-                    className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain   "
-                  />
-                </ClickAwayListener>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
-        </>,
+                <IoIosClose size={50} />
+              </Button>
+              <ClickAwayListener
+                mouseEvent="onMouseUp"
+                touchEvent="onTouchEnd"
+                onClickAway={(e) => {
+                  e.preventDefault();
+                  handleClose();
+                }}
+              >
+                <motion.img
+                  src={image}
+                  key="image"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  transition={{ duration: 0.2, type: "spring" }}
+                  alt="Enlarged view"
+                  className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain   "
+                />
+              </ClickAwayListener>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>,
         document.body
       )}
     </>

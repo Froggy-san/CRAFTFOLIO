@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/store/ThemeProvidor";
+import { useTheme } from "@/context/ThemeProvidor";
 import { useEffect, useRef, useState } from "react";
 
 export const BackgroundGradientAnimation = ({

@@ -19,6 +19,7 @@ import ProjectViewCaro from "@/features/projectView/ProjectViewCaro";
 import Contributors from "@/features/projectView/Contributors";
 import Heading from "@/components/shared/Heading";
 import Description from "@/features/projectView/Description";
+import PosterInfo from "@/features/projectView/PosterInfo";
 
 const ProjectView = () => {
   const { projectId } = useParams();
@@ -35,6 +36,9 @@ const ProjectView = () => {
   useDocumentTitle(project?.name || "");
 
   const relatedUser = userById?.[0]; // user that owns the related project.
+
+  console.log(projectById);
+  console.log(relatedUser, "SS");
   const contrbiutersTags =
     project && project.contributors ? JSON.parse(project.contributors) : [];
   const isProjectOwner =
@@ -56,6 +60,19 @@ const ProjectView = () => {
 
   return (
     <div id="project-view" className=" mb-40 mt-6 md:px-10">
+      {/* <div className=" flex flex-col xs:flex-row justify-between mb-4">
+        <PosterInfo poster={relatedUser} postDate={project.created_at} />
+        {isAuthLoading ? (
+          <Loading />
+        ) : (
+          isProjectOwner && (
+            <ProjectViewControls
+              imagesToDelete={imagesToDelete}
+              id={projectId || ""}
+            />
+          )
+        )}
+      </div> */}
       {isAuthLoading ? (
         <Loading />
       ) : (
@@ -67,7 +84,7 @@ const ProjectView = () => {
         )
       )}
       <ProjectViewCaro images={images} />
-
+      <PosterInfo poster={relatedUser} postDate={project.created_at} />
       {/* ----------- */}
 
       <div className=" mt-10 space-y-3">

@@ -1,7 +1,8 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import Logo from "./Logo";
+
 import { useAuth } from "@/hooks/useAuth";
-import AuroraBgComp from "./AuroraBgComp";
+import Logo from "@/components/shared/Logo";
+import AuroraBgComp from "@/components/shared/AuroraBgComp";
 
 const AuthLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -16,11 +17,6 @@ const AuthLayout = () => {
         <Outlet />
       </div>
       <AuroraBgComp />
-      {/* <img
-        src="https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/OIG3.y7NUvx649P.jpg"
-        alt="image"
-        className=" hidden md:block w-[50%] h-full object-cover"
-      /> */}
     </div>
   );
 };

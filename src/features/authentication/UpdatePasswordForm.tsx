@@ -11,6 +11,7 @@ import PasswordShowHide from "@/components/shared/PasswordShowHide";
 import { Card } from "@/components/ui/card";
 import useUpdatePassword from "./useUpdatePassword";
 import useObjectCompare from "@/hooks/useCompareObjects";
+import { useNavigate } from "react-router-dom";
 
 const updatePasswordSchema = z
   .object({
@@ -36,8 +37,9 @@ const updatePasswordSchema = z
 
 type updatePasswordTypes = z.infer<typeof updatePasswordSchema>;
 
-const UpdatePasswordForm = () => {
+const UpdatePasswordForm = ({ className }: { className?: string }) => {
   const { isUpdatingPassword, updatePassword } = useUpdatePassword();
+  const navigate = useNavigate();
 
   const defaultValues = {
     password: "",
@@ -47,14 +49,19 @@ const UpdatePasswordForm = () => {
     resolver: zodResolver(updatePasswordSchema),
     defaultValues,
   });
-  const isEqual = useObjectCompare(form.getValues(), defaultValues);
+  const disabled =
+    !form.getValues().password || !form.getValues().confirmPassword;
   function onSubmit(values: updatePasswordTypes) {
     console.log(values, "form  vlaues");
 
-    updatePassword(values.password);
+    updatePassword(values.password, { onSuccess: () => navigate("/Login") });
   }
   return (
-    <div className="  mb-3 w-full md:max-w-[65%] mr-[30px]  ml-auto  ">
+    <div
+      className={`  ${
+        className || " w-full md:max-w-[65%] mr-[30px]  ml-auto mb-12"
+      }`}
+    >
       <h1 className=" font-semibold text-lg my-2 ">Update password</h1>
       <Form {...form}>
         <form
@@ -65,6 +72,7 @@ const UpdatePasswordForm = () => {
             disabled={isUpdatingPassword}
             labelText={"Password"}
             fieldName={"password"}
+            description="Enter your new password."
             control={form.control}
           />
 
@@ -72,9 +80,10 @@ const UpdatePasswordForm = () => {
             disabled={isUpdatingPassword}
             labelText={"Confirm password"}
             fieldName={"confirmPassword"}
+            description="Confirm your new password."
             control={form.control}
           />
-          <div className="flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 pb-10">
+          <div className="flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 ">
             <Button
               variant="secondary"
               size="sm"
@@ -82,14 +91,14 @@ const UpdatePasswordForm = () => {
               onClick={() => {
                 form.reset();
               }}
-              disabled={isEqual || isUpdatingPassword}
+              disabled={disabled || isUpdatingPassword}
               type="button"
             >
               Cancel
             </Button>
             <Button
               size="sm"
-              disabled={isEqual || isUpdatingPassword}
+              disabled={disabled || isUpdatingPassword}
               type="submit"
               className=" w-full sm:w-[120px]"
             >

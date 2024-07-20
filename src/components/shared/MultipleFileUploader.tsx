@@ -142,7 +142,7 @@ const MultipleFileUploader = ({
                   index + 1
                 } and with the name of ${link}`}
                 variant="outline"
-                className=" absolute right-0 top-0 p-0 w-5 h-5"
+                className=" absolute right-0 top-0 p-0 w-5 h-5 z-10"
               >
                 <IoIosClose size={20} />
               </Button>
@@ -171,7 +171,7 @@ const MultipleFileUploader = ({
                     type="button"
                     onClick={() => handleDelete(file)}
                     variant="outline"
-                    className=" absolute right-0 top-0 p-0 w-5 h-5"
+                    className=" absolute right-0 top-0 p-0 w-5 h-5 z-10"
                   >
                     <IoIosClose size={20} />
                   </Button>

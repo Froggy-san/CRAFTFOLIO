@@ -10,7 +10,7 @@ import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditPost = () => {
-  const { user, isAuthenticated, isLoading: isUserLaoding } = useAuth();
+  const { user } = useAuth();
   const { postId } = useParams();
   useScrollUpWhenMounted();
   const navigate = useNavigate();
@@ -18,19 +18,33 @@ const EditPost = () => {
     user: relatedUser,
     isLoading,
     project,
+    error,
   } = useGetProjectById(postId || "");
 
   const isOwnerOfPost =
     user?.role === "admin" || relatedUser?.[0]?.userId === user?.id;
 
-  if (isLoading || isUserLaoding)
+  if (isLoading)
     return (
       <div className=" h-[91dvh] flex items-center justify-center">
         <Loading size={30} />
       </div>
     );
 
-  if (!isAuthenticated || !isOwnerOfPost)
+  if (error)
+    return (
+      <ErrorComp
+        message={
+          <div className=" flex flex-col sm:flex-row items-center gap-3">
+            <p className=" text-center font-semibold ">{error.message} </p>
+
+            <Button onClick={() => navigate(-1)}>Go back </Button>
+          </div>
+        }
+      />
+    );
+
+  if (!isOwnerOfPost)
     return (
       <ErrorComp
         message={
@@ -38,11 +52,8 @@ const EditPost = () => {
             <p className=" text-center font-semibold ">
               You are not authrized to do this action, please login first{" "}
             </p>
-            {isAuthenticated ? (
-              <Button onClick={() => navigate(-1)}>Go back </Button>
-            ) : (
-              <LinkBtn to="/login">Login</LinkBtn>
-            )}
+
+            <Button onClick={() => navigate(-1)}>Go back </Button>
           </div>
         }
       />

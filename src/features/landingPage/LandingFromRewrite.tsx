@@ -34,6 +34,7 @@ import { Switch } from "@/components/ui/switch";
 import ColorPicker from "@/components/shared/ColorPicker";
 import { colorSchema } from "@/formScehmas/colorSchema";
 import TagsInput from "@/components/shared/TagsInputRewrite";
+import FormRow from "@/components/shared/FormRow";
 // import TagsInput from "@/components/shared/TagsInput";
 const landingPageSchma = z
   .object({
@@ -293,58 +294,60 @@ const LandingFormRewrite = React.forwardRef(function (
                 </FormItem>
               )}
             />
+            <FormRow className=" gap-y-7 gap-x-2">
+              <FormField
+                control={form.control}
+                name="grainyTexture"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center w-full justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                      <FormLabel className="text-base">Grainy image</FormLabel>
+                      <FormDescription>
+                        For a vintage look, consider adding a grainy / old TV
+                        effect to the background image on your landing page.
+                      </FormDescription>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        aria-readonly
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="grainyTexture"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">Grainy image</FormLabel>
-                    <FormDescription>
-                      For a vintage look, consider adding a grainy / old TV
-                      effect to the background image on your landing page.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      aria-readonly
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="blur"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
-                      Blur landing image
-                    </FormLabel>
-                    <FormDescription>
-                      Create a blurred background effect for your landing page.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      aria-readonly
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="blur"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center w-full justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                      <FormLabel className="text-base">
+                        Blur landing image
+                      </FormLabel>
+                      <FormDescription>
+                        Create a blurred background effect for your landing
+                        page.
+                      </FormDescription>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        aria-readonly
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </FormRow>
             <FormField
               control={form.control}
               name="textColor"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 relative">
+                <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center justify-between rounded-lg border p-4 relative">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Text color</FormLabel>
                     <FormDescription>

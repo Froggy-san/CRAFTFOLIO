@@ -47,7 +47,7 @@ const ViewCarousel = ({ images, index, closeFunction }: ViewCarouselProps) => {
       <Carousel id="carousel" setApi={setApi}>
         <Button
           variant="secondary"
-          className="absolute right-5 top-10 rounded-full  cursor-pointer z-50 w-7 h-7 p-0 text-gray-800 hover:text-black"
+          className="absolute right-5 top-10 rounded-full  cursor-pointer z-50 w-7 h-7 p-0 bg-muted"
           onClick={closeFunction} // Ensure this button calls the handleClose function
         >
           <IoIosClose size={50} />

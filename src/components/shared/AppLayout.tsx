@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
 import Background from "./Background";
+import Header from "./Header";
+
 // bg-[#111827]
 const AppLayout = () => {
   return (

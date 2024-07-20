@@ -16,7 +16,7 @@ export default function useLogout() {
       // queryClient.removeQueries();
       toast.dismiss();
       await checkAuthUser();
-      navigate("/", { replace: true });
+      // navigate("/", { replace: true });
     },
 
     onError: (error) => {

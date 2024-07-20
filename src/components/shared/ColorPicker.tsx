@@ -38,7 +38,7 @@ const ColorPicker = ({
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 10 }}
               exit={{ opacity: 0, y: -20 }}
-              className=" absolute right-0 top-[100%] text-black"
+              className=" absolute right-0  top-[100%] text-black "
             >
               <SketchPicker
                 color={color}

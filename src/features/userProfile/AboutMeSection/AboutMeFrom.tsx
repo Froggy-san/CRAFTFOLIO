@@ -44,13 +44,15 @@ import {
 } from "react-color";
 import React, { useState } from "react";
 import { ClickAwayListener } from "@mui/material";
-import TagsInput from "@/components/shared/TagsInput";
+// import TagsInput from "@/components/shared/TagsInput";
 import useEditAboutMe from "./useEditAboutMe";
 import AboutMePreview from "./AboutMePreview";
 import FormButtons from "@/components/shared/FormButtons";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import { aboutMeFormProps } from "@/types/types";
 import { motion } from "framer-motion";
+import TagsInput from "@/components/shared/TagsInputRewrite";
+import FormRow from "@/components/shared/FormRow";
 const arrowSize = 21;
 
 export const options: { label: JSX.Element; value: string }[] = [
@@ -182,7 +184,11 @@ const AboutMeFrom = React.forwardRef(function (
                   <FormLabel className="text-base ">Links</FormLabel>
                 </div>
                 <FormControl>
-                  <TagsInput tags={field.value} onChange={field.onChange} />
+                  <TagsInput tags={field.value} onChange={field.onChange}>
+                    <TagsInput.TagsContainer>
+                      <TagsInput.TagsInputField />
+                    </TagsInput.TagsContainer>
+                  </TagsInput>
                 </FormControl>
                 <FormDescription>
                   Enter related links: Note (some links will not be shown due to
@@ -202,7 +208,12 @@ const AboutMeFrom = React.forwardRef(function (
                   <FormLabel className="text-base ">Tools</FormLabel>
                 </div>
                 <FormControl>
-                  <TagsInput tags={field.value} onChange={field.onChange} />
+                  <TagsInput tags={field.value} onChange={field.onChange}>
+                    <TagsInput.TagsContainer>
+                      <TagsInput.TagsInputField />
+                    </TagsInput.TagsContainer>
+                  </TagsInput>
+                  {/* <TagsInput tags={field.value} onChange={field.onChange} /> */}
                 </FormControl>
                 <FormDescription>
                   Enter the tools and technology you use in your work.
@@ -211,119 +222,122 @@ const AboutMeFrom = React.forwardRef(function (
               </FormItem>
             )}
           />
-
-          <FormField
-            control={form.control}
-            name="arrowType"
-            render={({ field }) => (
-              <FormItem
-                className={`flex flex-col xs:flex-row items-center justify-between rounded-lg border transition-all duration-500   p-4 ${
-                  isTools
-                    ? "opacity-1 visible z-auto relative "
-                    : "opacity-0 invisible  z-[-55] absolute"
-                }`}
-              >
-                <div className="space-y-0.5 text-center xs:text-left">
-                  <FormLabel className="text-base ">Arrow Shape</FormLabel>
-                  <FormDescription>
-                    Receive emails about your account security.
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger
-                      style={{
-                        color: `${
-                          field.value === "none"
-                            ? "black"
-                            : `rgba(${chosenColor})`
-                        } `,
-                      }}
-                      className=" w-full xs:w-[180px] "
-                    >
-                      <SelectValue placeholder="Arrow shape" />
-                    </SelectTrigger>
-                    <SelectContent className=" max-h-[250px]">
-                      {options.map((option, index) => (
-                        <SelectItem
-                          style={{
-                            color: `${
-                              field.value === "none"
-                                ? "black"
-                                : `rgba(${chosenColor})`
-                            } `,
-                          }}
-                          key={index}
-                          value={option.value}
-                        >
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="arrowColor"
-            render={({ field }) => (
-              <FormItem
-                // style={{ transition: "opacity .5s ease" }}
-                className={`flex flex-col  xs:flex-row items-center justify-between rounded-lg border p-4 transition-all duration-500  ${
-                  isArrowChosen
-                    ? "opacity-1 visible z-auto relative "
-                    : "opacity-0 invisible  z-[-55] absolute"
-                }`}
-              >
-                <div className="space-y-0.5 text-center xs:text-left">
-                  <FormLabel className="text-base ">Arrow Color</FormLabel>
-                  <FormDescription>
-                    Receive emails about your account security.
-                  </FormDescription>
-                </div>
-                <ClickAwayListener onClickAway={() => setShowColorBoard(false)}>
+          <FormRow>
+            <FormField
+              control={form.control}
+              name="arrowType"
+              render={({ field }) => (
+                <FormItem
+                  className={`flex flex-col xs:flex-row items-center justify-between rounded-lg border transition-all duration-500  w-full  p-4 ${
+                    isTools
+                      ? "opacity-1 visible z-auto relative "
+                      : "opacity-0 invisible  z-[-55] absolute"
+                  }`}
+                >
+                  <div className="space-y-0.5 text-center xs:text-left">
+                    <FormLabel className="text-base ">Arrow Shape</FormLabel>
+                    <FormDescription>
+                      Receive emails about your account security.
+                    </FormDescription>
+                  </div>
                   <FormControl>
-                    <div className=" relative w-full xs:w-fit">
-                      <Button
-                        variant="outline"
-                        type="button"
-                        onClick={() => setShowColorBoard((is) => !is)}
-                        style={{ backgroundColor: `rgb(${chosenColor})` }}
-                        className="mt-1  p-0 w-full h-10 xs:w-7 xs:h-7 duration-75 border-2"
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger
+                        style={{
+                          color: `${
+                            field.value === "none"
+                              ? "black"
+                              : `rgba(${chosenColor})`
+                          } `,
+                        }}
+                        className=" w-full xs:w-[180px] "
                       >
-                        {" "}
-                        {/* {
+                        <SelectValue placeholder="Arrow shape" />
+                      </SelectTrigger>
+                      <SelectContent className=" max-h-[250px]">
+                        {options.map((option, index) => (
+                          <SelectItem
+                            style={{
+                              color: `${
+                                field.value === "none"
+                                  ? "black"
+                                  : `rgba(${chosenColor})`
+                              } `,
+                            }}
+                            key={index}
+                            value={option.value}
+                          >
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="arrowColor"
+              render={({ field }) => (
+                <FormItem
+                  // style={{ transition: "opacity .5s ease" }}
+                  className={`flex flex-col  xs:flex-row items-center w-full justify-between rounded-lg border p-4 transition-all duration-500  ${
+                    isArrowChosen
+                      ? "opacity-1 visible z-auto relative "
+                      : "opacity-0 invisible  z-[-55] absolute"
+                  }`}
+                >
+                  <div className="space-y-0.5 text-center xs:text-left">
+                    <FormLabel className="text-base ">Arrow Color</FormLabel>
+                    <FormDescription>
+                      Receive emails about your account security.
+                    </FormDescription>
+                  </div>
+                  <ClickAwayListener
+                    onClickAway={() => setShowColorBoard(false)}
+                  >
+                    <FormControl>
+                      <div className=" relative w-full xs:w-fit">
+                        <Button
+                          variant="outline"
+                          type="button"
+                          onClick={() => setShowColorBoard((is) => !is)}
+                          style={{ backgroundColor: `rgb(${chosenColor})` }}
+                          className="mt-1  p-0 w-full h-10 xs:w-7 xs:h-7 duration-75 border-2"
+                        >
+                          {" "}
+                          {/* {
                           options.find(
                             (el) => el.value === form.getValues().arrowType
                           )?.label
                         } */}
-                      </Button>
+                        </Button>
 
-                      <SliderPicker
-                        color={field.value}
-                        onChange={(color) => {
-                          field.onChange(color.rgb);
-                          console.log(color.rgb);
-                        }}
-                        className={` absolute center-abslute-x px-3 py-2 w-[300px] bg-white  duration-150  ${
-                          showColorBoard
-                            ? "opacity-1 visible"
-                            : "opacity-0 invisible"
-                        }`}
-                      />
-                    </div>
-                  </FormControl>
-                </ClickAwayListener>
+                        <SliderPicker
+                          color={field.value}
+                          onChange={(color) => {
+                            field.onChange(color.rgb);
+                            console.log(color.rgb);
+                          }}
+                          className={` absolute center-abslute-x px-3 py-2 w-[300px] bg-white  duration-150  ${
+                            showColorBoard
+                              ? "opacity-1 visible"
+                              : "opacity-0 invisible"
+                          }`}
+                        />
+                      </div>
+                    </FormControl>
+                  </ClickAwayListener>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormRow>
 
           <AboutMePreview
             color={chosenColor}

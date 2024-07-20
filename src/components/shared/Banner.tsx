@@ -1,4 +1,4 @@
-import { useTheme } from "@/store/ThemeProvidor";
+import { useTheme } from "@/context/ThemeProvidor";
 import { BackgroundGradientAnimation } from "../ui/BackgroundGradientAnimation";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";

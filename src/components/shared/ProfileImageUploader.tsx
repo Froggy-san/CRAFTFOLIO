@@ -46,7 +46,7 @@ const ProfileImageUploader = ({
       {fileUrl ? (
         <>
           <div
-            className={`w-[250px] h-[250px]  sm:w-[330px] sm:h-[330px]   p-1   ${className}`}
+            className={`w-[250px] h-[250px]  sm:w-[330px] sm:h-[330px]   p-1  z-0  ${className}`}
           >
             <img
               src={fileUrl}
@@ -54,16 +54,16 @@ const ProfileImageUploader = ({
               className="h-full w-full object-cover  rounded-full"
             />
           </div>
-          <p className="mx-auto">Click or drag photo to replace</p>
+          <p className="mx-auto z-0">Click or drag photo to replace</p>
         </>
       ) : (
-        <div className=" flex h-80 flex-col items-center  justify-center p-7 lg:h-[612px]">
+        <div className=" flex h-80 flex-col items-center  justify-center p-7  z-0">
           <LuImagePlus size={45} />
-          <h3 className="base-medium text-light-2 mb-2 mt-6">
+          <h3 className="base-medium text-light-2 mb-2 mt-6 z-0">
             Drag photo here
           </h3>
-          <p className="text-light-4 small-regular mb-6">SVG, PNG, JPG</p>
-          <Button type="button" className="shad-button_dark_4">
+          <p className="text-light-4 small-regular mb-6 z-0">SVG, PNG, JPG</p>
+          <Button type="button" className="shad-button_dark_4 z-0">
             Select from computer
           </Button>
         </div>

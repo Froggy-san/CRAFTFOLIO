@@ -12,19 +12,19 @@ const AddPost = () => {
 
   if (isLoading) return <FullSnLoading />;
 
-  if (!isAuthenticated)
-    return (
-      <ErrorComp
-        message={
-          <div className=" flex flex-col sm:flex-row items-center gap-3">
-            <p className=" text-center font-semibold ">
-              You are not authrized to do this action, please login first{" "}
-            </p>
-            <LinkBtn to="/login">Login</LinkBtn>
-          </div>
-        }
-      />
-    );
+  // if (!isAuthenticated)
+  //   return (
+  //     <ErrorComp
+  //       message={
+  //         <div className=" flex flex-col sm:flex-row items-center gap-3">
+  //           <p className=" text-center font-semibold ">
+  //             You are not authrized to do this action, please login first{" "}
+  //           </p>
+  //           <LinkBtn to="/login">Login</LinkBtn>
+  //         </div>
+  //       }
+  //     />
+  //   );
 
   return (
     <div className=" flex flex-col project-form-h relative">

@@ -73,7 +73,17 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className=" flex justify-between items-center">
+                    Password{" "}
+                    <p className=" mt-2 text-sm">
+                      <Link
+                        className=" text-blue-500 underline"
+                        to={"/frogot-password"}
+                      >
+                        Forgot password?
+                      </Link>
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <div className=" relative ">
                       <Input
@@ -105,7 +115,17 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className=" flex justify-between items-center">
+                    Password{" "}
+                    <p className=" mt-2 text-sm">
+                      <Link
+                        className=" text-blue-500 underline"
+                        to={"/frogot-password"}
+                      >
+                        Forgot password?
+                      </Link>
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <div className=" relative ">
                       <Input
@@ -132,12 +152,14 @@ const LoginForm = () => {
               )}
             />
           )}
-          <p className=" text-sm">
-            Don't have an account?{" "}
-            <Link className=" text-blue-500 underline" to={"/signup"}>
-              Sign up.
-            </Link>
-          </p>
+          <div>
+            <p className=" text-sm">
+              Don't have an account?{" "}
+              <Link className=" text-blue-500 underline" to={"/signup"}>
+                Sign up.
+              </Link>
+            </p>
+          </div>
           <Button disabled={isSigningIn} type="submit">
             Login
           </Button>

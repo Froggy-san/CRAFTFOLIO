@@ -526,7 +526,8 @@ export async function getProjectById(projectId: string) {
     .eq("id", projectId);
 
   if (error) throw new Error(error.message);
-
+  if (!project.length)
+    throw new Error(`No posts with the id:[${projectId}] were found!`);
   const user = await getUserById(project[0].user_id);
 
   return { project, user };

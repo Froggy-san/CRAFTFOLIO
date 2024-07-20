@@ -22,7 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import useSignUp from "./useSignUp";
-import { validateEgyptianPhoneNumber } from "@/utils/helper";
+
 import { useState } from "react";
 import FormFieldItem from "@/components/shared/FormFieldItem";
 import signUpSchema from "@/formScehmas/signUpSchema";

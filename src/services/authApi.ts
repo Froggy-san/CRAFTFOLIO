@@ -309,3 +309,9 @@ export async function updatePassword(password: string) {
   if (error) throw new Error(error.message);
   return data;
 }
+
+export async function forgotMyPassword(email: string) {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+  if (error) throw new Error(error.message);
+  return data;
+}
