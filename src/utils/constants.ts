@@ -1,5 +1,6 @@
+const windowWidth = window.innerWidth;
 export const LENGHT_OF_STRING = 500;
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = windowWidth > 1200 ? 9 : 10;
 export const defaultTextColor = {
   r: 0,
   g: 0,
@@ -17,43 +18,4 @@ export const defaultText = {
 becoming a web development force.`,
 };
 
-export const defaultAboutMeText = `            Tech-savvy and eager, the Junior React Developer combines web
-fundamentals with a love for React, a UI-building library. They
-write clean code and navigate the web's blueprint. Their React
-skills shine, crafting reusable components and managing data flow.
-Always learning, they explore React's ecosystem. From
-collaborating on projects to crafting UIs, each challenge paves
-their path to becoming a web development force. Tech-savvy and
-eager, the Junior React Developer combines web fundamentals with a
-love for React, a UI-building library. They write clean code and
-navigate the web's blueprint. Their React skills shine, crafting
-reusable components and managing data flow. Always learning, they
-explore React's ecosystem. From collaborating on projects to
-crafting UIs, each challenge paves their path to becoming a web
-development force.Tech-savvy and eager, the Junior React Developer
-combines web fundamentals with a love for React, a UI-building
-library. They write clean code and navigate the web's blueprint.
-Their React skills shine, crafting reusable components and
-managing data flow. Always learning, they explore React's
-ecosystem. From collaborating on projects to crafting UIs, each
-challenge paves their path to becoming a web development
-force.Tech-savvy and eager, the Junior React Developer combines
-web fundamentals with a love for React, a UI-building library.
-They write clean code and navigate the web's blueprint. Their
-React skills shine, crafting reusable components and managing data
-flow. Always learning, they explore React's ecosystem. From
-collaborating on projects to crafting UIs, each challenge paves
-their path to becoming a web development force.Tech-savvy and
-eager, the Junior React Developer combines web fundamentals with a
-love for React, a UI-building library. They write clean code and
-navigate the web's blueprint. Their React skills shine, crafting
-reusable components and managing data flow. Always learning, they
-explore React's ecosystem. From collaborating on projects to
-crafting UIs, each challenge paves their path to becoming a web
-development force. explore React's ecosystem. From collaborating
-on projects to crafting UIs, each challenge paves their path to
-becoming a web development force. explore React's ecosystem. From
-collaborating on projects to crafting UIs, each challenge paves
-their path to becoming a web development force. explore React's
-ecosystem. From collaborating on projects to crafting UIs, each
-challenge paves their path to becoming a web development force.`;
+export const defaultAboutMeText = ` Tech-savvy and eager, the Junior React Developer combines web fundamentals with a love for React, a UI-building library. They write clean code and navigate the web's blueprint. Their React skills shine, crafting reusable components and managing data flow. Always learning, they explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force. Tech-savvy and eager, the Junior React Developer combines web fundamentals with a love for React, a UI-building library. They write clean code and navigate the web's blueprint. Their React skills shine, crafting reusable components and managing data flow. Always learning, they explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force.Tech-savvy and eager, the Junior React Developer combines web fundamentals with a love for React, a UI-building library. They write clean code and navigate the web's blueprint. Their React skills shine, crafting reusable components and managing data flow. Always learning, they explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force.Tech-savvy and eager, the Junior React Developer combines web fundamentals with a love for React, a UI-building library. They write clean code and navigate the web's blueprint. Their React skills shine, crafting reusable components and managing data flow. Always learning, they explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force.Tech-savvy and eager, the Junior React Developer combines web fundamentals with a love for React, a UI-building library. They write clean code and navigate the web's blueprint. Their React skills shine, crafting reusable components and managing data flow. Always learning, they explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force. explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force. explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force. explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to becoming a web development force.`;

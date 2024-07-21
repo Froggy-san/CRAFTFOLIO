@@ -34,7 +34,7 @@ const UnorderedListGrid = ({ children }: { children: ReactNode }) => {
       // animate="visible"
       // exit={{ opacity: 1, scale: 0 }}
       //lg:px-20
-      className="grid grid-cols-2  xl:grid-cols-3 xl:px-0 gap-2   mb-7 "
+      className="grid grid-cols-2  xl:grid-cols-3 4xl:grid-cols-4 xl:px-0 gap-2   mb-7 "
     >
       {children}
     </motion.ul>

@@ -15,6 +15,8 @@ import { FloatingNav } from "@/components/ui/FloatingNavBar";
 import { defaultProfilePicture } from "@/utils/constants";
 import useLandingPage from "@/features/landingPage/useLandingPage";
 import TooltipComp from "@/components/shared/TooltipComp";
+import Footer from "@/features/userProfile/Footer/Footer";
+import { BackgroundBeams } from "@/components/ui/BackgroundBeam";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -89,6 +91,8 @@ const UserProfile = () => {
         {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
       </div>
+
+      <Footer isTheOwnerOfPage={isTheOwnerOfPage} />
     </div>
   );
 };

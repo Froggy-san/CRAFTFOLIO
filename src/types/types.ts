@@ -136,6 +136,33 @@ export interface aboutMeFormProps {
   arrowColor: string | undefined;
 }
 
+// -----------------------------------------------------------Footer types
+
+export interface UserFooterProps {
+  id: number;
+  user_id: string;
+  heading: string;
+  additionalText: string;
+  emailBtnText: string;
+  copyText: string;
+}
+
+export interface CreateUserFooter {
+  user_id: string;
+  heading: string;
+  additionalText: string;
+  emailBtnText: string;
+  copyText: string;
+}
+export interface EditUserFooterProps {
+  id: number;
+  heading: string;
+  additionalText: string;
+  emailBtnText: string;
+  copyText: string;
+}
+// -----------------------------------------------------------Footer types
+
 // shadcn button types
 export type variant =
   | "link"

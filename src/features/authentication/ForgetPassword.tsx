@@ -65,7 +65,7 @@ const ForgotPassword = () => {
           </p>
         )}
         {showMessage && (
-          <div className=" border  rounded-lg px-4 py-2 text-center bg-green-950/70">
+          <div className=" border  rounded-lg px-4 py-2 text-center text-foreground bg-green-300/70 dark:bg-green-950/70">
             Please check your email to continue.
           </div>
         )}

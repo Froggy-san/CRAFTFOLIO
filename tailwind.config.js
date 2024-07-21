@@ -17,13 +17,14 @@ module.exports = {
       padding: "1rem",
       screens: {
         // xs: "450px",
-        // "2xl": "1400px",
+        "6xl": "3000px",
       },
     },
     extend: {
       screens: {
         xs: "450px",
         "3xl": "1500px",
+        "4xl": "2000px",
       },
 
       colors: {

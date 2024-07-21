@@ -8,7 +8,7 @@ const AuthLayout = () => {
   const { isAuthenticated } = useAuth();
   if (isAuthenticated) return <Navigate to="/" replace={true} />;
   return (
-    <div className="flex   justify-between h-screen">
+    <div className="flex   justify-between h-screen ">
       <Logo
         className=" absolute left-5
       top-5"

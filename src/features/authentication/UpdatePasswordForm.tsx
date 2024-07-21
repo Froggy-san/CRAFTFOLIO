@@ -52,8 +52,6 @@ const UpdatePasswordForm = ({ className }: { className?: string }) => {
   const disabled =
     !form.getValues().password || !form.getValues().confirmPassword;
   function onSubmit(values: updatePasswordTypes) {
-    console.log(values, "form  vlaues");
-
     updatePassword(values.password, { onSuccess: () => navigate("/Login") });
   }
   return (
