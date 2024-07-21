@@ -8,11 +8,12 @@ import { UserFooterProps } from "@/types/types";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import { useAuth } from "@/hooks/useAuth";
 import { useParams } from "react-router-dom";
+import Links from "./Links";
 
 const Footer = ({ isTheOwnerOfPage }: { isTheOwnerOfPage: boolean }) => {
   const { isLoading, data } = useUserFooter();
   const { userId } = useParams();
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
   const userFooter: UserFooterProps | undefined =
     data && data.length ? data[0] : undefined;
@@ -49,6 +50,7 @@ const Footer = ({ isTheOwnerOfPage }: { isTheOwnerOfPage: boolean }) => {
           text={userFooter?.emailBtnText}
           copiableText={userFooter?.copyText}
         />
+        <Links />
       </div>
     </div>
   );

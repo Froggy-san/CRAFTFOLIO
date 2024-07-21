@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 
-import { FaReact, FaLaravel } from "react-icons/fa6";
+import { FaReact, FaLaravel, FaDropbox } from "react-icons/fa6";
 import {
   SiRecoil,
   SiMobx,
@@ -50,12 +50,14 @@ import {
   // SiW3Schools,
   SiGitlab,
   SiGithub,
+  SiSpringCreators,
+  SiThreedotjs,
 } from "react-icons/si";
 // import { SiDrizzle } from "react-icons/si";
 
 import { DiPerl } from "react-icons/di";
 import { LiaJava } from "react-icons/lia";
-import { FaNodeJs, FaGitAlt } from "react-icons/fa";
+import { FaNodeJs, FaGitAlt, FaDribbble } from "react-icons/fa";
 
 import {
   RiGatsbyLine,
@@ -88,6 +90,11 @@ export const icons: { [key: string]: JSX.Element } = {
   git: <FaGitAlt size={iconSize} />,
   getHub: <SiGithub size={iconSize} />,
   gitlab: <SiGitlab size={iconSize} />,
+  dropbox: <FaDropbox size={iconSize} />,
+  dribbble: <FaDribbble size={iconSize} />,
+  spring: <SiSpringCreators size={iconSize} />,
+  "three.js": <SiThreedotjs size={iconSize} />,
+  three: <SiThreedotjs size={iconSize} />,
   // w3: <SiW3Schools size={iconSize} />,
   // w3school: <SiW3Schools size={iconSize} />,
   "stack over flow": <SiStackoverflow size={iconSize} />,

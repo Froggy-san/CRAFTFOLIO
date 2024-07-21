@@ -1,13 +1,20 @@
 import {
   FaGithub,
   FaLinkedin,
-  FaRedditAlien,
   FaTwitter,
+  FaSquareXTwitter,
 } from "react-icons/fa6";
-import { FaFacebookF, FaYoutube } from "react-icons/fa";
-import { SiIndeed, SiGlassdoor } from "react-icons/si";
+import {
+  FaFacebookF,
+  FaYoutube,
+  FaCodepen,
+  FaRedditAlien,
+} from "react-icons/fa";
+import { SiIndeed, SiGlassdoor, SiCodesandbox } from "react-icons/si";
 import { PiOfficeChairFill } from "react-icons/pi";
 import { BiLogoDiscord } from "react-icons/bi";
+import { LuCodesandbox } from "react-icons/lu";
+
 import { Link } from "react-router-dom";
 import { isNull, isUndefined } from "lodash";
 
@@ -25,6 +32,8 @@ const icons: { [key: string]: JSX.Element } = {
   "facebook.com": <FaFacebookF size={iconSize} />,
   "facebook.co": <FaFacebookF size={iconSize} />,
   "facebook.net": <FaFacebookF size={iconSize} />,
+  "codesandbox.io": <SiCodesandbox size={iconSize} />,
+  "x.com": <FaSquareXTwitter size={iconSize} />,
   "twitter.com": <FaTwitter size={iconSize} />,
   "twitter.co": <FaTwitter size={iconSize} />,
   "twitter.net": <FaTwitter size={iconSize} />,
