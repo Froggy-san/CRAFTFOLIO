@@ -12,8 +12,6 @@ import Links from "./Links";
 
 const Footer = ({ isTheOwnerOfPage }: { isTheOwnerOfPage: boolean }) => {
   const { isLoading, data } = useUserFooter();
-  const { userId } = useParams();
-  const { user } = useAuth();
 
   const userFooter: UserFooterProps | undefined =
     data && data.length ? data[0] : undefined;
@@ -23,7 +21,7 @@ const Footer = ({ isTheOwnerOfPage }: { isTheOwnerOfPage: boolean }) => {
   return (
     <div>
       {isTheOwnerOfPage && <FooterDiaDrawer footerData={userFooter} />}
-      <div className="  h-screen gap-10  flex flex-col items-center justify-center relative  antialiased text-center">
+      <div className="  h-[70vh] md:h-screen gap-10  flex flex-col items-center justify-center relative  antialiased text-center">
         {/* <BackgroundBeams className="" /> */}
         <Heading
           as="h1"

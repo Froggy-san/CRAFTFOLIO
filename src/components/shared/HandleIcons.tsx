@@ -72,6 +72,7 @@ import {
   BiLogoPhp,
   BiLogoSass,
 } from "react-icons/bi";
+import { CiInstagram } from "react-icons/ci";
 
 import {
   TbBrandNextjs,
@@ -114,6 +115,7 @@ export const icons: { [key: string]: JSX.Element } = {
   "css modules": <SiCssmodules size={iconSize} />,
   recoil: <SiRecoil size={iconSize} />,
   "framer motion": <TbBrandFramerMotion size={iconSize} />,
+  instagram: <CiInstagram size={iconSize} />,
   mobx: <SiMobx size={iconSize} />,
   redux: <TbBrandRedux size={iconSize} />,
   nextjs: <TbBrandNextjs size={iconSize} />,

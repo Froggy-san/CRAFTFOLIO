@@ -17,6 +17,7 @@ import { LuCodesandbox } from "react-icons/lu";
 
 import { Link } from "react-router-dom";
 import { isNull, isUndefined } from "lodash";
+import { CiInstagram } from "react-icons/ci";
 
 const wuzzuf =
   "https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/17177931064d0fb05e3afb.png";
@@ -32,6 +33,7 @@ const icons: { [key: string]: JSX.Element } = {
   "facebook.com": <FaFacebookF size={iconSize} />,
   "facebook.co": <FaFacebookF size={iconSize} />,
   "facebook.net": <FaFacebookF size={iconSize} />,
+  "instagram.com": <CiInstagram size={iconSize} />,
   "codesandbox.io": <SiCodesandbox size={iconSize} />,
   "x.com": <FaSquareXTwitter size={iconSize} />,
   "twitter.com": <FaTwitter size={iconSize} />,
@@ -105,7 +107,12 @@ const HandleLinkIcons = ({
       {iconLinks.length
         ? iconLinks.map((link, i: number) => {
             return (
-              <Link key={i} target="_blank" to={links[i]}>
+              <Link
+                key={i}
+                target="_blank"
+                to={links[i]}
+                className=" hover:opacity-80 transition-all"
+              >
                 {link}
               </Link>
             );
