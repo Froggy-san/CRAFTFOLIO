@@ -30,7 +30,7 @@ const PosterInfo = ({
             {poster.username}
           </p>
         </TooltipComp>
-        <TooltipComp toolTipText={`${calcHowManyDaysAgo(postDate)}`}>
+        <TooltipComp toolTipText={`Posted: ${calcHowManyDaysAgo(postDate)}`}>
           <p className=" text-xs text-foreground/60">
             {format(new Date(postDate), "LLLL/dd/yyyy")}
           </p>

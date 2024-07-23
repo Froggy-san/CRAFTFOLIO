@@ -319,9 +319,12 @@ const ProjectForm = ({
             stepProps.completed = false;
           }
           return (
-            <Step key={label} {...stepProps}>
+            <Step key={label} {...stepProps} className="">
               <StepLabel className=" flex-col sm:flex-row" {...labelProps}>
-                <span className="text-[10px] sm:text-base "> {label}</span>
+                <span className="text-[10px] text-foreground  sm:text-base ">
+                  {" "}
+                  {label}
+                </span>
               </StepLabel>
             </Step>
           );

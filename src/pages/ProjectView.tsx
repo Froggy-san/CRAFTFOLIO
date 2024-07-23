@@ -20,6 +20,9 @@ import Contributors from "@/features/projectView/Contributors";
 import Heading from "@/components/shared/Heading";
 import Description from "@/features/projectView/Description";
 import PosterInfo from "@/features/projectView/PosterInfo";
+import Tools from "@/features/projectView/Tools";
+import FullSnLoading from "@/components/shared/FullSnLoading";
+import Links from "@/features/projectView/Links";
 
 const ProjectView = () => {
   const { projectId } = useParams();
@@ -33,24 +36,21 @@ const ProjectView = () => {
 
   const project: Project | undefined = projectById?.[0];
 
+  console.log(project, "PROJECT");
   useDocumentTitle(project?.name || "");
 
   const relatedUser = userById?.[0]; // user that owns the related project.
 
-  console.log(projectById);
-  console.log(relatedUser, "SS");
-  const contrbiutersTags =
-    project && project.contributors ? JSON.parse(project.contributors) : [];
   const isProjectOwner =
     user?.role === "admin" ||
     (isAuthenticated && user?.id === relatedUser?.userId); // is the current viewer the same person as the owner of the post?
 
-  if (isLoading)
-    return (
-      <div className=" h-[80dvb] flex justify-center items-center">
-        <Loading />
-      </div>
-    );
+  const contrbiutersTags =
+    project && project.contributors ? JSON.parse(project.contributors) : [];
+  const toolsArr =
+    project && project.technologies ? JSON.parse(project.technologies) : [];
+
+  if (isLoading) return <FullSnLoading />;
 
   if (!project) return <ErrorComp />;
   const imagesToDelete = project.projectImages.map(
@@ -59,7 +59,7 @@ const ProjectView = () => {
   const images = project.projectImages.map((imageObj) => imageObj.imageUrl);
 
   return (
-    <div id="project-view" className=" mb-40 mt-6 md:px-10">
+    <div id="project-view" className=" mb-40 mt-6 md:px-10 ">
       {/* <div className=" flex flex-col xs:flex-row justify-between mb-4">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
         {isAuthLoading ? (
@@ -84,27 +84,33 @@ const ProjectView = () => {
         )
       )}
       <ProjectViewCaro images={images} />
-      <PosterInfo poster={relatedUser} postDate={project.created_at} />
+      <div className=" flex items-center justify-between">
+        <PosterInfo poster={relatedUser} postDate={project.created_at} />
+        <Contributors contrbiutersTags={contrbiutersTags} />
+      </div>
       {/* ----------- */}
 
-      <div className=" mt-10 space-y-3">
+      <div className=" mt-10 ">
         <Heading
           as="h1"
           Text={project.name}
           ariaLabel="project name"
-          className=" font-semibold text-3xl text-center"
+          className="  text-center   "
+          style={{
+            fontSize: "clamp(40px, 5vw, 50px)",
+            lineHeight: 1.1,
+            fontWeight: 600,
+            letterSpacing: "1px",
+            wordWrap: "break-word",
+          }}
         />
 
-        <Description Text={project.description} />
-        <Contributors contrbiutersTags={contrbiutersTags} />
+        <div className=" mt-24 space-y-10">
+          <Description Text={project.description} />
+          <Tools toolsArr={toolsArr} />
+          <Links links={project.links} />
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default ProjectView;
-
-/*
       <div className=" my-6  ">
         <h1 className=" font-semibold text-lg">Links:</h1>
         <div className="">
@@ -131,4 +137,8 @@ export default ProjectView;
           </div>
         </div>
       </div>
-*/
+    </div>
+  );
+};
+
+export default ProjectView;

@@ -124,7 +124,7 @@ const CollapseContent = function ({
         onClick?.();
       }}
       aria-label={ariaLabel}
-      className={`mt-5 break-all  ${className}`}
+      className={`mt-5 break-all whitespace-pre-wrap  ${className}`}
       style={style}
     >
       {isString ? text : children}

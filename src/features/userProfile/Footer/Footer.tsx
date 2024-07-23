@@ -10,7 +10,13 @@ import { useAuth } from "@/hooks/useAuth";
 import { useParams } from "react-router-dom";
 import Links from "./Links";
 
-const Footer = ({ isTheOwnerOfPage }: { isTheOwnerOfPage: boolean }) => {
+const Footer = ({
+  isTheOwnerOfPage,
+  userSocials,
+}: {
+  userSocials: string;
+  isTheOwnerOfPage: boolean;
+}) => {
   const { isLoading, data } = useUserFooter();
 
   const userFooter: UserFooterProps | undefined =
@@ -48,7 +54,7 @@ const Footer = ({ isTheOwnerOfPage }: { isTheOwnerOfPage: boolean }) => {
           text={userFooter?.emailBtnText}
           copiableText={userFooter?.copyText}
         />
-        <Links />
+        <Links userSocials={userSocials} />
       </div>
     </div>
   );

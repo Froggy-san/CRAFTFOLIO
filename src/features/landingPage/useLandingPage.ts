@@ -6,10 +6,10 @@ export default function useLandingPage() {
   const { userId } = useParams();
   const id = userId || "";
 
-  const { isLoading, data: { userLandingPage, userAvatar } = {} } = useQuery({
+  const { isLoading, data: { userLandingPage, relatedUser } = {} } = useQuery({
     queryFn: () => getUserLandingPage(id),
     queryKey: ["userLanding", id],
     enabled: !!id,
   });
-  return { isLoading, userLandingPage, userAvatar };
+  return { isLoading, userLandingPage, relatedUser };
 }

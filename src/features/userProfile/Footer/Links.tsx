@@ -2,9 +2,9 @@ import HandleLinkIcons from "@/components/shared/HandleLinkIcons";
 import { useAuth } from "@/hooks/useAuth";
 import React from "react";
 
-const Links = () => {
+const Links = ({ userSocials }: { userSocials: string }) => {
   const { user } = useAuth();
-  const links = user && user.socials ? JSON.parse(user.socials) : [];
+  const links = userSocials ? JSON.parse(userSocials) : [];
 
   return (
     <>

@@ -27,8 +27,9 @@ const UserProfile = () => {
 
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
-  const { userAvatar } = useLandingPage();
-  console.log(userAvatar, "user avatar");
+
+  const { relatedUser } = useLandingPage();
+  console.log(relatedUser, "user avatar");
   // const userProfileId = userId || "";
   // const { isLoading: isUserProfileLoading, userProfile } = useGetUserProfile();
 
@@ -51,15 +52,16 @@ const UserProfile = () => {
       <div></div> */}
       <FloatingNav
         navItems={[
+          { name: "Home", link: "/" },
           { name: "Projects", link: "posts-container" },
           { name: "About", link: "about" },
           { name: "Contact", link: "contact" },
           {
             name: (
-              <TooltipComp toolTipText={userAvatar?.at(0)?.username}>
+              <TooltipComp toolTipText={relatedUser?.at(0)?.username}>
                 <img
                   className="w-7 h-7 rounded-full"
-                  src={userAvatar?.at(0)?.avatar || defaultProfilePicture}
+                  src={relatedUser?.at(0)?.avatar || defaultProfilePicture}
                   alt="asa"
                 />
               </TooltipComp>
@@ -92,7 +94,10 @@ const UserProfile = () => {
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
       </div>
 
-      <Footer isTheOwnerOfPage={isTheOwnerOfPage} />
+      <Footer
+        userSocials={relatedUser?.at(0)?.socials || ""}
+        isTheOwnerOfPage={isTheOwnerOfPage}
+      />
     </div>
   );
 };

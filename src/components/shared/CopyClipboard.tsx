@@ -39,7 +39,7 @@ const CopyClipboard = ({
   //   }
   return (
     <div
-      className={`relative w-full max-w-[450px] flex items-center px-2 h-11 justify-between rounded-md border border-input bg-background gap-2 ${className}`}
+      className={`relative w-full  flex items-center px-2 h-11 justify-between rounded-md border border-input bg-background gap-2 ${className}`}
     >
       <span aria-label={`Copy URL:${text}`} className="truncate flex-1">
         {text}

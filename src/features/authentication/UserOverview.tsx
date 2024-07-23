@@ -34,7 +34,7 @@ const UserOverview = ({ user }: { user: User | undefined }) => {
 
       <Avatar
         onClick={() => setViewedImage(image)}
-        className=" w-32 h-32 sm:w-48 sm:h-48 cursor-pointer"
+        className=" w-32 h-32 sm:w-48 sm:h-48  hover:grayscale-[10%]   transition-grayscale duration-200 cursor-pointer"
       >
         <AvatarImage src={image} className=" object-cover" />
         <AvatarFallback>image</AvatarFallback>

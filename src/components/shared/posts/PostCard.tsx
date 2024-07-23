@@ -155,7 +155,7 @@ const PostCard = ({ post }: { post: Project }) => {
             className=" text-[12px] font-semibold  w-[80%] xs:w-[70%] sm:w-[50%]"
           />
         ) : (
-          <span></span>
+          <span />
         )}
         {previewLink ? (
           <Button variant="link" className=" group  pr-0" asChild>

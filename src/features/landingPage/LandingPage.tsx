@@ -23,8 +23,8 @@ const LandingPage = ({
   isUser: boolean;
   isOwner: boolean;
 }) => {
-  /// getting the LandingPage related to the page owner, in that userLandingPage data there might be a profile picture that user added in the landing page if not we are getting the userAvatar to put it instead.
-  const { isLoading, userLandingPage, userAvatar } = useLandingPage();
+  /// getting the LandingPage related to the page owner, in that userLandingPage data there might be a profile picture that user added in the landing page if not we are getting the relatedUser to put it instead.
+  const { isLoading, userLandingPage, relatedUser } = useLandingPage();
 
   const landingPage: landingProps | undefined = userLandingPage?.[0];
   const textColor =
@@ -61,8 +61,9 @@ const LandingPage = ({
           style={{ color: `rgba(${textColor})` }}
         />
         <LandingUserInfo
+          isOwner={isOwner}
           landingPageAvatarImg={
-            landingPage?.avatarImage || userAvatar?.[0].avatar || ""
+            landingPage?.avatarImage || relatedUser?.[0].avatar || ""
           }
           icons={icons}
         />

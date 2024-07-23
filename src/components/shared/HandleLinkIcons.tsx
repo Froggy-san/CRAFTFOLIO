@@ -23,7 +23,7 @@ const wuzzuf =
   "https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/17177931064d0fb05e3afb.png";
 const iconSize = 20;
 
-const icons: { [key: string]: JSX.Element } = {
+export const icons: { [key: string]: JSX.Element } = {
   "github.com": <FaGithub size={iconSize} />,
   "github.co": <FaGithub size={iconSize} />,
   "github.net": <FaGithub size={iconSize} />,
@@ -68,6 +68,20 @@ const icons: { [key: string]: JSX.Element } = {
   "discord.net": <BiLogoDiscord size={iconSize} />,
 };
 
+export const extractDomain = (url: string, showError = true) => {
+  try {
+    // Create a URL object from the input URL
+    const parsedUrl = new URL(url);
+    // Return the hostname (domain) from the URL object
+    return parsedUrl.hostname.startsWith("www.")
+      ? parsedUrl.hostname.split("w.")[1]
+      : parsedUrl.hostname;
+  } catch (error) {
+    // Handle any errors that might occur during parsing
+    showError && console.warn("Invalid URL:", url);
+    return null;
+  }
+};
 const HandleLinkIcons = ({
   links,
   className,
@@ -78,21 +92,6 @@ const HandleLinkIcons = ({
   errorMessage?: string;
 }) => {
   const urls = links && links.filter((el) => el !== ""); // we are filtering it because the links we are getting always has an empty string which gives us an error every time this function is called.
-
-  const extractDomain = (url: string) => {
-    try {
-      // Create a URL object from the input URL
-      const parsedUrl = new URL(url);
-      // Return the hostname (domain) from the URL object
-      return parsedUrl.hostname.startsWith("www.")
-        ? parsedUrl.hostname.split("w.")[1]
-        : parsedUrl.hostname;
-    } catch (error) {
-      // Handle any errors that might occur during parsing
-      console.error("Invalid URL:", url);
-      return null;
-    }
-  };
 
   const linkDomains = urls.length
     ? urls.map((url) => extractDomain(url)).filter((el) => !isNull(el))

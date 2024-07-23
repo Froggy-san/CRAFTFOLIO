@@ -84,14 +84,14 @@ export async function getUserLandingPage(userId: string) {
     .eq("user_id", userId);
   if (error) throw new Error(error.message);
 
-  let { data: userAvatar, error: userAvatarError } = await supabase
+  let { data: relatedUser, error: relatedUserError } = await supabase
     .from("publicUsers")
-    .select("avatar,username")
+    .select("avatar,username,socials")
     .eq("userId", userId);
 
-  if (userAvatarError) throw new Error(userAvatarError.message);
+  if (relatedUserError) throw new Error(relatedUserError.message);
 
-  return { userLandingPage, userAvatar };
+  return { userLandingPage, relatedUser };
 }
 
 /// Landing page creation.
