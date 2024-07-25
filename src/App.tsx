@@ -21,13 +21,17 @@ import ProtectedRoutes from "./pages/ProtectedRoutes";
 import AuthLayout from "./features/authentication/AuthLayout";
 import ForgetPassword from "./features/authentication/ForgetPassword";
 import ResetPassword from "./features/authentication/ResetPassword";
+import Popover from "./components/shared/Popover";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/user/:userId", element: <UserPorfolio /> },
+      {
+        path: "user/:userId",
+        element: <UserPorfolio />,
+      },
       {
         element: <ProtectedRoutes />,
         children: [

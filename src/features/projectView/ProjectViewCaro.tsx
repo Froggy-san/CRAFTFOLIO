@@ -14,6 +14,7 @@ import ImageView from "@/components/shared/ImageView";
 
 import { AnimatePresence } from "framer-motion";
 import ViewCarousel from "../projects/ViewCarousel";
+import { isUndefined } from "lodash";
 
 const ProjectViewCaro = ({ images }: { images: string[] }) => {
   // const [viewedImage, setViewedImaged] = useState<null | string>(null);
@@ -21,13 +22,6 @@ const ProjectViewCaro = ({ images }: { images: string[] }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
-  // const handleViewImage = useCallback(function (imageName: string) {
-  //   setViewedImaged(imageName);
-  // }, []);
-  // const handleCloseView = useCallback(function () {
-  //   setViewedImaged(null);
-  // }, []);
-
   console.log(viewedIndex, "index");
   React.useEffect(() => {
     if (!api) {
@@ -41,6 +35,33 @@ const ProjectViewCaro = ({ images }: { images: string[] }) => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
+
+  const resetBodyStyle = () => {
+    const body = document.querySelector("body");
+    if (body) {
+      body.style.height = "unset";
+      body.style.overflow = "unset";
+    }
+  };
+
+  React.useEffect(() => {
+    const body = document.querySelector("body");
+
+    // Set the style when the image is open
+    if (!isUndefined(viewedIndex) && body) {
+      body.style.height = "100%"; // Corrected to "100vh"
+      body.style.overflow = "hidden";
+    }
+
+    // Add event listener for browser navigation
+    window.addEventListener("popstate", resetBodyStyle);
+
+    // Clean up the event listener and reset styles when the component unmounts or image changes
+    return () => {
+      window.removeEventListener("popstate", resetBodyStyle);
+      resetBodyStyle(); // Reset styles on unmount or image change
+    };
+  }, [viewedIndex]);
   return (
     <div>
       <div className=" flex justify-center items-center">

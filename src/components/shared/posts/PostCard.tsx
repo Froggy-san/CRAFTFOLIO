@@ -103,7 +103,7 @@ const PostCard = ({ post }: { post: Project }) => {
           <TooltipComp toolTipText={post.name}>
             <h1
               aria-label="project name"
-              className="  w-fit max-w-full text-lg font-semibold line-clamp-1"
+              className="  w-fit max-w-full text-lg font-semibold truncate"
             >
               {post.name}
             </h1>

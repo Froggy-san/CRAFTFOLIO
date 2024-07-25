@@ -5,11 +5,12 @@ import LinkBtn from "@/components/shared/LinkBtn";
 import ProjectForm from "@/features/projects/ProjectForm";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 const AddPost = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
   useScrollUpWhenMounted();
-
+  useDocumentTitle("Add post");
   if (isLoading) return <FullSnLoading />;
 
   // if (!isAuthenticated)

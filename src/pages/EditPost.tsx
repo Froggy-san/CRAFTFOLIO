@@ -7,12 +7,14 @@ import ProjectForm from "@/features/projects/ProjectForm";
 import useGetProjectById from "@/features/projects/useGetProjectById";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditPost = () => {
   const { user } = useAuth();
   const { postId } = useParams();
   useScrollUpWhenMounted();
+  useDocumentTitle("Edit post");
   const navigate = useNavigate();
   const {
     user: relatedUser,

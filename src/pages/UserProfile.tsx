@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import useUserPosts from "@/features/projects/useUserPosts";
 import Pagination from "@/components/shared/Pagination";
@@ -17,6 +17,7 @@ import useLandingPage from "@/features/landingPage/useLandingPage";
 import TooltipComp from "@/components/shared/TooltipComp";
 import Footer from "@/features/userProfile/Footer/Footer";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeam";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -27,7 +28,7 @@ const UserProfile = () => {
 
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
-
+  useDocumentTitle("");
   const { relatedUser } = useLandingPage();
   console.log(relatedUser, "user avatar");
   // const userProfileId = userId || "";
@@ -45,6 +46,7 @@ const UserProfile = () => {
   return (
     <div className=" relative ">
       <BackButton />
+
       {/* <div className=" flex items-center gap-3 fixed bottom-[70px] left-[500px]">
         <FaArrowLeftLong size={20} />
         <p>Preview link</p>
@@ -95,6 +97,8 @@ const UserProfile = () => {
       </div>
 
       <Footer
+        userPhone={relatedUser?.at(0)?.phone || ""}
+        userEmail={relatedUser?.at(0)?.email || ""}
         userSocials={relatedUser?.at(0)?.socials || ""}
         isTheOwnerOfPage={isTheOwnerOfPage}
       />

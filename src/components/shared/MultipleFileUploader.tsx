@@ -113,10 +113,10 @@ const MultipleFileUploader = ({
         )}
       </div>
 
-      <div className=" rounded-lg p-5   ">
+      <div className=" rounded-lg py-5 px-3    ">
         {mediaUrl?.length || files.length ? (
-          <div className=" flex items-center justify-between">
-            <h1 className="  my-3  font-semibold text-2xl">
+          <div className=" flex items-center justify-between my-6">
+            <h1 className="    font-semibold text-2xl">
               Images:{mediaUrl?.length || 0 + files.length}
             </h1>
             <Button
@@ -128,13 +128,13 @@ const MultipleFileUploader = ({
                 handleDeleteAllImages();
               }}
             >
-              Delete All
+              DELETE ALL
             </Button>
           </div>
         ) : null}
-        <ul className=" flex items-center gap-x-3 gap-y-8 flex-wrap">
+        <ul className=" flex items-center justify-center gap-x-3 gap-y-8 flex-wrap">
           {mediaUrl?.map((link, index) => (
-            <li className=" w-32  relative" key={link}>
+            <li className="  w-full  sm:w-44   relative" key={link}>
               <Button
                 type="button"
                 onClick={() => handleDeleteImage(link)}
@@ -150,7 +150,7 @@ const MultipleFileUploader = ({
                 aria-label={`image number: ${index + 1}, image name: ${link} `}
                 src={link}
                 alt="url"
-                className=" max-h-32 h-full w-full object-contain"
+                className="  max-h-56   sm:max-h-40 h-full w-full object-contain"
               />
               <p
                 aria-label={`image number: ${index + 1} image name: ${link}`}
@@ -162,10 +162,7 @@ const MultipleFileUploader = ({
           ))}
           {files.length
             ? files.map((file, index) => (
-                <li
-                  className=" w-32  flex justify-between flex-col relative"
-                  key={file.preview}
-                >
+                <li className="  w-full  sm:w-44   relative" key={file.preview}>
                   <Button
                     aria-label={`the remove button for the image with the name of ${file.name}`}
                     type="button"
@@ -181,7 +178,7 @@ const MultipleFileUploader = ({
                     }`}
                     src={file.preview}
                     alt="url"
-                    className=" max-h-32 h-full w-full object-contain"
+                    className="  max-h-56   sm:max-h-40 h-full w-full object-contain"
                   />
                   <p
                     aria-label={`the name of the image is: ${file.name}`}

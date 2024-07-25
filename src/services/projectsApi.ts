@@ -86,7 +86,7 @@ export async function getUserLandingPage(userId: string) {
 
   let { data: relatedUser, error: relatedUserError } = await supabase
     .from("publicUsers")
-    .select("avatar,username,socials")
+    .select("avatar,username,socials,email,phone")
     .eq("userId", userId);
 
   if (relatedUserError) throw new Error(relatedUserError.message);

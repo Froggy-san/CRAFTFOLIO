@@ -53,7 +53,7 @@ const ContriburosPopover = ({
           </PopoverTrigger>
           <PopoverContent
             onFocus={handleFocus} // to prevent the autoFocus feature in the popover.
-            className={`w-80 p-2   my-2  max-h-96 overflow-y-auto  ${
+            className={`w-80 p-2   my-2  max-h-[40vh] overflow-y-auto  ${
               className || ""
             }`}
           >

@@ -8,12 +8,14 @@ import PostsList from "@/features/home/PostList";
 import useGetPosts from "@/features/projects/usePosts";
 import { useAuth } from "@/hooks/useAuth";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 const Home = () => {
   const { user } = useAuth();
   const { posts, isLoading, pageCount } = useGetPosts();
 
   useScrollUpWhenMounted();
+  useDocumentTitle("Home");
   const userObj = {
     username: user?.username,
     userId: user?.id,

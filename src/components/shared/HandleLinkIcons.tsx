@@ -9,11 +9,13 @@ import {
   FaYoutube,
   FaCodepen,
   FaRedditAlien,
+  FaYahoo,
 } from "react-icons/fa";
-import { SiIndeed, SiGlassdoor, SiCodesandbox } from "react-icons/si";
-import { PiOfficeChairFill } from "react-icons/pi";
+import { SiIndeed, SiGlassdoor, SiCodesandbox, SiGmail } from "react-icons/si";
+import { PiOfficeChairFill, PiMicrosoftOutlookLogo } from "react-icons/pi";
 import { BiLogoDiscord } from "react-icons/bi";
 import { LuCodesandbox } from "react-icons/lu";
+import { FcGoogle } from "react-icons/fc";
 
 import { Link } from "react-router-dom";
 import { isNull, isUndefined } from "lodash";
@@ -25,6 +27,12 @@ const iconSize = 20;
 
 export const icons: { [key: string]: JSX.Element } = {
   "github.com": <FaGithub size={iconSize} />,
+  "yahoo.com": <FaYahoo size={iconSize} color="5f00d1" />,
+  "mail.yahoo.com": <FaYahoo size={iconSize} color="5f00d1" />,
+  "outlook.com": <PiMicrosoftOutlookLogo size={iconSize} />,
+  "outlook.live": <PiMicrosoftOutlookLogo size={iconSize} />,
+  "mail.google.com": <SiGmail size={iconSize} color="darkred" />,
+  "google.com": <FcGoogle size={iconSize} />,
   "github.co": <FaGithub size={iconSize} />,
   "github.net": <FaGithub size={iconSize} />,
   "linkedin.com": <FaLinkedin size={iconSize} />,

@@ -5,7 +5,7 @@ import Loading from "@/components/shared/Loading";
 
 import CollapsibleText from "@/components/shared/CollapsibleText";
 import { useAuth } from "@/hooks/useAuth";
-import { imageObject, Project, publicUser } from "@/types/types";
+import { imageObject, Project, publicUser, User } from "@/types/types";
 
 // import ProjectControls from "@/features/projects/ProjectControls";
 import ErrorComp from "@/components/shared/ErrorComp";
@@ -23,6 +23,10 @@ import PosterInfo from "@/features/projectView/PosterInfo";
 import Tools from "@/features/projectView/Tools";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import Links from "@/features/projectView/Links";
+import Footer from "@/features/userProfile/Footer/Footer";
+import { format } from "date-fns";
+import GrainyImg from "@/components/shared/GrainyImg";
+import TypeAndDate from "@/features/projectView/TypeAndDate";
 
 const ProjectView = () => {
   const { projectId } = useParams();
@@ -35,8 +39,9 @@ const ProjectView = () => {
   } = useGetProjectById(projectId || "");
 
   const project: Project | undefined = projectById?.[0];
-
+  const posterData: User | undefined = userById?.[0];
   console.log(project, "PROJECT");
+  console.log(posterData, "USER ID");
   useDocumentTitle(project?.name || "");
 
   const relatedUser = userById?.[0]; // user that owns the related project.
@@ -47,19 +52,25 @@ const ProjectView = () => {
 
   const contrbiutersTags =
     project && project.contributors ? JSON.parse(project.contributors) : [];
+
   const toolsArr =
     project && project.technologies ? JSON.parse(project.technologies) : [];
+
+  // const postOwnerSocials =
+  //   posterData && posterData.socials ? JSON.parse(posterData.socials) : [];
 
   if (isLoading) return <FullSnLoading />;
 
   if (!project) return <ErrorComp />;
+
   const imagesToDelete = project.projectImages.map(
     (image: imageObject) => image.imageUrl.split("projects/")[1]
   );
+
   const images = project.projectImages.map((imageObj) => imageObj.imageUrl);
 
   return (
-    <div id="project-view" className=" mb-40 mt-6 md:px-10 ">
+    <div id="project-view" className="  mt-6 md:px-10 ">
       {/* <div className=" flex flex-col xs:flex-row justify-between mb-4">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
         {isAuthLoading ? (
@@ -83,10 +94,16 @@ const ProjectView = () => {
           />
         )
       )}
-      <ProjectViewCaro images={images} />
-      <div className=" flex items-center justify-between">
+      {images.length ? (
+        <ProjectViewCaro images={images} />
+      ) : (
+        <div className="flex relative  h-[330px]  sm:h-[600px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold mb-3">
+          No images.
+          <GrainyImg />
+        </div>
+      )}
+      <div className=" flex flex-col xs:flex-row gap-y-6 items-center  justify-between">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
-        <Contributors contrbiutersTags={contrbiutersTags} />
       </div>
       {/* ----------- */}
 
@@ -105,13 +122,34 @@ const ProjectView = () => {
           }}
         />
 
-        <div className=" mt-24 space-y-10">
+        <div className=" mt-24 space-y-24">
+          <TypeAndDate
+            type={project.type}
+            startDate={project.startDate}
+            endDate={project.endDate}
+          />
           <Description Text={project.description} />
           <Tools toolsArr={toolsArr} />
           <Links links={project.links} />
+          <Contributors contrbiutersTags={contrbiutersTags} />
         </div>
       </div>
-      <div className=" my-6  ">
+
+      <Footer
+        userPhone={posterData?.phone || ""}
+        userEmail={posterData?.email || ""}
+        postOwnerId={posterData?.userId}
+        isTheOwnerOfPage={isProjectOwner}
+        userSocials={posterData?.socials || ""}
+      />
+    </div>
+  );
+};
+
+export default ProjectView;
+
+/**
+       <div className=" my-6  ">
         <h1 className=" font-semibold text-lg">Links:</h1>
         <div className="">
           <div className=" flex flex-col gap-1 my-4">
@@ -137,8 +175,4 @@ const ProjectView = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default ProjectView;
+ */

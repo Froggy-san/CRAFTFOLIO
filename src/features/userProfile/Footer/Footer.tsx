@@ -13,21 +13,34 @@ import Links from "./Links";
 const Footer = ({
   isTheOwnerOfPage,
   userSocials,
+  userEmail,
+  userPhone,
+  postOwnerId,
+  className,
 }: {
   userSocials: string;
+  userEmail: string;
+  userPhone: string;
   isTheOwnerOfPage: boolean;
+  postOwnerId?: string;
+  className?: string;
 }) => {
-  const { isLoading, data } = useUserFooter();
+  const { isLoading, data } = useUserFooter(postOwnerId);
 
   const userFooter: UserFooterProps | undefined =
     data && data.length ? data[0] : undefined;
 
   if (isLoading) return <FullSnLoading />;
 
+  if (!userFooter) return null;
   return (
     <div>
       {isTheOwnerOfPage && <FooterDiaDrawer footerData={userFooter} />}
-      <div className="  h-[70vh] md:h-screen gap-10  flex flex-col items-center justify-center relative  antialiased text-center">
+      <div
+        className={` h-[70vh] md:h-[93vh] gap-10  flex flex-col items-center justify-center relative  antialiased text-center ${
+          className || ""
+        }`}
+      >
         {/* <BackgroundBeams className="" /> */}
         <Heading
           as="h1"
@@ -54,7 +67,11 @@ const Footer = ({
           text={userFooter?.emailBtnText}
           copiableText={userFooter?.copyText}
         />
-        <Links userSocials={userSocials} />
+        <Links
+          userPhone={userPhone}
+          userEmail={userEmail}
+          userSocials={userSocials}
+        />
       </div>
     </div>
   );

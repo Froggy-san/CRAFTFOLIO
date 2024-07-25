@@ -1,4 +1,5 @@
 import { getIconForTool } from "@/components/shared/HandleIcons";
+import Heading from "@/components/shared/Heading";
 import TooltipComp from "@/components/shared/TooltipComp";
 import React from "react";
 
@@ -12,7 +13,7 @@ const Tools = ({ toolsArr }: { toolsArr: string[] }) => {
 
   return (
     <div>
-      Tools:
+      <Heading Text="Tools:" as="h3" className="font-semibold text-lg" />
       <div className=" flex items-center justify-center sm:justify-normal flex-wrap mt-5  overflow-hidden ">
         <span className=" text-lg  pb-[2px]">[</span>{" "}
         {toolsArr.map((tool, i: number) => {

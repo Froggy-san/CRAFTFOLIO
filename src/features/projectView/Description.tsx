@@ -6,7 +6,7 @@ import { HiArrowCircleDown } from "react-icons/hi";
 const Description = ({ Text }: { Text: string | undefined }) => {
   return (
     <div>
-      <Heading Text="Description:" as="h3" />
+      <Heading Text="Description:" as="h3" className="font-semibold text-lg" />
 
       <Collapse textLenght={2000}>
         <Collapse.CollapseContent>{Text}</Collapse.CollapseContent>

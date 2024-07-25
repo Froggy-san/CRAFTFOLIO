@@ -9,15 +9,16 @@ const Contributors = ({
 }: {
   contrbiutersTags: publicUser[];
 }) => {
+  if (!contrbiutersTags.length) return null;
   return (
-    <Card className="  relative    px-5 py-6 flex flex-col items-center justify-center  w-fit gap-3 max-w-[700px]">
-      <Badge className=" absolute left-1/2 -translate-x-1/2 -top-2 whitespace-nowrap">
+    <div className="  relative   px-10    py-6 flex flex-col items-center justify-center   gap-3 w-full">
+      <Badge className=" absolute left-1/2 -translate-x-1/2 -top-3 whitespace-nowrap">
         contributors:
       </Badge>
-      <div className="flex flex-row  flex-wrap items-center  w-[109%] ">
+      <div className="flex flex-row  flex-wrap items-center  justify-center w-[109%] ">
         <AnimatedTooltip items={contrbiutersTags} />
       </div>
-    </Card>
+    </div>
   );
 };
 
