@@ -1,6 +1,7 @@
 import HandleLinkIcons from "@/components/shared/HandleLinkIcons";
 import { useAuth } from "@/hooks/useAuth";
 import React from "react";
+import { createPortal } from "react-dom";
 
 const Links = ({
   userSocials,
@@ -12,6 +13,8 @@ const Links = ({
   userSocials: string;
 }) => {
   const links = userSocials ? JSON.parse(userSocials) : [];
+
+  const footerContainer = document.getElementById("footer-container");
 
   return (
     <>
@@ -46,10 +49,14 @@ const Links = ({
           Phone: {userPhone}
         </p>
       </div>
-      <div className=" flex flex-col gap-y-3 items-center absolute bottom-5 left-1/2 -translate-x-1/2 md:hidden  justify-center  w-full">
-        <HandleLinkIcons links={links} className="  flex-wrap" />
-        <p className=" text-xs">Phone: {userPhone}</p>
-      </div>
+      {footerContainer &&
+        createPortal(
+          <div className=" flex flex-col gap-y-3 items-center   md:hidden  justify-center  w-full">
+            <HandleLinkIcons links={links} className="  flex-wrap" />
+            <p className=" text-xs">Phone: {userPhone}</p>
+          </div>,
+          footerContainer
+        )}
     </>
   );
 };

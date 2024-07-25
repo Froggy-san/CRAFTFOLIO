@@ -1,6 +1,3 @@
-// import React from "react";
-// import GranyImg from "@/components/shared/GrainyImg";
-// import useGetUserProfile from "@/features/projects/useUserPosts";
 import UserLandingProfile from "@/features/landingPage/UserLandingProfile";
 import HandleIcons from "@/components/shared/HandleLinkIcons";
 import useLandingPage from "./useLandingPage";
@@ -40,7 +37,7 @@ const LandingPage = ({
     secondaryText: landingPage?.secondaryText || defaultText.about,
     tertiaryText: landingPage?.tertiaryText || defaultText.about,
   };
-
+  console.log(landingPage?.grainyTexture, landingPage?.blur, "EFFECTS ?");
   return (
     <div className=" select-none">
       {isUser && isOwner ? (
@@ -48,8 +45,12 @@ const LandingPage = ({
       ) : null}
       {/* {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null} */}
 
-      <div className="  max-h-[1450px]  xs::max-h-[83vh] rounded-lg mt-3 relative grany overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10">
-        {!landingPage || landingPage.grainyTexture ? <GrainyImg /> : null}
+      <div
+        className={`max-h-[1450px]  xs::max-h-[83vh] rounded-lg mt-3 relative  overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10 ${
+          (!landingPage || landingPage.grainyTexture) && "grany"
+        }`}
+      >
+        {(!landingPage || landingPage.grainyTexture) && <GrainyImg />}
 
         <LandingPageImage
           landingImage={landingPage?.landingImage || defaultLandingPageImage}

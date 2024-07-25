@@ -7,6 +7,7 @@ const LandingPageImage = ({
   landingImage: string;
   imageEffects: boolean;
 }) => {
+  console.log(imageEffects, "IMAGE EFFECTSSS");
   return (
     <img
       src={landingImage}

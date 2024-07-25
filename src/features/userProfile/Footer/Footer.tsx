@@ -37,6 +37,7 @@ const Footer = ({
     <div>
       {isTheOwnerOfPage && <FooterDiaDrawer footerData={userFooter} />}
       <div
+        id="footer-container"
         className={` h-[70vh] md:h-[93vh] gap-10  flex flex-col items-center justify-center relative  antialiased text-center ${
           className || ""
         }`}
