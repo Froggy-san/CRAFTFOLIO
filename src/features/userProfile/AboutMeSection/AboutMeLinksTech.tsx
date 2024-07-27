@@ -37,27 +37,25 @@ const AboutMeLinksTech = ({
   }, []);
 
   return (
-    <motion.div className=" relative mt-7 md:px-10">
-      <AnimatePresence>
-        {!isEditing && (
-          <ShowLinksAndTools
-            isAuthenticated={isAuthenticated}
-            links={links}
-            tools={tools}
-            arrowName={linksAndtech.arrowType}
-            arrowColor={arrowColor}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isEditing && (
-          <AboutMeFrom
-            handleCloseForm={handleCloseForm}
-            linksAndTech={linksAndtech}
-            userId={userId}
-          />
-        )}
-      </AnimatePresence>
+    <div className=" relative mt-7 md:px-10">
+      {!isEditing && (
+        <ShowLinksAndTools
+          isAuthenticated={isAuthenticated}
+          links={links}
+          tools={tools}
+          arrowName={linksAndtech.arrowType}
+          arrowColor={arrowColor}
+        />
+      )}
+
+      {isEditing && (
+        <AboutMeFrom
+          handleCloseForm={handleCloseForm}
+          linksAndTech={linksAndtech}
+          userId={userId}
+        />
+      )}
+
       {!isEditing && (
         <Badge
           onClick={() => setIsEditing(true)}
@@ -66,7 +64,7 @@ const AboutMeLinksTech = ({
           {linksAndtech.links ? "Edit links" : "Add links"}
         </Badge>
       )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -89,12 +87,7 @@ export const ShowLinksAndTools = ({
     arrowName !== "none" && options.find((el) => el.value === arrowName)?.label;
 
   return (
-    <motion.div
-      initial={{ y: -120, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -120, opacity: 0 }}
-      className={`space-y-10 mt-16 ${className || ""}`}
-    >
+    <div className={`space-y-10 mt-16 show-tag ${className || ""}`}>
       <div className=" relative  ">
         {links.length ? (
           <HandleLinkIcons
@@ -146,7 +139,7 @@ export const ShowLinksAndTools = ({
           Add the tools you use in your work.
         </h1>
       ) : null}
-    </motion.div>
+    </div>
   );
 };
 

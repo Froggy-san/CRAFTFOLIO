@@ -21,7 +21,7 @@ import ProtectedRoutes from "./pages/ProtectedRoutes";
 import AuthLayout from "./features/authentication/AuthLayout";
 import ForgetPassword from "./features/authentication/ForgetPassword";
 import ResetPassword from "./features/authentication/ResetPassword";
-import Popover from "./components/shared/Popover";
+import DashBoard from "./pages/DashBoard";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +38,7 @@ const router = createBrowserRouter([
           { path: "/upload-post", element: <AddPost /> },
           { path: "/edit-post/:postId", element: <EditPost /> },
           { path: "/user-settings", element: <UserSettings /> },
+          { path: "/dashboard", element: <DashBoard /> },
         ],
       },
       // { path: "/uploads", element: <UploadPorfolio /> },

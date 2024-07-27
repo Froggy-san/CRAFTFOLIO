@@ -62,7 +62,7 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
 
         <DialogContent
           style={{ borderRadius: "1rem" }}
-          className=" overflow-x-hidden overflow-y-scroll scroll-gutter-both scroll h-[80dvb] max-w-[950px] px-1 xs:px-6   "
+          className=" overflow-x-hidden overflow-y-scroll scroll-gutter-both scroll h-[80dvb] max-w-[950px] px-1 xs:px-6   !rounded-none lg:!rounded-[1rem] "
         >
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>

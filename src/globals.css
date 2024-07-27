@@ -34,6 +34,15 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    --dashboard-blue: #e0f2fe;
+    --dashboard-green: #dcfce7;
+    --dashboard-indigo: #e0e7ff;
+    --dashboard-orange: #fef9c3;
+
+    --dashboard-text-blue: #0369a1;
+    --dashboard-text-green: #15803d;
+    --dashboard-text-indigo: #4338ca;
+    --dashboard-text-orange: #a16207;
   }
 
   .dark {
@@ -64,6 +73,16 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --dashboard-blue: #075985;
+    --dashboard-green: #166534;
+    --dashboard-indigo: #3730a3;
+    --dashboard-orange: #854d0e;
+
+    --dashboard-text-blue: #e0f2fe;
+    --dashboard-text-green: #dcfce7;
+    --dashboard-text-indigo: #e0e7ff;
+    --dashboard-text-orange: #fef9c3;
   }
 }
 

@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { LuUser } from "react-icons/lu";
 import { FiSettings } from "react-icons/fi";
 import { CgLogOut } from "react-icons/cg";
-import { MdOutlineBugReport } from "react-icons/md";
+import { MdOutlineBugReport, MdSpaceDashboard } from "react-icons/md";
 
 const UserMenu = ({
   user,
@@ -51,12 +51,21 @@ const UserMenu = ({
               <span> Profile</span>
             </DropdownMenuItem>
           </Link>
+
           <Link to={`/user-settings`}>
             <DropdownMenuItem>
               <FiSettings className="mr-2 h-4 w-4" />
               <span> Settings</span>
             </DropdownMenuItem>
           </Link>
+
+          <Link to={`/dashboard`}>
+            <DropdownMenuItem>
+              <MdSpaceDashboard className="mr-2 h-4 w-4" />
+              <span> Dashboard</span>
+            </DropdownMenuItem>
+          </Link>
+
           <DropdownMenuItem onClick={() => logOut()}>
             <CgLogOut className="mr-2 h-4 w-4" />
             <span> Logout</span>

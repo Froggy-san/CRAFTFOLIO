@@ -13,6 +13,7 @@ export interface User {
   resumeUrl: string;
 }
 export interface UserTagProps {
+  role: string | undefined;
   userId: string | undefined;
   username: string | undefined;
   avatar: string | undefined;
@@ -162,6 +163,12 @@ export interface EditUserFooterProps {
   copyText: string;
 }
 // -----------------------------------------------------------Footer types
+
+export interface GetUsersProps {
+  page: number;
+  searchTerm: string;
+  sortValue: string;
+}
 
 // shadcn button types
 export type variant =

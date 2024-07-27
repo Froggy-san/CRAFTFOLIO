@@ -152,6 +152,16 @@ const LoginForm = () => {
               )}
             />
           )}
+
+          <Button
+            size="sm"
+            disabled={isSigningIn}
+            type="submit"
+            className="  block  "
+          >
+            Login
+          </Button>
+
           <div>
             <p className=" text-sm">
               Don't have an account?{" "}
@@ -160,9 +170,6 @@ const LoginForm = () => {
               </Link>
             </p>
           </div>
-          <Button disabled={isSigningIn} type="submit">
-            Login
-          </Button>
         </form>
       </Form>
     </div>

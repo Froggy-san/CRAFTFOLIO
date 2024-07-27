@@ -6,8 +6,6 @@ import Pagination from "@/components/shared/Pagination";
 import LandingPage from "@/features/landingPage/LandingPage";
 import ProjectControls from "@/features/projects/ProjectControls";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-// import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
-import Heading from "@/components/shared/Heading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
@@ -18,31 +16,25 @@ import TooltipComp from "@/components/shared/TooltipComp";
 import Footer from "@/features/userProfile/Footer/Footer";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeam";
 import { useDocumentTitle } from "@uidotdev/usehooks";
+import ErrorComp from "@/components/shared/ErrorComp";
+import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 
 // import { FaArrowLeftLong } from "react-icons/fa6";
 
 const UserProfile = () => {
   const { user, isLoading } = useAuth();
   const { isLoading: isPostsLoading, pageCount, userPosts } = useUserPosts();
-  // useScrollUpWhenMounted();
+  useScrollUpWhenMounted();
 
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
   useDocumentTitle("");
-  const { relatedUser } = useLandingPage();
-  console.log(relatedUser, "user avatar");
-  // const userProfileId = userId || "";
-  // const { isLoading: isUserProfileLoading, userProfile } = useGetUserProfile();
+  const { relatedUser, isLoading: landingLoading } = useLandingPage();
 
-  if (isLoading) return <FullSnLoading />;
+  if (isLoading || landingLoading) return <FullSnLoading />;
 
-  // console.log(pageCount, "SS");
-  // console.log(userPosts, "USER POSTS");
-
-  // const userProjects = userProfile?.[0].projects;
-
-  // console.log(userProfile, "01129442476");
-
+  if (!relatedUser || !relatedUser.length) return <ErrorComp />;
+  console.log(userPosts, "USER POSTS");
   return (
     <div className=" relative ">
       <BackButton />

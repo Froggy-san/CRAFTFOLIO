@@ -33,6 +33,16 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        "dashboard-blue": "var(--dashboard-blue)",
+        "dashboard-green": "var(--dashboard-green)",
+        "dashboard-indigo": "var(--dashboard-indigo)",
+        "dashboard-orange": "var(--dashboard-orange)",
+
+        "dashboard-text-blue": "var(--dashboard-text-blue)",
+        "dashboard-text-green": "var(--dashboard-text-green)",
+        "dashboard-text-indigo": "var(--dashboard-text-indigo)",
+        "dashboard-text-orange": "var(--dashboard-text-orange)",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

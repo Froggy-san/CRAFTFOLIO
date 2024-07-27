@@ -65,8 +65,7 @@ const PostCard = ({ post }: { post: Project }) => {
       animate={isDeleting ? "deleting" : "visible"}
       // exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={` relative    rounded-lg h-fit break-words
-        `}
+      className={` relative z-[unset] rounded-lg h-fit break-words`}
     >
       {currentOwner ? (
         <CardControls

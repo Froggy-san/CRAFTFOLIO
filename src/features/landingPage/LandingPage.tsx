@@ -13,6 +13,7 @@ import LandingPageImage from "./LandingPageImage";
 import { landingProps } from "@/types/types";
 import LandingDialogDrawer from "./LandingDialogDrawer";
 const theColorBlack = "0,0,0,1";
+
 const LandingPage = ({
   isUser,
   isOwner,
@@ -20,7 +21,7 @@ const LandingPage = ({
   isUser: boolean;
   isOwner: boolean;
 }) => {
-  /// getting the LandingPage related to the page owner, in that userLandingPage data there might be a profile picture that user added in the landing page if not we are getting the relatedUser to put it instead.
+  /// getting the LandingPage related to the page owner, in that userLandingPage data there might be a profile picture that user added in the landing page if not we are getting  the user's profile picture from relatedUser to put it instead.
   const { isLoading, userLandingPage, relatedUser } = useLandingPage();
 
   const landingPage: landingProps | undefined = userLandingPage?.[0];
@@ -37,11 +38,14 @@ const LandingPage = ({
     secondaryText: landingPage?.secondaryText || defaultText.about,
     tertiaryText: landingPage?.tertiaryText || defaultText.about,
   };
-  console.log(landingPage?.grainyTexture, landingPage?.blur, "EFFECTS ?");
+
   return (
     <div className=" select-none">
       {isUser && isOwner ? (
-        <LandingDialogDrawer landingPage={landingPage} />
+        <LandingDialogDrawer
+          relatedUserAvatar={relatedUser?.[0].avatar}
+          landingPage={landingPage}
+        />
       ) : null}
       {/* {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null} */}
 
@@ -64,7 +68,7 @@ const LandingPage = ({
         <LandingUserInfo
           isOwner={isOwner}
           landingPageAvatarImg={
-            landingPage?.avatarImage || relatedUser?.[0].avatar || ""
+            landingPage?.avatarImage || relatedUser?.[0]?.avatar || ""
           }
           icons={icons}
         />

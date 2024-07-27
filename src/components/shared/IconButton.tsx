@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref } from "react";
+import React, { ReactElement, ReactNode, Ref } from "react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { buttonType, variant } from "@/types/types";
@@ -16,7 +16,7 @@ const IconButton = React.forwardRef(
       type,
       style,
     }: {
-      children?: ReactNode;
+      children?: ReactNode | ReactElement;
       onClick?: (e?: MouseEvent) => void;
       variant?: variant;
       className?: string;

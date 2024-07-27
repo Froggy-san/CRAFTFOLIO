@@ -9,6 +9,7 @@ const Header = () => {
   const { user, isLoading } = useAuth();
 
   const userObj = {
+    role: user?.role,
     username: user?.username,
     userId: user?.id,
     avatar: user?.avatar,

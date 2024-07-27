@@ -1,13 +1,9 @@
 import useUserFooter from "./useUserFooter";
-import { Button } from "@/components/ui/button";
 import EmailButton from "./EmailButton";
-import { BackgroundBeams } from "@/components/ui/BackgroundBeam";
 import Heading from "@/components/shared/Heading";
 import FooterDiaDrawer from "./FooterDiaDrawer";
 import { UserFooterProps } from "@/types/types";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-import { useAuth } from "@/hooks/useAuth";
-import { useParams } from "react-router-dom";
 import Links from "./Links";
 
 const Footer = ({

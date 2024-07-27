@@ -121,8 +121,14 @@ function TagItem({
 function TagsInputField({
   className,
   style,
+  placeholder,
+  type,
+  ariaLabel,
 }: {
   className?: string;
+  placeholder?: string;
+  type?: string;
+  ariaLabel?: string;
   style?: CSSProperties;
 }) {
   const { value, setValue, handleAddTag } = useContext(TagsInputContext);
@@ -140,8 +146,9 @@ function TagsInputField({
   return (
     <div className=" relative pl-3 bg-background  text-foreground   flex-1 min-w-[250px]  h-7">
       <input
-        type="text"
-        placeholder="Enter tools you use..."
+        type={type || "text"}
+        aria-label={ariaLabel}
+        placeholder={placeholder || "Enter tools you use..."}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}

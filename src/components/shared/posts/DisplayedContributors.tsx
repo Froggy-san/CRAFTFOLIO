@@ -15,7 +15,7 @@ const DisplayedContributors = ({
 }) => {
   return (
     <div
-      className={` flex items-center flex-wrap  h-[25px] overflow-hidden gap-y-36  ${
+      className={` flex items-center flex-wrap   h-[25px] overflow-hidden gap-y-36  ${
         className || ""
       }`}
     >

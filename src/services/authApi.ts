@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
-import { defaultTextColor } from "@/utils/constants";
-import { publicUser } from "@/types/types";
+import { DASHBOARD_PAGE_SIZE, defaultTextColor } from "@/utils/constants";
+import { GetUsersProps, publicUser } from "@/types/types";
 
 export async function deleteUser(userId: string) {
   // const serviceRoleKey =
@@ -278,6 +278,27 @@ export async function getUserById(userId: string) {
   }
 
   return user;
+}
+
+export async function getUsers({ searchTerm, page, sortValue }: GetUsersProps) {
+  let query = supabase.from("publicUsers").select("*", { count: "exact" });
+
+  if (searchTerm)
+    query = query.or(
+      `username.ilike.%${searchTerm}%,email.ilike.%${searchTerm}`
+    );
+
+  if (sortValue) query = query.order(sortValue, { ascending: true });
+
+  const from = (page - 1) * DASHBOARD_PAGE_SIZE;
+  const to = from + DASHBOARD_PAGE_SIZE - 1;
+
+  const { data: publicUsers, error, count } = await query.range(from, to);
+  if (error) {
+    console.log(error.message);
+    throw new Error(error.message);
+  }
+  return { publicUsers, count };
 }
 
 export async function deletePublicUser(userId: string) {

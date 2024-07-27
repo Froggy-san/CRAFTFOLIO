@@ -33,7 +33,7 @@ const ForgotPassword = () => {
     formState: { errors, isSubmitting },
     control,
   } = useForm<FormValues>({
-    defaultValues: { email: "moeosama1@outlook.com" },
+    defaultValues: { email: "" },
   });
   console.log(data, "DATA");
 

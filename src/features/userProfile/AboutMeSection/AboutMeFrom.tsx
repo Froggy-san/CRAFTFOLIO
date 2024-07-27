@@ -53,6 +53,7 @@ import { aboutMeFormProps } from "@/types/types";
 import { motion } from "framer-motion";
 import TagsInput from "@/components/shared/TagsInputRewrite";
 import FormRow from "@/components/shared/FormRow";
+import Heading from "@/components/shared/Heading";
 const arrowSize = 21;
 
 export const options: { label: JSX.Element; value: string }[] = [
@@ -165,14 +166,8 @@ const AboutMeFrom = React.forwardRef(function (
   }
 
   return (
-    <motion.div
-      initial={{ y: -120, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -120, opacity: 0 }}
-      ref={ref}
-      className=" mt-14"
-    >
-      {" "}
+    <div ref={ref} className=" mt-14 show-tag space-y-4">
+      <Heading Text="Socials & Tools" className=" font-semibold" />{" "}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -186,7 +181,7 @@ const AboutMeFrom = React.forwardRef(function (
                 <FormControl>
                   <TagsInput tags={field.value} onChange={field.onChange}>
                     <TagsInput.TagsContainer>
-                      <TagsInput.TagsInputField />
+                      <TagsInput.TagsInputField placeholder="Enter links" />
                     </TagsInput.TagsContainer>
                   </TagsInput>
                 </FormControl>
@@ -222,7 +217,7 @@ const AboutMeFrom = React.forwardRef(function (
               </FormItem>
             )}
           />
-          <FormRow>
+          <div className=" flex flex-col gap-y-8 lg:flex-row gap-3">
             <FormField
               control={form.control}
               name="arrowType"
@@ -237,7 +232,7 @@ const AboutMeFrom = React.forwardRef(function (
                   <div className="space-y-0.5 text-center xs:text-left">
                     <FormLabel className="text-base ">Arrow Shape</FormLabel>
                     <FormDescription>
-                      Receive emails about your account security.
+                      Choose the shape of the arrow.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -245,22 +240,24 @@ const AboutMeFrom = React.forwardRef(function (
                       <SelectTrigger
                         style={{
                           color: `${
-                            field.value === "none"
-                              ? "black"
-                              : `rgba(${chosenColor})`
+                            field.value === "none" ? "" : `rgba(${chosenColor})`
                           } `,
                         }}
-                        className=" w-full xs:w-[180px] "
+                        className=" w-full xs:w-[180px] text-foreground "
                       >
                         <SelectValue placeholder="Arrow shape" />
                       </SelectTrigger>
-                      <SelectContent className=" max-h-[250px]">
+                      <SelectContent
+                        className={`max-h-[250px] ${
+                          chosenColor && `text-[rgba(${chosenColor})]`
+                        }`}
+                      >
                         {options.map((option, index) => (
                           <SelectItem
                             style={{
                               color: `${
                                 field.value === "none"
-                                  ? "black"
+                                  ? ""
                                   : `rgba(${chosenColor})`
                               } `,
                             }}
@@ -294,7 +291,7 @@ const AboutMeFrom = React.forwardRef(function (
                   <div className="space-y-0.5 text-center xs:text-left">
                     <FormLabel className="text-base ">Arrow Color</FormLabel>
                     <FormDescription>
-                      Receive emails about your account security.
+                      Choose what color the arrow should be.
                     </FormDescription>
                   </div>
                   <ClickAwayListener
@@ -337,7 +334,7 @@ const AboutMeFrom = React.forwardRef(function (
                 </FormItem>
               )}
             />
-          </FormRow>
+          </div>
 
           <AboutMePreview
             color={chosenColor}
@@ -361,7 +358,7 @@ const AboutMeFrom = React.forwardRef(function (
           {/* <Button type="submit">Submit</Button> */}
         </form>
       </Form>
-    </motion.div>
+    </div>
   );
 });
 

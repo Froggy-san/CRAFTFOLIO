@@ -8,7 +8,7 @@ const Options = [
   { label: "Oldest", value: "created_at-asc" },
   { label: "Newest", value: "created_at-desc" },
 ];
-const ProjectControls = () => {
+const ProjectControls = ({ selectDisabled }: { selectDisabled?: boolean }) => {
   return (
     <div className=" relative flex justify-around xs:flex-row  items-center  gap-3  my-5">
       <Heading>Posts</Heading>
@@ -16,6 +16,7 @@ const ProjectControls = () => {
       <div className=" flex items-center gap-2">
         <SelectComp
           paramName="sort"
+          disabled={selectDisabled}
           options={Options}
           selectPlaceholer="Sort by"
           className=" w-[200px] xs:w-[120px]"

@@ -27,7 +27,11 @@ import useEditLandingPage from "./useEditLandingPage";
 import IconButton from "@/components/shared/IconButton";
 import _ from "lodash";
 import useObjectCompare from "@/hooks/useCompareObjects";
-import { defaultLandingPageImage, defaultTextColor } from "@/utils/constants";
+import {
+  defaultLandingPageImage,
+  defaultProfilePicture,
+  defaultTextColor,
+} from "@/utils/constants";
 import ProfileImageUploader from "@/components/shared/ProfileImageUploader";
 import { Switch } from "@/components/ui/switch";
 
@@ -76,9 +80,11 @@ const LandingFormRewrite = React.forwardRef(function (
     setOpen,
     landingToEdit,
     setHasTheFormDataChanged,
+    relatedUserAvatar,
   }: {
     setOpen: React.Dispatch<SetStateAction<boolean>>;
     landingToEdit?: landingProps;
+    relatedUserAvatar?: string;
     setHasTheFormDataChanged?: React.Dispatch<SetStateAction<boolean>>;
   },
   ref?: Ref<HTMLFormElement>
@@ -373,7 +379,11 @@ const LandingFormRewrite = React.forwardRef(function (
                   <FormLabel>Landing photo</FormLabel>
                   <FormControl>
                     <ProfileImageUploader
-                      mediaUrl={landingToEdit?.avatarImage || user?.avatar}
+                      mediaUrl={
+                        landingToEdit?.avatarImage ||
+                        relatedUserAvatar ||
+                        defaultProfilePicture
+                      }
                       fieldChange={field.onChange}
                     />
                   </FormControl>

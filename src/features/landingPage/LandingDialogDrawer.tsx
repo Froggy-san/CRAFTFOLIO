@@ -25,7 +25,13 @@ import { useRef, useState } from "react";
 import { TbPhotoEdit } from "react-icons/tb";
 import LandingFormRewrite from "./LandingFromRewrite";
 import { landingProps } from "@/types/types";
-function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
+function LandingDialogDrawer({
+  relatedUserAvatar,
+  landingPage,
+}: {
+  relatedUserAvatar?: string;
+  landingPage?: landingProps;
+}) {
   const [open, setOpen] = useState(false);
   const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false); // To prevent the drawer from moving while the user is scrolling inside the drawr content.
   const [disableDrag, selectDisabled] = useState(false);
@@ -61,7 +67,7 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
 
         <DialogContent
           style={{ borderRadius: "1rem" }}
-          className=" overflow-x-hidden overflow-y-scroll scroll-gutter-both scroll h-[80dvb] max-w-[950px] px-1 xs:px-6   "
+          className=" overflow-x-hidden overflow-y-scroll scroll-gutter-both scroll h-[80dvb] max-w-[950px]  !rounded-none lg:!rounded-[1rem]  px-1 xs:px-6   "
         >
           <DialogHeader>
             <DialogTitle>Create Your landing page.</DialogTitle>
@@ -70,7 +76,11 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
             </DialogDescription>
           </DialogHeader>
 
-          <LandingFormRewrite setOpen={setOpen} landingToEdit={landingPage} />
+          <LandingFormRewrite
+            relatedUserAvatar={relatedUserAvatar}
+            setOpen={setOpen}
+            landingToEdit={landingPage}
+          />
         </DialogContent>
       </Dialog>
     );
@@ -106,6 +116,7 @@ function LandingDialogDrawer({ landingPage }: { landingPage?: landingProps }) {
           <LandingFormRewrite
             setHasTheFormDataChanged={setHasTheFormDataChanged}
             setOpen={setOpen}
+            relatedUserAvatar={relatedUserAvatar}
             ref={formRef}
             landingToEdit={landingPage}
           />

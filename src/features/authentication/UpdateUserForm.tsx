@@ -218,7 +218,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                     <FormControl>
                       <TagsInput tags={field.value} onChange={field.onChange}>
                         <TagsInput.TagsContainer>
-                          <TagsInput.TagsInputField />
+                          <TagsInput.TagsInputField placeholder="Enter your socials..." />
                         </TagsInput.TagsContainer>
                       </TagsInput>
                     </FormControl>

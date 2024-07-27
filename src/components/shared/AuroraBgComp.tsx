@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 const AuroraBgComp = () => {
   const location = useLocation();
-  console.log(location, "Location");
 
   return (
     <AuroraBackground className=" ">
@@ -19,8 +18,8 @@ const AuroraBgComp = () => {
         }}
         className="relative flex flex-col gap-4 items-center justify-center px-4  "
       >
-        <div className="text-3xl  md:text-6xl lg:text-7xl font-bold dark:text-white text-center">
-          {location.pathname === "/Login" ? (
+        <div className="text-3xl  md:text-6xl lg:text-7xl  font-bold dark:text-white text-center">
+          {location.pathname === "/login" ? (
             <div>
               <div className="-skew-x-2 pr-10">CRAFT</div>
               <div className=" -skew-x-2 pl-10">FOLIO</div>
@@ -30,7 +29,7 @@ const AuroraBgComp = () => {
           )}
         </div>
         <div className="font-extralight  text-3xl   dark:text-neutral-200 py-4">
-          {location.pathname === "/Login"
+          {location.pathname === "/login"
             ? "Where careers start"
             : "Let's get you setup."}
         </div>

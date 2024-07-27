@@ -218,7 +218,7 @@ const SignUpForm = () => {
           </div>
           <p className=" text-sm pb-10">
             Don't have an account?{" "}
-            <Link className=" text-blue-500 underline" to={"/Login"}>
+            <Link className=" text-blue-500 underline" to={"/login"}>
               Login.
             </Link>
           </p>

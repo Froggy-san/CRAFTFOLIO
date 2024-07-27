@@ -1,6 +1,7 @@
 const windowWidth = window.innerWidth;
 export const LENGHT_OF_STRING = 500;
 export const PAGE_SIZE = windowWidth > 1200 ? 9 : 10;
+export const DASHBOARD_PAGE_SIZE = 6;
 export const defaultTextColor = {
   r: 0,
   g: 0,

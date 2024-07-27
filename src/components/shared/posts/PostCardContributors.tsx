@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { defaultProfilePicture } from "@/utils/constants";
 import TooltipComp from "../TooltipComp";
-import { d } from "node_modules/@tanstack/react-query-devtools/build/modern/devtools-PtxSnd7z";
 
 const PostCardContributors = ({ items }: { items: publicUser[] }) => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const PostCardContributors = ({ items }: { items: publicUser[] }) => {
     if (!id.includes("-any")) navigate(`/user/${id}`);
   }
   return (
-    <div className=" flex items-center flex-wrap  h-[25px] md:h-[31px] overflow-hidden gap-y-36">
+    <div className=" flex items-center flex-wrap  h-[30px] pt-1 md:pt-0  md:h-[31px] overflow-hidden gap-y-36">
       <span className=" pr-4">Contributors:</span>
       {items.map((item, i: number) => {
         return (

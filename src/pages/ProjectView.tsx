@@ -96,12 +96,12 @@ const ProjectView = () => {
       )}
       {images.length ? (
         <ProjectViewCaro images={images} />
-      ) : (
-        <div className="flex relative  h-[330px]  sm:h-[600px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold mb-3">
-          No images.
-          <GrainyImg />
-        </div>
-      )}
+      ) : null
+      // <div className="flex relative  h-[330px]  sm:h-[600px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold mb-3">
+      //   No images.
+      //   <GrainyImg />
+      // </div>
+      }
       <div className=" flex flex-col xs:flex-row gap-y-6 items-center  justify-between">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
       </div>
@@ -147,32 +147,3 @@ const ProjectView = () => {
 };
 
 export default ProjectView;
-
-/**
-       <div className=" my-6  ">
-        <h1 className=" font-semibold text-lg">Links:</h1>
-        <div className="">
-          <div className=" flex flex-col gap-1 my-4">
-            <h1 className=" font-semibold text-sm">Website Link:</h1>
-            <CopyClipboard
-              className=" h-9 text-sm"
-              text="http://localhost:5173/user/6345e9d7-df41-47da-af29-a723b1a6afbb"
-            />
-          </div>
-          <div className=" flex flex-col gap-1 my-4">
-            <h1 className=" font-semibold text-sm">Youtube:</h1>
-            <CopyClipboard
-              className=" h-9 text-sm"
-              text="https://www.youtube.com/watch?v=NmFJ4bYLUY0&ab_channel=HasanabiPublicBroadcastSystem"
-            />
-          </div>
-          <div className=" flex flex-col gap-1 my-4">
-            <h1 className=" font-semibold text-sm">cakeresume:</h1>
-            <CopyClipboard
-              className=" h-9 text-sm"
-              text="https://www.cakeresume.com/resources/front-end-developer-portfolio"
-            />
-          </div>
-        </div>
-      </div>
- */

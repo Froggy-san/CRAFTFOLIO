@@ -2,6 +2,8 @@ import Banner from "@/components/shared/Banner";
 
 import Heading from "@/components/shared/Heading";
 import Pagination from "@/components/shared/Pagination";
+import TestingRef from "@/components/shared/Ref";
+import Zoop from "@/components/shared/Zoop";
 import { Card } from "@/components/ui/card";
 import HomePostControlls from "@/features/home/HomePostControlls";
 import PostsList from "@/features/home/PostList";
@@ -17,6 +19,7 @@ const Home = () => {
   useScrollUpWhenMounted();
   useDocumentTitle("Home");
   const userObj = {
+    role: user?.role,
     username: user?.username,
     userId: user?.id,
     avatar: user?.avatar,
@@ -26,7 +29,8 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
-
+      <Zoop />
+      <TestingRef />
       <HomePostControlls
         selectDisabled={posts && !posts.length ? true : false}
         user={userObj}

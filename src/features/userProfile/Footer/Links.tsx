@@ -20,12 +20,12 @@ const Links = ({
     <>
       <div className=" absolute hidden md:block w-full h-full  left-0 bottom-0  z-0">
         <div className=" relative h-full flex  items-end px-6 justify-between">
-          {links.length && (
+          {links.length ? (
             <div className=" flex items-center justify-center flex-col space-y-10">
               <HandleLinkIcons links={links} className=" flex-col gap-6" />
               <div className=" h-[90px] w-[1px] bg-foreground rounded-2xl" />
             </div>
-          )}
+          ) : null}
           {/* ----------------------------------------------- */}
           {userEmail && (
             <div className=" flex items-center justify-center space-y-10 flex-col">
