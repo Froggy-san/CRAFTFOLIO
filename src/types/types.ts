@@ -13,7 +13,7 @@ export interface User {
   resumeUrl: string;
 }
 export interface UserTagProps {
-  role: string | undefined;
+  role?: string | undefined;
   userId: string | undefined;
   username: string | undefined;
   avatar: string | undefined;
