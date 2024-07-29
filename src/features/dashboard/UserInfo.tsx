@@ -18,7 +18,7 @@ const UserInfo = () => {
           <p className=" text-xs  text-foreground/50">
             Joined: {format(new Date(user.created_at), "LLLL/dd/yyyy")}
           </p>
-          <AddAdminAcc />
+          {user.role === "admin" && <AddAdminAcc />}
         </div>
       </div>
     </div>
