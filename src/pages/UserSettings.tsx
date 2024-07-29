@@ -1,5 +1,6 @@
 import Loading from "@/components/shared/Loading";
 import DeleteAllPost from "@/features/authentication/DeleteAllPost";
+import DeleteUserSetting from "@/features/authentication/DeleteUserSetting";
 import UpdatePasswordForm from "@/features/authentication/UpdatePasswordForm";
 import UpdateUserForm from "@/features/authentication/UpdateUserForm";
 import UserOverview from "@/features/authentication/UserOverview";
@@ -24,6 +25,7 @@ const UserSettings = () => {
       <UpdateUserForm user={user} />
       <UpdatePasswordForm />
       {user && <DeleteAllPost userId={user.id} />}
+      {user && <DeleteUserSetting userId={user.id} />}
     </div>
   );
 };

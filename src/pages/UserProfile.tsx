@@ -31,10 +31,12 @@ const UserProfile = () => {
   useDocumentTitle("");
   const { relatedUser, isLoading: landingLoading } = useLandingPage();
 
+  console.log(relatedUser, "RRRRRRRRR");
   if (isLoading || landingLoading) return <FullSnLoading />;
 
-  if (!relatedUser || !relatedUser.length) return <ErrorComp />;
-  console.log(userPosts, "USER POSTS");
+  if (!relatedUser || !relatedUser.length)
+    return <ErrorComp message="This user doens't exist." />;
+
   return (
     <div className=" relative ">
       <BackButton />
@@ -89,6 +91,7 @@ const UserProfile = () => {
       </div>
 
       <Footer
+        resume={relatedUser.at(0)?.resumeUrl || ""}
         userPhone={relatedUser?.at(0)?.phone || ""}
         userEmail={relatedUser?.at(0)?.email || ""}
         userSocials={relatedUser?.at(0)?.socials || ""}

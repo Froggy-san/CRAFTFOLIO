@@ -18,7 +18,7 @@ const DashBaordStats = () => {
       >
         DASHBAORD
       </FlipText>
-      <div className=" flex gap-3 mt-2 ">
+      <div className=" flex flex-col sm:flex-row juc gap-3 mt-2 ">
         <Card className="flex w-full p-3 items-center gap-5">
           <div className=" w-[80px] flex items-center justify-center  text-dashboard-text-blue   h-[80px] rounded-full bg-dashboard-blue">
             <SiApostrophe size={30} />

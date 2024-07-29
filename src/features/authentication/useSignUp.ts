@@ -3,22 +3,22 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-export default function useSignUp() {
+export default function useSignUp(adminSession?: boolean) {
   const navigate = useNavigate();
 
   const { mutate: signUp, isPending: isSigning } = useMutation({
     mutationFn: signUpApi,
-    onMutate : () => {
-toast.loading("Loading...")
+    onMutate: () => {
+      toast.loading("Loading...");
     },
     onSuccess: () => {
-      toast.dismiss()
+      toast.dismiss();
       toast.success(`you have signed up!`);
-      navigate("/login");
+      !adminSession && navigate("/login");
     },
 
     onError: (error) => {
-      toast.dismiss()
+      toast.dismiss();
 
       toast.error(error.message);
     },

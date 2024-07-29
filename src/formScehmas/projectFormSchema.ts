@@ -1,3 +1,4 @@
+import { isValidUrl } from "@/utils/helper";
 import { isAfter, isBefore } from "date-fns";
 import { z } from "zod";
 
@@ -22,9 +23,14 @@ export const projectFormSchema = z
         description: z.string().min(4, {
           message: "Description is required and must be at least 4 characters.",
         }),
-        url: z.string().min(4, {
-          message: "URL is required and must be at least 4 characters.",
-        }),
+        url: z
+          .string()
+          .min(4, {
+            message: "URL is required and must be at least 4 characters.",
+          })
+          .refine((text) => isValidUrl(text), {
+            message: "This url in not a vaild url.",
+          }),
       })
       .array(),
     startDate: z.date(),

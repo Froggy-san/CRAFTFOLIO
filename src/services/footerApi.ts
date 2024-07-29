@@ -51,3 +51,12 @@ export async function editUserFooter({
 
   return data;
 }
+
+export async function deleteUserFooter(userId: string) {
+  const { error } = await supabase
+    .from("profileFooter")
+    .delete()
+    .eq("user_id", userId);
+
+  if (error) throw new Error(`Couldn't delete user's footer section`);
+}

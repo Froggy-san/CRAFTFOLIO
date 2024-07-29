@@ -79,19 +79,48 @@ export async function getPosts({ page, searchTerm, sortValue }: getPosts) {
 
 export async function getUserLandingPage(userId: string) {
   const { data: userLandingPage, error } = await supabase
-    .from("landingPages ")
+    .from("landingPages")
     .select("*")
     .eq("user_id", userId);
   if (error) throw new Error(error.message);
 
   let { data: relatedUser, error: relatedUserError } = await supabase
     .from("publicUsers")
-    .select("avatar,username,socials,email,phone")
+    .select("*")
     .eq("userId", userId);
 
   if (relatedUserError) throw new Error(relatedUserError.message);
 
   return { userLandingPage, relatedUser };
+}
+
+export async function deleteUserLandingPage(userId: string) {
+  const { data: userLandingImages, error: imageErrors } = await supabase
+    .from("landingPages")
+    .select("avatarImage,landingImage")
+    .eq("user_id", userId);
+
+  if (imageErrors)
+    throw new Error(
+      `Something went wrong with the deleting of the user's landing page.`
+    );
+
+  if (userLandingImages.length) {
+    //https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/landingImages/0.3974139411032498-449130082_989589689240789_3290714148449789681_n.jpg
+    const imageObj = userLandingImages[0];
+    const avatarImage = imageObj.avatarImage.split("landingImages/")[1];
+    const landingImage = imageObj.landingImage.split("landingImages/")[1];
+    console.log(avatarImage, landingImage, "LANDIGN IMAGES DELETE");
+    await deleteImgFromStrage({
+      storageName: "landingImages",
+      imagesToDelete: [avatarImage, landingImage],
+    });
+  }
+  const { error } = await supabase
+    .from("landingPages")
+    .delete()
+    .eq("user_id", userId);
+  if (error) throw new Error(`Couldn't delete user's landing page.`);
 }
 
 /// Landing page creation.
@@ -416,7 +445,6 @@ export async function editPost({
   /// 5. In case the user has deleted an existing image from the post.
 
   if (imagesToDelete.length) {
-    console.log(imagesToDelete, "PROBLEM>>!");
     const imageNamesToDelete: string[] = [];
 
     for (let i = 0; i < imagesToDelete.length; i++) {

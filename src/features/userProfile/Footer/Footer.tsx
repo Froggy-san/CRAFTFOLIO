@@ -12,11 +12,13 @@ const Footer = ({
   userEmail,
   userPhone,
   postOwnerId,
+  resume,
   className,
 }: {
   userSocials: string;
   userEmail: string;
   userPhone: string;
+  resume: string;
   isTheOwnerOfPage: boolean;
   postOwnerId?: string;
   className?: string;
@@ -28,9 +30,8 @@ const Footer = ({
 
   if (isLoading) return <FullSnLoading />;
 
-  if (!userFooter) return null;
   return (
-    <div>
+    <div id="contact">
       {isTheOwnerOfPage && <FooterDiaDrawer footerData={userFooter} />}
       <div
         id="footer-container"
@@ -62,9 +63,10 @@ const Footer = ({
         />
         <EmailButton
           text={userFooter?.emailBtnText}
-          copiableText={userFooter?.copyText}
+          copiableText={userFooter?.copyText || userEmail}
         />
         <Links
+          resume={resume}
           userPhone={userPhone}
           userEmail={userEmail}
           userSocials={userSocials}

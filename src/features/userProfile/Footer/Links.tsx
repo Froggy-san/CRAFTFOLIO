@@ -1,5 +1,6 @@
 import HandleLinkIcons from "@/components/shared/HandleLinkIcons";
 import { useAuth } from "@/hooks/useAuth";
+import { isValidUrl } from "@/utils/helper";
 import React from "react";
 import { createPortal } from "react-dom";
 
@@ -7,13 +8,16 @@ const Links = ({
   userSocials,
   userEmail,
   userPhone,
+  resume,
 }: {
   userPhone: string;
   userEmail: string;
   userSocials: string;
+  resume: string;
 }) => {
   const links = userSocials ? JSON.parse(userSocials) : [];
 
+  console.log(resume, "RESUMEEE");
   const footerContainer = document.getElementById("footer-container");
 
   return (
@@ -45,15 +49,39 @@ const Links = ({
             </div>
           )}
         </div>
-        <p className=" text-xs text-center absolute left-1/2 -translate-x-1/2 bottom-5 text-foreground/70">
+        <p className=" text-xs text-center absolute left-1/2 -translate-x-1/2 bottom-7 text-foreground/70">
           Phone: {userPhone}
         </p>
+        {resume && (
+          <div className=" truncate w-full max-w-[350px] text-xs  bottom-2 text-center absolute left-1/2 -translate-x-1/2 ">
+            <span>Resume: </span>
+            {isValidUrl(resume) ? (
+              <a className=" text-muted-foreground" href={resume}>
+                {resume}
+              </a>
+            ) : (
+              <p>{resume}</p>
+            )}
+          </div>
+        )}
       </div>
       {footerContainer &&
         createPortal(
           <div className=" flex flex-col gap-y-3 items-center   md:hidden  justify-center  w-full">
             <HandleLinkIcons links={links} className="  flex-wrap" />
-            <p className=" text-xs">Phone: {userPhone}</p>
+            <p className=" text-xs text-muted-foreground">Phone: {userPhone}</p>
+            {resume && (
+              <div className=" truncate w-full max-w-[350px] text-xs ">
+                <span>Resume: </span>
+                {isValidUrl(resume) ? (
+                  <a className=" text-muted-foreground" href={resume}>
+                    {resume}
+                  </a>
+                ) : (
+                  <p>{resume}</p>
+                )}
+              </div>
+            )}
           </div>,
           footerContainer
         )}

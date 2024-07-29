@@ -29,7 +29,7 @@ const UserImg = ({
         }}
         aria-label="user's picture in the landing page"
         className={cn(
-          " w-28 relative h-28 xs:w-36 xs:h-36  lg:w-40 lg:h-40 rounded-full  hover:grayscale-[10%] hover:opacity-95   transition-all duration-200 cursor-pointer",
+          " w-20 relative h-20 xs:w-36 xs:h-36  lg:w-40 lg:h-40 rounded-full  hover:grayscale-[10%] hover:opacity-95   transition-all duration-200 cursor-pointer",
           className
         )}
       >

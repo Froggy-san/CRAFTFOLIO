@@ -13,7 +13,7 @@ const DashBoard = () => {
 
   return (
     <Card
-      className=" flex mt-3  p-2 "
+      className=" flex flex-col md:flex-row mt-3  p-2 "
       style={{ height: "calc( 99dvh  - (50px + 0.5rem + 0.75rem)" }}
     >
       <UserInfo />

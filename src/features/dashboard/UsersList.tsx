@@ -128,37 +128,39 @@ const UsersList = () => {
                     </TableCell>
                     <TableCell className=" flex  justify-end items-center">
                       {format(new Date(user.created_at), "LLLL/dd/yyyy")}
-                      <TableDropDown />
+                      <TableDropDown id={user.userId} />
                     </TableCell>
                   </TableRow>
                 ))
               : null}
           </TableBody>
-          <TableFooter className=" bg-background h-14">
-            <TableCell>
-              Page: {page} / {pageCount}{" "}
-            </TableCell>
+          <TableFooter className=" bg-background h-12">
+            <TableRow>
+              <TableCell>
+                Page: {page} / {pageCount}{" "}
+              </TableCell>
 
-            <TableCell className="py-0" colSpan={4}>
-              <div className="  justify-end gap-3 flex">
-                <Button
-                  disabled={page === 1}
-                  onClick={handlePrevious}
-                  variant="outline"
-                  size="sm"
-                >
-                  Previous
-                </Button>
-                <Button
-                  disabled={page === pageCount || !pageCount}
-                  onClick={handleNext}
-                  variant="outline"
-                  size="sm"
-                >
-                  Next
-                </Button>
-              </div>
-            </TableCell>
+              <TableCell className="py-0" colSpan={4}>
+                <div className="  justify-end gap-3 flex">
+                  <Button
+                    disabled={page === 1}
+                    onClick={handlePrevious}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Previous
+                  </Button>
+                  <Button
+                    disabled={page === pageCount || !pageCount}
+                    onClick={handleNext}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Next
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
           </TableFooter>
         </Table>
       </Card>

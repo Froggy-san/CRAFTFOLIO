@@ -34,8 +34,14 @@ import {
 
 type sginUpSchemaTypes = z.infer<typeof signUpSchema>;
 
-const SignUpForm = () => {
-  const { signUp, isSigning } = useSignUp();
+const SignUpForm = ({
+  adminSession,
+  className,
+}: {
+  adminSession?: boolean;
+  className?: string;
+}) => {
+  const { signUp, isSigning } = useSignUp(adminSession);
   const [isShowPass, setIsShowPass] = useState(false);
 
   const form = useForm<sginUpSchemaTypes>({
@@ -51,13 +57,16 @@ const SignUpForm = () => {
   });
 
   function onSubmit(values: sginUpSchemaTypes) {
-    console.log(values, "form  vlaues");
-
-    signUp({ ...values, role: "user" });
+    signUp({ ...values, role: adminSession ? "admin" : "user" });
   }
 
   return (
-    <div className="w-[94%] mx-auto  overflow-y-auto overflow-x-hidden h-[81%] mt-32 px-3">
+    <div
+      className={
+        className ||
+        "w-[94%] mx-auto  overflow-y-auto overflow-x-hidden h-[81%] mt-32 px-3"
+      }
+    >
       <h1 className=" text-xl font-semibold mb-12">Sign up</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -216,12 +225,14 @@ const SignUpForm = () => {
               Cancel
             </Button>
           </div>
-          <p className=" text-sm pb-10">
-            Don't have an account?{" "}
-            <Link className=" text-blue-500 underline" to={"/login"}>
-              Login.
-            </Link>
-          </p>
+          {!adminSession && (
+            <p className=" text-sm pb-10">
+              Don't have an account?{" "}
+              <Link className=" text-blue-500 underline" to={"/login"}>
+                Login.
+              </Link>
+            </p>
+          )}
         </form>
       </Form>
     </div>

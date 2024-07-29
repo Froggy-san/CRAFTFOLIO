@@ -42,7 +42,7 @@ import FormRow from "@/components/shared/FormRow";
 // import TagsInput from "@/components/shared/TagsInput";
 const landingPageSchma = z
   .object({
-    primaryText: z.string().min(6, { message: `Text is too short` }).max(100, {
+    primaryText: z.string().max(100, {
       message: `text is too long.`,
     }),
     secondaryText: z
@@ -431,25 +431,15 @@ const LandingFormRewrite = React.forwardRef(function (
               >
                 Cancel
               </Button>
-              {landingToEdit ? (
-                <Button
-                  size="sm"
-                  disabled={isEqual || isCreanting || isEditting}
-                  type="submit"
-                  className=" tracking-wider w-full sm:w-[unset]"
-                >
-                  Edit
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  disabled={isCreanting || isEditting}
-                  type="submit"
-                  className="w-full sm:w-[unset]"
-                >
-                  Upload landing page
-                </Button>
-              )}
+
+              <Button
+                size="sm"
+                disabled={isEqual || isCreanting || isEditting}
+                type="submit"
+                className=" tracking-wider w-full sm:w-[unset]"
+              >
+                {isEditting ? "Upload landing page" : "Edit"}
+              </Button>
             </div>
           </form>
         </Form>

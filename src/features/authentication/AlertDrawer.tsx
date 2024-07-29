@@ -39,8 +39,6 @@ function AlertDrawer({ userId }: { userId: string }) {
   const { count } = useGetNumOfProjects(userId);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  console.log(count, "CCCCCCCCCCCCCCCC");
-  console.log(userId, "CCCCCCCCCCCCCCCC");
   const dialogDescriptionText = `This action cannot be undone. This will permanently delete all (${
     count || 0
   }) posts you have and remove your data from our servers`;

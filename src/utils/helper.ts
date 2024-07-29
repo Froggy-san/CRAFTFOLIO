@@ -47,68 +47,6 @@ export function randomYear(min: number, max: number): number {
   return year;
 }
 
-const clothKeywords = [
-  "shirt",
-  "pants",
-  "dress",
-  "skirt",
-  "jacket",
-  "cloth",
-  "clothing",
-  "coat",
-  "sweater",
-  "hat",
-  "scarf",
-  "gloves",
-  "socks",
-  "shoes",
-  "boots",
-  "belt",
-  "tie",
-  "jeans",
-  "t-shirt",
-  "hoodie",
-  "blouse",
-  "shorts",
-];
-
-// Define a function that takes a string as a parameter and returns a boolean
-export function hasClothKeywords(str: string): boolean {
-  // Use the some method to check if any of the keywords are included in the string
-  return clothKeywords.some((keyword) => str.includes(keyword));
-}
-
-const electronicKeywords = [
-  "laptop",
-  "phone",
-  "tablet",
-  "camera",
-  "TV",
-  "monitor",
-  "keyboard",
-  "mouse",
-  "printer",
-  "speaker",
-  "headphone",
-  "charger",
-  "battery",
-  "USB",
-  "HDMI",
-  "Bluetooth",
-  "WiFi",
-  "LED",
-  "LCD",
-  "RAM",
-  "CPU",
-  "GPU",
-];
-
-// Define a function that takes a product object as a parameter and returns a boolean
-export function isItElectronic(str: string): boolean {
-  // Use the some method to check if any of the keywords are included in the string
-  return electronicKeywords.some((keyword) => str.includes(keyword));
-}
-
 export function validateEgyptianPhoneNumber(phoneNumber: string) {
   // define the regex
   const regex = /^01[0125][0-9]{8}$/;
@@ -132,6 +70,18 @@ export function validateEmail(email: string) {
   return re.test(String(email).toLowerCase());
 }
 
+export function isValidUrl(urlString: string): boolean {
+  try {
+    // Try creating a URL object first for common cases
+    new URL(urlString);
+    return true;
+  } catch (error) {
+    // If the URL object creation fails, perform additional checks
+    const regex =
+      /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5]))|localhost|[^:]+)(?::\d+)?(?:\/[^?#]*\??(?:[^#]*))?(?:#.*)?$/i;
+    return regex.test(urlString);
+  }
+}
 export function removeAllSpacesFrom(str: string, toUpperCase?: boolean) {
   const updatedStr = str
     // remove all spaces.
