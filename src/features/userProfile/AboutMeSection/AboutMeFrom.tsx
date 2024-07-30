@@ -318,7 +318,7 @@ const AboutMeFrom = React.forwardRef(function (
                           color={field.value}
                           onChange={(color) => {
                             field.onChange(color.rgb);
-                            console.log(color.rgb);
+                            // console.log(color.rgb);
                           }}
                           className={` absolute center-abslute-x px-3 py-2 w-[300px] bg-white  duration-150  ${
                             showColorBoard

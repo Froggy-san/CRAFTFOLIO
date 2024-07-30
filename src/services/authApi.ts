@@ -93,12 +93,14 @@ export async function signUp({
 
   if (publicUserError) throw new Error(publicUserError.message);
 
+  const DEFAULT_ABOUT_ME_COLOR = { r: 110, g: 64, b: 191, a: 1 };
+
   const aboutError = await createAboutMe({
     links: "",
     aboutMe: "",
     toolsAndTech: "",
     arrowType: "",
-    arrowColor: JSON.stringify(defaultTextColor),
+    arrowColor: JSON.stringify(DEFAULT_ABOUT_ME_COLOR),
     user_id: data.user?.id,
   });
   if (aboutError) {
