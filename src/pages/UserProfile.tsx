@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import useUserPosts from "@/features/projects/useUserPosts";
 import Pagination from "@/components/shared/Pagination";
@@ -9,20 +8,22 @@ import FullSnLoading from "@/components/shared/FullSnLoading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
 import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
-import { FloatingNav } from "@/components/ui/FloatingNavBar";
+
 import { defaultProfilePicture } from "@/utils/constants";
 import useLandingPage from "@/features/landingPage/useLandingPage";
 import TooltipComp from "@/components/shared/TooltipComp";
 import Footer from "@/features/userProfile/Footer/Footer";
-import { BackgroundBeams } from "@/components/ui/BackgroundBeam";
+
 import { useDocumentTitle } from "@uidotdev/usehooks";
 import ErrorComp from "@/components/shared/ErrorComp";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import { createPortal } from "react-dom";
-
+import { lazy, Suspense } from "react";
+const LazyFloatingNav = lazy(() => import("@/components/ui/FloatingNavBar"));
 const UserProfile = () => {
   const { user, isLoading } = useAuth();
   const { isLoading: isPostsLoading, pageCount, userPosts } = useUserPosts();
+
   useScrollUpWhenMounted();
   const APPLAYOUT_CONTAINER = document.getElementById("home");
   console.log(APPLAYOUT_CONTAINER, "TTTTTTTTTTTTTTEST");
@@ -42,26 +43,30 @@ const UserProfile = () => {
 
       {APPLAYOUT_CONTAINER &&
         createPortal(
-          <FloatingNav
-            navItems={[
-              { name: "Home", link: "home" },
-              { name: "Projects", link: "posts-container" },
-              { name: "About", link: "about" },
-              { name: "Contact", link: "contact" },
-              {
-                name: (
-                  <TooltipComp toolTipText={relatedUser?.at(0)?.username}>
-                    <img
-                      className="w-7 h-7 rounded-full"
-                      src={relatedUser?.at(0)?.avatar || defaultProfilePicture}
-                      alt="asa"
-                    />
-                  </TooltipComp>
-                ),
-                link: "",
-              },
-            ]}
-          />,
+          <Suspense>
+            <LazyFloatingNav
+              navItems={[
+                { name: "Home", link: "home" },
+                { name: "Projects", link: "posts-container" },
+                { name: "About", link: "about" },
+                { name: "Contact", link: "contact" },
+                {
+                  name: (
+                    <TooltipComp toolTipText={relatedUser?.at(0)?.username}>
+                      <img
+                        className="w-7 h-7 rounded-full"
+                        src={
+                          relatedUser?.at(0)?.avatar || defaultProfilePicture
+                        }
+                        alt="asa"
+                      />
+                    </TooltipComp>
+                  ),
+                  link: "",
+                },
+              ]}
+            />
+          </Suspense>,
           APPLAYOUT_CONTAINER
         )}
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />

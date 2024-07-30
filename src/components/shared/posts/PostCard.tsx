@@ -16,6 +16,7 @@ import GrainyImg from "../GrainyImg";
 
 import PostCardContributors from "./PostCardContributors";
 import Loading from "../Loading";
+import { useMemo } from "react";
 
 const previewRegex = /pre[av]iew/i;
 
@@ -40,12 +41,17 @@ const PostCard = ({ post }: { post: Project }) => {
       previewRegex.test(link.description)
   )?.url;
 
-  const imagesToDelete = post.projectImages.map(
-    (image: imageObject) => image.imageUrl.split("projects/")[1]
+  const imagesToDelete = useMemo(
+    () =>
+      post.projectImages.map(
+        (image: imageObject) => image.imageUrl.split("projects/")[1]
+      ),
+    [post.projectImages]
   );
 
-  const postImages = post.projectImages.map(
-    (image: imageObject) => image.imageUrl
+  const postImages = useMemo(
+    () => post.projectImages.map((image: imageObject) => image.imageUrl),
+    [post.projectImages]
   );
   const contrbiutersTags =
     post && post.contributors ? JSON.parse(post.contributors) : [];

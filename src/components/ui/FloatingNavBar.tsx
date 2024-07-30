@@ -9,7 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Link } from "react-scroll";
 
-export const FloatingNav = ({
+const FloatingNav = ({
   navItems,
   className,
 }: {
@@ -84,3 +84,5 @@ export const FloatingNav = ({
     </AnimatePresence>
   );
 };
+
+export default FloatingNav;
