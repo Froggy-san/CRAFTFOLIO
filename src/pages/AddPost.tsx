@@ -29,7 +29,7 @@ const AddPost = () => {
 
   return (
     <div className=" flex flex-col project-form-h relative">
-      <BackButton />
+      <BackButton className=" hidden sm:block" />
       {/* <h1 className=" text-4xl">Create Project</h1> */}
       <ProjectForm user={user} />
     </div>

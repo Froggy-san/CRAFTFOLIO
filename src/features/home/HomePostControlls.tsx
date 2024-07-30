@@ -4,18 +4,6 @@ import LinkBtn from "@/components/shared/LinkBtn";
 import { HiOutlinePlus } from "react-icons/hi";
 import { UserTagProps } from "@/types/types";
 
-const Options = [
-  { label: "Name (A-Z)", value: "name-asc" },
-  { label: "Name (Z-A)", value: "name-desc" },
-  { label: "Oldest", value: "created_at-asc" },
-  { label: "Newest", value: "created_at-desc" },
-  {
-    label: "newestssssssssssssaaassssssssss",
-    value: "created_asssssssssst-desc",
-  },
-  { label: "Add post", value: "/login", valueOne: "/user/" },
-];
-
 const HomePostControlls = ({
   user,
   selectDisabled,
@@ -25,6 +13,24 @@ const HomePostControlls = ({
   user?: UserTagProps;
   className?: string;
 }) => {
+  const options = [
+    { label: "Name (A-Z)", value: "name-asc" },
+    { label: "Name (Z-A)", value: "name-desc" },
+    { label: "Latest", value: "created_at-desc" },
+    { label: "Oldest", value: "created_at-asc" },
+
+    {
+      label: (
+        <span className=" flex  items-center">
+          {" "}
+          <HiOutlinePlus className="mr-2 h-4 w-4" />
+          <span className="truncate">Add post</span>
+        </span>
+      ),
+      value: "",
+      link: user?.username ? `/user/${user.userId}` : "/login",
+    },
+  ];
   return (
     <div
       className={`relative flex justify-around xs:flex-row  items-center  gap-3  my-5 ${
@@ -43,9 +49,8 @@ const HomePostControlls = ({
         </LinkBtn>
         <SelectComp
           disabled={selectDisabled}
-          user={user}
           paramName="sort"
-          options={Options}
+          options={options}
           selectPlaceholer="Sort by"
           className=" w-[200px] xs:w-[120px]"
         />

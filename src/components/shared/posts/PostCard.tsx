@@ -13,8 +13,7 @@ import { format } from "date-fns";
 import ToolsUsed from "./ToolsUsed";
 import { motion, useMotionValue } from "framer-motion";
 import GrainyImg from "../GrainyImg";
-import { AnimatedTooltip } from "../AnimatedTooltops";
-import DisplayedContributors from "./DisplayedContributors";
+
 import PostCardContributors from "./PostCardContributors";
 import Loading from "../Loading";
 
@@ -50,6 +49,7 @@ const PostCard = ({ post }: { post: Project }) => {
   );
   const contrbiutersTags =
     post && post.contributors ? JSON.parse(post.contributors) : [];
+
   const currentOwner =
     loggedInUser?.role === "admin" || post.user_id === loggedInUser?.id;
   //bg-[#ffffff]

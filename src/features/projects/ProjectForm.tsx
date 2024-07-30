@@ -50,6 +50,7 @@ import TagsInput from "@/components/shared/TagsInputRewrite";
 import ContributorsTags from "./contribuorsInputField/ContributorsTags";
 import { projectFormSchema } from "@/formScehmas/projectFormSchema";
 import { AnimatePresence, motion } from "framer-motion";
+import TooltipComp from "@/components/shared/TooltipComp";
 // import TagsInput from "@/components/shared/TagsInput";
 
 type projectSchemaTypes = z.infer<typeof projectFormSchema>;
@@ -99,8 +100,8 @@ const ProjectForm = ({
   }
 
   const defaultValues = {
-    name: post?.name || "asdadasdasd",
-    type: post?.type || "asdadadadadd",
+    name: post?.name || "",
+    type: post?.type || "",
     startDate: post ? new Date(post.startDate) : undefined,
     endDate: post ? new Date(post.endDate) : undefined,
     technologies:
@@ -108,7 +109,7 @@ const ProjectForm = ({
     contributors:
       post && post.contributors ? JSON.parse(post.contributors) : [],
     links: post ? JSON.parse(post.links) : [],
-    description: post?.description || "asdadasdadas",
+    description: post?.description || "",
     projectImages: [],
   };
   const handleDeleteImage = React.useCallback((link: string) => {
@@ -132,8 +133,8 @@ const ProjectForm = ({
 
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
 
-  // checkStep is a function that stops the user from clicking the next button while some fields are empty or has errors on it.
-  function checkStep() {
+  // checkStepErrors is a function that stops the user from clicking the next button while some fields are empty or has errors on it.
+  function checkStepErrors() {
     let isThereErrors;
     for (let i = 0; i < stepFields[activeStep].length; i++) {
       const fieldName = stepFields[activeStep][i];
@@ -183,9 +184,9 @@ const ProjectForm = ({
   }
   // (activeStep === 2 && isEqual) ||
   const handleNext = () => {
-    if (checkStep()) form.trigger();
+    if (checkStepErrors()) form.trigger();
 
-    if (!checkStep()) {
+    if (!checkStepErrors()) {
       let newSkipped = skipped;
       if (isStepSkipped(activeStep)) {
         newSkipped = new Set(newSkipped.values());
@@ -322,7 +323,7 @@ const ProjectForm = ({
         <>
           <div
             ref={formContainerRef}
-            className="    overflow-y-auto h-full  flex   w-full px-3"
+            className="    overflow-y-auto h-full  flex   w-full px-2"
           >
             <Form {...form}>
               <motion.form
@@ -578,6 +579,7 @@ const ProjectForm = ({
                                     <FormLabel>URL</FormLabel>
                                     <FormControl>
                                       <Input
+                                        type="url"
                                         placeholder="https://www.react-hook-form.com/api/usefieldarray/"
                                         {...field}
                                       />
@@ -601,7 +603,7 @@ const ProjectForm = ({
                         ))
                       )}
                       <div className=" ">
-                        <FormDescription className="  font-semibold text-xs  pr-6">
+                        <FormDescription className="  font-semibold text-xs  ">
                           <Button
                             className="   w-full my-2"
                             type="button"
@@ -663,7 +665,7 @@ const ProjectForm = ({
                           </FormLabel>
                           <FormControl>
                             <Textarea
-                              className=" h-[140px]"
+                              className=" h-[133px]"
                               disabled={isCreating || isEditing}
                               placeholder="Talk about the project."
                               {...field}
@@ -709,6 +711,7 @@ const ProjectForm = ({
           >
             <Button
               color="inherit"
+              size="sm"
               disabled={activeStep === 0 || isCreating || isEditing}
               onClick={() => {
                 handleBack();
@@ -729,15 +732,60 @@ const ProjectForm = ({
                 Skip
               </Button>
             )} */}
-            <Button
-              className="  disabled:cursor-not-allowed"
-              disabled={
-                deletedImages.length
+            {/*  
+              deletedImages.length
                   ? false
-                  : (activeStep === 2 && isEqual) ||
-                    checkStep() ||
-                    isCreating ||
-                    isEditing
+                  : */}
+
+            {(activeStep === 2 && isEqual && !deletedImages.length) ||
+            checkStepErrors() ? (
+              <TooltipComp
+                toolTipText={
+                  activeStep === 2 && isEqual
+                    ? "No changes has been made."
+                    : "Check for errors or empty & required fields"
+                }
+              >
+                <Button
+                  className="  disabled:pointer-events-auto"
+                  size="sm"
+                  disabled
+                  onClick={() => {
+                    activeStep === 2 && submitButton();
+                    handleNext();
+                    scrollTopOfElemnt();
+                  }}
+                >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
+              </TooltipComp>
+            ) : (
+              <Button
+                className="  disabled:cursor-not-allowed"
+                size="sm"
+                disabled={
+                  (activeStep === 2 && isEqual && !deletedImages.length) ||
+                  checkStepErrors() ||
+                  isCreating ||
+                  isEditing
+                }
+                onClick={() => {
+                  activeStep === 2 && submitButton();
+                  handleNext();
+                  scrollTopOfElemnt();
+                }}
+              >
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button>
+            )}
+            {/* <Button
+              className="  disabled:cursor-not-allowed"
+              size="sm"
+              disabled={
+                (activeStep === 2 && isEqual && !deletedImages.length) ||
+                checkStepErrors() ||
+                isCreating ||
+                isEditing
               }
               onClick={() => {
                 activeStep === 2 && submitButton();
@@ -746,7 +794,7 @@ const ProjectForm = ({
               }}
             >
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
+            </Button> */}
           </Box>
         </>
       )}

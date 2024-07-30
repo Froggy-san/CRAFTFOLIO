@@ -20,11 +20,14 @@ const ProtectedRoutes = () => {
             <p className=" text-center font-semibold ">
               You are not authrized to do this action, please login first{" "}
             </p>
-            <LinkBtn to="/login">Login</LinkBtn>
+            <LinkBtn size="sm" to="/login">
+              Login
+            </LinkBtn>
           </div>
         }
       />
     );
+
   return (
     <div>
       <Outlet />

@@ -18,20 +18,19 @@ import { BackgroundBeams } from "@/components/ui/BackgroundBeam";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 import ErrorComp from "@/components/shared/ErrorComp";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
-
-// import { FaArrowLeftLong } from "react-icons/fa6";
+import { createPortal } from "react-dom";
 
 const UserProfile = () => {
   const { user, isLoading } = useAuth();
   const { isLoading: isPostsLoading, pageCount, userPosts } = useUserPosts();
   useScrollUpWhenMounted();
-
+  const APPLAYOUT_CONTAINER = document.getElementById("home");
+  console.log(APPLAYOUT_CONTAINER, "TTTTTTTTTTTTTTEST");
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
   useDocumentTitle("");
   const { relatedUser, isLoading: landingLoading } = useLandingPage();
 
-  console.log(relatedUser, "RRRRRRRRR");
   if (isLoading || landingLoading) return <FullSnLoading />;
 
   if (!relatedUser || !relatedUser.length)
@@ -39,44 +38,40 @@ const UserProfile = () => {
 
   return (
     <div className=" relative ">
-      <BackButton />
+      <BackButton className={`${!isTheOwnerOfPage && "relative mb-5"}`} />
 
-      {/* <div className=" flex items-center gap-3 fixed bottom-[70px] left-[500px]">
-        <FaArrowLeftLong size={20} />
-        <p>Preview link</p>
-      </div>
-      <div></div> */}
-      <FloatingNav
-        navItems={[
-          { name: "Home", link: "/" },
-          { name: "Projects", link: "posts-container" },
-          { name: "About", link: "about" },
-          { name: "Contact", link: "contact" },
-          {
-            name: (
-              <TooltipComp toolTipText={relatedUser?.at(0)?.username}>
-                <img
-                  className="w-7 h-7 rounded-full"
-                  src={relatedUser?.at(0)?.avatar || defaultProfilePicture}
-                  alt="asa"
-                />
-              </TooltipComp>
-            ),
-            link: "",
-          },
-        ]}
-      />
+      {APPLAYOUT_CONTAINER &&
+        createPortal(
+          <FloatingNav
+            navItems={[
+              { name: "Home", link: "home" },
+              { name: "Projects", link: "posts-container" },
+              { name: "About", link: "about" },
+              { name: "Contact", link: "contact" },
+              {
+                name: (
+                  <TooltipComp toolTipText={relatedUser?.at(0)?.username}>
+                    <img
+                      className="w-7 h-7 rounded-full"
+                      src={relatedUser?.at(0)?.avatar || defaultProfilePicture}
+                      alt="asa"
+                    />
+                  </TooltipComp>
+                ),
+                link: "",
+              },
+            ]}
+          />,
+          APPLAYOUT_CONTAINER
+        )}
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
-
-      {user && isTheOwnerOfPage ? (
-        <Button className="my-4" asChild>
-          <Link to="/upload-post">Upload a post</Link>
-        </Button>
-      ) : null}
 
       {/* ------------------ projects section */}
 
-      <ProjectControls />
+      <ProjectControls
+        selectDisabled={!userPosts?.length}
+        isTheOwnerOfPage={isTheOwnerOfPage}
+      />
       <div className=" my-5">
         {isPostsLoading ? (
           <FullSnLoading />

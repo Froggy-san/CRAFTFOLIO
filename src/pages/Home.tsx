@@ -32,7 +32,7 @@ const Home = () => {
       <Zoop />
       <TestingRef />
       <HomePostControlls
-        selectDisabled={posts && !posts.length ? true : false}
+        selectDisabled={!posts?.length}
         user={userObj}
         className=" mt-20"
       />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { isValidElement } from "react";
 import {
   Select,
   SelectContent,
@@ -34,7 +34,7 @@ import { HiOutlinePlus } from "react-icons/hi";
 
 interface Option {
   value: string;
-  valueOne?: string;
+  link?: string;
   label: string | JSX.Element;
 }
 
@@ -43,7 +43,6 @@ interface SelectProps {
   options: Option[];
   selectPlaceholer?: string;
   className?: string;
-  user?: UserTagProps;
   disabled?: boolean;
 }
 
@@ -52,8 +51,8 @@ const SelectComp = ({
   options,
   selectPlaceholer,
   className,
-  user,
-  disabled,
+
+  disabled = false,
 }: SelectProps) => {
   const [searchParams] = useSearchParams();
   const selectedValue = searchParams.get("sort") || "";
@@ -75,9 +74,7 @@ const SelectComp = ({
         </SelectTrigger>
         <SelectContent>
           {options.map((option, i) =>
-            option.valueOne ? (
-              ""
-            ) : (
+            !option.value ? null : (
               <SelectItem key={i} value={option.value}>
                 {option.label}
               </SelectItem>
@@ -101,20 +98,17 @@ const SelectComp = ({
           <DropdownMenuLabel>Sort by</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {options.map((option, i) => {
-            if (option.valueOne) {
+            if (option.link) {
               return (
                 <React.Fragment key={i}>
                   <DropdownMenuSeparator />
-                  <Link
-                    to={
-                      user && !user.username
-                        ? option.value
-                        : `${option.valueOne}${user?.userId}`
-                    }
-                  >
+                  <Link to={option.link}>
                     <DropdownMenuItem>
-                      <HiOutlinePlus className="mr-2 h-4 w-4" />
-                      <span className="truncate">{option.label}</span>
+                      {isValidElement(option.label) ? (
+                        option.label
+                      ) : (
+                        <span className="truncate">{option.label}</span>
+                      )}
                     </DropdownMenuItem>
                   </Link>
                 </React.Fragment>
@@ -123,10 +117,16 @@ const SelectComp = ({
               return (
                 <DropdownMenuItem
                   key={i}
-                  onClick={() => setParam("sort", option.value)}
-                  disabled={selectedValue === option.value}
+                  onClick={() =>
+                    setParam("sort", option.value, doesTheUrlHasTheSortProp)
+                  }
+                  disabled={selectedValue === option.value || disabled}
                 >
-                  <span className="truncate">{option.label}</span>
+                  {isValidElement(option.label) ? (
+                    option.label
+                  ) : (
+                    <span className="truncate">{option.label}</span>
+                  )}
 
                   {selectedValue === option.value ? (
                     <DropdownMenuShortcut key={i}>

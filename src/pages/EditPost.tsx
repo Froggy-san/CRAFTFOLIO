@@ -63,7 +63,7 @@ const EditPost = () => {
 
   return (
     <div className=" flex justify-center items-center project-form-h relative">
-      <BackButton />
+      <BackButton className=" hidden sm:block" />
       <ProjectForm user={user} post={project?.[0]} />
     </div>
   );

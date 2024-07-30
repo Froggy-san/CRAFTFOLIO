@@ -12,6 +12,8 @@ const PostCardContributors = ({ items }: { items: publicUser[] }) => {
   function handleNavigate(id: string) {
     if (!id.includes("-any")) navigate(`/user/${id}`);
   }
+
+  if (!items.length) return null;
   return (
     <div className=" flex items-center flex-wrap  h-[30px] pt-1 md:pt-0  md:h-[31px] overflow-hidden gap-y-36">
       <span className=" pr-4">Contributors:</span>

@@ -6,7 +6,7 @@ import Header from "./Header";
 const AppLayout = () => {
   return (
     <div
-      id="/"
+      id="home"
       vaul-drawer-wrapper=""
       className=" container bg-background pt-2   overflow-x-hidden "
     >
