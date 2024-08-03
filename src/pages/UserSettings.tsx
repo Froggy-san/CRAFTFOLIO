@@ -24,7 +24,7 @@ const UserSettings = () => {
       <UserOverview user={user} />
       <UpdateUserForm user={user} />
       <UpdatePasswordForm />
-      {user && <DeleteAllPost userId={user.id} />}
+      {/* {user && <DeleteAllPost userId={user.id} />} */}
       {user && <DeleteUserSetting userId={user.id} />}
     </div>
   );

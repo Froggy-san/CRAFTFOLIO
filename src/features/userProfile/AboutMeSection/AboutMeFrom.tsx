@@ -50,9 +50,7 @@ import AboutMePreview from "./AboutMePreview";
 import FormButtons from "@/components/shared/FormButtons";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import { aboutMeFormProps } from "@/types/types";
-import { motion } from "framer-motion";
 import TagsInput from "@/components/shared/TagsInputRewrite";
-import FormRow from "@/components/shared/FormRow";
 import Heading from "@/components/shared/Heading";
 const arrowSize = 21;
 

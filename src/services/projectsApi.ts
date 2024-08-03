@@ -326,10 +326,6 @@ export async function createProject(project: createProjectProps) {
       })
     : [];
 
-  console.log(projectObj, "project object");
-  console.log(imageNames, "image names");
-  console.log(imagePaths, "image paths");
-
   const { error: imageTableError } = await supabase
     .from("projectImages")
     .insert(imagePaths)

@@ -1,18 +1,17 @@
+import { SecondTextGenerateEffect } from "@/components/shared/GenerateSecondText";
+import { BackgroundGradientAnimation } from "@/components/ui/BackgroundGradientAnimation";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { TextGenerateEffect } from "@/components/ui/GenerateText";
 import { useTheme } from "@/context/ThemeProvidor";
-import { BackgroundGradientAnimation } from "../ui/BackgroundGradientAnimation";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { TextGenerateEffect } from "../ui/GenerateText";
-import { SecondTextGenerateEffect } from "./GenerateSecondText";
-import GrainyImg from "./GrainyImg";
+
 import { IoIosBuild } from "react-icons/io";
 
 const Banner = () => {
   const { theme } = useTheme();
 
   return (
-    <Card className=" h-[500px] lg:h-[95vh] w-full  grany overflow-hidden   mt-3 relative">
-      <GrainyImg className=" " />
+    <Card className=" h-[500px] lg:h-[95vh] w-full  grainy overflow-hidden   mt-3 relative">
       <BackgroundGradientAnimation
         gradientBackgroundStart={
           theme === "dark" ? "rgb(108, 0, 162)" : "rgba(240,219,165,1)"

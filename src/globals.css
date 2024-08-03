@@ -263,7 +263,7 @@
   .divide-width-type-screen > * {
     width: calc((100% / 3));
   }
-  .grany {
+  .grainy {
     &::before {
       position: absolute;
       left: 0;

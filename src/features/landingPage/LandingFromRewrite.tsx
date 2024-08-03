@@ -14,7 +14,7 @@ import {
   // FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { TbPhotoEdit } from "react-icons/tb";
+
 import { Button } from "@/components/ui/button";
 import Avatar from "@/components/shared/Avatar";
 
@@ -24,7 +24,6 @@ import { useAuth } from "@/hooks/useAuth";
 import React, { Ref, SetStateAction, useEffect, useRef, useState } from "react";
 import { landingProps } from "@/types/types";
 import useEditLandingPage from "./useEditLandingPage";
-import IconButton from "@/components/shared/IconButton";
 import _ from "lodash";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import {
@@ -39,6 +38,7 @@ import ColorPicker from "@/components/shared/ColorPicker";
 import { colorSchema } from "@/formScehmas/colorSchema";
 import TagsInput from "@/components/shared/TagsInputRewrite";
 import FormRow from "@/components/shared/FormRow";
+import { LinkPreview } from "@/components/ui/link-preview";
 // import TagsInput from "@/components/shared/TagsInput";
 const landingPageSchma = z
   .object({
@@ -116,10 +116,15 @@ const LandingFormRewrite = React.forwardRef(function (
     defaultValues, // defaultValues:{...defualtValues (the one we defined up there)}
   });
 
-  // console.log(form.getValues(), "from balues");
+  console.log(form.getValues(), "from balues");
   // Check if the user changed anything about the landing page's data, to prevent any unnecessary api calls.
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
 
+  const chosenLandingImage =
+    (form.getValues().landingImage.length &&
+      URL.createObjectURL(form.getValues().landingImage[0])) ||
+    landingToEdit?.landingImage ||
+    defaultLandingPageImage;
   useEffect(() => {
     setHasTheFormDataChanged?.(isEqual);
   }, [isEqual]);
@@ -222,7 +227,7 @@ const LandingFormRewrite = React.forwardRef(function (
                   <FormLabel>Primary Text</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="I am your name"
+                      placeholder="You can put your name and your profession"
                       {...field}
                       disabled={isCreanting || isEditting}
                     />
@@ -242,7 +247,7 @@ const LandingFormRewrite = React.forwardRef(function (
                   <FormControl>
                     <Textarea
                       className=" h-[150px]"
-                      placeholder="craftfolio@me.com"
+                      placeholder="Talk about yourself and what you do"
                       {...field}
                     />
                   </FormControl>
@@ -261,7 +266,7 @@ const LandingFormRewrite = React.forwardRef(function (
                   <FormControl>
                     <Textarea
                       className=" h-[150px]"
-                      placeholder="React"
+                      placeholder="More but less important details about yourself"
                       {...field}
                       disabled={isCreanting || isEditting}
                     />
@@ -281,7 +286,7 @@ const LandingFormRewrite = React.forwardRef(function (
                   <FormControl>
                     <TagsInput tags={field.value} onChange={field.onChange}>
                       <TagsInput.TagsContainer>
-                        <TagsInput.TagsInputField />
+                        <TagsInput.TagsInputField placeholder="Enter social media links" />
                       </TagsInput.TagsContainer>
                     </TagsInput>
 
@@ -300,7 +305,7 @@ const LandingFormRewrite = React.forwardRef(function (
                 </FormItem>
               )}
             />
-            <FormRow className=" gap-y-7 gap-x-2">
+            <FormRow className=" gap-y-7 gap-x-2 z-0">
               <FormField
                 control={form.control}
                 name="grainyTexture"
@@ -309,7 +314,16 @@ const LandingFormRewrite = React.forwardRef(function (
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">Grainy image</FormLabel>
                       <FormDescription>
-                        For a vintage look, consider adding a grainy / old TV
+                        For a vintage look, consider adding a{" "}
+                        <LinkPreview
+                          grainy={field.value}
+                          url=""
+                          imageSrc={chosenLandingImage}
+                          isStatic
+                          className="font-semibold"
+                        >
+                          grainy / old TV
+                        </LinkPreview>{" "}
                         effect to the background image on your landing page.
                       </FormDescription>
                     </div>
@@ -334,8 +348,17 @@ const LandingFormRewrite = React.forwardRef(function (
                         Blur landing image
                       </FormLabel>
                       <FormDescription>
-                        Create a blurred background effect for your landing
-                        page.
+                        Create a{" "}
+                        <LinkPreview
+                          url=""
+                          imageSrc={chosenLandingImage}
+                          isStatic
+                          className="font-semibold  "
+                          imageClassName={`${field.value && "blur-[1px]"}`}
+                        >
+                          blurred background effect
+                        </LinkPreview>{" "}
+                        for your landing page.
                       </FormDescription>
                     </div>
                     <FormControl>
@@ -353,7 +376,7 @@ const LandingFormRewrite = React.forwardRef(function (
               control={form.control}
               name="textColor"
               render={({ field }) => (
-                <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center justify-between rounded-lg border p-4 relative">
+                <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center justify-between rounded-lg border p-4 relative z-0">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Text color</FormLabel>
                     <FormDescription>

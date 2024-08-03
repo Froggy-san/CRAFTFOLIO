@@ -90,7 +90,7 @@ const PostCard = ({ post }: { post: Project }) => {
         />
       ) : (
         <Link to={`/project/${post.id}`}>
-          <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
+          <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grainy  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
             No images.
             {isDeleting && (
               <Loading

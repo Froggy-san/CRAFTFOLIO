@@ -26,7 +26,7 @@ const UserProfile = () => {
 
   useScrollUpWhenMounted();
   const APPLAYOUT_CONTAINER = document.getElementById("home");
-  console.log(APPLAYOUT_CONTAINER, "TTTTTTTTTTTTTTEST");
+
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
   useDocumentTitle("");

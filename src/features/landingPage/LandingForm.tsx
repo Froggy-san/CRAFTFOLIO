@@ -318,7 +318,9 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                       <div className="space-y-0.5">
-                        <FormLabel className="text-base">Grany image</FormLabel>
+                        <FormLabel className="text-base">
+                          Grainy image
+                        </FormLabel>
                         <FormDescription>
                           Receive emails about your account security.
                         </FormDescription>
@@ -363,7 +365,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 relative">
                       <div className="space-y-0.5">
-                        <FormLabel className="text-base">Grany image</FormLabel>
+                        <FormLabel className="text-base">Grainy image</FormLabel>
                         <FormDescription>
                           Receive emails about your account security.
                         </FormDescription>

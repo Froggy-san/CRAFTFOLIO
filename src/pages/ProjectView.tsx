@@ -96,7 +96,7 @@ const ProjectView = () => {
       )}
       {
         images.length ? <ProjectViewCaro images={images} /> : null
-        // <div className="flex relative  h-[330px]  sm:h-[600px]  grany  rounded-md overflow-hidden items-center justify-center p-0  font-semibold mb-3">
+        // <div className="flex relative  h-[330px]  sm:h-[600px]  grainy  rounded-md overflow-hidden items-center justify-center p-0  font-semibold mb-3">
         //   No images.
         //   <GrainyImg />
         // </div>

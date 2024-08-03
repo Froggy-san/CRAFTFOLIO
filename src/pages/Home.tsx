@@ -1,10 +1,8 @@
-import Banner from "@/components/shared/Banner";
-
-import Heading from "@/components/shared/Heading";
+import LinkPreviewDemo from "@/components/shared/LinkPreviewDemo";
 import Pagination from "@/components/shared/Pagination";
-import TestingRef from "@/components/shared/Ref";
-import Zoop from "@/components/shared/Zoop";
-import { Card } from "@/components/ui/card";
+
+import { LinkPreview } from "@/components/ui/link-preview";
+import Banner from "@/features/home/Banner";
 import HomePostControlls from "@/features/home/HomePostControlls";
 import PostsList from "@/features/home/PostList";
 import useGetPosts from "@/features/projects/usePosts";
@@ -29,7 +27,6 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
-
       <HomePostControlls
         selectDisabled={!posts?.length}
         user={userObj}
