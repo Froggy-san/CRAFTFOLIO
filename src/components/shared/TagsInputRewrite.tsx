@@ -4,6 +4,7 @@ import React, {
   ReactNode,
   SetStateAction,
   createContext,
+  forwardRef,
   useContext,
   useState,
 } from "react";
@@ -16,7 +17,7 @@ import { Badge } from "../ui/badge";
 
 interface TagsInputContextValues {
   onChange: React.Dispatch<SetStateAction<string[]>>;
-  tags: string[];
+  Tags: string[];
   handleAddTag: (value: string) => void;
   value: string;
   setValue: React.Dispatch<SetStateAction<string>>;
@@ -24,63 +25,67 @@ interface TagsInputContextValues {
 
 const TagsInputContext = createContext<TagsInputContextValues>({
   onChange: () => {},
-  tags: [],
+  Tags: [],
   handleAddTag: () => {},
   value: "",
   setValue: () => {},
 });
 interface TagsInputProps {
   onChange: React.Dispatch<SetStateAction<string[]>>;
-  tags: string[];
+  Tags: string[];
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
 }
-const TagsInput = function ({ children, tags, onChange }: TagsInputProps) {
+const TagsInput = function ({ children, Tags, onChange }: TagsInputProps) {
   const [value, setValue] = useState("");
   function handleAddTag(value: string) {
     const trimmedValue = value.trim();
     if (trimmedValue) {
-      onChange([...tags, trimmedValue]);
+      onChange([...Tags, trimmedValue]);
       setValue("");
     }
   }
   return (
     <TagsInputContext.Provider
-      value={{ onChange, tags, handleAddTag, value, setValue }}
+      value={{ onChange, Tags, handleAddTag, value, setValue }}
     >
       {children}
     </TagsInputContext.Provider>
   );
 };
 
-function TagsContainer({
-  className,
-  children,
-  style,
-  tagsStyles,
-}: {
-  className?: string;
-  style?: CSSProperties;
-  tagsStyles?: string;
-  children?: ReactElement;
-}) {
-  const { onChange, tags } = useContext(TagsInputContext);
+const TagsContainer = forwardRef(function (
+  {
+    className,
+    children,
+    style,
+    tagsStyles,
+  }: {
+    className?: string;
+    style?: CSSProperties;
+    tagsStyles?: string;
+    children?: ReactElement;
+  },
+  ref?: React.Ref<HTMLDivElement>
+) {
+  const { onChange, Tags } = useContext(TagsInputContext);
   function handleRemovingTag(index: number) {
-    // Create a shallow copy of the tags array
-    const updatedTags = [...tags];
+    // Create a shallow copy of the Tags array
+    const updatedTags = [...Tags];
     updatedTags.splice(index, 1); // Remove the tag at the specified index
     onChange(updatedTags); // Update the state with the modified array
   }
   return (
     <Card
+      ref={ref}
       style={style}
       className={` flex items-center p-2 gap-1 flex-wrap my-10 ${
         className || ""
       }`}
     >
-      {tags.length
-        ? tags.map((tag, i) => (
+      {Tags.length
+        ? Tags.map((tag, i) => (
             <TagItem
               className={tagsStyles}
               key={i}
@@ -92,8 +97,7 @@ function TagsContainer({
       {children}
     </Card>
   );
-}
-
+});
 function TagItem({
   tag,
   removeFunction,
@@ -118,33 +122,43 @@ function TagItem({
   );
 }
 
-function TagsInputField({
-  className,
-  style,
-  placeholder,
-  type,
-  ariaLabel,
-}: {
-  className?: string;
-  placeholder?: string;
-  type?: string;
-  ariaLabel?: string;
-  style?: CSSProperties;
-}) {
-  const { value, setValue, handleAddTag } = useContext(TagsInputContext);
-  // const [value, setValue] = useState("");
-  // function handleAddTag(value: string) {
-  //   onChange([...tags, value]);
-  //   setValue("");
-  // }
+const TagsInputField = forwardRef(function (
+  {
+    className,
+    style,
+    placeholder,
+    type,
+    ariaLabel,
+  }: {
+    className?: string;
+    placeholder?: string;
+    type?: string;
+    ariaLabel?: string;
+    style?: CSSProperties;
+  },
+  ref?: React.Ref<HTMLDivElement>
+) {
+  const { value, setValue, handleAddTag, onChange, Tags } =
+    useContext(TagsInputContext);
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevent form submission
       handleAddTag(value);
     }
+    if (e.key === "Backspace" && !value) {
+      e.preventDefault();
+      const updatedTags = [...Tags];
+      updatedTags.pop(); // Remove the last tag
+      onChange(updatedTags); // Update the state with the modified array
+    }
   }
+
   return (
-    <div className=" relative pl-3 bg-background  text-foreground   flex-1 min-w-[250px]  h-7">
+    <div
+      ref={ref}
+      className=" relative pl-3 bg-background  text-foreground   flex-1 min-w-[250px]  h-7"
+    >
       <input
         type={type || "text"}
         aria-label={ariaLabel}
@@ -164,26 +178,30 @@ function TagsInputField({
       )}
     </div>
   );
-}
+});
 
-function SendBtn({
-  className,
-  style,
-  variant,
-  children,
-  size,
-}: {
-  className?: string;
-  style?: CSSProperties;
-  variant?: variant;
-  size?: buttonSize;
-  children?: ReactElement;
-}) {
+const SendBtn = forwardRef(function (
+  {
+    className,
+    style,
+    variant,
+    children,
+    size,
+  }: {
+    className?: string;
+    style?: CSSProperties;
+    variant?: variant;
+    size?: buttonSize;
+    children?: ReactElement;
+  },
+  ref?: React.Ref<HTMLButtonElement>
+) {
   const { value, handleAddTag } = useContext(TagsInputContext);
   const isValue = value.trim().length; // checking if the user inputed any value in the input field
 
   return (
     <Button
+      ref={ref}
       type="button"
       onClick={() => handleAddTag(value)}
       size={size || "sm"}
@@ -196,7 +214,7 @@ function SendBtn({
       {children || <BsSendFill size={20} />}
     </Button>
   );
-}
+});
 
 export function useTagsInput() {
   const context = useContext(TagsInputContext);

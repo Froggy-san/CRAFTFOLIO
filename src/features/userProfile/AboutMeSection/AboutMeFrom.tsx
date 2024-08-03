@@ -177,7 +177,7 @@ const AboutMeFrom = React.forwardRef(function (
                   <FormLabel className="text-base ">Links</FormLabel>
                 </div>
                 <FormControl>
-                  <TagsInput tags={field.value} onChange={field.onChange}>
+                  <TagsInput Tags={field.value} onChange={field.onChange}>
                     <TagsInput.TagsContainer>
                       <TagsInput.TagsInputField placeholder="Enter links" />
                     </TagsInput.TagsContainer>
@@ -201,7 +201,7 @@ const AboutMeFrom = React.forwardRef(function (
                   <FormLabel className="text-base ">Tools</FormLabel>
                 </div>
                 <FormControl>
-                  <TagsInput tags={field.value} onChange={field.onChange}>
+                  <TagsInput Tags={field.value} onChange={field.onChange}>
                     <TagsInput.TagsContainer>
                       <TagsInput.TagsInputField />
                     </TagsInput.TagsContainer>

@@ -500,7 +500,7 @@ const ProjectForm = ({
                           <FormLabel>Tools used</FormLabel>
                           <FormControl>
                             <TagsInput
-                              tags={field.value}
+                              Tags={field.value}
                               onChange={field.onChange}
                             >
                               <div className=" relative">

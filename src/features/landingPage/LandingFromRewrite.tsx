@@ -39,39 +39,8 @@ import { colorSchema } from "@/formScehmas/colorSchema";
 import TagsInput from "@/components/shared/TagsInputRewrite";
 import FormRow from "@/components/shared/FormRow";
 import { LinkPreview } from "@/components/ui/link-preview";
+import { landingPageSchma } from "@/formScehmas/landingFormSchema";
 // import TagsInput from "@/components/shared/TagsInput";
-const landingPageSchma = z
-  .object({
-    primaryText: z.string().max(100, {
-      message: `text is too long.`,
-    }),
-    secondaryText: z
-      .string()
-      .max(600, { message: `Text must be no more than (150)char.` }),
-    tertiaryText: z
-      .string()
-      .max(450, { message: `Text must be no more than (150)char.` }),
-    socials: z.string().array().default([]),
-    // z
-    //   .string()
-    //   .trim()
-    //   .transform((str) => str.split(/,\s*/))
-    //   .transform((data) =>
-    //     data
-    //       .map((str) => str.trim())
-    //       .filter((str) => str !== "")
-    //       .join(",")
-    //   ),
-    grainyTexture: z.boolean(),
-    blur: z.boolean(),
-    textColor: colorSchema,
-    avatar: z.custom<File[]>(),
-    landingImage: z.custom<File[]>(),
-  })
-  .refine((data) => data.socials.length <= 5, {
-    message: "You can add a maximum of 5 social media links.",
-    path: ["socials"], // Specify the path for targeted error display
-  });
 
 type updateUserSchemaTypes = z.infer<typeof landingPageSchma>;
 
@@ -284,7 +253,7 @@ const LandingFormRewrite = React.forwardRef(function (
                 <FormItem className=" ">
                   <FormLabel>Socials.</FormLabel>
                   <FormControl>
-                    <TagsInput tags={field.value} onChange={field.onChange}>
+                    <TagsInput Tags={field.value} onChange={field.onChange}>
                       <TagsInput.TagsContainer>
                         <TagsInput.TagsInputField placeholder="Enter social media links" />
                       </TagsInput.TagsContainer>
@@ -313,7 +282,7 @@ const LandingFormRewrite = React.forwardRef(function (
                   <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center w-full justify-between rounded-lg border p-4">
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">Grainy image</FormLabel>
-                      <FormDescription>
+                      <div className="text-sm text-muted-foreground">
                         For a vintage look, consider adding a{" "}
                         <LinkPreview
                           grainy={field.value}
@@ -325,7 +294,7 @@ const LandingFormRewrite = React.forwardRef(function (
                           grainy / old TV
                         </LinkPreview>{" "}
                         effect to the background image on your landing page.
-                      </FormDescription>
+                      </div>
                     </div>
                     <FormControl>
                       <Switch
@@ -347,7 +316,7 @@ const LandingFormRewrite = React.forwardRef(function (
                       <FormLabel className="text-base">
                         Blur landing image
                       </FormLabel>
-                      <FormDescription>
+                      <div className="text-sm text-muted-foreground">
                         Create a{" "}
                         <LinkPreview
                           url=""
@@ -359,7 +328,7 @@ const LandingFormRewrite = React.forwardRef(function (
                           blurred background effect
                         </LinkPreview>{" "}
                         for your landing page.
-                      </FormDescription>
+                      </div>
                     </div>
                     <FormControl>
                       <Switch

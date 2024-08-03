@@ -67,6 +67,13 @@ const ContributorsTags = ({
         });
       }
     }
+
+    if (e.key === "Backspace" && !inputedValue) {
+      e.preventDefault();
+      const updatedTags = [...contrbiutersTag];
+      updatedTags.pop();
+      onChange(updatedTags);
+    }
   }
   const handleFocus = useCallback(function handleFocus() {
     if (inputRef.current) {
