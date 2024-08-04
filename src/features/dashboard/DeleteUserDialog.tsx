@@ -104,7 +104,7 @@ const DeleteUserAlert = ({ userId, open, setOpen }: DialogDrawerProps) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
-        <DrawerHeader className="text-left">
+        <DrawerHeader className=" text-center sm:text-left">
           <DrawerTitle>Are you sure?</DrawerTitle>
           <DrawerDescription>{dialogDescriptionText}</DrawerDescription>
         </DrawerHeader>

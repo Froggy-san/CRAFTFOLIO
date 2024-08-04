@@ -4,8 +4,7 @@ import { Card } from "@/components/ui/card";
 import { User } from "@/types/types";
 import { defaultProfilePicture } from "@/utils/constants";
 import { calcHowManyDaysAgo } from "@/utils/helper";
-
-import React, { useState } from "react";
+import { useState } from "react";
 import useGetNumOfProjects from "../projects/useGetNumOfProjects";
 import Loading from "@/components/shared/Loading";
 import { format } from "date-fns";
@@ -18,7 +17,7 @@ const UserOverview = ({ user }: { user: User | undefined }) => {
   const timePassed = calcHowManyDaysAgo(user ? user.created_at : "");
   return (
     <Card className=" flex  p-5 my-4 w-full lg:max-w-[70%] mx-auto gap-2">
-      <div className=" space-y-1 flex-1">
+      <div className=" text-xs sm:text-base space-y-1 flex-1">
         <h1 aria-label="user setting" className=" text-xl font-semibold">
           User settings
         </h1>

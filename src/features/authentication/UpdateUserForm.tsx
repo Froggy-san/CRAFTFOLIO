@@ -65,10 +65,10 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
     });
   }
   return (
-    <div className="   w-full sm:w-[94%]  mx-auto    overflow-x-hidden   mt-12 sm:px-3">
+    <div className="   w-full lg:w-[94%]  mx-auto    overflow-x-hidden   mt-12 sm:px-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className=" flex flex-col md:flex-row gap-5 px-2">
+          <div className=" flex flex-col md:flex-row gap-5 px-1">
             <FormField
               control={form.control}
               name="avatar"
@@ -87,7 +87,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 </FormItem>
               )}
             />
-            <div className=" flex-1 space-y-3 max-w-full min-w-[330px]">
+            <div className=" flex-1 space-y-3 max-w-full min-w-[250px]">
               <FormRow className=" justify-between  items-center">
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Username"

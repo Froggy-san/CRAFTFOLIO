@@ -22,7 +22,11 @@ const DeleteUserSetting = ({
           <div>Remove all posts on your account.</div>
         </div>
         <div className=" w-full xs:w-fit">
-          <Button onClick={() => setOpen(true)} variant="destructive">
+          <Button
+            className=" w-full "
+            onClick={() => setOpen(true)}
+            variant="destructive"
+          >
             DELETE ACCOUNT
           </Button>
           {/* <AlertDrawer userId={userId} /> */}

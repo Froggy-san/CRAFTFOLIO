@@ -13,7 +13,7 @@ const LandingUserInfo = ({
   isOwner,
 }: landingUserInfoProps) => {
   return (
-    <div className=" z-10 h-full f-fit flex  sm:items-end items-center flex-col gap-3 mb-auto   ">
+    <div className=" z-10 h-full flex  sm:items-end items-center flex-col gap-3 mb-auto   ">
       <div className=" flex flex-col gap-2 items-center h-full">
         <UserLandingProfile isOwner={isOwner} avatar={landingPageAvatarImg} />
         <HandleLinkIcons links={icons} />
