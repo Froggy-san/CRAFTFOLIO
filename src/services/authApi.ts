@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
-import { DASHBOARD_PAGE_SIZE, defaultTextColor } from "@/utils/constants";
+import { DASHBOARD_PAGE_SIZE } from "@/utils/constants";
 import { GetUsersProps, publicUser } from "@/types/types";
 import { deleteAllUsersPosts, getNumOfProjectsForUser } from "./projectsApi";
 import { deleteImgFromStrage } from "@/utils/helper";
@@ -9,20 +9,17 @@ import { deleteUserFooter } from "./footerApi";
 import { deleteUserLandingPage } from "./landingPageApi";
 
 export async function deleteUser(userId: string) {
-  // const serviceRoleKey =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsZHB0Y3pheHliaWpiaGxjYmpqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNTUxOTAzMiwiZXhwIjoyMDMxMDk1MDMyfQ.riwd24bYKRy160eqPRtr_ZJijvwh5E3GbiAcnWC_Qbw";
+  const serviceRoleKey = import.meta.env.VITE_SUPABASE_ADMIN_KEY as string;
+
   await deleteUserLandingPage(userId);
   await deleteUserFooter(userId);
   const count = await getNumOfProjectsForUser(userId);
   if (count) await deleteAllUsersPosts(userId);
   await deletePublicUser(userId);
-  const serviceRoleKey = import.meta.env.VITE_SUPABASE_ADMIN_KEY as string;
   const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
   const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
 
   if (error) throw new Error(error.message);
-
-  //https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/avatars/avater-85594f1f-89d5-46a1-a16a-5346c60813ee-0.7358486329541425?t=2024-07-28T16%3A19%3A38.630Z
 }
 
 interface loginProps {
@@ -102,7 +99,7 @@ export async function signUp({
   });
   if (aboutError) {
     await deleteUser(data.user?.id || ""); // deleting the user from the users table.
-    // await deletePublicUser(data.user?.id || ""); // deleting the user from public users talbe. //!the code as been added to the deleteUser.//
+
     throw new Error(aboutError.message);
   }
 
@@ -113,7 +110,7 @@ export async function getCurrentUser() {
   /// this will get the data from localstorage , if it exists of course .
   const { data: session } = await supabase.auth.getSession();
 
-  /// it seems obvious but am ganna say it anyways , so if the user's data isn't in the localStorage it iwll return null , so we are ganna get the user's data some other way , like redirectiong the user to the login page or soemthing , i don't know up until this point .
+  /// it seems obvious but i am gonna say it anyways , so if the user's data isn't in the localStorage it iwll return null , so we are ganna get the user's data some other way , like redirectiong the user to the login page or soemthing , i don't know up until this point .
   if (!session.session) return null;
 
   const {
