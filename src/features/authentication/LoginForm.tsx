@@ -38,7 +38,6 @@ const LoginForm = () => {
 
   // 2. Define a submit handler.
   function onSubmit(values: loginSchemaTypes) {
-    values, "VAlues";
     login(values);
   }
 
