@@ -43,8 +43,6 @@ const DialogComp = ({
   showOpenButton = true,
   setIsOpen,
 }: diaProps) => {
-  // const location = ation();
-  // console.log(location.pathname.includes("/"), "LONK");
   const [open, setOpen] = useState(false);
   function handleOpen() {
     if (setIsOpen) {

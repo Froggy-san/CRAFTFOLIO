@@ -31,8 +31,7 @@ const AboutMe = ({ isAuthenticated, userId }: aboutMeProps) => {
   const data: dataTypes | undefined = aboutMe?.[0];
 
   if (isLoading || isEditting) return <FullSnLoading />;
-  console.log(aboutMe, "about me");
-  console.log(data);
+
   const links = data && data.links ? JSON.parse(data.links) : [];
 
   const tools = data && data.toolsAndTech ? JSON.parse(data.toolsAndTech) : [];

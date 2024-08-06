@@ -57,7 +57,6 @@ export async function getPosts({ page, searchTerm, sortValue }: getPosts) {
 
   if (sortValue) {
     const sort = sortValue.split("-");
-    console.log(sort[1] === "asc", "sort");
 
     query = query.order(sort[0], { ascending: sort[1] === "asc" });
   }
@@ -92,7 +91,7 @@ export async function createProject(project: createProjectProps) {
     .select();
 
   if (error) throw new Error(error.message);
-  console.log(data, "data.aaa");
+
   if (noFiles) return data;
 
   const imageNames = projectImages.map((image) => {
@@ -300,7 +299,6 @@ export async function getUserPosts({
 
   if (sortValue) {
     const sort = sortValue.split("-");
-    console.log(sort[1] === "asc", "sort");
 
     query = query.order(sort[0], { ascending: sort[1] === "asc" });
   }

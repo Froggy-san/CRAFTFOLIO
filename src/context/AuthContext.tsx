@@ -49,7 +49,6 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
 
       const currentUser = await getCurrentUser(); // getting the current user.
 
-      console.log(currentUser, "user data.1!");
       if (currentUser) {
         setUser({
           aud: currentUser.aud,

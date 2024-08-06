@@ -40,8 +40,7 @@ const ProjectView = () => {
 
   const project: Project | undefined = projectById?.[0];
   const posterData: User | undefined = userById?.[0];
-  console.log(project, "PROJECT");
-  console.log(posterData, "USER ID");
+
   useDocumentTitle(project?.name || "");
 
   const relatedUser = userById?.[0]; // user that owns the related project.

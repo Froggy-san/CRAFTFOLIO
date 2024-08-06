@@ -71,7 +71,6 @@ const FooterForm = React.forwardRef(function (
     defaultValues, // defaultValues:{...defualtValues (the one we defined up there)}
   });
 
-  // console.log(form.getValues(), "from balues");
   // Check if the user changed anything about the landing page's data, to prevent any unnecessary api calls.
   const isEqual = useObjectCompare(form.getValues(), defaultValues);
 

@@ -35,7 +35,7 @@ export async function deleteUserLandingPage(userId: string) {
     const imageObj = userLandingImages[0];
     const avatarImage = imageObj.avatarImage.split("landingImages/")[1];
     const landingImage = imageObj.landingImage.split("landingImages/")[1];
-    console.log(avatarImage, landingImage, "LANDIGN IMAGES DELETE");
+
     await deleteImgFromStrage({
       storageName: "landingImages",
       imagesToDelete: [avatarImage, landingImage],
@@ -168,9 +168,6 @@ export async function editLandtingPage(landingToEdit: editLandingProps) {
     updatedData.landingImage = landingImagePath;
   }
 
-  // console.log("TEST -------------------- TEST");
-  // console.log(landingToEdit, "landing To edit");
-  // console.log("TEST -------------------- TEST");
   const { data, error } = await supabase
     .from("landingPages")
     .update({ ...updatedData })

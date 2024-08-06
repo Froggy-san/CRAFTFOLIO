@@ -66,11 +66,9 @@ const EditAboutMe = ({
     setClickCount((count) => count + 1);
   }
 
-  // console.log(aboutMeData, "ABOUT ME DATA!!");
-
   useEffect(() => {
     setAboutMeValue(aboutMeData);
-    console.log(aboutMeValue, "OOOO");
+
     if (text.current) {
       text.current.one = aboutMeData || "";
     }

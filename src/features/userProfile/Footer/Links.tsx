@@ -17,7 +17,6 @@ const Links = ({
 }) => {
   const links = userSocials ? JSON.parse(userSocials) : [];
 
-  console.log(resume, "RESUMEEE");
   const footerContainer = document.getElementById("footer-container");
 
   return (

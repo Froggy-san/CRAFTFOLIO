@@ -57,7 +57,6 @@ const UsersList = () => {
     if (page === 1) return;
     setPage((page) => page - 1);
   }
-  console.log(users, "usersssss");
 
   return (
     <div>

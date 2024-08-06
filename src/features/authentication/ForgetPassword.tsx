@@ -35,7 +35,6 @@ const ForgotPassword = () => {
   } = useForm<FormValues>({
     defaultValues: { email: "" },
   });
-  console.log(data, "DATA");
 
   function onSubmit({ email }: FormValues) {
     // console.log(values.email);

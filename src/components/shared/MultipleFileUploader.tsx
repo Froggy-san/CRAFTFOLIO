@@ -32,7 +32,6 @@ const MultipleFileUploader = ({
   // const [fileUrls, setFileUrl] = useState<string[]>(mediaUrl || []);
   const [files, setFiles] = useState<FileWithPreview[]>([]);
 
-  console.log(mediaUrl, "MEDIA");
   // const urls = files.map((file: File) => {
   //   return { fileObj: URL.createObjectURL(file), fileName: file.name };
   // });
