@@ -1,13 +1,13 @@
 import { getPhoneData } from "@/components/shared/phomeInput/PhoneInput";
-import { validateEgyptianPhoneNumber } from "@/utils/helper";
+// import { validateEgyptianPhoneNumber } from "@/utils/helper";
 import { z } from "zod";
 
 const updateUserSchema = z
   .object({
     username: z
       .string()
-      .min(6, { message: `password is too short` })
-      .max(55, { message: `password is too long.` }),
+      .min(6, { message: `Username is too short.` })
+      .max(55, { message: `Username is too long.` }),
     email: z.string().min(2).max(50),
 
     speciality: z.string(),
@@ -15,8 +15,8 @@ const updateUserSchema = z
     resumeUrl: z.string(),
     phone: z
       .string()
-      .min(6, { message: `password is too short` })
-      .max(55, { message: `password is too long.` }),
+      .min(6, { message: `Please put a vaild phone number.` })
+      .max(55, { message: `Please put a vaild phone number.` }),
     avatar: z.custom<File[]>(),
   })
   .refine(
@@ -24,7 +24,7 @@ const updateUserSchema = z
       const { isValid } = getPhoneData(data.phone);
       return isValid;
     },
-    { message: "Please put a vaild number", path: ["phone"] }
+    { message: "Please put a vaild phone number.", path: ["phone"] }
   );
 
 export default updateUserSchema;

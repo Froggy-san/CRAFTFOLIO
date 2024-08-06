@@ -1,25 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../../ui/button";
 import { createPortal } from "react-dom";
-import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from "lucide-react";
-import DialogComp from "../DialogComp";
-import { Card } from "../../ui/card";
-import { DropdownMenuShortcut } from "../../ui/dropdown-menu";
+
 import SearchPopover from "./SearchPopover";
 
 const HeaderSearchBar = () => {

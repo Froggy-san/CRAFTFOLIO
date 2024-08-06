@@ -24,18 +24,29 @@ const ImageView = ({
   useEffect(() => {
     const body = document.querySelector("body");
 
+    if (!body) return;
+
     // Set the style when the image is open
     if (typeof image === "string" && body) {
-      body.style.height = "100%"; // Corrected to "100vh"
+      body.style.height = "100vh";
       body.style.overflow = "hidden";
     }
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault(); // Prevent default browser behavior
+        handleClose();
+      }
+    };
+
     // Add event listener for browser navigation
+    window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("popstate", resetBodyStyle);
 
     // Clean up the event listener and reset styles when the component unmounts or image changes
     return () => {
       window.removeEventListener("popstate", resetBodyStyle);
+      window.removeEventListener("keydown", handleKeyDown);
       resetBodyStyle(); // Reset styles on unmount or image change
     };
   }, [image]);

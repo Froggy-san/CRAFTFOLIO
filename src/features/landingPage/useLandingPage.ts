@@ -1,4 +1,4 @@
-import { getUserLandingPage } from "@/services/projectsApi";
+import { getUserLandingPage } from "@/services/landingPageApi";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 

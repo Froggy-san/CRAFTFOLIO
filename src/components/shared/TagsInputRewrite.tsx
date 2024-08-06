@@ -146,7 +146,7 @@ const TagsInputField = forwardRef(function (
       e.preventDefault(); // Prevent form submission
       handleAddTag(value);
     }
-    if (e.key === "Backspace" && !value) {
+    if (e.code === "Backspace" && !value) {
       e.preventDefault();
       const updatedTags = [...Tags];
       updatedTags.pop(); // Remove the last tag

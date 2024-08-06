@@ -1,4 +1,4 @@
-import { editLandtingPage as editLandtingPageApi } from "@/services/projectsApi";
+import { editLandtingPage as editLandtingPageApi } from "@/services/landingPageApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 

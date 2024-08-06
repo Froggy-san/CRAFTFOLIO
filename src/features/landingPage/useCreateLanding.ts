@@ -1,4 +1,4 @@
-import { createLanding as createLandingApi } from "@/services/projectsApi";
+import { createLanding as createLandingApi } from "@/services/landingPageApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 

@@ -3,13 +3,10 @@ import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
 import { DASHBOARD_PAGE_SIZE, defaultTextColor } from "@/utils/constants";
 import { GetUsersProps, publicUser } from "@/types/types";
-import {
-  deleteAllUsersPosts,
-  deleteUserLandingPage,
-  getNumOfProjectsForUser,
-} from "./projectsApi";
+import { deleteAllUsersPosts, getNumOfProjectsForUser } from "./projectsApi";
 import { deleteImgFromStrage } from "@/utils/helper";
 import { deleteUserFooter } from "./footerApi";
+import { deleteUserLandingPage } from "./landingPageApi";
 
 export async function deleteUser(userId: string) {
   // const serviceRoleKey =
