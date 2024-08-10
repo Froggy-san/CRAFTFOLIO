@@ -54,6 +54,7 @@ const ContributorsTags = ({
   function handleAddTag(value: publicUser) {
     onChange([...contrbiutersTag, value]);
     setInputedValue("");
+    setSelectedIndex(-1);
   }
 
   function handleRemovingTag(index: number) {
