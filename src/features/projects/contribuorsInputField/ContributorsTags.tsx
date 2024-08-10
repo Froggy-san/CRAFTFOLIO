@@ -1,25 +1,23 @@
 import React, {
   CSSProperties,
-  FormEvent,
   ReactElement,
   SetStateAction,
   useCallback,
   useRef,
   useState,
 } from "react";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
 import { Card } from "../../../components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { IoClose } from "react-icons/io5";
-import { values } from "lodash";
 import { publicUser } from "@/types/types";
 import ContriburosPopover from "./ContriburosPopover";
 import { defaultProfilePicture } from "@/utils/constants";
 import { ClickAwayListener } from "@mui/material";
 import { v6 as uuidv6 } from "uuid";
 import { Badge } from "@/components/ui/badge";
+import useSearchUser from "@/components/shared/headerSearchBar/useSearchUser";
+import { useAuth } from "@/hooks/useAuth";
 
 interface TagInputProps {
   onChange: React.Dispatch<SetStateAction<publicUser[]>>;
@@ -38,9 +36,20 @@ const ContributorsTags = ({
   style,
   children,
 }: TagInputProps) => {
+  const { user: { id } = {} } = useAuth();
   const [inputedValue, setInputedValue] = useState("");
-
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const { publicUsers } = useSearchUser(inputedValue);
+
+  const users = publicUsers
+    ? publicUsers.filter(
+        (user) =>
+          !contrbiutersTag.some((tag) => tag.userId === user.userId) &&
+          user.userId !== id
+      )
+    : [];
 
   function handleAddTag(value: publicUser) {
     onChange([...contrbiutersTag, value]);
@@ -55,10 +64,37 @@ const ContributorsTags = ({
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
-      e.preventDefault(); // Prevent form submission
+    const { key } = e;
+    const listLength = users.length;
+    const isSelected = selectedIndex >= 0; // Checking if it is greater or equal 0 because the selection starts at 0.
+
+    if (key === "ArrowDown") {
+      e.preventDefault();
+      if (selectedIndex < listLength - 1) {
+        setSelectedIndex((prev) => prev + 1);
+        // (listRef.current!.children[selectedIndex + 1] as HTMLLIElement).focus();
+      } else {
+        setSelectedIndex(-1); // If the user keeps clicking the arrow down key after reaching the last item, we reset the selectedIndex so we enable them to go through the list again.
+      }
+    } else if (key === "ArrowUp") {
+      e.preventDefault();
+      if (selectedIndex > 0) {
+        setSelectedIndex((prev) => prev - 1);
+        // (listRef.current!.children[selectedIndex - 1] as HTMLLIElement).focus();
+      } else {
+        setSelectedIndex(listLength); // If the user keeps clicking the arrow up key after reaching the first item, we set the selectedIndex to the lengh of the results so they can go through the list from the other direction.
+      }
+    }
+
+    if (key === "Enter") {
+      e.preventDefault();
+      // Adding a tag in the case where the user presses the Enter key while selecting an item.
+      if (isSelected) {
+        handleAddTag(users[selectedIndex]);
+      }
+      // If the user doesn't select an item, a tag is added with a random ID and the '-any' suffix to distinguish it from existing user tags in the database.
       const trimmedValue = inputedValue.trim();
-      if (trimmedValue) {
+      if (!isSelected && trimmedValue) {
         handleAddTag({
           userId: uuidv6() + "-any",
           avatar: "",
@@ -67,6 +103,8 @@ const ContributorsTags = ({
         });
       }
     }
+
+    // Deleting the tags if the user doesn't have any text inputed inside the input field.
 
     if (e.key === "Backspace" && !inputedValue) {
       e.preventDefault();
@@ -103,9 +141,12 @@ const ContributorsTags = ({
             <input
               ref={inputRef}
               type="text"
-              placeholder="Enter tools you use..."
+              placeholder="Search or add a user's name ..."
               value={inputedValue}
-              onChange={(e) => setInputedValue(e.target.value)}
+              onChange={(e) => {
+                if (selectedIndex > -1) setSelectedIndex(-1);
+                setInputedValue(e.target.value);
+              }}
               onKeyDown={handleKeyDown}
               className=" h-7 focus:outline-none pl-3  w-full bg-background"
             />
@@ -115,6 +156,9 @@ const ContributorsTags = ({
               </Badge>
             ) : null}
             <ContriburosPopover
+              selectedIndex={selectedIndex}
+              ref={listRef}
+              users={users || []}
               alreadyAddedTags={contrbiutersTag}
               handleAddTag={handleAddTag}
               handleFocus={handleFocus}

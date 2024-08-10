@@ -29,11 +29,8 @@ const AboutMe = ({ isAuthenticated, userId }: aboutMeProps) => {
   const { isLoading, aboutMe } = useAboutMe();
   const { isEditting } = useEditAboutMe();
   const data: dataTypes | undefined = aboutMe?.[0];
-
   if (isLoading || isEditting) return <FullSnLoading />;
-
   const links = data && data.links ? JSON.parse(data.links) : [];
-
   const tools = data && data.toolsAndTech ? JSON.parse(data.toolsAndTech) : [];
 
   const arrowColor =

@@ -1,8 +1,5 @@
-import useSearchUser from "@/components/shared/headerSearchBar/useSearchUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -10,81 +7,82 @@ import {
 } from "@/components/ui/popover";
 import { publicUser } from "@/types/types";
 import { defaultProfilePicture } from "@/utils/constants";
-import { useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 
-const ContriburosPopover = ({
-  alreadyAddedTags,
-  inputedValue,
-  handleFocus,
-  className,
-  handleAddTag,
-}: {
-  className?: string;
-  handleFocus: () => void;
-  inputedValue: string;
-  alreadyAddedTags: publicUser[];
-  handleAddTag: (value: publicUser) => void;
-}) => {
-  const [open, setOpen] = useState(false);
+const ContriburosPopover = forwardRef(
+  (
+    {
+      users,
+      selectedIndex,
+      inputedValue,
+      handleFocus,
+      className,
+      handleAddTag,
+    }: {
+      className?: string;
+      selectedIndex: number;
+      users: publicUser[];
+      handleFocus: () => void;
+      inputedValue: string;
+      alreadyAddedTags: publicUser[];
+      handleAddTag: (value: publicUser) => void;
+    },
+    ref?: React.Ref<HTMLUListElement>
+  ) => {
+    const [open, setOpen] = useState(false);
 
-  const { publicUsers } = useSearchUser(inputedValue);
+    useEffect(() => {
+      if (inputedValue.trim().length) {
+        setOpen(true);
+      } else setOpen(false);
+    }, [inputedValue, open]);
 
-  const users =
-    publicUsers &&
-    publicUsers.filter(
-      (user) => !alreadyAddedTags.some((tag) => tag.userId === user.userId)
+    return (
+      <>
+        {users?.length ? (
+          <Popover open={open}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className=" w-1   center-abslute invisible"
+              ></Button>
+            </PopoverTrigger>
+            <PopoverContent
+              onFocus={handleFocus} // to prevent the autoFocus feature in the popover.
+              className={`w-80 p-2   my-2  max-h-[40vh] overflow-y-auto  ${
+                className || ""
+              }`}
+            >
+              <ul ref={ref} className=" space-y-2">
+                {users.map((user, index) => {
+                  return (
+                    <li
+                      onClick={() => handleAddTag(user)}
+                      key={index}
+                      className={`hover:bg-accent flex gap-3 items-center cursor-pointer p-1 rounded-md focus:bg-accent ${
+                        selectedIndex === index && "bg-accent"
+                      }`}
+                    >
+                      <Avatar>
+                        <AvatarImage
+                          className=""
+                          src={user.avatar || defaultProfilePicture}
+                          alt="image not found"
+                        />
+                        <AvatarFallback>image</AvatarFallback>
+                      </Avatar>
+                      <p className="    truncate">{user.username}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </PopoverContent>
+          </Popover>
+        ) : null}
+      </>
     );
-
-  useEffect(() => {
-    if (inputedValue.trim().length) {
-      setOpen(true);
-    } else setOpen(false);
-  }, [inputedValue, open]);
-
-  return (
-    <>
-      {users?.length ? (
-        <Popover open={open}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              className=" w-1   center-abslute invisible"
-            ></Button>
-          </PopoverTrigger>
-          <PopoverContent
-            onFocus={handleFocus} // to prevent the autoFocus feature in the popover.
-            className={`w-80 p-2   my-2  max-h-[40vh] overflow-y-auto  ${
-              className || ""
-            }`}
-          >
-            <ul className=" space-y-2">
-              {users.map((user, index) => {
-                return (
-                  <li
-                    onClick={() => handleAddTag(user)}
-                    key={index}
-                    className=" hover:bg-accent flex gap-3 items-center cursor-pointer p-1 rounded-md"
-                  >
-                    <Avatar>
-                      <AvatarImage
-                        className=""
-                        src={user.avatar || defaultProfilePicture}
-                        alt="image not found"
-                      />
-                      <AvatarFallback>image</AvatarFallback>
-                    </Avatar>
-                    <p className="    truncate">{user.username}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </PopoverContent>
-        </Popover>
-      ) : null}
-    </>
-  );
-};
-
+  }
+);
 export default ContriburosPopover;
 
 // import useSearchUser from "@/components/shared/headerSearchBar/useSearchUser";

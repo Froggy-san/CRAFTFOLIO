@@ -5,8 +5,7 @@ import HandleLinkIcons from "@/components/shared/HandleLinkIcons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { defaultTextColor } from "@/utils/constants";
-import { getIconForTool, icons } from "@/components/shared/HandleIcons";
-import { AnimatePresence, motion } from "framer-motion";
+import { getIconForTool } from "@/components/shared/HandleIcons";
 interface AboutMeLinksTech {
   linksAndtech: aboutMeFormProps;
   userId: string | undefined;
@@ -91,7 +90,9 @@ export const ShowLinksAndTools = ({
       <div className=" relative  ">
         {links.length ? (
           <HandleLinkIcons
-            errorMessage="The links you have provided are invaild"
+            errorMessage={
+              isAuthenticated ? "The links you have provided are invaild" : ""
+            }
             className=""
             links={links}
           />

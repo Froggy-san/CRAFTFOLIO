@@ -211,7 +211,7 @@ const SendBtn = forwardRef(function (
       } ${className || ""}`}
       variant={variant || "default"}
     >
-      {children || <BsSendFill size={20} />}
+      {children || <BsSendFill />}
     </Button>
   );
 });

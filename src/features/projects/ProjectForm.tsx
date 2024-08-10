@@ -507,7 +507,10 @@ const ProjectForm = ({
                                 <TagsInput.TagsContainer className=" items-start m-0">
                                   <TagsInput.TagsInputField />
                                 </TagsInput.TagsContainer>
-                                <TagsInput.SendBtn className=" absolute right-0 top-[105%]" />
+                                <TagsInput.SendBtn
+                                  size="sm"
+                                  className=" absolute right-3 top-[120%]  p-0 w-9 h-9 text-lg"
+                                />
                               </div>
                             </TagsInput>
                           </FormControl>
