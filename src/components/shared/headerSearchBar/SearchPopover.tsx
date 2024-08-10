@@ -1,14 +1,6 @@
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Card } from "@/components/ui/card";
-import { IoIosSearch } from "react-icons/io";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+
 import SearchBar from "./SearchBar";
 import useSearchUser from "./useSearchUser";
 import SearchResults from "./SearchResults";
