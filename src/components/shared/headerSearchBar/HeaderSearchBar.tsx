@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../ui/button";
 import { createPortal } from "react-dom";
 
 import SearchPopover from "./SearchPopover";
+import SearchPopoverRewrite from "./SearchPopoverRewrite";
 
 const HeaderSearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
   return (
     <>
       <Button
@@ -21,7 +31,8 @@ const HeaderSearchBar = () => {
         </div>
       </Button>
       {createPortal(
-        <SearchPopover open={isOpen} onOpenChange={setIsOpen} />,
+        // <SearchPopover open={isOpen} onOpenChange={setIsOpen} />
+        <SearchPopoverRewrite open={isOpen} setOpen={setIsOpen} />,
         document.body
       )}
     </>

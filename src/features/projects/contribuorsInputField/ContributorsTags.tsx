@@ -155,3 +155,158 @@ function TagItem({
 }
 
 export default ContributorsTags;
+
+/*
+const ContributorsTags = ({
+  onChange,
+  contrbiutersTag,
+  className,
+  style,
+  children,
+}: TagInputProps) => {
+  const [inputedValue, setInputedValue] = useState("");
+  const [open, setOpen] = useState(false);
+  const { publicUsers } = useSearchUser(inputedValue);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const users =
+    publicUsers &&
+    publicUsers.filter(
+      (user) => !contrbiutersTag.some((tag) => tag.userId === user.userId)
+    );
+  function handleAddTag(value: publicUser) {
+    onChange([...contrbiutersTag, value]);
+    setInputedValue("");
+  }
+
+  function handleRemovingTag(index: number) {
+    // Create a shallow copy of the tags array
+    const updatedTags = [...contrbiutersTag];
+    updatedTags.splice(index, 1); // Remove the tag at the specified index
+    onChange(updatedTags); // Update the state with the modified array
+  }
+
+  useEffect(() => {
+    if (inputedValue.trim().length) {
+      setOpen(true);
+    } else setOpen(false);
+  }, [inputedValue, open]);
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+      const trimmedValue = inputedValue.trim();
+      if (trimmedValue) {
+        handleAddTag({
+          userId: uuidv6() + "-any",
+          avatar: "",
+          username: trimmedValue,
+          email: "",
+        });
+      }
+    }
+
+    if (e.key === "Backspace" && !inputedValue) {
+      e.preventDefault();
+      const updatedTags = [...contrbiutersTag];
+      updatedTags.pop();
+      onChange(updatedTags);
+    }
+  }
+  const handleFocus = useCallback(function handleFocus() {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+  return (
+    <ClickAwayListener onClickAway={() => setInputedValue("")}>
+      <div className=" w-full">
+        <Card
+          style={style}
+          className={` flex items-center p-2 gap-1 flex-wrap w-full  ${
+            className || ""
+          }`}
+        >
+          {contrbiutersTag.length
+            ? contrbiutersTag.map((tag: publicUser, i: number) => (
+                <TagItem
+                  key={i}
+                  tag={tag}
+                  removeFunction={() => handleRemovingTag(i)}
+                />
+              ))
+            : null}
+          <Command
+            shouldFilter={false}
+            className="rounded-lg  relative min-w-[250px]  max-w-[250px] flex-1    border-none shadow-md"
+          >
+            <div className=" relative  ">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Enter tools you use..."
+                value={inputedValue}
+                onChange={(e) => setInputedValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className=" h-7 focus:outline-none pl-3  w-full bg-background"
+              />
+              {inputedValue ? (
+                <Badge className="pointer-events-none absolute right-[0.3rem] top-[0.3rem]  h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex  text-foreground   show-tag">
+                  Enter
+                </Badge>
+              ) : null}
+            </div>
+
+
+            {users?.length ? (
+              <Popover open={open}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className=" w-1   center-abslute invisible"
+                  ></Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  onFocus={handleFocus} // to prevent the autoFocus feature in the popover.
+                  className={`w-80 p-2   my-2  max-h-[40vh] overflow-y-auto  ${
+                    className || ""
+                  }`}
+                >
+                  <CommandList className="">
+                    {users.map((user, i) => {
+                      return (
+                        <CommandItem
+                          className="!px-2 !py-1.5"
+                          onSelect={() => handleAddTag(user)}
+                          onClick={() => handleAddTag(user)}
+                          key={i}
+                          value={user.userId}
+                        >
+                          <li className=" flex  text-sm items-center w-full gap-3">
+                            <div className=" flex items-center gap-2 min-w-[150px] max-w-[250px]">
+                              <Avatar>
+                                <AvatarImage
+                                  className=" object-cover"
+                                  src={user.avatar || defaultProfilePicture}
+                                  alt="image not found"
+                                />
+                                <AvatarFallback>image</AvatarFallback>
+                              </Avatar>
+                              <p className="    truncate">{user.username}</p>
+                            </div>
+                          </li>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandList>
+                </PopoverContent>
+              </Popover>
+            ) : null}
+          </Command>
+        </Card>
+        {children}
+      </div>
+    </ClickAwayListener>
+  );
+};
+
+*/
