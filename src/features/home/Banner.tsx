@@ -1,17 +1,17 @@
 import { SecondTextGenerateEffect } from "@/components/shared/GenerateSecondText";
 import { BackgroundGradientAnimation } from "@/components/ui/BackgroundGradientAnimation";
-import { Button } from "@/components/ui/button";
+
 import { Card } from "@/components/ui/card";
 import { TextGenerateEffect } from "@/components/ui/GenerateText";
 import { useTheme } from "@/context/ThemeProvidor";
 
-import { IoIosBuild } from "react-icons/io";
+import BannerBtns from "./BannerBtns";
 
 const Banner = () => {
   const { theme } = useTheme();
 
   return (
-    <Card className=" h-[500px] lg:h-[95vh] w-full  grainy overflow-hidden   mt-3 relative">
+    <Card className="grainy relative mt-3 h-[470px] w-full overflow-hidden lg:h-[95vh]">
       <BackgroundGradientAnimation
         gradientBackgroundStart={
           theme === "dark" ? "rgb(108, 0, 162)" : "rgba(240,219,165,1)"
@@ -25,29 +25,20 @@ const Banner = () => {
         fourthColor={theme === "dark" ? "200, 50, 50" : "235,102,102"}
         fifthColor={theme === "dark" ? "180, 180, 50" : "154,63,251"}
         pointerColor={theme === "dark" ? "140, 100, 255" : "237,183,77"}
-        className="  z-[10]"
+        className="z-[10]"
       />
-      <div className=" absolute inset-0 flex flex-col items-center justify-center w-full h-full z-50 text-center text-[25px] sm:text-3xl  md:text-4xl lg:text-4xl xl:text-[3.2rem] px-3  ">
+      {/*  text-[clamp(1.25rem,3.3vw,2.7rem)] leading-[clamp(1.7rem,4vw,3rem)] text-[25px] sm:text-3xl md:text-4xl lg:text-4xl xl:text-[3.2rem] */}
+      <div className="absolute inset-0 z-50 flex h-full w-full flex-col items-center justify-center px-3 text-center text-[clamp(1.2rem,3.3vw,2.7rem)]">
         <TextGenerateEffect
-          className=" text-center mb-3  w-full   leading-10 "
+          className="mb-3 w-full text-center leading-10"
           words="Craftfolio is where your career starts."
         />
 
         <SecondTextGenerateEffect
-          className=" text-center w-full  md:max-w-[65vw]  "
+          className="w-full text-center md:max-w-[65vw]"
           words="Empower your career journey. Start with Craftfolio. Build a stellar portfolio and connect with the creative world."
         />
-        <div className=" w-full flex items-center justify-center gap-3 xs:gap-6 mt-10 ">
-          <Button className=" gap-2 text-base md:text-md">
-            <IoIosBuild size={20} /> Start building...
-          </Button>
-          <Button
-            variant="secondary"
-            className=" font-semibold text-base md:text-md"
-          >
-            Learn more
-          </Button>
-        </div>
+        <BannerBtns />
       </div>
     </Card>
   );

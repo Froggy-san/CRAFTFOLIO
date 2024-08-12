@@ -3,6 +3,8 @@ import Pagination from "@/components/shared/Pagination";
 
 import { LinkPreview } from "@/components/ui/link-preview";
 import Banner from "@/features/home/Banner";
+import Faq from "@/features/home/Faq";
+import Footer from "@/features/home/Footer";
 import HomePostControlls from "@/features/home/HomePostControlls";
 import PostsList from "@/features/home/PostList";
 import useGetPosts from "@/features/projects/usePosts";
@@ -30,10 +32,15 @@ const Home = () => {
       <HomePostControlls
         selectDisabled={!posts?.length}
         user={userObj}
-        className=" mt-20"
+        className="mt-20"
       />
       <PostsList userId={user?.id} posts={posts} isLoading={isLoading} />
       {!pageCount ? null : <Pagination pageCount={pageCount} />}
+
+      {/* <Faq /> */}
+
+      <Footer />
+
       {/* <Card className=" relative my-20   max-w-[1200px]  px-5 h-[500px] sm:h-[350px] mx-auto  overflow-hidden text-center">
         <div className=" space-y-3 text-3xl sm:text-5xl font-semibold mt-7">
           <Heading

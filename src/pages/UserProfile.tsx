@@ -23,14 +23,15 @@ const LazyFloatingNav = lazy(() => import("@/components/ui/FloatingNavBar"));
 const UserProfile = () => {
   const { user, isLoading } = useAuth();
   const { isLoading: isPostsLoading, pageCount, userPosts } = useUserPosts();
+  const { relatedUser, isLoading: landingLoading } = useLandingPage();
 
   useScrollUpWhenMounted();
+  useDocumentTitle(relatedUser?.[0].username || "");
+
   const APPLAYOUT_CONTAINER = document.getElementById("home");
 
   const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
-  useDocumentTitle("");
-  const { relatedUser, isLoading: landingLoading } = useLandingPage();
 
   if (isLoading || landingLoading) return <FullSnLoading />;
 
@@ -38,7 +39,7 @@ const UserProfile = () => {
     return <ErrorComp message="This user doens't exist." />;
 
   return (
-    <div className=" relative ">
+    <div className="relative">
       <BackButton className={`${!isTheOwnerOfPage && "relative mb-5"}`} />
 
       {APPLAYOUT_CONTAINER &&
@@ -54,7 +55,7 @@ const UserProfile = () => {
                   name: (
                     <TooltipComp toolTipText={relatedUser?.at(0)?.username}>
                       <img
-                        className="w-7 h-7 rounded-full"
+                        className="h-7 w-7 rounded-full"
                         src={
                           relatedUser?.at(0)?.avatar || defaultProfilePicture
                         }
@@ -67,7 +68,7 @@ const UserProfile = () => {
               ]}
             />
           </Suspense>,
-          APPLAYOUT_CONTAINER
+          APPLAYOUT_CONTAINER,
         )}
       <LandingPage isOwner={isTheOwnerOfPage} isUser={user ? true : false} />
 
@@ -77,7 +78,7 @@ const UserProfile = () => {
         selectDisabled={!userPosts?.length}
         isTheOwnerOfPage={isTheOwnerOfPage}
       />
-      <div className=" my-5">
+      <div className="my-5">
         {isPostsLoading ? (
           <FullSnLoading />
         ) : (
