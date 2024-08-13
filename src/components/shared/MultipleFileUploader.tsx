@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-// import { BsFillImageFill } from "react-icons/bs";
 import { IoDownload } from "react-icons/io5";
 import { BsFileEarmarkImage } from "react-icons/bs";
-// import { BiSolidImageAdd } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import { Button } from "../ui/button";
@@ -48,7 +46,7 @@ const MultipleFileUploader = ({
       setFiles((previousFiles) => [
         ...previousFiles,
         ...acceptedFiles.map((file) =>
-          Object.assign(file, { preview: URL.createObjectURL(file) })
+          Object.assign(file, { preview: URL.createObjectURL(file) }),
         ),
       ]);
       // setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
@@ -66,7 +64,7 @@ const MultipleFileUploader = ({
       //   ...acceptedFiles.map((file: File) => {file :  URL.createObjectURL(file) , fileName : file.name}),
       // ]);
     },
-    [files]
+    [files],
   );
 
   function handleDelete(file: FileWithPreview) {
@@ -94,28 +92,28 @@ const MultipleFileUploader = ({
       >
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p className=" flex flex-col items-center justify-center gap-3">
+          <p className="flex flex-col items-center justify-center gap-3">
             {" "}
             <IoDownload size={30} />{" "}
-            <span className=" font-semibold text-center">
+            <span className="text-center font-semibold">
               Drop the files here ...
             </span>
           </p>
         ) : (
-          <p className=" flex flex-col  items-center justify-center gap-3">
+          <p className="flex flex-col items-center justify-center gap-3">
             {" "}
             <BsFileEarmarkImage size={30} />{" "}
-            <span className=" w-32 sm:w-[unset] font-semibold text-center">
+            <span className="w-32 text-center font-semibold sm:w-[unset]">
               Drag 'n' drop some files here, or click to select files.
             </span>
           </p>
         )}
       </div>
 
-      <div className=" rounded-lg py-5 px-3    ">
+      <div className="rounded-lg px-3 py-5">
         {mediaUrl?.length || files.length ? (
-          <div className=" flex items-center justify-between my-6">
-            <h1 className="    font-semibold text-2xl">
+          <div className="my-6 flex items-center justify-between">
+            <h1 className="text-2xl font-semibold">
               Images:{mediaUrl?.length || 0 + files.length}
             </h1>
             <Button
@@ -131,62 +129,130 @@ const MultipleFileUploader = ({
             </Button>
           </div>
         ) : null}
-        <ul className=" flex items-center justify-center gap-x-3 gap-y-8 flex-wrap">
-          {mediaUrl?.map((link, index) => (
-            <li className="  w-full  sm:w-44   relative" key={link}>
-              <Button
-                type="button"
-                onClick={() => handleDeleteImage(link)}
-                aria-label={`the remove button for the image number ${
-                  index + 1
-                } and with the name of ${link}`}
-                variant="outline"
-                className=" absolute right-0 top-0 p-0 w-5 h-5 z-10"
-              >
-                <IoIosClose size={20} />
-              </Button>
-              <img
-                aria-label={`image number: ${index + 1}, image name: ${link} `}
-                src={link}
-                alt="url"
-                className="  max-h-56   sm:max-h-40 h-full w-full object-contain"
-              />
-              <p
-                aria-label={`image number: ${index + 1} image name: ${link}`}
-                className="w-full  overflow-hidden whitespace-nowrap overflow-ellipsis"
-              >
-                {link}
-              </p>
-            </li>
-          ))}
-          {files.length
-            ? files.map((file, index) => (
-                <li className="  w-full  sm:w-44   relative" key={file.preview}>
+        <ul className="flex flex-wrap items-center justify-center gap-x-3 gap-y-8">
+          {mediaUrl?.map((link, index) => {
+            if (link.includes("mp4")) {
+              return (
+                <li className="relative w-full sm:w-44" key={link}>
                   <Button
-                    aria-label={`the remove button for the image with the name of ${file.name}`}
                     type="button"
-                    onClick={() => handleDelete(file)}
+                    onClick={() => handleDeleteImage(link)}
+                    aria-label={`the remove button for the image number ${
+                      index + 1
+                    } and with the name of ${link}`}
                     variant="outline"
-                    className=" absolute right-0 top-0 p-0 w-5 h-5 z-10"
+                    className="absolute right-0 top-0 z-10 h-5 w-5 p-0"
+                  >
+                    <IoIosClose size={20} />
+                  </Button>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    aria-label={`image number: ${index + 1}, image name: ${link} `}
+                    src={link}
+                    className="h-full max-h-56 w-full object-contain sm:max-h-40"
+                  />
+                  <p
+                    aria-label={`image number: ${index + 1} image name: ${link}`}
+                    className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap"
+                  >
+                    {link}
+                  </p>
+                </li>
+              );
+            } else {
+              return (
+                <li className="relative w-full sm:w-44" key={link}>
+                  <Button
+                    type="button"
+                    onClick={() => handleDeleteImage(link)}
+                    aria-label={`the remove button for the image number ${
+                      index + 1
+                    } and with the name of ${link}`}
+                    variant="outline"
+                    className="absolute right-0 top-0 z-10 h-5 w-5 p-0"
                   >
                     <IoIosClose size={20} />
                   </Button>
                   <img
-                    aria-label={` image number: ${index + 1}, image name: ${
-                      file.name
-                    }`}
-                    src={file.preview}
+                    aria-label={`image number: ${index + 1}, image name: ${link} `}
+                    src={link}
                     alt="url"
-                    className="  max-h-56   sm:max-h-40 h-full w-full object-contain"
+                    className="h-full max-h-56 w-full object-contain sm:max-h-40"
                   />
                   <p
-                    aria-label={`the name of the image is: ${file.name}`}
-                    className="w-full overflow-hidden whitespace-nowrap overflow-ellipsis"
+                    aria-label={`image number: ${index + 1} image name: ${link}`}
+                    className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap"
                   >
-                    {file.name}
+                    {link}
                   </p>
                 </li>
-              ))
+              );
+            }
+          })}
+          {files.length
+            ? files.map((file, index) => {
+                if (file.type.includes("video")) {
+                  return (
+                    <li className="relative w-full sm:w-44" key={file.preview}>
+                      <Button
+                        aria-label={`the remove button for the image with the name of ${file.name}`}
+                        type="button"
+                        onClick={() => handleDelete(file)}
+                        variant="outline"
+                        className="absolute right-0 top-0 z-10 h-5 w-5 p-0"
+                      >
+                        <IoIosClose size={20} />
+                      </Button>
+                      <video
+                        loop
+                        autoPlay
+                        muted
+                        aria-label={` image number: ${index + 1}, image name: ${
+                          file.name
+                        }`}
+                        src={file.preview}
+                        className="h-full max-h-56 w-full object-contain sm:max-h-40"
+                      />
+                      <p
+                        aria-label={`the name of the image is: ${file.name}`}
+                        className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap"
+                      >
+                        {file.name}
+                      </p>
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li className="relative w-full sm:w-44" key={file.preview}>
+                      <Button
+                        aria-label={`the remove button for the image with the name of ${file.name}`}
+                        type="button"
+                        onClick={() => handleDelete(file)}
+                        variant="outline"
+                        className="absolute right-0 top-0 z-10 h-5 w-5 p-0"
+                      >
+                        <IoIosClose size={20} />
+                      </Button>
+                      <img
+                        aria-label={` image number: ${index + 1}, image name: ${
+                          file.name
+                        }`}
+                        src={file.preview}
+                        alt="url"
+                        className="h-full max-h-56 w-full object-contain sm:max-h-40"
+                      />
+                      <p
+                        aria-label={`the name of the image is: ${file.name}`}
+                        className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap"
+                      >
+                        {file.name}
+                      </p>
+                    </li>
+                  );
+                }
+              })
             : null}
         </ul>
       </div>

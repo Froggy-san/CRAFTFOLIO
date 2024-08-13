@@ -42,39 +42,62 @@ const ViewCarousel = ({ images, index, closeFunction }: ViewCarouselProps) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, type: "spring" }}
       key="container"
-      className="fixed w-full h-full inset-0 bg-[rgba(0,0,0,0.3)] backdrop-blur-sm backdrop-brightness-50  z-10"
+      className="fixed inset-0 z-10 h-full w-full bg-[rgba(0,0,0,0.3)] backdrop-blur-sm backdrop-brightness-50"
     >
       <Carousel id="carousel" setApi={setApi}>
         <Button
           variant="secondary"
-          className="absolute right-5 top-10 rounded-full  cursor-pointer z-50 w-7 h-7 p-0 bg-muted"
+          className="absolute right-5 top-10 z-50 h-7 w-7 cursor-pointer rounded-full bg-muted p-0"
           onClick={closeFunction} // Ensure this button calls the handleClose function
         >
           <IoIosClose size={50} />
         </Button>
         <CarouselContent id="carousel-content">
-          {images.map((image, i) => (
-            <CarouselItem id="carousel-item" key={i}>
-              <div
-                key="container"
-                className="flex items-center justify-center  w-full h-[100dvh]  select-none z-50"
-              >
-                <motion.img
-                  src={image}
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.7, opacity: 0 }}
-                  transition={{ duration: 0.2, type: "spring" }}
-                  alt="Enlarged view"
-                  className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain "
-                />
-              </div>
-            </CarouselItem>
-          ))}
+          {images.map((image, i) => {
+            if (image.includes("mp4")) {
+              return (
+                <CarouselItem id="carousel-item" key={i}>
+                  <div
+                    key="container"
+                    className="z-50 flex h-[100dvh] w-full select-none items-center justify-center"
+                  >
+                    <motion.video
+                      controls
+                      src={image}
+                      initial={{ scale: 0.7, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.7, opacity: 0 }}
+                      transition={{ duration: 0.2, type: "spring" }}
+                      className="max-h-[90%] max-w-[100%] object-contain sm:max-h-[100%]"
+                    />
+                  </div>
+                </CarouselItem>
+              );
+            } else {
+              return (
+                <CarouselItem id="carousel-item" key={i}>
+                  <div
+                    key="container"
+                    className="z-50 flex h-[100dvh] w-full select-none items-center justify-center"
+                  >
+                    <motion.img
+                      src={image}
+                      initial={{ scale: 0.7, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.7, opacity: 0 }}
+                      transition={{ duration: 0.2, type: "spring" }}
+                      alt="Enlarged view"
+                      className="max-h-[90%] max-w-[100%] object-contain sm:max-h-[100%]"
+                    />
+                  </div>
+                </CarouselItem>
+              );
+            }
+          })}
         </CarouselContent>
-        <CarouselPrevious className=" left-2" />
-        <CarouselNext className=" right-2" />
-        <div className="absolute bottom-0 font-semibold left-1/2 translate-x-[-50%] z-50 py-2 text-center bg-primary-foreground p-2 rounded-tr-lg rounded-tl-lg text-sm text-muted-foreground">
+        <CarouselPrevious className="left-2" />
+        <CarouselNext className="right-2" />
+        <div className="absolute bottom-0 left-1/2 z-50 translate-x-[-50%] rounded-tl-lg rounded-tr-lg bg-primary-foreground p-2 py-2 text-center text-sm font-semibold text-muted-foreground">
           Slide {current} of {count}
         </div>
       </Carousel>

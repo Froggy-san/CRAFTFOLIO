@@ -87,7 +87,7 @@ const ProjectForm = ({
 
   const imageLinks = post?.projectImages.map((imageObj) => imageObj.imageUrl);
   const viewedImages = imageLinks?.filter(
-    (image) => !deletedImages.includes(image)
+    (image) => !deletedImages.includes(image),
   );
 
   const { isCreating, createProject, createError } = useCreateProject();
@@ -159,7 +159,7 @@ const ProjectForm = ({
         }
       } else
         return fieldsPerStep.some(
-          (field) => field === undefined || field === ""
+          (field) => field === undefined || field === "",
         );
     };
 
@@ -178,7 +178,7 @@ const ProjectForm = ({
   function submitButton() {
     if (formRef.current) {
       formRef.current.dispatchEvent(
-        new Event("submit", { cancelable: true, bubbles: true })
+        new Event("submit", { cancelable: true, bubbles: true }),
       );
     }
   }
@@ -269,11 +269,11 @@ const ProjectForm = ({
     >
       {/*  TITLE. start */}
       {!post ? (
-        <h1 className=" flex items-center  text-4xl mb-6 font-semibold">
+        <h1 className="mb-6 flex items-center text-4xl font-semibold">
           Create post <CgFileAdd className="pl-2" size={30} />
         </h1>
       ) : (
-        <h1 className=" flex items-center  text-4xl mb-6 font-semibold">
+        <h1 className="mb-6 flex items-center text-4xl font-semibold">
           Edit post <AiTwotoneEdit className="pl-2" size={30} />
         </h1>
       )}
@@ -290,8 +290,8 @@ const ProjectForm = ({
           }
           return (
             <Step key={label} {...stepProps} className="">
-              <StepLabel className=" flex-col sm:flex-row" {...labelProps}>
-                <span className="text-[10px] text-foreground  sm:text-base ">
+              <StepLabel className="flex-col sm:flex-row" {...labelProps}>
+                <span className="text-[10px] text-foreground sm:text-base">
                   {" "}
                   {label}
                 </span>
@@ -307,11 +307,11 @@ const ProjectForm = ({
           </Typography>
           {/* <FullSnLoading className=" h-[46dvb]" /> */}
           {isCreating || isEditing ? (
-            <div className=" h-[50dvb]">
-              <FullSnLoading className=" h-full" />
+            <div className="h-[50dvb]">
+              <FullSnLoading className="h-full" />
             </div>
           ) : (
-            <div className=" h-[47dvb]"></div>
+            <div className="h-[47dvb]"></div>
           )}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
@@ -323,13 +323,13 @@ const ProjectForm = ({
         <>
           <div
             ref={formContainerRef}
-            className="    overflow-y-auto h-full  flex   w-full px-2"
+            className="flex h-full w-full overflow-y-auto px-2"
           >
             <Form {...form}>
               <motion.form
                 ref={formRef}
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8  h-fit w-full"
+                className="h-fit w-full space-y-8"
               >
                 {/* {renderComponent()} */}
 
@@ -338,16 +338,16 @@ const ProjectForm = ({
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`  mt-5 space-y-4 pb-1`}
+                    className={`mt-5 space-y-4 pb-1`}
                   >
-                    <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
+                    <FormRow className="sm:form-row flex-col items-center justify-between sm:flex-row">
                       <FormField
                         control={form.control}
                         name="name"
                         render={({ field }) => (
-                          <FormItem className="w-full mb-auto">
+                          <FormItem className="mb-auto w-full">
                             <FormLabel>
-                              Name <span className=" text-destructive">*</span>
+                              Name <span className="text-destructive">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -367,9 +367,9 @@ const ProjectForm = ({
                         control={form.control}
                         name="type"
                         render={({ field }) => (
-                          <FormItem className="w-full mb-auto">
+                          <FormItem className="mb-auto w-full">
                             <FormLabel>
-                              Type <span className=" text-destructive">*</span>
+                              Type <span className="text-destructive">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -388,15 +388,15 @@ const ProjectForm = ({
                       />
                     </FormRow>
 
-                    <FormRow className=" flex-col sm:flex-row sm:form-row justify-between  items-center">
+                    <FormRow className="sm:form-row flex-col items-center justify-between sm:flex-row">
                       <FormField
                         control={form.control}
                         name="startDate"
                         render={({ field }) => (
-                          <FormItem className="w-full mb-auto">
+                          <FormItem className="mb-auto w-full">
                             <FormLabel>
                               Start Date{" "}
-                              <span className=" text-destructive">*</span>
+                              <span className="text-destructive">*</span>
                             </FormLabel>
                             <FormControl>
                               <Popover>
@@ -407,7 +407,7 @@ const ProjectForm = ({
                                     className={cn(
                                       "w-full justify-start text-left font-normal",
                                       !form.getValues().startDate &&
-                                        "text-muted-foreground"
+                                        "text-muted-foreground",
                                     )}
                                   >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -443,10 +443,10 @@ const ProjectForm = ({
                         control={form.control}
                         name="endDate"
                         render={({ field }) => (
-                          <FormItem className="w-full mb-auto">
+                          <FormItem className="mb-auto w-full">
                             <FormLabel>
                               End date{" "}
-                              <span className=" text-destructive">*</span>
+                              <span className="text-destructive">*</span>
                             </FormLabel>
                             <FormControl>
                               <FormControl>
@@ -458,7 +458,7 @@ const ProjectForm = ({
                                       className={cn(
                                         "w-full justify-start text-left font-normal",
                                         !form.getValues().endDate &&
-                                          "text-muted-foreground"
+                                          "text-muted-foreground",
                                       )}
                                     >
                                       <CalendarIcon className="mr-2 h-4 w-4" />
@@ -496,20 +496,20 @@ const ProjectForm = ({
                       control={form.control}
                       name="technologies"
                       render={({ field }) => (
-                        <FormItem className="w-full mb-auto">
+                        <FormItem className="mb-auto w-full">
                           <FormLabel>Tools used</FormLabel>
                           <FormControl>
                             <TagsInput
                               Tags={field.value}
                               onChange={field.onChange}
                             >
-                              <div className=" relative">
-                                <TagsInput.TagsContainer className=" items-start m-0">
+                              <div className="relative">
+                                <TagsInput.TagsContainer className="m-0 items-start">
                                   <TagsInput.TagsInputField />
                                 </TagsInput.TagsContainer>
                                 <TagsInput.SendBtn
                                   size="sm"
-                                  className=" absolute right-3 top-[120%]  p-0 w-9 h-9 text-lg"
+                                  className="absolute right-3 top-[120%] h-9 w-9 p-0 text-lg"
                                 />
                               </div>
                             </TagsInput>
@@ -535,12 +535,12 @@ const ProjectForm = ({
                     className={`mt-5 space-y-4 pb-2`}
                   >
                     {/* LINKS START */}
-                    <div className="   space-y-5">
-                      <h1 className=" cursor-default">Links</h1>
+                    <div className="space-y-5">
+                      <h1 className="cursor-default">Links</h1>
                       {!fields.length ? (
                         <div
                           onClick={() => append({ description: "", url: "" })}
-                          className=" flex justify-center items-center  min-h-[140px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm   ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer gap-2  font-semibold tracking-wider"
+                          className="flex min-h-[140px] w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-semibold tracking-wider ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Links <FiLink size={20} />
                         </div>
@@ -548,17 +548,17 @@ const ProjectForm = ({
                         fields.map((field, index) => (
                           <React.Fragment key={field.id}>
                             {index !== 0 && (
-                              <div className=" my-5">
-                                <div className="w-[90%] mx-auto h-[1px] bg-gray-300"></div>
+                              <div className="my-5">
+                                <div className="mx-auto h-[1px] w-[90%] bg-gray-300"></div>
                               </div>
                             )}
 
-                            <div className=" flex flex-col sm:flex-row items-center gap-3 h-fit mt-10">
+                            <div className="mt-10 flex h-fit flex-col items-center gap-3 sm:flex-row">
                               <FormField
                                 control={form.control}
                                 name={`links.${index}.description`}
                                 render={({ field }) => (
-                                  <FormItem className=" w-full mb-auto sm:w-40">
+                                  <FormItem className="mb-auto w-full sm:w-40">
                                     <FormLabel>What the URL for</FormLabel>
                                     <FormControl>
                                       <Input
@@ -578,7 +578,7 @@ const ProjectForm = ({
                                 control={form.control}
                                 name={`links.${index}.url`}
                                 render={({ field }) => (
-                                  <FormItem className=" w-full  mb-auto sm:flex-1">
+                                  <FormItem className="mb-auto w-full sm:flex-1">
                                     <FormLabel>URL</FormLabel>
                                     <FormControl>
                                       <Input
@@ -606,9 +606,9 @@ const ProjectForm = ({
                         ))
                       )}
                       <div className=" ">
-                        <FormDescription className="  font-semibold text-xs  ">
+                        <FormDescription className="text-xs font-semibold">
                           <Button
-                            className="   w-full my-2"
+                            className="my-2 w-full"
                             type="button"
                             onClick={() => append({ description: "", url: "" })}
                           >
@@ -633,12 +633,6 @@ const ProjectForm = ({
                               contrbiutersTag={field.value}
                               onChange={field.onChange}
                             />
-                            {/* <Textarea
-                            disabled={isCreating || isEditing}
-                            className=" h-[140px]"
-                            placeholder="Name or links of people have helped or contributed in creating this project."
-                            {...field}
-                          /> */}
                           </FormControl>
                           <FormDescription>
                             Search for an existing users or add new ones.
@@ -664,11 +658,11 @@ const ProjectForm = ({
                         <FormItem>
                           <FormLabel>
                             Description{" "}
-                            <span className=" text-destructive">*</span>
+                            <span className="text-destructive">*</span>
                           </FormLabel>
                           <FormControl>
                             <Textarea
-                              className=" h-[133px]"
+                              className="h-[133px]"
                               disabled={isCreating || isEditing}
                               placeholder="Talk about the project."
                               {...field}
@@ -750,7 +744,7 @@ const ProjectForm = ({
                 }
               >
                 <Button
-                  className="  disabled:pointer-events-auto"
+                  className="disabled:pointer-events-auto"
                   size="sm"
                   disabled
                   onClick={() => {
@@ -764,7 +758,7 @@ const ProjectForm = ({
               </TooltipComp>
             ) : (
               <Button
-                className="  disabled:cursor-not-allowed"
+                className="disabled:cursor-not-allowed"
                 size="sm"
                 disabled={
                   (activeStep === 2 && isEqual && !deletedImages.length) ||

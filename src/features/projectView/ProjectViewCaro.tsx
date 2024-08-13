@@ -64,34 +64,55 @@ const ProjectViewCaro = ({ images }: { images: string[] }) => {
   }, [viewedIndex]);
   return (
     <div>
-      <div className=" flex justify-center items-center">
-        <Carousel setApi={setApi} className=" w-full   ">
+      <div className="flex items-center justify-center">
+        <Carousel setApi={setApi} className="w-full">
           <CarouselContent className="">
-            {images.map((image, index) => (
-              <CarouselItem key={index} className="">
-                <Card className="">
-                  <CardContent
-                    className="flex 
-             h-[350px] xs:h-[450px] md:h-[80dvb]  items-center justify-center p-0  rounded-lg overflow-hidden select-none"
-                  >
-                    <ImagePortrait
-                      handleViewImage={() => setViewedIndex(index)}
-                      image={image}
-                    />
-                    <img
-                      // onClick={() => setViewedImaged(image)}
-                      onClick={() => setViewedIndex(index)}
-                      src={image}
-                      alt="image"
-                      className=" w-full h-full object-cover cursor-pointer md:hidden"
-                    />
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
+            {images.map((image, index) => {
+              if (image.includes("mp4")) {
+                return (
+                  <CarouselItem key={index} className="">
+                    <Card className="">
+                      <CardContent className="flex h-[350px] select-none items-center justify-center overflow-hidden rounded-lg p-0 xs:h-[450px] md:h-[80dvb]">
+                        <ImagePortrait
+                          MediaType="video"
+                          // handleViewImage={() => setViewedIndex(index)}
+                          image={image}
+                        />
+                        <video
+                          // onClick={() => setViewedImaged(image)}
+                          // onClick={() => setViewedIndex(index)}
+                          src={image}
+                          className="h-full w-full cursor-pointer object-cover md:hidden"
+                        />
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                );
+              } else {
+                return (
+                  <CarouselItem key={index} className="">
+                    <Card className="">
+                      <CardContent className="flex h-[350px] select-none items-center justify-center overflow-hidden rounded-lg p-0 xs:h-[450px] md:h-[80dvb]">
+                        <ImagePortrait
+                          handleViewImage={() => setViewedIndex(index)}
+                          image={image}
+                        />
+                        <img
+                          // onClick={() => setViewedImaged(image)}
+                          onClick={() => setViewedIndex(index)}
+                          src={image}
+                          alt="image"
+                          className="h-full w-full cursor-pointer object-cover md:hidden"
+                        />
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                );
+              }
+            })}
           </CarouselContent>
-          <CarouselPrevious className=" left-[-14px] sm:left-10" />
-          <CarouselNext className=" right-[-14px] sm:right-10" />
+          <CarouselPrevious className="left-[-14px] sm:left-10" />
+          <CarouselNext className="right-[-14px] sm:right-10" />
         </Carousel>
       </div>
       <div className="py-2 text-center text-sm text-muted-foreground">

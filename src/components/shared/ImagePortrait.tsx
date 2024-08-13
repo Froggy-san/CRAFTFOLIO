@@ -1,29 +1,58 @@
+type MediaType = "image" | "video";
+
 const ImagePortrait = ({
   image,
   handleViewImage,
+  MediaType = "image",
 }: {
+  MediaType?: MediaType;
   image: string;
   handleViewImage?: (imageName: string) => void;
 }) => {
-  return (
-    <div className=" relative w-full h-full hidden md:block">
-      <img
-        src={image}
-        className=" w-full h-full object-cover absolute top-0 left-0 z-10 blur-md brightness-50 opacity-90  "
-      />
-
-      <div className=" w-full h-full  flex items-center justify-center absolute top-0 left-0 z-20 ">
-        <img
-          onClick={() => {
-            if (!handleViewImage) return;
-            handleViewImage(image);
-          }}
+  if (MediaType === "video") {
+    return (
+      <div className="relative hidden h-full w-full md:block">
+        <video
+          muted
+          autoPlay
+          loop
           src={image}
-          className=" max-w-full max-h-full  object-contain cursor-pointer "
+          className="absolute left-0 top-0 z-10 h-full w-full object-cover opacity-90 blur-md brightness-50"
         />
+
+        <div className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center">
+          <video
+            controls
+            onClick={() => {
+              if (!handleViewImage) return;
+              handleViewImage(image);
+            }}
+            src={image}
+            className="max-h-full max-w-full cursor-pointer object-contain"
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else
+    return (
+      <div className="relative hidden h-full w-full md:block">
+        <img
+          src={image}
+          className="absolute left-0 top-0 z-10 h-full w-full object-cover opacity-90 blur-md brightness-50"
+        />
+
+        <div className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center">
+          <img
+            onClick={() => {
+              if (!handleViewImage) return;
+              handleViewImage(image);
+            }}
+            src={image}
+            className="max-h-full max-w-full cursor-pointer object-contain"
+          />
+        </div>
+      </div>
+    );
 };
 
 export default ImagePortrait;
