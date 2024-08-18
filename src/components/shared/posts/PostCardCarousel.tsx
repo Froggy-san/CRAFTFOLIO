@@ -76,6 +76,7 @@ const PostCardCarousel = ({
                           src={image}
                           alt={image}
                           className="h-full w-full object-cover"
+                          onMouseDown={(e) => e.preventDefault()}
                         />
                       </CardContent>
                     </Card>

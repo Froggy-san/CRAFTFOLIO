@@ -33,7 +33,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import FormRow from "@/components/shared/FormRow";
 import { Textarea } from "@/components/ui/textarea";
-import MultipleFileUploader from "@/components/shared/MultipleFileUploader";
+import MultipleFileUploader from "@/components/shared/MultipleFileUploader/MultipleFileUploader";
 import useCreateProject from "./useCreateProject";
 import { Project, User } from "@/types/types";
 import useEditPost from "./useEditPost";
@@ -85,13 +85,14 @@ const ProjectForm = ({
   const [skipped, setSkipped] = useState(new Set<number>());
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
 
+  const { isCreating, createProject, createError } = useCreateProject();
+  const { isEditing, editPost, edittingError } = useEditPost();
+
   const imageLinks = post?.projectImages.map((imageObj) => imageObj.imageUrl);
   const viewedImages = imageLinks?.filter(
     (image) => !deletedImages.includes(image),
   );
 
-  const { isCreating, createProject, createError } = useCreateProject();
-  const { isEditing, editPost, edittingError } = useEditPost();
   const formRef = useRef<HTMLFormElement>(null);
   const formContainerRef = useRef<HTMLDivElement>(null);
 
@@ -174,7 +175,7 @@ const ProjectForm = ({
     return skipped.has(step);
   };
 
-  // I wanted to put the submit button outside of the form componenet duo to style reasons, this function allows us to submit the form from outside the form it self.
+  // I wanted to put the submit button outside the form componenet duo to style reasons, this function allows us to submit the form from outside the form it self.
   function submitButton() {
     if (formRef.current) {
       formRef.current.dispatchEvent(
@@ -545,65 +546,80 @@ const ProjectForm = ({
                           Add Links <FiLink size={20} />
                         </div>
                       ) : (
-                        fields.map((field, index) => (
-                          <React.Fragment key={field.id}>
-                            {index !== 0 && (
-                              <div className="my-5">
-                                <div className="mx-auto h-[1px] w-[90%] bg-gray-300"></div>
-                              </div>
-                            )}
-
-                            <div className="mt-10 flex h-fit flex-col items-center gap-3 sm:flex-row">
-                              <FormField
-                                control={form.control}
-                                name={`links.${index}.description`}
-                                render={({ field }) => (
-                                  <FormItem className="mb-auto w-full sm:w-40">
-                                    <FormLabel>What the URL for</FormLabel>
-                                    <FormControl>
-                                      <Input
-                                        placeholder="React form hook"
-                                        {...field}
-                                      />
-                                    </FormControl>
-                                    <FormDescription>
-                                      Enter what the URL is for.
-                                    </FormDescription>
-                                    <FormMessage />
-                                  </FormItem>
+                        <AnimatePresence>
+                          {fields.map((field, index) => (
+                            <React.Fragment key={field.id}>
+                              <AnimatePresence>
+                                {index !== 0 && (
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="my-5"
+                                  >
+                                    <div className="mx-auto h-[1px] w-[90%] bg-gray-300"></div>
+                                  </motion.div>
                                 )}
-                              />
+                              </AnimatePresence>
 
-                              <FormField
-                                control={form.control}
-                                name={`links.${index}.url`}
-                                render={({ field }) => (
-                                  <FormItem className="mb-auto w-full sm:flex-1">
-                                    <FormLabel>URL</FormLabel>
-                                    <FormControl>
-                                      <Input
-                                        type="url"
-                                        placeholder="https://www.react-hook-form.com/api/usefieldarray/"
-                                        {...field}
-                                      />
-                                    </FormControl>
-                                    <FormDescription>
-                                      Enter the URL.
-                                    </FormDescription>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-                              <Button
-                                type="button"
-                                variant="secondary"
-                                onClick={() => remove(index)}
+                              <motion.div
+                                layout
+                                initial={{ opacity: 0, y: 25 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 25 }}
+                                className="mt-10 flex h-fit flex-col items-center gap-3 sm:flex-row"
                               >
-                                Remove
-                              </Button>
-                            </div>
-                          </React.Fragment>
-                        ))
+                                <FormField
+                                  control={form.control}
+                                  name={`links.${index}.description`}
+                                  render={({ field }) => (
+                                    <FormItem className="mb-auto w-full sm:w-40">
+                                      <FormLabel>What the URL for</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          placeholder="React form hook"
+                                          {...field}
+                                        />
+                                      </FormControl>
+                                      <FormDescription>
+                                        Enter what the URL is for.
+                                      </FormDescription>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+
+                                <FormField
+                                  control={form.control}
+                                  name={`links.${index}.url`}
+                                  render={({ field }) => (
+                                    <FormItem className="mb-auto w-full sm:flex-1">
+                                      <FormLabel>URL</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          type="url"
+                                          placeholder="https://www.react-hook-form.com/api/usefieldarray/"
+                                          {...field}
+                                        />
+                                      </FormControl>
+                                      <FormDescription>
+                                        Enter the URL.
+                                      </FormDescription>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                                <Button
+                                  type="button"
+                                  variant="secondary"
+                                  onClick={() => remove(index)}
+                                >
+                                  Remove
+                                </Button>
+                              </motion.div>
+                            </React.Fragment>
+                          ))}
+                        </AnimatePresence>
                       )}
                       <div className=" ">
                         <FormDescription className="text-xs font-semibold">

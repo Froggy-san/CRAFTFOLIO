@@ -4,11 +4,18 @@ import { TiArrowRightThick } from "react-icons/ti";
 import IconButton from "./IconButton";
 import { PaginationEllipsis } from "../ui/pagination";
 import { Link } from "react-scroll";
+import { cn } from "@/lib/utils";
 
 const scrollOffest = -50;
 const scrollDuraiton = 200;
 
-const Pagination = ({ pageCount }: { pageCount: number }) => {
+const Pagination = ({
+  pageCount,
+  className,
+}: {
+  pageCount: number;
+  className?: string;
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentPage = !searchParams.get("page")
@@ -53,7 +60,7 @@ const Pagination = ({ pageCount }: { pageCount: number }) => {
   }
 
   return (
-    <div className=" flex justify-between items-center">
+    <div className={cn("flex items-center justify-between", className)}>
       <Link
         to={currentPage === 1 ? "" : "posts-container"}
         smooth
@@ -68,7 +75,7 @@ const Pagination = ({ pageCount }: { pageCount: number }) => {
           <TiArrowLeftThick size={20} />
         </IconButton>
       </Link>
-      <div className=" flex items-center ">
+      <div className="flex items-center">
         {currentPage > 3 && <PaginationEllipsis />}
         {pageNumbers.map((page) => (
           <Link

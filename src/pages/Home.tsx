@@ -1,3 +1,4 @@
+import { VanishList } from "@/components/shared/Animation";
 import LinkPreviewDemo from "@/components/shared/LinkPreviewDemo";
 import Pagination from "@/components/shared/Pagination";
 
@@ -35,11 +36,13 @@ const Home = () => {
         className="mt-20"
       />
       <PostsList userId={user?.id} posts={posts} isLoading={isLoading} />
-      {!pageCount ? null : <Pagination pageCount={pageCount} />}
+      {!pageCount ? null : (
+        <Pagination pageCount={pageCount} className="mb-5" />
+      )}
 
       {/* <Faq /> */}
 
-      <Footer />
+      {/* <Footer /> */}
 
       {/* <Card className=" relative my-20   max-w-[1200px]  px-5 h-[500px] sm:h-[350px] mx-auto  overflow-hidden text-center">
         <div className=" space-y-3 text-3xl sm:text-5xl font-semibold mt-7">
@@ -63,6 +66,7 @@ const Home = () => {
         </div>
         <GlobeComp />
       </Card> */}
+      {/* <VanishList /> */}
     </div>
   );
 };
