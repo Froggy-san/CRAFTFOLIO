@@ -26,7 +26,7 @@ const UserProfile = () => {
   const { relatedUser, isLoading: landingLoading } = useLandingPage();
 
   useScrollUpWhenMounted();
-  useDocumentTitle(relatedUser?.[0].username || "");
+  useDocumentTitle(relatedUser?.[0]?.username || "");
 
   const APPLAYOUT_CONTAINER = document.getElementById("home");
 
@@ -36,7 +36,7 @@ const UserProfile = () => {
   if (isLoading || landingLoading) return <FullSnLoading />;
 
   if (!relatedUser || !relatedUser.length)
-    return <ErrorComp message="This user doens't exist." />;
+    return <ErrorComp message="This user doesn't exist." />;
 
   return (
     <div className="relative">

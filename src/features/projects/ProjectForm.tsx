@@ -546,7 +546,7 @@ const ProjectForm = ({
                           Add Links <FiLink size={20} />
                         </div>
                       ) : (
-                        <AnimatePresence>
+                        <>
                           {fields.map((field, index) => (
                             <React.Fragment key={field.id}>
                               <AnimatePresence>
@@ -619,7 +619,7 @@ const ProjectForm = ({
                               </motion.div>
                             </React.Fragment>
                           ))}
-                        </AnimatePresence>
+                        </>
                       )}
                       <div className=" ">
                         <FormDescription className="text-xs font-semibold">
@@ -661,59 +661,63 @@ const ProjectForm = ({
                 )}
                 {/*                                                                      SECOND STEP                         */}
                 {/*                                                                      THIRD STEP                         */}
-                {activeStep === 2 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`mt-5 space-y-4`}
-                  >
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            Description{" "}
-                            <span className="text-destructive">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Textarea
-                              className="h-[133px]"
-                              disabled={isCreating || isEditing}
-                              placeholder="Talk about the project."
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription>
-                            Describe the goals, process, and outcome of your
-                            project.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                {/*Note that the display of this component differs from the other two above due to how we handle image states in the multipleFileUploader component. If you examine the component, you'll see that uploaded files are managed solely within the component itself; we don't retrieve them from the form state. Consequently, when a user drags and drops files and then navigates to another page (like page 2), the component unmounts, leading to the loss of the previously uploaded data. To address this, we chose to keep the component associated with step 2 rendered continuously, preserving its state. Alternatively, we could pass the image state from the useForm hook state. */}
+                <motion.div
+                  variants={{
+                    hide: { opacity: 0, y: 30 },
+                    show: { opacity: 1, y: 0 },
+                  }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={activeStep === 2 ? "show" : "hide"}
+                  className={`mt-5 space-y-4 ${activeStep === 2 ? "block" : "hidden"}`}
+                >
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Description{" "}
+                          <span className="text-destructive">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            className="h-[133px]"
+                            disabled={isCreating || isEditing}
+                            placeholder="Talk about the project."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Describe the goals, process, and outcome of your
+                          project.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                    <FormField
-                      control={form.control}
-                      name="projectImages"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Post images</FormLabel>
-                          <FormControl>
-                            <MultipleFileUploader
-                              fieldChange={field.onChange}
-                              handleDeleteImage={handleDeleteImage}
-                              handleDeleteAllImages={handleDelteAllImgs}
-                              mediaUrl={viewedImages}
-                            />
-                          </FormControl>
+                  <FormField
+                    control={form.control}
+                    name="projectImages"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Post images</FormLabel>
+                        <FormControl>
+                          <MultipleFileUploader
+                            fieldChange={field.onChange}
+                            handleDeleteImage={handleDeleteImage}
+                            handleDeleteAllImages={handleDelteAllImgs}
+                            mediaUrl={viewedImages}
+                          />
+                        </FormControl>
 
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </motion.div>
-                )}
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </motion.div>
+
                 {/*                                                                      THIRD STEP                         */}
               </motion.form>
             </Form>

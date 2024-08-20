@@ -9,11 +9,11 @@ interface ErrorProps {
 const ErrorComp = ({ message, className }: ErrorProps) => {
   return (
     <div
-      className={` flex  flex-col sm:flex-row my-11 items-center justify-center h-56 gap-5 ${className}`}
+      className={`my-11 flex h-56 flex-col items-center justify-center gap-5 sm:flex-row ${className}`}
     >
       {message || (
         <>
-          Something went wrong.!{" "}
+          Something went wrong!{" "}
           <LinkBtn size="sm" to="/">
             Go back{" "}
           </LinkBtn>

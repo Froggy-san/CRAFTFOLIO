@@ -97,7 +97,7 @@ const MultipleFileUploader = ({
 
   useEffect(() => {
     // Revoke the data uris to avoid memory leaks
-    console.log(files.filter((file) => !file.type.includes("video")));
+
     return () =>
       files
         .filter((file) => !file.type.includes("video"))

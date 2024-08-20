@@ -60,16 +60,16 @@ const ProjectView = () => {
 
   if (isLoading) return <FullSnLoading />;
 
-  if (!project) return <ErrorComp />;
+  if (!project) return <ErrorComp message={`Sorry, we can't find the post!`} />;
 
   const imagesToDelete = project.projectImages.map(
-    (image: imageObject) => image.imageUrl.split("projects/")[1]
+    (image: imageObject) => image.imageUrl.split("projects/")[1],
   );
 
   const images = project.projectImages.map((imageObj) => imageObj.imageUrl);
 
   return (
-    <div id="project-view" className="  mt-6 md:px-10 ">
+    <div id="project-view" className="mt-6 md:px-10">
       {/* <div className=" flex flex-col xs:flex-row justify-between mb-4">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
         {isAuthLoading ? (
@@ -100,17 +100,17 @@ const ProjectView = () => {
         //   <GrainyImg />
         // </div>
       }
-      <div className=" flex flex-col xs:flex-row gap-y-6 items-center  justify-between">
+      <div className="flex flex-col items-center justify-between gap-y-6 xs:flex-row">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
       </div>
       {/* ----------- */}
 
-      <div className=" mt-10 ">
+      <div className="mt-10">
         <Heading
           as="h1"
           Text={project.name}
           ariaLabel="project name"
-          className="  text-center   "
+          className="text-center"
           style={{
             fontSize: "clamp(40px, 5vw, 50px)",
             lineHeight: 1.1,
@@ -120,7 +120,7 @@ const ProjectView = () => {
           }}
         />
 
-        <div className=" mt-24 space-y-24">
+        <div className="mt-24 space-y-24">
           <TypeAndDate
             type={project.type}
             startDate={project.startDate}

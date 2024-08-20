@@ -22,10 +22,12 @@ import AuthLayout from "./features/authentication/AuthLayout";
 import ForgetPassword from "./features/authentication/ForgetPassword";
 import ResetPassword from "./features/authentication/ResetPassword";
 import DashBoard from "./pages/DashBoard";
+import Error from "./components/shared/Error";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
       {
@@ -50,9 +52,14 @@ const router = createBrowserRouter([
       { path: "/project/:projectId", element: <ProjectView /> },
     ],
   },
-  { path: "/reset-password", element: <ResetPassword /> },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
+    errorElement: <Error />,
+  },
   {
     element: <AuthLayout />,
+    errorElement: <Error />,
     children: [
       { path: "/login", element: <LoginForm /> },
       { path: "/signup", element: <SignUpForm /> },

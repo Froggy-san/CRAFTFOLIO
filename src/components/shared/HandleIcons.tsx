@@ -7,6 +7,7 @@ import {
   SiReactquery,
   SiAstro,
   SiAppwrite,
+  SiNetlify,
   SiStyledcomponents,
   SiCsswizardry,
   SiPython,
@@ -88,6 +89,7 @@ const iconSize = 15;
 const imageSize = " w-[20px] h-[20px]";
 
 export const icons: { [key: string]: JSX.Element } = {
+  netlify: <SiNetlify />,
   git: <FaGitAlt />,
   getHub: <SiGithub />,
   gitlab: <SiGitlab />,
@@ -107,6 +109,7 @@ export const icons: { [key: string]: JSX.Element } = {
   go: <TbBrandGolang />,
   "go lang": <TbBrandGolang />,
   "styled css": <SiStyledcomponents />,
+  "styled component": <SiStyledcomponents />,
   radix: <SiRadixui />,
   "react form hook": <SiReacthookform />,
   zod: <SiZod />,
@@ -140,7 +143,7 @@ export const icons: { [key: string]: JSX.Element } = {
   "spring boot": <SiSpringboot />,
   express: <SiExpress />,
   jasmine: <SiJasmine />,
-  jest: <SiJest className=" text-red-950" />,
+  jest: <SiJest className="text-red-950" />,
   groovy: <SiApachegroovy />,
   apachegroovy: <SiApachegroovy />,
   //   shadcn: <SiShadcnui  />,
@@ -157,11 +160,11 @@ export const icons: { [key: string]: JSX.Element } = {
   java: <LiaJava />,
   javascript: <RiJavascriptFill />,
   js: <RiJavascriptFill />,
-  supabase: <RiSupabaseFill className=" text-green-700" />,
-  firebase: <SiFirebase className=" text-yellow-500" />,
+  supabase: <RiSupabaseFill className="text-green-700" />,
+  firebase: <SiFirebase className="text-yellow-500" />,
   "node js": <FaNodeJs />,
   html: <RiHtml5Fill />,
-  tailwindcss: <SiTailwindcss className=" text-blue-500" />,
+  tailwindcss: <SiTailwindcss className="text-blue-500" />,
   bootstrap: <RiBootstrapFill />,
   typescript: <BiLogoTypescript />,
   postgresql: <BiLogoPostgresql />,
@@ -196,7 +199,7 @@ export const icons: { [key: string]: JSX.Element } = {
 const options = {
   includeScore: true,
   findAllMatches: true,
-  threshold: 0.25, // Adjust this threshold to your needs
+  threshold: 0.3, // Adjust this threshold to your needs
 };
 const fuse = new Fuse(Object.keys(icons), options);
 

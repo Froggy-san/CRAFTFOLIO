@@ -53,7 +53,7 @@ export const projectFormSchema = z
     {
       message: "Start date must be before end date",
       path: ["startDate"],
-    }
+    },
   )
   .refine(
     (data) => {
@@ -62,5 +62,5 @@ export const projectFormSchema = z
     {
       message: "Start date must be before end date",
       path: ["endDate"],
-    }
+    },
   );
