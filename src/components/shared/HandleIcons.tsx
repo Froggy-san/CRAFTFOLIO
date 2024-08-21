@@ -112,6 +112,7 @@ export const icons: { [key: string]: JSX.Element } = {
   "styled component": <SiStyledcomponents />,
   radix: <SiRadixui />,
   "react form hook": <SiReacthookform />,
+  "react hook form": <SiReacthookform />,
   zod: <SiZod />,
   "react router": <SiReactrouter />,
   postcss: <SiPostcss />,
