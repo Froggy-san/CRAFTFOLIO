@@ -38,12 +38,12 @@ const AboutMe = ({ isAuthenticated, userId }: aboutMeProps) => {
   if (!isAuthenticated)
     // if the current vistor isn't the owner of the page return the text only.
     return (
-      <div id="about" className="md:px-10 space-y-7 ">
+      <div id="about" className="md:px-10">
         {data?.aboutMe && (
           <div>
             <Heading>About me</Heading>
             <Collapse textLenght={1200}>
-              <Collapse.CollapseContent className=" text-lg mt-16">
+              <Collapse.CollapseContent className="mt-16 text-lg">
                 {data.aboutMe}
               </Collapse.CollapseContent>
               <Collapse.CollapseButton arrowPositionX="right" />

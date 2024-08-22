@@ -120,7 +120,7 @@ const AboutMeFrom = React.forwardRef(function (
     userId: string | undefined;
     handleCloseForm: () => void;
   },
-  ref?: React.Ref<HTMLDivElement>
+  ref?: React.Ref<HTMLDivElement>,
 ) {
   const [showColorBoard, setShowColorBoard] = useState(false);
   const { isEditting, editAboutMe } = useEditAboutMe();
@@ -159,13 +159,13 @@ const AboutMeFrom = React.forwardRef(function (
 
         userId: userId || "",
       },
-      { onSuccess: handleCloseForm }
+      { onSuccess: handleCloseForm },
     );
   }
 
   return (
-    <div ref={ref} className=" mt-14 show-tag space-y-4">
-      <Heading Text="Socials & Tools" className=" font-semibold" />{" "}
+    <div ref={ref} className="show-tag mt-14 space-y-4">
+      <Heading Text="Socials & Tools" className="font-semibold" />{" "}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -174,7 +174,7 @@ const AboutMeFrom = React.forwardRef(function (
             render={({ field }) => (
               <FormItem className="">
                 <div className="space-y-0.5">
-                  <FormLabel className="text-base ">Links</FormLabel>
+                  <FormLabel className="text-base">Links</FormLabel>
                 </div>
                 <FormControl>
                   <TagsInput Tags={field.value} onChange={field.onChange}>
@@ -198,7 +198,7 @@ const AboutMeFrom = React.forwardRef(function (
             render={({ field }) => (
               <FormItem className="">
                 <div className="space-y-0.5">
-                  <FormLabel className="text-base ">Tools</FormLabel>
+                  <FormLabel className="text-base">Tools</FormLabel>
                 </div>
                 <FormControl>
                   <TagsInput Tags={field.value} onChange={field.onChange}>
@@ -215,20 +215,20 @@ const AboutMeFrom = React.forwardRef(function (
               </FormItem>
             )}
           />
-          <div className=" flex flex-col gap-y-8 lg:flex-row gap-3">
+          <div className="flex flex-col gap-3 gap-y-8 lg:flex-row">
             <FormField
               control={form.control}
               name="arrowType"
               render={({ field }) => (
                 <FormItem
-                  className={`flex flex-col xs:flex-row items-center justify-between rounded-lg border transition-all duration-500  w-full  p-4 ${
+                  className={`flex w-full flex-col items-center justify-between rounded-lg border p-4 transition-all duration-500 xs:flex-row ${
                     isTools
-                      ? "opacity-1 visible z-auto relative "
-                      : "opacity-0 invisible  z-[-55] absolute"
+                      ? "opacity-1 visible relative z-auto"
+                      : "invisible absolute z-[-55] opacity-0"
                   }`}
                 >
                   <div className="space-y-0.5 text-center xs:text-left">
-                    <FormLabel className="text-base ">Arrow Shape</FormLabel>
+                    <FormLabel className="text-base">Arrow Shape</FormLabel>
                     <FormDescription>
                       Choose the shape of the arrow.
                     </FormDescription>
@@ -241,7 +241,7 @@ const AboutMeFrom = React.forwardRef(function (
                             field.value === "none" ? "" : `rgba(${chosenColor})`
                           } `,
                         }}
-                        className=" w-full xs:w-[180px] text-foreground "
+                        className="w-full text-foreground xs:w-[180px]"
                       >
                         <SelectValue placeholder="Arrow shape" />
                       </SelectTrigger>
@@ -280,14 +280,14 @@ const AboutMeFrom = React.forwardRef(function (
               render={({ field }) => (
                 <FormItem
                   // style={{ transition: "opacity .5s ease" }}
-                  className={`flex flex-col  xs:flex-row items-center w-full justify-between rounded-lg border p-4 transition-all duration-500  ${
+                  className={`!z-20 flex w-full flex-col items-center justify-between rounded-lg border p-4 transition-all duration-500 xs:flex-row ${
                     isArrowChosen
-                      ? "opacity-1 visible z-auto relative "
-                      : "opacity-0 invisible  z-[-55] absolute"
+                      ? "opacity-1 visible relative z-auto"
+                      : "invisible absolute z-[-55] opacity-0"
                   }`}
                 >
                   <div className="space-y-0.5 text-center xs:text-left">
-                    <FormLabel className="text-base ">Arrow Color</FormLabel>
+                    <FormLabel className="text-base">Arrow Color</FormLabel>
                     <FormDescription>
                       Choose what color the arrow should be.
                     </FormDescription>
@@ -296,13 +296,13 @@ const AboutMeFrom = React.forwardRef(function (
                     onClickAway={() => setShowColorBoard(false)}
                   >
                     <FormControl>
-                      <div className=" relative w-full xs:w-fit">
+                      <div className="relative w-full xs:w-fit">
                         <Button
                           variant="outline"
                           type="button"
                           onClick={() => setShowColorBoard((is) => !is)}
                           style={{ backgroundColor: `rgb(${chosenColor})` }}
-                          className="mt-1  p-0 w-full h-10 xs:w-7 xs:h-7 duration-75 border-2"
+                          className="mt-1 h-10 w-full border-2 p-0 duration-75 xs:h-7 xs:w-7"
                         >
                           {" "}
                           {/* {
@@ -318,10 +318,10 @@ const AboutMeFrom = React.forwardRef(function (
                             field.onChange(color.rgb);
                             // console.log(color.rgb);
                           }}
-                          className={` absolute center-abslute-x px-3 py-2 w-[300px] bg-white  duration-150  ${
+                          className={`center-abslute-x absolute w-[300px] bg-white px-3 py-2 duration-150 ${
                             showColorBoard
                               ? "opacity-1 visible"
-                              : "opacity-0 invisible"
+                              : "invisible opacity-0"
                           }`}
                         />
                       </div>
