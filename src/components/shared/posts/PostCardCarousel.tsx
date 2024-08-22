@@ -22,7 +22,7 @@ const PostCardCarousel = ({
   postImages,
 }: PostCardCarouselProps) => {
   return (
-    <Carousel id="carousel" className="w-full rounded-lg">
+    <Carousel id="carousel" className="w-full select-none rounded-lg">
       {isDeleting && (
         <Loading className="center-abslute z-30 !opacity-100" size={30} />
       )}

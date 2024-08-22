@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/services/authApi";
 import { User } from "@/types/types";
-import { format } from "date-fns";
+
 import React, { createContext, useEffect, useState } from "react";
 
 const initailUser = {
@@ -80,7 +80,6 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    // if (!localStorage.getItem("gameToken")) return;
     checkAuthUser();
   }, []);
 

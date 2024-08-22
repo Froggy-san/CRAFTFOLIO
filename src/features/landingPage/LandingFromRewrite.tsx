@@ -56,7 +56,7 @@ const LandingFormRewrite = React.forwardRef(function (
     relatedUserAvatar?: string;
     setHasTheFormDataChanged?: React.Dispatch<SetStateAction<boolean>>;
   },
-  ref?: Ref<HTMLFormElement>
+  ref?: Ref<HTMLFormElement>,
 ) {
   const { user } = useAuth();
   const { isEditting, editLandingPage } = useEditLandingPage();
@@ -154,7 +154,7 @@ const LandingFormRewrite = React.forwardRef(function (
           socials: JSON.stringify(values.socials),
           textColor: JSON.stringify(values.textColor),
         },
-        { onSuccess: () => setOpen(false) }
+        { onSuccess: () => setOpen(false) },
       );
     }
     if (!landingToEdit)
@@ -175,24 +175,24 @@ const LandingFormRewrite = React.forwardRef(function (
           textColor: JSON.stringify(values.textColor),
           user_id: user?.id || "",
         },
-        { onSuccess: () => setOpen(false) }
+        { onSuccess: () => setOpen(false) },
       );
   }
   return (
-    <div className=" min-w-[120px] m-auto  w-full  max-w-[1000px]">
-      <div className="   px-1">
+    <div className="m-auto w-full min-w-[120px] max-w-[1000px]">
+      <div className="px-1">
         <Form {...form}>
           <form
             ref={ref}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 "
+            className="space-y-8"
           >
             <FormField
               control={form.control}
               name="primaryText"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Primary Text</FormLabel>
+                  <FormLabel>Introduction</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="You can put your name and your profession"
@@ -200,7 +200,9 @@ const LandingFormRewrite = React.forwardRef(function (
                       disabled={isCreanting || isEditting}
                     />
                   </FormControl>
-
+                  <FormDescription>
+                    Briefly introduce yourself and your profession.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -211,15 +213,18 @@ const LandingFormRewrite = React.forwardRef(function (
               name="secondaryText"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Brief Description about your self</FormLabel>
+                  <FormLabel>About Me</FormLabel>
                   <FormControl>
                     <Textarea
-                      className=" h-[150px]"
-                      placeholder="Talk about yourself and what you do"
+                      className="h-[150px]"
+                      placeholder="Experienced [Your Profession] | Passionate about [Your Area of Interest] | Skilled in [Your Key Skills]"
                       {...field}
                     />
                   </FormControl>
-
+                  <FormDescription>
+                    Share a brief description of yourself, your background, and
+                    interests.{" "}
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -230,16 +235,19 @@ const LandingFormRewrite = React.forwardRef(function (
               name="tertiaryText"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Write what ever you want</FormLabel>
+                  <FormLabel>Additional Details</FormLabel>
                   <FormControl>
                     <Textarea
-                      className=" h-[150px]"
-                      placeholder="More but less important details about yourself"
+                      className="h-[150px]"
+                      placeholder="Any other relevant information?"
                       {...field}
                       disabled={isCreanting || isEditting}
                     />
                   </FormControl>
-
+                  <FormDescription>
+                    Feel free to provide any other relevant information about
+                    yourself.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -273,12 +281,12 @@ const LandingFormRewrite = React.forwardRef(function (
                 </FormItem>
               )}
             />
-            <FormRow className=" gap-y-7 gap-x-2 z-0">
+            <FormRow className="z-0 gap-x-2 gap-y-7">
               <FormField
                 control={form.control}
                 name="grainyTexture"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center w-full justify-between rounded-lg border p-4">
+                  <FormItem className="flex w-full flex-col items-center justify-between gap-2 rounded-lg border p-4 text-center xs:flex-row xs:text-left">
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">Grainy image</FormLabel>
                       <div className="text-sm text-muted-foreground">
@@ -310,7 +318,7 @@ const LandingFormRewrite = React.forwardRef(function (
                 control={form.control}
                 name="blur"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center w-full justify-between rounded-lg border p-4">
+                  <FormItem className="flex w-full flex-col items-center justify-between gap-2 rounded-lg border p-4 text-center xs:flex-row xs:text-left">
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">
                         Blur landing image
@@ -321,7 +329,7 @@ const LandingFormRewrite = React.forwardRef(function (
                           url=""
                           imageSrc={chosenLandingImage}
                           isStatic
-                          className="font-semibold  "
+                          className="font-semibold"
                           imageClassName={`${field.value && "blur-[1px]"}`}
                         >
                           blurred background effect
@@ -344,7 +352,7 @@ const LandingFormRewrite = React.forwardRef(function (
               control={form.control}
               name="textColor"
               render={({ field }) => (
-                <FormItem className="flex flex-col text-center gap-2  xs:text-left  xs:flex-row items-center justify-between rounded-lg border p-4 relative z-0">
+                <FormItem className="relative z-0 flex flex-col items-center justify-between gap-2 rounded-lg border p-4 text-center xs:flex-row xs:text-left">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Text color</FormLabel>
                     <FormDescription>
@@ -408,7 +416,7 @@ const LandingFormRewrite = React.forwardRef(function (
               )}
             />
 
-            <div className="  hidden md:flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 ">
+            <div className="hidden flex-col-reverse items-center justify-end gap-4 sm:flex-row md:flex">
               <Button
                 variant="secondary"
                 size="sm"
@@ -418,7 +426,7 @@ const LandingFormRewrite = React.forwardRef(function (
                 }}
                 disabled={isCreanting || isEditting}
                 type="button"
-                className=" tracking-wider w-full sm:w-[unset]"
+                className="w-full tracking-wider sm:w-[unset]"
               >
                 Cancel
               </Button>
@@ -427,7 +435,7 @@ const LandingFormRewrite = React.forwardRef(function (
                 size="sm"
                 disabled={isEqual || isCreanting || isEditting}
                 type="submit"
-                className=" tracking-wider w-full sm:w-[unset]"
+                className="w-full tracking-wider sm:w-[unset]"
               >
                 {isEditting ? "Upload landing page" : "Edit"}
               </Button>

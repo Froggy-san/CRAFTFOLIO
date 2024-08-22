@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { useCallback, useState } from "react";
-import { FileWithPath, useDropzone } from "react-dropzone";
+import { FileRejection, FileWithPath, useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
 import { LuImagePlus } from "react-icons/lu";
 
 type AvatarProps = {
@@ -15,13 +16,19 @@ const Avatar = ({ fieldChange, mediaUrl }: AvatarProps) => {
   const [file, setFile] = useState<File[]>([]);
 
   const onDrop = useCallback(
-    (acceptedFiles: FileWithPath[]) => {
-      // Do something with the files
-      setFile(acceptedFiles);
-      fieldChange(acceptedFiles); // according to bing this calls the onChange function and sends the file array to the input.
-      setFileUrl(URL.createObjectURL(acceptedFiles[0]));
+    (acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
+      if (rejectedFiles.length) {
+        toast.dismiss();
+        toast.error(rejectedFiles[0].errors?.[0].code);
+      }
+
+      if (acceptedFiles.length) {
+        setFile(acceptedFiles);
+        fieldChange(acceptedFiles);
+        setFileUrl(URL.createObjectURL(acceptedFiles[0]));
+      }
     },
-    [file]
+    [file],
   );
 
   /// the second parameter in the useDropzone hook is the accept object, you pust what can the from accept from the user .
@@ -30,19 +37,19 @@ const Avatar = ({ fieldChange, mediaUrl }: AvatarProps) => {
     onDrop,
     accept: {
       "image/*": [".png", ".jpeg", ".jpg", ".svg"],
-      "video/*": [".mp4", ".webm"],
     },
+    maxSize: 6 * 1024 * 1024, // 6MB in bytes
   });
 
   return (
     <div
       {...getRootProps()}
-      className="item-center flex cursor-pointer flex-col  justify-center rounded-xl"
+      className="item-center flex cursor-pointer flex-col justify-center rounded-xl"
     >
-      <input {...getInputProps()} className="cursor-pointer " />
+      <input {...getInputProps()} className="cursor-pointer" />
       {fileUrl ? (
         <>
-          <div className="flex h-[300px] w-full justify-center   xs:h-[350px] sm:h-[400px] xs:p-5 md:h-[550px] lg:p-10 ">
+          <div className="flex h-[300px] w-full justify-center xs:h-[350px] xs:p-5 sm:h-[400px] md:h-[550px] lg:p-10">
             <img
               src={fileUrl}
               alt="image"
@@ -52,7 +59,7 @@ const Avatar = ({ fieldChange, mediaUrl }: AvatarProps) => {
           <p className="mx-auto">Click or drag phto to replace</p>
         </>
       ) : (
-        <div className=" flex h-80 flex-col items-center  justify-center p-7 lg:h-[612px]">
+        <div className="flex h-80 flex-col items-center justify-center p-7 lg:h-[612px]">
           <LuImagePlus size={45} />
           <h3 className="base-medium text-light-2 mb-2 mt-6">
             Drag photo here

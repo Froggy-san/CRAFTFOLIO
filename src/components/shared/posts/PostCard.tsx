@@ -38,20 +38,20 @@ const PostCard = ({ post }: { post: Project }) => {
     post && post.technologies ? JSON.parse(post.technologies) : [];
   const previewLink = JSON.parse(post.links).find(
     (link: { description: string; url: string }) =>
-      previewRegex.test(link.description)
+      previewRegex.test(link.description),
   )?.url;
 
   const imagesToDelete = useMemo(
     () =>
       post.projectImages.map(
-        (image: imageObject) => image.imageUrl.split("projects/")[1]
+        (image: imageObject) => image.imageUrl.split("projects/")[1],
       ),
-    [post.projectImages]
+    [post.projectImages],
   );
 
   const postImages = useMemo(
     () => post.projectImages.map((image: imageObject) => image.imageUrl),
-    [post.projectImages]
+    [post.projectImages],
   );
   const contrbiutersTags =
     post && post.contributors ? JSON.parse(post.contributors) : [];
@@ -71,7 +71,7 @@ const PostCard = ({ post }: { post: Project }) => {
       animate={isDeleting ? "deleting" : "visible"}
       // exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={` relative z-[unset] rounded-lg h-fit break-words`}
+      className={`relative z-[unset] h-fit break-words rounded-lg`}
     >
       {currentOwner ? (
         <CardControls
@@ -90,13 +90,10 @@ const PostCard = ({ post }: { post: Project }) => {
         />
       ) : (
         <Link to={`/project/${post.id}`}>
-          <div className="flex relative  h-[200px] xs:h-[250px] sm:h-[350px]  grainy  rounded-md overflow-hidden items-center justify-center p-0  font-semibold">
+          <div className="grainy relative flex h-[200px] items-center justify-center overflow-hidden rounded-md p-0 font-semibold xs:h-[250px] sm:h-[350px]">
             No images.
             {isDeleting && (
-              <Loading
-                className=" center-abslute z-30 !opacity-100"
-                size={30}
-              />
+              <Loading className="center-abslute z-30 !opacity-100" size={30} />
             )}
             <GrainyImg />
           </div>
@@ -104,11 +101,11 @@ const PostCard = ({ post }: { post: Project }) => {
       )}
 
       <Link to={`/project/${post.id}`}>
-        <div className=" p-2 ">
+        <div className="p-2">
           <TooltipComp toolTipText={post.name}>
             <h1
               aria-label="project name"
-              className="  w-fit max-w-full text-lg font-semibold truncate"
+              className="w-fit max-w-full truncate text-lg font-semibold"
             >
               {post.name}
             </h1>
@@ -121,21 +118,21 @@ const PostCard = ({ post }: { post: Project }) => {
             className=" text-sm max-h-[70px] break-all h-fit"
             element="p"
           /> */}
-          <div className=" text-[10px]">
+          <div className="text-[10px]">
             <p>
               From:
-              <span className=" text-red-500">
+              <span className="text-red-500">
                 {" "}
                 {format(new Date(post.startDate), "LLLL/dd/yyyy")}
               </span>{" "}
               - To:
-              <span className=" text-red-500">
+              <span className="text-red-500">
                 {" "}
                 {format(new Date(post.endDate), "LLLL/dd/yyyy")}
               </span>
             </p>
             <TooltipComp toolTipText={post.type}>
-              <p className="overflow-hidden  w-fit max-w-full   whitespace-nowrap overflow-ellipsis">{`Type: ${
+              <p className="w-fit max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">{`Type: ${
                 post.type.length ? post.type : "~"
               }`}</p>
             </TooltipComp>
@@ -152,22 +149,22 @@ const PostCard = ({ post }: { post: Project }) => {
           </div>
         </div>
       </Link>
-      <div className=" flex items-center justify-between">
+      <div className="flex items-center justify-between">
         {post.publicUsers ? (
           <UserTag
             link={`/user/${user.userId}`}
             user={user}
-            className=" text-[12px] font-semibold  w-[80%] xs:w-[70%] sm:w-[50%]"
+            className="w-[80%] text-[12px] font-semibold xs:w-[70%] sm:w-[50%]"
           />
         ) : (
           <span />
         )}
         {previewLink ? (
-          <Button variant="link" className=" group  pr-0" asChild>
+          <Button variant="link" className="group pr-0" asChild>
             <Link target="_blank" to={previewLink}>
               {" "}
               <BsArrowUpRight
-                className=" group-hover:translate-x-[5px] group-hover:translate-y-[-5px] transition-all"
+                className="transition-all group-hover:translate-x-[5px] group-hover:translate-y-[-5px]"
                 size={15}
               />
             </Link>

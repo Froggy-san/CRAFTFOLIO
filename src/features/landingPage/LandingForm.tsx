@@ -168,7 +168,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
           socials: JSON.stringify(values.socials),
           textColor: JSON.stringify(values.textColor),
         },
-        { onSuccess: () => setIsOpen(false) }
+        { onSuccess: () => setIsOpen(false) },
       );
     }
     if (!landingToEdit)
@@ -189,7 +189,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
           textColor: JSON.stringify(values.textColor),
           user_id: user?.id || "",
         },
-        { onSuccess: () => setIsOpen(false) }
+        { onSuccess: () => setIsOpen(false) },
       );
   }
   return (
@@ -197,7 +197,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <div className="flex items-end">
           <IconButton
-            className=" ml-auto  my-3"
+            className="my-3 ml-auto"
             onClick={() => setIsOpen(true)}
             variant="ghost"
           >
@@ -216,25 +216,25 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
             <TbPhotoEdit className="h-4 w-4" />
           </button>
         </DialogTrigger> */}
-        <DialogContent className=" overflow-y-scroll h-[80dvb] max-w-[800px] px-1 xs:px-6">
+        <DialogContent className="h-[80dvb] max-w-[800px] overflow-y-scroll px-1 xs:px-6">
           <DialogHeader>
             <DialogTitle>Create Your landing page.</DialogTitle>
             <DialogDescription>
               Talk about your self and what you do.
             </DialogDescription>
           </DialogHeader>
-          <div className="  w-full  max-w-[100%]  mx-auto   px-1">
+          <div className="mx-auto w-full max-w-[100%] px-1">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8 w-full max-w-[100%]"
+                className="w-full max-w-[100%] space-y-8"
               >
                 <FormField
                   control={form.control}
                   name="primaryText"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Primary Text</FormLabel>
+                      <FormLabel>Introduction</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="I am your name"
@@ -242,7 +242,9 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                           disabled={isCreanting || isEditting}
                         />
                       </FormControl>
-
+                      <FormDescription>
+                        Briefly introduce yourself and your profession.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -253,15 +255,18 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   name="secondaryText"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Brief Description about your self</FormLabel>
+                      <FormLabel>About Me</FormLabel>
                       <FormControl>
                         <Textarea
-                          className=" h-[150px]"
+                          className="h-[150px]"
                           placeholder="craftfolio@me.com"
                           {...field}
                         />
                       </FormControl>
-
+                      <FormDescription>
+                        Share a brief description of yourself, your background,
+                        and interests.{" "}
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -272,16 +277,19 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   name="tertiaryText"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Write what ever you want</FormLabel>
+                      <FormLabel>Additional Details</FormLabel>
                       <FormControl>
                         <Textarea
-                          className=" h-[150px]"
+                          className="h-[150px]"
                           placeholder="React"
                           {...field}
                           disabled={isCreanting || isEditting}
                         />
                       </FormControl>
-
+                      <FormDescription>
+                        Feel free to provide any other relevant information
+                        about yourself.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -295,7 +303,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                       <FormLabel>Socials.</FormLabel>
                       <FormControl>
                         <TagsInput
-                          className=" mx-auto min-w-[250px] max-w-[250px] xs:max-w-[400px] md:max-w-[700px]"
+                          className="mx-auto min-w-[250px] max-w-[250px] xs:max-w-[400px] md:max-w-[700px]"
                           tags={field.value}
                           onChange={field.onChange}
                         />
@@ -363,9 +371,11 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   control={form.control}
                   name="textColor"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 relative">
+                    <FormItem className="relative flex flex-row items-center justify-between rounded-lg border p-4">
                       <div className="space-y-0.5">
-                        <FormLabel className="text-base">Grainy image</FormLabel>
+                        <FormLabel className="text-base">
+                          Grainy image
+                        </FormLabel>
                         <FormDescription>
                           Receive emails about your account security.
                         </FormDescription>
@@ -423,7 +433,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                   )}
                 />
 
-                <div className="flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 ">
+                <div className="flex flex-col-reverse items-center justify-end gap-4 sm:flex-row">
                   <Button
                     variant="secondary"
                     size="sm"
@@ -433,7 +443,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                     }}
                     disabled={isCreanting || isEditting}
                     type="button"
-                    className=" tracking-wider w-full sm:w-[unset]"
+                    className="w-full tracking-wider sm:w-[unset]"
                   >
                     Cancel
                   </Button>
@@ -442,7 +452,7 @@ const LandingForm = ({ landingToEdit }: { landingToEdit?: landingProps }) => {
                       size="sm"
                       disabled={isEqual || isCreanting || isEditting}
                       type="submit"
-                      className=" tracking-wider w-full sm:w-[unset]"
+                      className="w-full tracking-wider sm:w-[unset]"
                     >
                       Edit
                     </Button>
