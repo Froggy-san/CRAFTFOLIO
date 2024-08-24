@@ -25,8 +25,9 @@ import { useState } from "react";
 import DialogComp from "@/components/shared/DialogComp";
 import AlertDialogComp from "@/components/shared/AlertDialogComp";
 import useDeleteUserPosts from "../projects/useDeleteUserPosts";
-import useGetNumOfProjects from "../projects/useGetNumOfProjects";
+
 import Loading from "@/components/shared/Loading";
+import useGetStats from "../projects/useGetStats";
 
 interface DialogDrawerProps {
   dialogDescription?: string;
@@ -36,7 +37,7 @@ interface DialogDrawerProps {
 function AlertDrawer({ userId }: { userId: string }) {
   const [open, setOpen] = useState(false);
   const { isDeletingPosts, deleteAllPosts } = useDeleteUserPosts();
-  const { count } = useGetNumOfProjects(userId);
+  const { count } = useGetStats(userId);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const dialogDescriptionText = `This action cannot be undone. This will permanently delete all (${
@@ -68,7 +69,7 @@ function AlertDrawer({ userId }: { userId: string }) {
         <Button
           disabled={!count || isDeletingPosts}
           variant="destructive"
-          className=" w-full"
+          className="w-full"
         >
           {!count ? "No posts to delete" : "Delete all posts"}
         </Button>

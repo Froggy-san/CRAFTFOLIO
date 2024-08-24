@@ -1,5 +1,5 @@
-import { publicUser } from "@/types/types";
-import React from "react";
+import { userEssentialData } from "@/types/types";
+
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import TooltipComp from "../TooltipComp";
@@ -10,7 +10,7 @@ const DisplayedContributors = ({
   contributors,
   className,
 }: {
-  contributors: publicUser[];
+  contributors: userEssentialData[];
   className?: string;
 }) => {
   return (

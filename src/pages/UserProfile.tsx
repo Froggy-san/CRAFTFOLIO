@@ -19,19 +19,26 @@ import ErrorComp from "@/components/shared/ErrorComp";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import { createPortal } from "react-dom";
 import { lazy, Suspense } from "react";
+import useTrackVisted from "@/hooks/useTrackVisted";
 const LazyFloatingNav = lazy(() => import("@/components/ui/FloatingNavBar"));
 const UserProfile = () => {
   const { user, isLoading } = useAuth();
   const { isLoading: isPostsLoading, pageCount, userPosts } = useUserPosts();
   const { relatedUser, isLoading: landingLoading } = useLandingPage();
+  const { userId } = useParams();
 
   useScrollUpWhenMounted();
   useDocumentTitle(relatedUser?.[0]?.username || "");
 
   const APPLAYOUT_CONTAINER = document.getElementById("home");
 
-  const { userId } = useParams();
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
+
+  console.log(relatedUser?.[0]);
+  useTrackVisted({
+    profileUser: relatedUser?.[0],
+    isOwnerOfPage: isTheOwnerOfPage,
+  });
 
   if (isLoading || landingLoading) return <FullSnLoading />;
 

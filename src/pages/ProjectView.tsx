@@ -3,17 +3,13 @@ import { useParams } from "react-router-dom";
 
 import Loading from "@/components/shared/Loading";
 
-import CollapsibleText from "@/components/shared/CollapsibleText";
 import { useAuth } from "@/hooks/useAuth";
-import { imageObject, Project, publicUser, User } from "@/types/types";
+import { imageObject, Project, User } from "@/types/types";
 
 // import ProjectControls from "@/features/projects/ProjectControls";
 import ErrorComp from "@/components/shared/ErrorComp";
-import CopyClipboard from "@/components/shared/CopyClipboard";
 import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
-import UserTag from "@/components/shared/UserTag";
 import { useDocumentTitle } from "@uidotdev/usehooks";
-
 import ProjectViewControls from "@/features/projectView/ProjectViewControls";
 import ProjectViewCaro from "@/features/projectView/ProjectViewCaro";
 import Contributors from "@/features/projectView/Contributors";

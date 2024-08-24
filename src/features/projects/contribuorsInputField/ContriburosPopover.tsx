@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { publicUser } from "@/types/types";
+import { userEssentialData } from "@/types/types";
 import { defaultProfilePicture } from "@/utils/constants";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 
@@ -21,13 +21,13 @@ const ContriburosPopover = forwardRef(
     }: {
       className?: string;
       selectedIndex: number;
-      users: publicUser[];
+      users: userEssentialData[];
       handleFocus: () => void;
       inputedValue: string;
-      alreadyAddedTags: publicUser[];
-      handleAddTag: (value: publicUser) => void;
+      alreadyAddedTags: userEssentialData[];
+      handleAddTag: (value: userEssentialData) => void;
     },
-    ref?: React.Ref<HTMLUListElement>
+    ref?: React.Ref<HTMLUListElement>,
   ) => {
     const [open, setOpen] = useState(false);
 
@@ -44,22 +44,22 @@ const ContriburosPopover = forwardRef(
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className=" w-1   center-abslute invisible"
+                className="center-abslute invisible w-1"
               ></Button>
             </PopoverTrigger>
             <PopoverContent
               onFocus={handleFocus} // to prevent the autoFocus feature in the popover.
-              className={`w-80 p-2   my-2  max-h-[40vh] overflow-y-auto  ${
+              className={`my-2 max-h-[40vh] w-80 overflow-y-auto p-2 ${
                 className || ""
               }`}
             >
-              <ul ref={ref} className=" space-y-2">
+              <ul ref={ref} className="space-y-2">
                 {users.map((user, index) => {
                   return (
                     <li
                       onClick={() => handleAddTag(user)}
                       key={index}
-                      className={`hover:bg-accent flex gap-3 items-center cursor-pointer p-1 rounded-md focus:bg-accent ${
+                      className={`flex cursor-pointer items-center gap-3 rounded-md p-1 hover:bg-accent focus:bg-accent ${
                         selectedIndex === index && "bg-accent"
                       }`}
                     >
@@ -71,7 +71,7 @@ const ContriburosPopover = forwardRef(
                         />
                         <AvatarFallback>image</AvatarFallback>
                       </Avatar>
-                      <p className="    truncate">{user.username}</p>
+                      <p className="truncate">{user.username}</p>
                     </li>
                   );
                 })}
@@ -81,7 +81,7 @@ const ContriburosPopover = forwardRef(
         ) : null}
       </>
     );
-  }
+  },
 );
 export default ContriburosPopover;
 

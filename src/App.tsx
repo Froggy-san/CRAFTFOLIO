@@ -1,3 +1,4 @@
+import "./globals.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -15,7 +16,6 @@ import AuthContextProvidor from "./context/AuthContext";
 import ProjectView from "./pages/ProjectView";
 import EditPost from "./pages/EditPost";
 import AddPost from "./pages/AddPost";
-import "./globals.css";
 import { ThemeProvider } from "./context/ThemeProvidor";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import AuthLayout from "./features/authentication/AuthLayout";
@@ -43,12 +43,6 @@ const router = createBrowserRouter([
           { path: "/dashboard", element: <DashBoard /> },
         ],
       },
-      // { path: "/uploads", element: <UploadPorfolio /> },
-
-      // { path: "/upload-post", element: <AddPost /> },
-      // { path: "/edit-post/:postId", element: <EditPost /> },
-      // { path: "/user-settings", element: <UserSettings /> },
-
       { path: "/project/:projectId", element: <ProjectView /> },
     ],
   },

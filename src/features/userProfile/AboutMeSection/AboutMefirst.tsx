@@ -104,9 +104,9 @@
 //     return (
 //       <div className=" ">
 //         <Collapse textLenght={1200}>
-//           <Collapse.CollapseContent className="md:px-10 text-lg mt-16">
+//           <Collapse.CollapseContant className="md:px-10 text-lg mt-16">
 //             {data?.aboutMe || defaultText}
-//           </Collapse.CollapseContent>
+//           </Collapse.CollapseContant>
 //           <Collapse.CollapseButton arrowPositionX="right" />
 //         </Collapse>
 
@@ -149,13 +149,13 @@
 //         ) : (
 //           <>
 //             <Collapse textLenght={1200}>
-//               <Collapse.CollapseContent
+//               <Collapse.CollapseContant
 //                 onClick={handleEditting}
 //                 className="md:px-10 text-lg mt-16  break-words"
 //                 style={{ whiteSpace: "pre-wrap" }}
 //               >
 //                 {aboutMeValue || defaultText}
-//               </Collapse.CollapseContent>
+//               </Collapse.CollapseContant>
 //               <Collapse.CollapseButton arrowPositionX="right" />
 //             </Collapse>
 //           </>

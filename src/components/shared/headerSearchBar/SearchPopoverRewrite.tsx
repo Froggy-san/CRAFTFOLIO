@@ -15,7 +15,7 @@ import useSearchUser from "./useSearchUser";
 import useDebounce from "@/hooks/useDebounce";
 import { Link, useNavigate } from "react-router-dom";
 import { defaultProfilePicture } from "@/utils/constants";
-import { publicUser } from "@/types/types";
+import { userEssentialData } from "@/types/types";
 import SearchBar from "./SearchBar";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -32,7 +32,7 @@ const SearchPopoverRewrite = ({
   const { isLoading, publicUsers, error } = useSearchUser(debouncedValue);
 
   const navigate = useNavigate();
-  const handleClickAndSelect = useCallback((publicUser: publicUser) => {
+  const handleClickAndSelect = useCallback((publicUser: userEssentialData) => {
     setOpen(false);
     navigate(`/user/${publicUser.userId}`);
   }, []);

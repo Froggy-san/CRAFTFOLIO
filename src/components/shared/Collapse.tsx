@@ -1,6 +1,5 @@
 import React, {
   Dispatch,
-  ReactElement,
   ReactNode,
   SetStateAction,
   createContext,
@@ -9,6 +8,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+
 import IconButton from "./IconButton";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LENGHT_OF_STRING } from "@/utils/constants";
@@ -87,7 +87,7 @@ const Collapse = function ({
 
 ///           Contant
 
-const CollapseContent = forwardRef(
+const CollapseContant = forwardRef(
   (
     {
       children,
@@ -217,6 +217,6 @@ export function useCollapse() {
   if (!context) throw new Error(`you have used the SearchContext wrong`);
   return context;
 }
-Collapse.CollapseContent = CollapseContent;
+Collapse.CollapseContant = CollapseContant;
 Collapse.CollapseButton = CollapseButton;
 export default Collapse;

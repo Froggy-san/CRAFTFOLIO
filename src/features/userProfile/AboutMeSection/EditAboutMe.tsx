@@ -86,11 +86,11 @@ const EditAboutMe = ({
   return (
     <div>
       {clickCount === 2 ? (
-        <div className=" space-y-4 my-5">
-          <h1 className=" leading-none font-medium">About me</h1>
+        <div className="my-5 space-y-4">
+          <h1 className="font-medium leading-none">About me</h1>
           <Textarea
             value={aboutMeValue}
-            className=" h-48"
+            className="h-48"
             autoFocus
             onChange={(e) => {
               setAboutMeValue(e.target.value);
@@ -110,13 +110,13 @@ const EditAboutMe = ({
       ) : (
         <>
           <Collapse textLenght={1200}>
-            <Collapse.CollapseContent
+            <Collapse.CollapseContant
               onClick={handleEditting}
-              className="md:px-10 text-lg mt-16  break-words"
+              className="mt-16 break-words text-lg md:px-10"
               style={{ whiteSpace: "pre-wrap" }}
             >
               {aboutMeValue || defaultText}
-            </Collapse.CollapseContent>
+            </Collapse.CollapseContant>
             <Collapse.CollapseButton arrowPositionX="right" />
           </Collapse>
         </>

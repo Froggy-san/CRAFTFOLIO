@@ -1,11 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { publicUser } from "@/types/types";
+import { userEssentialData } from "@/types/types";
 import { defaultProfilePicture } from "@/utils/constants";
 import React, { forwardRef, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface SearchResultsProps {
-  users: publicUser[];
+  users: userEssentialData[];
   className?: string;
   selecedIndex: number;
   closeDialogFn: () => void;

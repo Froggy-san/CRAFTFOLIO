@@ -2,8 +2,13 @@ import { createClient } from "@supabase/supabase-js";
 import { createAboutMe } from "./aboutMeApi";
 import supabase, { supabaseUrl } from "./supabase";
 import { DASHBOARD_PAGE_SIZE } from "@/utils/constants";
-import { GetUsersProps, publicUser } from "@/types/types";
-import { deleteAllUsersPosts, getNumOfProjectsForUser } from "./projectsApi";
+import {
+  GetUsersProps,
+  userEssentialData,
+  User,
+  publicUser,
+} from "@/types/types";
+import { deleteAllUsersPosts, getStats } from "./projectsApi";
 import { deleteImgFromStrage } from "@/utils/helper";
 import { deleteUserFooter } from "./footerApi";
 import { deleteUserLandingPage } from "./landingPageApi";
@@ -13,7 +18,7 @@ export async function deleteUser(userId: string) {
 
   await deleteUserLandingPage(userId);
   await deleteUserFooter(userId);
-  const count = await getNumOfProjectsForUser(userId);
+  const { count } = await getStats(userId);
   if (count) await deleteAllUsersPosts(userId);
   await deletePublicUser(userId);
   const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
@@ -258,7 +263,7 @@ export async function editContributorsTags({
 
   for (let i = 0; i < projects.length; i++) {
     const item: ProjectData = projects[i];
-    const contributors: publicUser[] = JSON.parse(item.contributors);
+    const contributors: userEssentialData[] = JSON.parse(item.contributors);
     const TagsToEdit = contributors.find((tag) => tag.userId === userId);
 
     if (TagsToEdit) {
@@ -295,7 +300,7 @@ export async function getUsers({ searchTerm, page, sortValue }: GetUsersProps) {
 
   if (searchTerm)
     query = query.or(
-      `username.ilike.%${searchTerm}%,email.ilike.%${searchTerm}`
+      `username.ilike.%${searchTerm}%,email.ilike.%${searchTerm}`,
     );
 
   if (sortValue) query = query.order(sortValue, { ascending: true });
@@ -360,4 +365,14 @@ export async function forgotMyPassword(email: string) {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email);
   if (error) throw new Error(error.message);
   return data;
+}
+
+export async function addVisted(user: publicUser) {
+  const { data, error } = await supabase
+    .from("publicUsers")
+    .update({ visted: user.visted + 1 })
+    .eq("userId", user.userId)
+    .select();
+
+  if (error) console.error(error.message);
 }

@@ -9,7 +9,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { Link } from "react-router-dom";
-import { publicUser } from "@/types/types";
+import { userEssentialData } from "@/types/types";
 import { defaultProfilePicture } from "@/utils/constants";
 
 export const AnimatedTooltip = ({
@@ -17,7 +17,7 @@ export const AnimatedTooltip = ({
   items,
 }: {
   imageSize?: number;
-  items: publicUser[];
+  items: userEssentialData[];
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
   const springConfig = { stiffness: 100, damping: 5 };

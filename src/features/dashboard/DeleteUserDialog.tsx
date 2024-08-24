@@ -24,13 +24,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import DialogComp from "@/components/shared/DialogComp";
-import AlertDialogComp from "@/components/shared/AlertDialogComp";
-import useDeleteUserPosts from "../projects/useDeleteUserPosts";
-import useGetNumOfProjects from "../projects/useGetNumOfProjects";
 import Loading from "@/components/shared/Loading";
 import useDeleteUserAccount from "../authentication/useDeleteUserAccount";
 import { useAuth } from "@/hooks/useAuth";
@@ -54,10 +47,9 @@ const DeleteUserAlert = ({ userId, open, setOpen }: DialogDrawerProps) => {
 
   const dialogDescriptionText = (
     <>
-      <span className=" text-destructive  font-semibold">WARNING!</span>:
-      Deleting your account will permanently remove all your posts and data from
-      our system. This action cannot be undone. Are you sure you want to
-      continue?
+      <span className="font-semibold text-destructive">WARNING!</span>: Deleting
+      your account will permanently remove all your posts and data from our
+      system. This action cannot be undone. Are you sure you want to continue?
     </>
   );
 
@@ -88,7 +80,7 @@ const DeleteUserAlert = ({ userId, open, setOpen }: DialogDrawerProps) => {
             </AlertDialogDescription>
           </AlertDialogHeader>
 
-          <div className=" flex flex-col pt-2 sm:py-0 sm:flex-row-reverse  justify-start items-center gap-2 sm:gap-2">
+          <div className="flex flex-col items-center justify-start gap-2 pt-2 sm:flex-row-reverse sm:gap-2 sm:py-0">
             <Button variant="destructive" onClick={handleDelete}>
               {isDeleting ? <Loading /> : "Continue"}
             </Button>
@@ -104,7 +96,7 @@ const DeleteUserAlert = ({ userId, open, setOpen }: DialogDrawerProps) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
-        <DrawerHeader className=" text-center sm:text-left">
+        <DrawerHeader className="text-center sm:text-left">
           <DrawerTitle>Are you sure?</DrawerTitle>
           <DrawerDescription>{dialogDescriptionText}</DrawerDescription>
         </DrawerHeader>

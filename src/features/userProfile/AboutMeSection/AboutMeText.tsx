@@ -50,11 +50,11 @@ const AboutMeText = ({
     <div className="">
       <Heading>About me</Heading>
       {clickCount === 2 ? (
-        <div className=" space-y-4 my-5">
-          <h1 className=" leading-none font-medium">About me</h1>
+        <div className="my-5 space-y-4">
+          <h1 className="font-medium leading-none">About me</h1>
           <Textarea
             value={aboutMeValue}
-            className=" h-48"
+            className="h-48"
             autoFocus
             onChange={(e) => {
               setAboutMeValue(e.target.value);
@@ -71,21 +71,21 @@ const AboutMeText = ({
           />
         </div>
       ) : (
-        <div className=" relative">
+        <div className="relative">
           <Collapse textLenght={1200}>
-            <Collapse.CollapseContent
+            <Collapse.CollapseContant
               onClick={handleEditting}
-              className="md:px-10 text-lg mt-16  break-words pb-7"
+              className="mt-16 break-words pb-7 text-lg md:px-10"
               style={{ whiteSpace: "pre-wrap" }}
             >
               {aboutMeValue || defaultAboutMeText}
-            </Collapse.CollapseContent>
+            </Collapse.CollapseContant>
             <Collapse.CollapseButton arrowPositionX="right" />
           </Collapse>
-          <div className=" absolute right-[120px] gap-3 bottom-0 flex items-center text-sm font-semibold z-[2]">
-            <HiCursorClick size={20} className=" animate-pulse " />
+          <div className="absolute bottom-0 right-[120px] z-[2] flex items-center gap-3 text-sm font-semibold">
+            <HiCursorClick size={20} className="animate-pulse" />
 
-            <p className=" text-red-400">Double tap to edit.</p>
+            <p className="text-red-400">Double tap to edit.</p>
           </div>
         </div>
       )}

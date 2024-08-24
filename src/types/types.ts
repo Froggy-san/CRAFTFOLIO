@@ -70,6 +70,21 @@ export interface editLandingProps {
 }
 
 export interface publicUser {
+  email: string | undefined;
+  id: string;
+  userId?: string;
+  avatar: string;
+  phone: string;
+  socials: string;
+  speciality: string;
+  username: string;
+  created_at: string;
+  role: string;
+  resumeUrl: string;
+  visted: number;
+}
+
+export interface userEssentialData {
   userId: string;
   username: string;
   avatar: string;
@@ -95,7 +110,7 @@ export interface Project {
   name: string;
   links: string;
   contributors: string;
-  publicUsers?: publicUser;
+  publicUsers?: userEssentialData;
 }
 
 export interface createProjectProps {

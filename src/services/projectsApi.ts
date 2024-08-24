@@ -15,13 +15,20 @@ import { PAGE_SIZE } from "@/utils/constants";
 //   return { projects, error };
 // }
 
-export async function getNumOfProjectsForUser(userId: string) {
+export async function getStats(userId: string) {
+  const { data: visted, error: vistedError } = await supabase
+    .from("publicUsers")
+    .select("visted")
+    .eq("userId", userId);
+
+  if (vistedError) throw new Error(vistedError.message);
+
   const { count, error } = await supabase
     .from("projects")
     .select("", { count: "exact", head: true })
     .eq("user_id", userId);
   if (error) throw new Error(`Couldn't get the number of project for the user`);
-  return count;
+  return { count, visted };
 }
 
 interface getPosts {
@@ -36,14 +43,14 @@ export async function getPosts({ page, searchTerm, sortValue }: getPosts) {
         .from("projects")
         .select(
           "* ,projectImages(id,imageUrl,project_id) ,publicUsers(userId,avatar,username)",
-          { count: "exact" }
+          { count: "exact" },
         )
     : // if there is no sort value we want the data to come from the database sorted by the newest to the oldest posts when the web app load the first time.
       supabase
         .from("projects")
         .select(
           "* ,projectImages(id,imageUrl,project_id) ,publicUsers(userId,avatar,username)",
-          { count: "exact" }
+          { count: "exact" },
         )
         .order("created_at", { ascending: false });
 
@@ -51,7 +58,7 @@ export async function getPosts({ page, searchTerm, sortValue }: getPosts) {
 
   if (searchTerm) {
     query = query.or(
-      `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,technologies.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`
+      `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,technologies.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`,
     );
   }
 
@@ -164,7 +171,7 @@ export async function editPost({
 
   const imageNames = projectImages.length
     ? projectImages.map(
-        (image) => `${Math.random()}-${image.name.replace(/\//g, "")}`
+        (image) => `${Math.random()}-${image.name.replace(/\//g, "")}`,
       )
     : [];
 
@@ -293,7 +300,7 @@ export async function getUserPosts({
   // searching.
   if (searchTerm) {
     query = query.or(
-      `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,technologies.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`
+      `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,technologies.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`,
     );
   }
 
@@ -326,7 +333,7 @@ export async function getProjectById(projectId: string) {
       `
     *,
   projectImages(id,project_id,imageUrl)
-  `
+  `,
     )
     .eq("id", projectId);
 
@@ -378,7 +385,7 @@ export async function deleteAllUsersPosts(userId: string) {
 
   imageNames &&
     imageNames.forEach((name) =>
-      imagesToDelete.push(name.imageUrl.split("projects/")[1])
+      imagesToDelete.push(name.imageUrl.split("projects/")[1]),
     );
 
   const { error: imageDeletionError } = await supabase

@@ -10,7 +10,7 @@ import { Card } from "../../../components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { IoClose } from "react-icons/io5";
-import { publicUser } from "@/types/types";
+import { userEssentialData } from "@/types/types";
 import ContriburosPopover from "./ContriburosPopover";
 import { defaultProfilePicture } from "@/utils/constants";
 import { ClickAwayListener } from "@mui/material";
@@ -20,8 +20,8 @@ import useSearchUser from "@/components/shared/headerSearchBar/useSearchUser";
 import { useAuth } from "@/hooks/useAuth";
 
 interface TagInputProps {
-  onChange: React.Dispatch<SetStateAction<publicUser[]>>;
-  contrbiutersTag: publicUser[];
+  onChange: React.Dispatch<SetStateAction<userEssentialData[]>>;
+  contrbiutersTag: userEssentialData[];
   className?: string;
   style?: CSSProperties;
   children?: ReactElement;
@@ -47,11 +47,11 @@ const ContributorsTags = ({
     ? publicUsers.filter(
         (user) =>
           !contrbiutersTag.some((tag) => tag.userId === user.userId) &&
-          user.userId !== id
+          user.userId !== id,
       )
     : [];
 
-  function handleAddTag(value: publicUser) {
+  function handleAddTag(value: userEssentialData) {
     onChange([...contrbiutersTag, value]);
     setInputedValue("");
     setSelectedIndex(-1);
@@ -121,15 +121,15 @@ const ContributorsTags = ({
   }, []);
   return (
     <ClickAwayListener onClickAway={() => setInputedValue("")}>
-      <div className=" w-full">
+      <div className="w-full">
         <Card
           style={style}
-          className={` flex items-center p-2 gap-1 flex-wrap w-full  ${
+          className={`flex w-full flex-wrap items-center gap-1 p-2 ${
             className || ""
           }`}
         >
           {contrbiutersTag.length
-            ? contrbiutersTag.map((tag: publicUser, i: number) => (
+            ? contrbiutersTag.map((tag: userEssentialData, i: number) => (
                 <TagItem
                   key={i}
                   tag={tag}
@@ -138,7 +138,7 @@ const ContributorsTags = ({
               ))
             : null}
 
-          <div className=" relative  min-w-[250px]">
+          <div className="relative min-w-[250px]">
             <input
               ref={inputRef}
               type="text"
@@ -149,10 +149,10 @@ const ContributorsTags = ({
                 setInputedValue(e.target.value);
               }}
               onKeyDown={handleKeyDown}
-              className=" h-7 focus:outline-none pl-3  w-full bg-background"
+              className="h-7 w-full bg-background pl-3 focus:outline-none"
             />
             {inputedValue ? (
-              <Badge className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex  text-foreground   show-tag">
+              <Badge className="show-tag pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-foreground opacity-100 sm:flex">
                 Enter
               </Badge>
             ) : null}
@@ -177,12 +177,12 @@ function TagItem({
   tag,
   removeFunction,
 }: {
-  tag: publicUser;
+  tag: userEssentialData;
   removeFunction: () => void;
 }) {
   return (
-    <div className=" border flex  justify-between items-center pl-2   max-w-[100%]   bg-secondary  hover:bg-secondary/90 transition-all  text-primary text-sm h-fit p-1 gap-1 rounded-md border-solid font-semibold  show-tag">
-      <Avatar className=" h-7 w-7">
+    <div className="show-tag flex h-fit max-w-[100%] items-center justify-between gap-1 rounded-md border border-solid bg-secondary p-1 pl-2 text-sm font-semibold text-primary transition-all hover:bg-secondary/90">
+      <Avatar className="h-7 w-7">
         <AvatarImage
           className=""
           src={tag.avatar || defaultProfilePicture}
@@ -190,8 +190,8 @@ function TagItem({
         />
         <AvatarFallback>image</AvatarFallback>
       </Avatar>
-      <span className="pb-[1px]  flex-1 truncate">{tag.username}</span>{" "}
-      <button type="button" className=" mt-1 p-1 h-fit mx-2">
+      <span className="flex-1 truncate pb-[1px]">{tag.username}</span>{" "}
+      <button type="button" className="mx-2 mt-1 h-fit p-1">
         {" "}
         <IoClose onClick={removeFunction} size={15} />
       </button>

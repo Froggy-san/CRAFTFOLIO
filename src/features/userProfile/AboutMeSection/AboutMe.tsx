@@ -43,9 +43,9 @@ const AboutMe = ({ isAuthenticated, userId }: aboutMeProps) => {
           <div>
             <Heading>About me</Heading>
             <Collapse textLenght={1200}>
-              <Collapse.CollapseContent className="mt-16 text-lg">
+              <Collapse.CollapseContant className="mt-16 text-lg">
                 {data.aboutMe}
-              </Collapse.CollapseContent>
+              </Collapse.CollapseContant>
               <Collapse.CollapseButton arrowPositionX="right" />
             </Collapse>
           </div>
