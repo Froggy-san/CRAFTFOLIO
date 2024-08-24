@@ -12,7 +12,7 @@ const DashBaordStats = () => {
   const { user } = useAuth();
 
   const { count, visted } = useGetStats(user?.id || "");
-  console.log(visted, "VISTED");
+
   return (
     <div>
       <FlipText className="mb-6 mt-2 text-[2.5rem]" style={{ lineHeight: "1" }}>

@@ -36,7 +36,7 @@ const UserProfile = () => {
 
   console.log(relatedUser?.[0]);
   useTrackVisted({
-    profileUser: relatedUser?.[0],
+    currentViewedProfile: relatedUser?.[0],
     isOwnerOfPage: isTheOwnerOfPage,
   });
 
