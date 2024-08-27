@@ -4,8 +4,7 @@ import Heading from "@/components/shared/Heading";
 import FooterDiaDrawer from "./FooterDiaDrawer";
 import { UserFooterProps } from "@/types/types";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-import { lazy, Suspense } from "react";
-const Links = lazy(() => import("./Links"));
+import Links from "./Links";
 
 const Footer = ({
   isTheOwnerOfPage,
@@ -66,14 +65,13 @@ const Footer = ({
           text={userFooter?.emailBtnText}
           copiableText={userFooter?.copyText || userEmail}
         />
-        <Suspense>
-          <Links
-            resume={resume}
-            userPhone={userPhone}
-            userEmail={userEmail}
-            userSocials={userSocials}
-          />
-        </Suspense>
+
+        <Links
+          resume={resume}
+          userPhone={userPhone}
+          userEmail={userEmail}
+          userSocials={userSocials}
+        />
       </div>
     </div>
   );
