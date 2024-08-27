@@ -21,20 +21,20 @@ const Links = ({
 
   return (
     <>
-      <div className=" absolute hidden md:block w-full h-full  left-0 bottom-0  z-0">
-        <div className=" relative h-full flex  items-end px-6 justify-between">
+      <div className="absolute bottom-0 left-0 z-0 hidden h-full w-full md:block">
+        <div className="relative flex h-full items-end justify-between px-6">
           {links.length ? (
-            <div className=" flex items-center justify-center flex-col space-y-10">
-              <HandleLinkIcons links={links} className=" flex-col gap-6" />
-              <div className=" h-[90px] w-[1px] bg-foreground rounded-2xl" />
+            <div className="flex flex-col items-center justify-center space-y-10">
+              <HandleLinkIcons links={links} className="flex-col gap-6" />
+              <div className="h-[90px] w-[1px] rounded-2xl bg-foreground" />
             </div>
           ) : null}
           {/* ----------------------------------------------- */}
           {userEmail && (
-            <div className=" flex items-center justify-center space-y-10 flex-col">
+            <div className="flex flex-col items-center justify-center space-y-10">
               <a
                 href={`mailto:${userEmail}`}
-                className="  text-foreground hover:text-foreground/60 hover:-translate-y-2 transition-all "
+                className="text-foreground transition-all hover:-translate-y-2 hover:text-foreground/60"
                 style={{
                   writingMode: "vertical-rl",
                   fontFamily: "monospace",
@@ -44,46 +44,63 @@ const Links = ({
               >
                 {userEmail}
               </a>
-              <div className=" h-[90px] w-[1px] bg-foreground rounded-2xl" />
+              <div className="h-[90px] w-[1px] rounded-2xl bg-foreground" />
             </div>
           )}
         </div>
-        <p className=" text-xs text-center absolute left-1/2 -translate-x-1/2 bottom-7 text-foreground/70">
+        <p className="absolute bottom-7 left-1/2 -translate-x-1/2 text-center text-xs text-foreground/70">
           Phone: {userPhone}
         </p>
         {resume && (
-          <div className=" truncate w-full max-w-[350px] text-xs  bottom-2 text-center absolute left-1/2 -translate-x-1/2 ">
+          <div className="absolute bottom-2 left-1/2 w-full max-w-[350px] -translate-x-1/2 truncate text-center text-xs">
             <span>Resume: </span>
             {isValidUrl(resume) ? (
-              <a className=" text-muted-foreground" href={resume}>
+              <a className="text-muted-foreground" href={resume}>
                 {resume}
               </a>
             ) : (
-              <p>{resume}</p>
+              <p className="inline-block text-muted-foreground">{resume}</p>
             )}
           </div>
         )}
       </div>
-      {footerContainer &&
+      <div className="flex w-full flex-col items-center justify-center gap-y-3 md:hidden">
+        <HandleLinkIcons links={links} className="mb-7 flex-wrap" />
+        <p className="text-xs text-muted-foreground">Phone: {userPhone}</p>
+        {resume && (
+          <div className="w-full max-w-[350px] truncate text-xs">
+            <span>Resume: </span>
+            {isValidUrl(resume) ? (
+              <a className="text-muted-foreground" href={resume}>
+                {resume}
+              </a>
+            ) : (
+              <p className="inline-block text-muted-foreground">{resume}</p>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* {footerContainer &&
         createPortal(
-          <div className=" flex flex-col gap-y-3 items-center   md:hidden  justify-center  w-full">
-            <HandleLinkIcons links={links} className="  flex-wrap" />
-            <p className=" text-xs text-muted-foreground">Phone: {userPhone}</p>
+          <div className="flex w-full flex-col items-center justify-center gap-y-3 md:hidden">
+            <p className="text-xs text-muted-foreground">Phone: {userPhone}</p>
             {resume && (
-              <div className=" truncate w-full max-w-[350px] text-xs ">
+              <div className="w-full max-w-[350px] truncate text-xs">
                 <span>Resume: </span>
                 {isValidUrl(resume) ? (
-                  <a className=" text-muted-foreground" href={resume}>
+                  <a className="text-muted-foreground" href={resume}>
                     {resume}
                   </a>
                 ) : (
-                  <p>{resume}</p>
+                  <p className="inline-block text-muted-foreground">{resume}</p>
                 )}
               </div>
             )}
+            <HandleLinkIcons links={links} className="flex-wrap" />
           </div>,
-          footerContainer
-        )}
+          footerContainer,
+        )} */}
     </>
   );
 };

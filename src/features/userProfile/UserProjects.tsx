@@ -19,20 +19,20 @@ const UserProjects = ({
   if (!userProjects.length && searchTerm)
     return (
       <Empty
-        className=" h-[300px] flex justify-center items-center font-semibold"
+        className="flex h-[300px] items-center justify-center font-semibold"
         message={`No matches for "${searchTerm}"`}
       />
     );
   if (!userProjects.length)
     return (
       <Empty
-        className=" h-[300px] flex justify-center items-center font-semibold"
-        message="There are no posts, be the first to post."
+        className="flex h-[300px] items-center justify-center font-semibold"
+        message="No posts."
       />
     );
 
   return (
-    <div className=" my-6">
+    <div className="my-6">
       <PostsGrid posts={userProjects} />
       {/* <UnorderedListGrid>
         {userProjects

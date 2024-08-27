@@ -14,7 +14,7 @@ export const defaultProfilePicture =
   "https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/OIG1.jpg";
 
 export const defaultText = {
-  title: ` Hello, I am Something something and i whatever whatever fuck you`,
+  title: ` Hello, I am Full name and i am something.. `,
   about: `Tech-savvy and eager, the Junior React Developer combines web fundamentals with a love for React, a UI-building library. They write clean code and navigate the web's blueprint. Their React skills shine, crafting reusable components and managing data flow. Always learning, they explore React's ecosystem. From collaborating on projects to crafting UIs, each challenge paves their path to
 becoming a web development force.`,
 };

@@ -156,7 +156,6 @@ const AboutMeFrom = React.forwardRef(function (
         arrowColor: JSON.stringify(values.arrowColor),
         links: JSON.stringify(values.links),
         toolsAndTech: JSON.stringify(values.toolsAndTech),
-
         userId: userId || "",
       },
       { onSuccess: handleCloseForm },
@@ -230,7 +229,9 @@ const AboutMeFrom = React.forwardRef(function (
                   <div className="space-y-0.5 text-center xs:text-left">
                     <FormLabel className="text-base">Arrow Shape</FormLabel>
                     <FormDescription>
-                      Choose the shape of the arrow.
+                      For each tool, we'll attempt to find a matching icon based
+                      on its name. If an icon cannot be found, you can select a
+                      custom arrow as a placeholder.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -289,7 +290,8 @@ const AboutMeFrom = React.forwardRef(function (
                   <div className="space-y-0.5 text-center xs:text-left">
                     <FormLabel className="text-base">Arrow Color</FormLabel>
                     <FormDescription>
-                      Choose what color the arrow should be.
+                      You can choose a color for the arrow or icon to
+                      personalize your tool display.
                     </FormDescription>
                   </div>
                   <ClickAwayListener

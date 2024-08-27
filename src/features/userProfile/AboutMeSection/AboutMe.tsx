@@ -6,7 +6,7 @@ import useEditAboutMe from "./useEditAboutMe";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import { defaultAboutMeText, defaultTextColor } from "@/utils/constants";
 import AboutMeText from "./AboutMeText";
-import AboutMeFrom from "./AboutMeFrom";
+
 import AboutMeLinksTech, { ShowLinksAndTools } from "./AboutMeLinksTech";
 import Heading from "@/components/shared/Heading";
 interface aboutMeProps {

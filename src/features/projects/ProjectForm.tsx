@@ -538,6 +538,7 @@ const ProjectForm = ({
                     {/* LINKS START */}
                     <div className="space-y-5">
                       <h1 className="cursor-default">Links</h1>
+
                       {!fields.length ? (
                         <div
                           onClick={() => append({ description: "", url: "" })}
@@ -563,7 +564,7 @@ const ProjectForm = ({
                               </AnimatePresence>
 
                               <motion.div
-                                layout
+                                // layout
                                 initial={{ opacity: 0, y: 25 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 25 }}

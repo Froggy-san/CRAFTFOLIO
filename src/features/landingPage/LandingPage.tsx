@@ -29,18 +29,22 @@ const LandingPage = ({
     landingPage && landingPage.textColor
       ? Object.values(JSON.parse(landingPage.textColor)).join(",")
       : theColorBlack;
+
   const icons =
     landingPage && landingPage.socials ? JSON.parse(landingPage.socials) : [];
+
   if (isLoading) return <FullSnLoading />;
 
   const landingPageText = {
-    primaryText: landingPage?.primaryText || defaultText.title,
-    secondaryText: landingPage?.secondaryText || defaultText.about,
-    tertiaryText: landingPage?.tertiaryText || defaultText.about,
+    primaryText: landingPage?.primaryText || (isOwner ? defaultText.title : ""),
+    secondaryText:
+      landingPage?.secondaryText || (isOwner ? defaultText.about : ""),
+    tertiaryText:
+      landingPage?.tertiaryText || (isOwner ? defaultText.about : ""),
   };
 
   return (
-    <div className=" select-none">
+    <div className="select-none">
       {isUser && isOwner ? (
         <LandingDialogDrawer
           relatedUserAvatar={relatedUser?.[0].avatar}
@@ -50,7 +54,7 @@ const LandingPage = ({
       {/* {isUser && isOwner ? <LandingForm landingToEdit={landingPage} /> : null} */}
 
       <div
-        className={`max-h-[1450px]  xs::max-h-[83vh] rounded-lg mt-3 relative  overflow-hidden flex flex-col-reverse items-center sm:flex-row justify-between  gap-5 gap-x-10 p-5 lg:p-10 ${
+        className={`xs::max-h-[83vh] relative mt-3 flex max-h-[1450px] flex-col-reverse items-center justify-between gap-5 gap-x-10 overflow-hidden rounded-lg p-5 sm:flex-row lg:p-10 ${
           (!landingPage || landingPage.grainyTexture) && "grainy"
         }`}
       >

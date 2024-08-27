@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { defaultTextColor } from "@/utils/constants";
 import { getIconForTool } from "@/components/shared/HandleIcons";
+import { LuFileEdit } from "react-icons/lu";
+
 import { cn } from "@/lib/utils";
 interface AboutMeLinksTech {
   linksAndtech: aboutMeFormProps;
@@ -57,12 +59,18 @@ const AboutMeLinksTech = ({
       )}
 
       {!isEditing && (
-        <Badge
-          onClick={() => setIsEditing(true)}
-          className="absolute bottom-[-50px] right-0 cursor-pointer"
-        >
-          {linksAndtech.links ? "Edit links" : "Add links"}
-        </Badge>
+        <div className="mt-24 flex items-center justify-center">
+          <Button
+            size="sm"
+            onClick={() => setIsEditing(true)}
+            className="gap-2"
+          >
+            <LuFileEdit size={20} />
+            {linksAndtech.links?.length || linksAndtech.toolsAndTech?.length
+              ? "EDIT LINKS & TOOLS"
+              : "ADD LINKS & TOOLS"}
+          </Button>
+        </div>
       )}
     </div>
   );
@@ -110,7 +118,7 @@ export const ShowLinksAndTools = ({
           <h1 className="mb-7 text-lg font-semibold">
             Some of the tools i can use:
           </h1>
-          <div className="flex flex-wrap gap-2 sm:justify-center">
+          <div className="flex flex-wrap justify-center gap-2">
             {tools.map((tool: string, i) => {
               const icon = getIconForTool(tool, true);
               return (
@@ -123,7 +131,10 @@ export const ShowLinksAndTools = ({
                   <span
                     style={{
                       paddingTop: "3px",
-                      color: `rgb(${Object.values(arrowColor).join(",")})`,
+                      color:
+                        arrowName === "none"
+                          ? ""
+                          : `rgb(${Object.values(arrowColor).join(",")})`,
                     }}
                     className={`text-lg ${!icon && !arrowShape && "hidden"}`}
                   >

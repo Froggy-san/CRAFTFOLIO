@@ -1,4 +1,4 @@
-import React from "react";
+import { getIconForTool } from "@/components/shared/HandleIcons";
 
 const AboutMePreview = ({
   tools,
@@ -9,15 +9,21 @@ const AboutMePreview = ({
   arrow: JSX.Element | null;
   color: string;
 }) => {
+
   return (
-    <div className=" flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-3">
       <h1 className="font-semibold">Preview:</h1>
       {tools.length
         ? tools.map((el, i) => (
-            <div key={i} className="flex items-center gap-1">
-              <span style={{ color: `rgb(${color})` }} className="mt-1 ">
+            <div key={i} className="show-tag flex items-center gap-1">
+              <span
+                style={{
+                  color: arrow ? `rgb(${color})` : "",
+                }}
+                className="mt-1"
+              >
                 {" "}
-                {arrow}
+                {getIconForTool(el, true) || arrow}
               </span>
 
               <span key={i}>{el}</span>

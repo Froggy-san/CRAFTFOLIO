@@ -4,7 +4,8 @@ import Heading from "@/components/shared/Heading";
 import FooterDiaDrawer from "./FooterDiaDrawer";
 import { UserFooterProps } from "@/types/types";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-import Links from "./Links";
+import { lazy, Suspense } from "react";
+const Links = lazy(() => import("./Links"));
 
 const Footer = ({
   isTheOwnerOfPage,
@@ -31,11 +32,11 @@ const Footer = ({
   if (isLoading) return <FullSnLoading />;
 
   return (
-    <div id="contact">
+    <div id="contact" className="mt-24">
       {isTheOwnerOfPage && <FooterDiaDrawer footerData={userFooter} />}
       <div
         id="footer-container"
-        className={` h-[70vh] md:h-[93vh] gap-10  flex flex-col items-center justify-center relative  antialiased text-center ${
+        className={`relative flex h-[86vh] flex-col items-center justify-center gap-10 text-center antialiased md:h-[90vh] ${
           className || ""
         }`}
       >
@@ -59,18 +60,20 @@ const Footer = ({
             userFooter?.additionalText ||
             "Although I’m not currently looking for any new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!"
           }
-          className="  tracking-wide max-w-[600px] text-foreground/70"
+          className="max-w-[600px] tracking-wide text-foreground/70"
         />
         <EmailButton
           text={userFooter?.emailBtnText}
           copiableText={userFooter?.copyText || userEmail}
         />
-        <Links
-          resume={resume}
-          userPhone={userPhone}
-          userEmail={userEmail}
-          userSocials={userSocials}
-        />
+        <Suspense>
+          <Links
+            resume={resume}
+            userPhone={userPhone}
+            userEmail={userEmail}
+            userSocials={userSocials}
+          />
+        </Suspense>
       </div>
     </div>
   );

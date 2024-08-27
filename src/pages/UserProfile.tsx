@@ -34,7 +34,6 @@ const UserProfile = () => {
 
   const isTheOwnerOfPage = user?.role === "admin" || user?.id === userId;
 
-  console.log(relatedUser?.[0]);
   useTrackVisted({
     currentViewedProfile: relatedUser?.[0],
     isOwnerOfPage: isTheOwnerOfPage,
@@ -54,8 +53,17 @@ const UserProfile = () => {
           <Suspense>
             <LazyFloatingNav
               navItems={[
-                { name: "Home", link: "home" },
-                { name: "Projects", link: "posts-container" },
+                { name: "Landing", link: "home" },
+                {
+                  name: (
+                    <span
+                      className={`${!userPosts?.length && "text-muted-foreground"}`}
+                    >
+                      Projects
+                    </span>
+                  ),
+                  link: "posts-container",
+                },
                 { name: "About", link: "about" },
                 { name: "Contact", link: "contact" },
                 {
@@ -93,8 +101,8 @@ const UserProfile = () => {
         )}
         {!pageCount ? null : <Pagination pageCount={pageCount} />}
       </div>
-      <div className="my-7 mb-52">
-        {/* <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} /> */}
+
+      <div className="my-7">
         <AboutMe isAuthenticated={isTheOwnerOfPage} userId={userId || ""} />
       </div>
 

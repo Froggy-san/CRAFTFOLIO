@@ -21,25 +21,25 @@ const ProjectControls = ({
   selectDisabled?: boolean;
 }) => {
   return (
-    <div className=" mt-16  mb-5">
+    <div className="mb-5 mt-16">
       {isTheOwnerOfPage ? (
-        <div className=" flex items-center justify-center mb-10">
+        <div className="mb-10 flex items-center justify-center">
           <Button
             size="sm"
-            className=" mx-auto w-full  max-w-[250px]  gap-2  sm:hidden"
+            className="mx-auto w-full max-w-[250px] gap-2"
             asChild
           >
             <Link to="/upload-post">
-              <TbLayoutGridAdd size={20} /> Upload a post
+              <TbLayoutGridAdd size={20} /> UPLOAD POST
             </Link>
           </Button>
         </div>
       ) : null}
-      <div className=" relative flex justify-around xs:flex-row  items-center  gap-3  ">
+      <div className="relative flex items-center justify-around gap-3 xs:flex-row">
         <Heading>Posts</Heading>
-        <Search className="   w-[60%] max-w-[500px]" />
-        <div className=" flex items-center gap-2">
-          {isTheOwnerOfPage && (
+        <Search className="w-[60%] max-w-[500px]" />
+        <div className="flex items-center gap-2">
+          {/* {isTheOwnerOfPage && (
             <LinkBtn
               to="/upload-post"
               variant="ghost"
@@ -47,13 +47,13 @@ const ProjectControls = ({
             >
               Add Post <HiOutlinePlus className=" h-3 w-3" />
             </LinkBtn>
-          )}
+          )} */}
           <SelectComp
             paramName="sort"
             disabled={selectDisabled}
             options={options}
             selectPlaceholer="Sort by"
-            className=" w-[200px] xs:w-[120px]"
+            className="w-[200px] xs:w-[120px]"
           />
         </div>
       </div>

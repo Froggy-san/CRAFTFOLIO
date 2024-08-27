@@ -310,7 +310,7 @@ export async function getUsers({ searchTerm, page, sortValue }: GetUsersProps) {
 
   const { data: publicUsers, error, count } = await query.range(from, to);
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
     throw new Error(error.message);
   }
   return { publicUsers, count };

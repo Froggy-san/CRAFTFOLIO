@@ -13,12 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
+
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import useSignUp from "./useSignUp";
@@ -64,10 +59,10 @@ const SignUpForm = ({
     <div
       className={
         className ||
-        "w-[94%] mx-auto  overflow-y-auto overflow-x-hidden h-[81%] mt-32 px-3"
+        "mx-auto mt-32 h-[81%] w-[94%] overflow-y-auto overflow-x-hidden px-3"
       }
     >
-      <h1 className=" text-xl font-semibold mb-12">Sign up</h1>
+      <h1 className="mb-12 text-xl font-semibold">Sign up</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormFieldItem<sginUpSchemaTypes>
@@ -76,7 +71,11 @@ const SignUpForm = ({
             fieldName="username"
             description="Choose a username for your account."
           >
-            <Input placeholder="cartfoilio200" disabled={isSigning} />
+            <Input
+              type="text"
+              placeholder="cartfoilio200"
+              disabled={isSigning}
+            />
           </FormFieldItem>
 
           <FormFieldItem<sginUpSchemaTypes>
@@ -85,7 +84,11 @@ const SignUpForm = ({
             fieldName="email"
             description="Enter a vaild email."
           >
-            <Input placeholder="cartfoilio200" disabled={isSigning} />
+            <Input
+              type="email"
+              placeholder="cartfoilio200"
+              disabled={isSigning}
+            />
           </FormFieldItem>
           <PasswordShowHide<sginUpSchemaTypes>
             onChange={setIsShowPass}
@@ -127,7 +130,7 @@ const SignUpForm = ({
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Phone number</FormLabel>
                 <FormControl>
                   <PhoneInput
                     defaultCountry="EG"
@@ -202,9 +205,9 @@ const SignUpForm = ({
             )}
           /> */}
 
-          <div className=" flex flex-col items-center gap-4 ">
+          <div className="flex flex-col items-center gap-4">
             <Button
-              className=" w-full"
+              className="w-full"
               size="sm"
               disabled={isSigning}
               type="submit"
@@ -218,7 +221,7 @@ const SignUpForm = ({
               onClick={() => {
                 form.reset();
               }}
-              className=" w-full"
+              className="w-full"
               disabled={isSigning}
               type="button"
             >
@@ -226,9 +229,9 @@ const SignUpForm = ({
             </Button>
           </div>
           {!adminSession && (
-            <p className=" text-sm pb-10">
+            <p className="pb-10 text-sm">
               Don't have an account?{" "}
-              <Link className=" text-blue-500 underline" to={"/login"}>
+              <Link className="text-blue-500 underline" to={"/login"}>
                 Login.
               </Link>
             </p>
