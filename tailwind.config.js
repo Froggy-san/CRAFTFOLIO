@@ -37,7 +37,6 @@ module.exports = {
         "dashboard-green": "var(--dashboard-green)",
         "dashboard-indigo": "var(--dashboard-indigo)",
         "dashboard-orange": "var(--dashboard-orange)",
-
         "dashboard-text-blue": "var(--dashboard-text-blue)",
         "dashboard-text-green": "var(--dashboard-text-green)",
         "dashboard-text-indigo": "var(--dashboard-text-indigo)",
@@ -158,7 +157,7 @@ module.exports = {
 function addVariablesForColors({ addBase, theme }) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   );
 
   addBase({

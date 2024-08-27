@@ -30,6 +30,7 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
+
       <HomePostControlls
         selectDisabled={!posts?.length}
         user={userObj}
