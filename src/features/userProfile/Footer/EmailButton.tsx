@@ -23,9 +23,9 @@ const EmailButton = ({
     return () => clearTimeout(setTime); // Use clearTimeout for setTimeout
   }, [copied]);
   return (
-    <Button className=" relative" onClick={handleCopy}>
+    <Button className="relative" onClick={handleCopy}>
       <div
-        className={` absolute -bottom-5 left-1/2 -translate-x-1/2 w-[300px] h-[300px] pointer-events-none`}
+        className={`pointer-events-none absolute -bottom-5 left-1/2 h-[300px] w-[300px] -translate-x-1/2`}
       >
         <Lottie
           options={{
@@ -38,7 +38,7 @@ const EmailButton = ({
           }}
         />
       </div>
-      {text ? text : copied ? "Email copied" : "Copy email"}
+      {copied ? "Email copied" : text || "Copy email"}
     </Button>
   );
 };
