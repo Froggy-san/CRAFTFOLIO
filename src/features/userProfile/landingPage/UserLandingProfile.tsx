@@ -25,7 +25,7 @@ const UserLandingProfile = ({
     function () {
       setViewedImaged(profileImage);
     },
-    [profileImage]
+    [profileImage],
   );
 
   const handleCloseOptions = () => {
@@ -33,7 +33,7 @@ const UserLandingProfile = ({
   };
 
   return (
-    <div className=" flex flex-col gap-3">
+    <div className="flex flex-col gap-3">
       {" "}
       <div
         onClick={() => {
@@ -42,7 +42,7 @@ const UserLandingProfile = ({
           else handleShowImage();
         }}
         aria-label="user's picture in the landing page"
-        className=" w-28 relative h-28 xs:w-36 xs:h-36  lg:w-40 lg:h-40 rounded-full  hover:grayscale-[10%] hover:opacity-95   transition-all duration-200 cursor-pointer"
+        className="relative h-28 w-28 cursor-pointer rounded-full transition-all duration-200 hover:opacity-95 hover:grayscale-[10%] xs:h-36 xs:w-36 lg:h-40 lg:w-40 4xl:h-52 4xl:w-52"
       >
         {/* OPTIONS  */}
         <AnimatePresence>
@@ -68,7 +68,7 @@ const UserLandingProfile = ({
                 }}
                 exit={{ width: 30, right: "calc(100% - 30px)", opacity: 0 }}
                 transition={{ type: "spring", duration: 0.3 }}
-                className="absolute  overflow-hidden p-1 rounded-md bg-background text-sm whitespace-nowrap"
+                className="absolute overflow-hidden whitespace-nowrap rounded-md bg-background p-1 text-sm"
               >
                 <button
                   onClick={(e) => {
@@ -76,16 +76,16 @@ const UserLandingProfile = ({
                     handleCloseOptions();
                     handleShowImage();
                   }}
-                  className=" relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent focus:text-accent-foreground w-full"
+                  className="relative flex w-full select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent focus:text-accent-foreground"
                 >
-                  <IoMdImages className="mr-2 " size={20} />
+                  <IoMdImages className="mr-2" size={20} />
                   View image
                 </button>
                 <Link
                   to="/user-settings"
-                  className=" relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent focus:text-accent-foreground w-full"
+                  className="relative flex w-full select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent focus:text-accent-foreground"
                 >
-                  <CiSettings className="mr-2 " size={20} />
+                  <CiSettings className="mr-2" size={20} />
                   Settings
                 </Link>
               </motion.div>
@@ -96,7 +96,7 @@ const UserLandingProfile = ({
         <img
           src={profileImage}
           alt="image"
-          className=" h-full w-full object-cover rounded-full"
+          className="h-full w-full rounded-full object-cover"
         />
       </div>
       <ImageView

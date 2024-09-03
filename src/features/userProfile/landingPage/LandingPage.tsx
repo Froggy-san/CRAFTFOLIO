@@ -1,4 +1,4 @@
-import UserLandingProfile from "@/features/landingPage/UserLandingProfile";
+import UserLandingProfile from "@/features/userProfile/landingPage/UserLandingProfile";
 import HandleIcons from "@/components/shared/HandleLinkIcons";
 import useLandingPage from "./useLandingPage";
 import LandingForm from "./LandingForm";

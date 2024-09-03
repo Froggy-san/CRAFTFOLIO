@@ -31,7 +31,7 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
   const [hasTheFormDataChanged, setHasTheFormDataChanged] = useState(false); // To prevent the drawer from moving while the user is scrolling inside the drawr content.
   const [disableDrag, selectDisabled] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const title = "Create a footer section for your portfolio.";
+  const title = "Edit your footer section for your portfolio.";
   const dialogDescriptionText = `Connect with the creative world around you by including your email and socials.`;
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -39,7 +39,7 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
   const submitForm = () => {
     if (formRef.current) {
       formRef.current.dispatchEvent(
-        new Event("submit", { cancelable: true, bubbles: true })
+        new Event("submit", { cancelable: true, bubbles: true }),
       );
     }
   };
@@ -49,12 +49,12 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <div className="flex justify-end">
           <Button
-            className=" ml-auto gap-1  my-3"
+            className="my-3 ml-auto gap-1"
             onClick={() => setOpen(true)}
             variant="ghost"
           >
-            <span className=" text-xs font-semibold">
-              Create/Edit your footer section.
+            <span className="text-xs font-semibold">
+              Edit your footer section.
             </span>
             <TbPhotoEdit className="h-4 w-4" />
           </Button>
@@ -62,7 +62,7 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
 
         <DialogContent
           style={{ borderRadius: "1rem" }}
-          className=" overflow-x-hidden overflow-y-scroll scroll-gutter-both scroll h-[80dvb] max-w-[950px] px-1 xs:px-6   !rounded-none lg:!rounded-[1rem] "
+          className="scroll-gutter-both scroll h-[80dvb] max-w-[950px] overflow-x-hidden overflow-y-scroll !rounded-none px-1 xs:px-6 lg:!rounded-[1rem]"
         >
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
@@ -80,18 +80,18 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
       <DrawerTrigger asChild>
         <div className="flex items-end">
           <Button
-            className=" ml-auto gap-1  my-3"
+            className="my-3 ml-auto gap-1"
             onClick={() => setOpen(true)}
             variant="ghost"
           >
-            <span className=" text-xs font-semibold">
+            <span className="text-xs font-semibold">
               Create/Edit your landing page.
             </span>
             <TbPhotoEdit className="h-4 w-4" />
           </Button>
         </div>
       </DrawerTrigger>
-      <DrawerContent className=" h-[85vh]">
+      <DrawerContent className="h-[85vh]">
         <DrawerHeader className="text-center sm:text-center">
           <DrawerTitle>{title}</DrawerTitle>
           <DrawerDescription>{dialogDescriptionText}</DrawerDescription>
@@ -100,7 +100,7 @@ function FooterDiaDrawer({ footerData }: { footerData?: UserFooterProps }) {
         <div
           onTouchStart={() => selectDisabled(true)}
           onTouchEnd={() => selectDisabled(false)}
-          className=" px-2  mb-10 overflow-y-auto"
+          className="mb-10 overflow-y-auto px-2"
         >
           <FooterForm
             setHasTheFormDataChanged={setHasTheFormDataChanged}

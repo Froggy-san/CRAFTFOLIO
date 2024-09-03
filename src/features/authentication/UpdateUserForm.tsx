@@ -65,10 +65,10 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
     });
   }
   return (
-    <div className="   w-full lg:w-[94%]  mx-auto    overflow-x-hidden   mt-12 sm:px-3">
+    <div className="mx-auto mt-12 w-full overflow-x-hidden sm:px-3 lg:w-[94%]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className=" flex flex-col md:flex-row gap-5 px-1">
+          <div className="flex flex-col gap-5 px-1 md:flex-row">
             <FormField
               control={form.control}
               name="avatar"
@@ -87,35 +87,34 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 </FormItem>
               )}
             />
-            <div className=" flex-1 space-y-3 max-w-full min-w-[250px]">
-              <FormRow className=" justify-between  items-center">
+            <div className="min-w-[250px] max-w-full flex-1 space-y-3">
+              <FormRow className="items-center justify-between">
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Username"
                   fieldName="username"
                   control={form.control}
-                  className=" w-full"
+                  className="w-full"
+                  description="A personalized name for your account."
                 >
-                  <Input
-                    placeholder="Mohammed Osama"
-                    disabled={isUpdatingUser}
-                  />
+                  <Input disabled={isUpdatingUser} />
                 </FormFieldItem>
 
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Email"
                   fieldName="email"
-                  className=" w-full"
+                  className="w-full"
+                  description="Your primary email address"
                   control={form.control}
                 >
                   <Input placeholder="User email" disabled />
                 </FormFieldItem>
               </FormRow>
-              <FormRow className=" justify-between  items-center">
+              <FormRow className="items-center justify-between">
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Speciality"
                   fieldName="speciality"
-                  className=" w-full"
-                  description="Enter what you specialized in."
+                  className="w-full"
+                  description="Your primary area of expertise or focus."
                   control={form.control}
                 >
                   <Input
@@ -127,8 +126,8 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Resume URL"
                   fieldName="resumeUrl"
-                  className=" w-full"
-                  description="Include your resume link."
+                  className="w-full"
+                  description="Upload your resume url for potential employers to view."
                   control={form.control}
                 >
                   <Input type="text" disabled={isUpdatingUser} />
@@ -166,7 +165,9 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                         onChange={field.onChange}
                       />
                     </FormControl>
-                    <FormDescription>Your phone number.</FormDescription>
+                    <FormDescription>
+                      Your contact phone number.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -222,7 +223,9 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                         </TagsInput.TagsContainer>
                       </TagsInput>
                     </FormControl>
-                    <FormDescription>Your phone number.</FormDescription>
+                    <FormDescription>
+                      Add links to your social media profiles for networking.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -240,11 +243,11 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
               </FormFieldItem> */}
             </div>
           </div>
-          <div className="flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 pb-10">
+          <div className="flex flex-col-reverse items-center justify-end gap-4 pb-10 sm:flex-row">
             <Button
               variant="secondary"
               size="sm"
-              className=" w-full sm:w-[120px]"
+              className="w-full sm:w-[120px]"
               onClick={() => {
                 form.reset();
               }}
@@ -257,7 +260,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
               size="sm"
               disabled={isEqual || isUpdatingUser}
               type="submit"
-              className=" w-full sm:w-[120px]"
+              className="w-full sm:w-[120px]"
             >
               Submit
             </Button>

@@ -38,7 +38,7 @@ const EmailButton = ({
           }}
         />
       </div>
-      {copied ? "Email copied" : text || "Copy email"}
+      {copied ? "Copied!" : text || "Copy email"}
     </Button>
   );
 };

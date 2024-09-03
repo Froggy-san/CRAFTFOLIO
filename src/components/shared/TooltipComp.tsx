@@ -9,7 +9,9 @@ const TooltipComp = ({
   children,
   toolTipText,
   duration,
+  className,
 }: {
+  className?: string;
   children: ReactNode;
   toolTipText: string;
   duration?: number;
@@ -18,7 +20,7 @@ const TooltipComp = ({
     <TooltipProvider delayDuration={duration || 500}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent className={className || ""}>
           <p>{toolTipText}</p>
         </TooltipContent>
       </Tooltip>

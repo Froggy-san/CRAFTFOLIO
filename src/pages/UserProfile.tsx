@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import useUserPosts from "@/features/projects/useUserPosts";
 import Pagination from "@/components/shared/Pagination";
-import LandingPage from "@/features/landingPage/LandingPage";
+import LandingPage from "@/features/userProfile/landingPage/LandingPage";
 import ProjectControls from "@/features/projects/ProjectControls";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import AboutMe from "@/features/userProfile/AboutMeSection/AboutMe";
@@ -10,7 +10,7 @@ import UserProjects from "@/features/userProfile/UserProjects";
 import BackButton from "@/components/shared/BackButton";
 
 import { defaultProfilePicture } from "@/utils/constants";
-import useLandingPage from "@/features/landingPage/useLandingPage";
+import useLandingPage from "@/features/userProfile/landingPage/useLandingPage";
 import TooltipComp from "@/components/shared/TooltipComp";
 import Footer from "@/features/userProfile/Footer/Footer";
 
@@ -20,6 +20,7 @@ import useScrollUpWhenMounted from "@/hooks/useScrollUpWhenMounted";
 import { createPortal } from "react-dom";
 import { lazy, Suspense } from "react";
 import useTrackVisted from "@/hooks/useTrackVisted";
+import Resume from "@/features/userProfile/Resume";
 const LazyFloatingNav = lazy(() => import("@/components/ui/FloatingNavBar"));
 const UserProfile = () => {
   const { user, isLoading } = useAuth();
@@ -53,7 +54,17 @@ const UserProfile = () => {
           <Suspense>
             <LazyFloatingNav
               navItems={[
-                { name: "Landing", link: "home" },
+                // { name: "Landing", link: "home" },
+                {
+                  name: (
+                    <Resume
+                      asLink={true}
+                      isOwnerOfPage={isTheOwnerOfPage}
+                      link={user?.resumeUrl || ""}
+                    />
+                  ),
+                  link: "",
+                },
                 {
                   name: (
                     <span
@@ -78,7 +89,7 @@ const UserProfile = () => {
                       />
                     </TooltipComp>
                   ),
-                  link: "",
+                  link: "home",
                 },
               ]}
             />

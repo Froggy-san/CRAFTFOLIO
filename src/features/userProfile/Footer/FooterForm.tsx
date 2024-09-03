@@ -21,11 +21,7 @@ import Avatar from "@/components/shared/Avatar";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/useAuth";
 import React, { Ref, SetStateAction, useEffect, useRef, useState } from "react";
-import {
-  EditUserFooterProps,
-  landingProps,
-  UserFooterProps,
-} from "@/types/types";
+import { UserFooterProps } from "@/types/types";
 
 import IconButton from "@/components/shared/IconButton";
 import _ from "lodash";
@@ -33,6 +29,7 @@ import useObjectCompare from "@/hooks/useCompareObjects";
 import FormFieldItem from "@/components/shared/FormFieldItem";
 import useCreateUserFooter from "./useCreateFooter";
 import useEditUserFooter from "./useEditUserFooter";
+import FormRow from "@/components/shared/FormRow";
 
 // import TagsInput from "@/components/shared/TagsInput";
 const FooterSchema = z.object({
@@ -54,7 +51,7 @@ const FooterForm = React.forwardRef(function (
     footerData?: UserFooterProps;
     setHasTheFormDataChanged?: React.Dispatch<SetStateAction<boolean>>;
   },
-  ref?: Ref<HTMLFormElement>
+  ref?: Ref<HTMLFormElement>,
 ) {
   const { user } = useAuth();
   const { isLoading, createFooter } = useCreateUserFooter();
@@ -63,7 +60,7 @@ const FooterForm = React.forwardRef(function (
     heading: footerData?.heading || "",
     additionalText: footerData?.additionalText || "",
     emailBtnText: footerData?.emailBtnText || "",
-    copyText: footerData?.copyText || "",
+    copyText: footerData?.copyText || `${user?.email}`,
   };
 
   const form = useForm<FooterSchemaTypes>({
@@ -110,19 +107,19 @@ const FooterForm = React.forwardRef(function (
     }
   }
   return (
-    <div className=" min-w-[120px] m-auto  w-full  max-w-[1000px]">
-      <div className="   px-1">
+    <div className="m-auto w-full min-w-[120px] max-w-[1000px]">
+      <div className="px-1">
         <Form {...form}>
           <form
             ref={ref}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 "
+            className="space-y-8"
           >
             <FormFieldItem<FooterSchemaTypes>
               labelText="Heading"
               control={form.control}
               fieldName="heading"
-              description="Heading."
+              description="This field allows you to add a header or a call-to-action text, such as “Get in Touch” or “Contact Me”."
             >
               <Input
                 placeholder="Contact me"
@@ -134,7 +131,7 @@ const FooterForm = React.forwardRef(function (
               labelText="Additional text"
               control={form.control}
               fieldName="additionalText"
-              description="Wrtie what ever you want."
+              description="Use this field to provide additional information or a personal message, like “I am looking forward to meeting you” or “Feel free to reach out for collaborations”."
             >
               <Textarea
                 placeholder="Let's get you started."
@@ -142,30 +139,34 @@ const FooterForm = React.forwardRef(function (
               />
             </FormFieldItem>
 
-            <FormFieldItem<FooterSchemaTypes>
-              labelText="Button text"
-              control={form.control}
-              fieldName="emailBtnText"
-              description="Enter the text you want the button to say."
-            >
-              <Input
-                placeholder="Let's get you started."
-                disabled={isEditting || isLoading}
-              />
-            </FormFieldItem>
+            <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
+              <FormFieldItem<FooterSchemaTypes>
+                labelText="Button text"
+                control={form.control}
+                className="mb-auto w-full"
+                fieldName="emailBtnText"
+                description="This field lets you customize the text on the button that visitors will click to copy your email address."
+              >
+                <Input
+                  placeholder="Let's get you started."
+                  disabled={isEditting || isLoading}
+                />
+              </FormFieldItem>
 
-            <FormFieldItem<FooterSchemaTypes>
-              labelText="Copiable Text"
-              control={form.control}
-              fieldName="copyText"
-              description="Enter the text you want the user to copy when clicking the button."
-            >
-              <Input
-                placeholder="Let's get you started."
-                disabled={isEditting || isLoading}
-              />
-            </FormFieldItem>
-            <div className="  hidden md:flex flex-col-reverse  sm:flex-row items-center justify-end gap-4 ">
+              <FormFieldItem<FooterSchemaTypes>
+                labelText="Copiable Text"
+                control={form.control}
+                className="mb-auto w-full"
+                fieldName="copyText"
+                description="Enter the text that you want visitors to copy when they click the button. This is typically your email address or any other contact information"
+              >
+                <Input
+                  placeholder="Let's get you started."
+                  disabled={isEditting || isLoading}
+                />
+              </FormFieldItem>
+            </div>
+            <div className="hidden flex-col-reverse items-center justify-end gap-4 sm:flex-row md:flex">
               <Button
                 variant="secondary"
                 size="sm"
@@ -175,7 +176,7 @@ const FooterForm = React.forwardRef(function (
                   setOpen(false);
                 }}
                 type="button"
-                className=" tracking-wider w-full sm:w-[unset]"
+                className="w-full tracking-wider sm:w-[unset]"
               >
                 Cancel
               </Button>
@@ -184,7 +185,7 @@ const FooterForm = React.forwardRef(function (
                 type="submit"
                 onClick={() => setOpen(false)}
                 disabled={isEditting || isLoading || isEqual}
-                className=" tracking-wider w-full sm:w-[unset]"
+                className="w-full tracking-wider sm:w-[unset]"
               >
                 {footerData ? "Edit" : "Create"}
               </Button>
