@@ -13,7 +13,7 @@ const LandingPageText = ({
   return (
     <div
       style={style}
-      className={`z-10 flex h-full max-w-[95%] flex-1 flex-col gap-6 overflow-hidden whitespace-pre-wrap text-center text-xl xs:gap-10 sm:text-left ${className}`}
+      className={`z-10 flex h-full flex-1 flex-col gap-6 overflow-hidden whitespace-pre-wrap text-center text-xl xs:gap-10 sm:text-left md:max-w-[95%] ${className}`}
     >
       {/* className="  text-xl  xs:text-1xl md:text-2xl lg:text-4xl 3xl:text-5xl " */}
       {landingPageText.primaryText && (

@@ -22,7 +22,7 @@ const PostsList = ({
 
   if (isLoading)
     return (
-      <div className=" flex items-center justify-center h-96">
+      <div className="flex h-[90vh] items-center justify-center">
         <Loading size={30} />
       </div>
     );
@@ -30,7 +30,7 @@ const PostsList = ({
   if (posts && !posts.length && searchTerm)
     return (
       <Empty
-        className=" h-[500px] flex justify-center items-center font-semibold"
+        className="flex h-[500px] items-center justify-center font-semibold"
         message={`No matches for "${searchTerm}"`}
       />
     );
@@ -38,17 +38,17 @@ const PostsList = ({
   if (!isLoading && !posts?.length)
     return (
       <Empty
-        className=" flex  flex-col sm:flex-row h-[500px]  justify-center items-center gap-2"
+        className="flex h-[500px] flex-col items-center justify-center gap-2 sm:flex-row"
         message={
           userId ? (
             <>
               {" "}
-              <p className="  font-semibold">
+              <p className="font-semibold">
                 There are not posts, be the first one to post.
               </p>{" "}
               <LinkBtn
                 to={`/user/${userId}`}
-                className=" py-0 h-[35px] pb-[2px]"
+                className="h-[35px] py-0 pb-[2px]"
               >
                 My profile.
               </LinkBtn>
@@ -57,7 +57,7 @@ const PostsList = ({
             <>
               {" "}
               <p>There are not posts, be the first one to post.</p>{" "}
-              <LinkBtn to="/login" className=" py-0 h-[35px] pb-[2px]">
+              <LinkBtn to="/login" className="h-[35px] py-0 pb-[2px]">
                 Login.
               </LinkBtn>
             </>
@@ -68,7 +68,7 @@ const PostsList = ({
 
   // console.log(posts, "posts!!");
   return (
-    <div className=" mb-24">
+    <div className="mb-24">
       <PostsGrid posts={posts} />
     </div>
   );
