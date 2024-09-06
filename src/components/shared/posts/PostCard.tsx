@@ -33,7 +33,7 @@ const PostCard = ({ post }: { post: Project }) => {
     userId: post.publicUsers?.userId,
     avatar: post.publicUsers?.avatar,
   };
-  const x = useMotionValue(0);
+
   const postTech =
     post && post.technologies ? JSON.parse(post.technologies) : [];
   const previewLink = JSON.parse(post.links).find(
@@ -95,7 +95,7 @@ const PostCard = ({ post }: { post: Project }) => {
             {isDeleting && (
               <Loading className="center-abslute z-30 !opacity-100" size={30} />
             )}
-            <GrainyImg />
+            {/* <GrainyImg /> */}
           </div>
         </Link>
       )}

@@ -60,7 +60,7 @@ const UserProfile = () => {
                     <Resume
                       asLink={true}
                       isOwnerOfPage={isTheOwnerOfPage}
-                      link={user?.resumeUrl || ""}
+                      link={relatedUser[0]?.resumeUrl || ""}
                     />
                   ),
                   link: "",
