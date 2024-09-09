@@ -92,9 +92,8 @@ function App() {
                 fontSize: "16px",
                 maxWidth: "500px",
                 padding: "7px 17px",
-
-                // backgroundColor: "var(--color-grey-0)",
-                // color: "var(--color-grey-700)",
+                backgroundColor: "hsl(var(--primary-foreground))",
+                color: "hsl(var(--foreground))",
               },
             }}
           />
