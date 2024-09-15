@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Loading from "@/components/shared/Loading";
 
 import { useAuth } from "@/hooks/useAuth";
-import { imageObject, Project, User } from "@/types/types";
+import { imageObject, Project } from "@/types/types";
 
 // import ProjectControls from "@/features/projects/ProjectControls";
 import ErrorComp from "@/components/shared/ErrorComp";
@@ -19,9 +19,6 @@ import PosterInfo from "@/features/projectView/PosterInfo";
 import Tools from "@/features/projectView/Tools";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import Links from "@/features/projectView/Links";
-import Footer from "@/features/userProfile/Footer/Footer";
-import { format } from "date-fns";
-import GrainyImg from "@/components/shared/GrainyImg";
 import TypeAndDate from "@/features/projectView/TypeAndDate";
 
 const ProjectView = () => {
@@ -35,7 +32,7 @@ const ProjectView = () => {
   } = useGetProjectById(projectId || "");
 
   const project: Project | undefined = projectById?.[0];
-  const posterData: User | undefined = userById?.[0];
+  // const posterData: User | undefined = userById?.[0];
 
   useDocumentTitle(project?.name || "");
 
@@ -65,7 +62,7 @@ const ProjectView = () => {
   const images = project.projectImages.map((imageObj) => imageObj.imageUrl);
 
   return (
-    <div id="project-view" className="mt-6 md:px-10">
+    <div id="project-view" className="mt-6 pb-5 md:px-10">
       {/* <div className=" flex flex-col xs:flex-row justify-between mb-4">
         <PosterInfo poster={relatedUser} postDate={project.created_at} />
         {isAuthLoading ? (
@@ -124,19 +121,19 @@ const ProjectView = () => {
           />
           <Description Text={project.description} />
           <Tools toolsArr={toolsArr} />
-          <Links links={project.links} />
+          <Links links={project.links} isOwner={isProjectOwner} />
           <Contributors contrbiutersTags={contrbiutersTags} />
         </div>
       </div>
 
-      <Footer
+      {/* <Footer
         resume={posterData?.resumeUrl || ""}
         userPhone={posterData?.phone || ""}
         userEmail={posterData?.email || ""}
         postOwnerId={posterData?.userId}
         isTheOwnerOfPage={isProjectOwner}
         userSocials={posterData?.socials || ""}
-      />
+      /> */}
     </div>
   );
 };

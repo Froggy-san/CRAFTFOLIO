@@ -11,12 +11,11 @@ import { BsArrowUpRight } from "react-icons/bs";
 import PostCardCarousel from "./PostCardCarousel";
 import { format } from "date-fns";
 import ToolsUsed from "./ToolsUsed";
-import { motion, useMotionValue } from "framer-motion";
-import GrainyImg from "../GrainyImg";
-
+import { motion } from "framer-motion";
 import PostCardContributors from "./PostCardContributors";
 import Loading from "../Loading";
 import { useMemo } from "react";
+import { IoIosImages } from "react-icons/io";
 
 const previewRegex = /pre[av]iew/i;
 
@@ -90,7 +89,8 @@ const PostCard = ({ post }: { post: Project }) => {
         />
       ) : (
         <Link to={`/project/${post.id}`}>
-          <div className="grainy relative flex h-[200px] items-center justify-center overflow-hidden rounded-md p-0 font-semibold xs:h-[250px] sm:h-[350px]">
+          <div className="grainy relative flex h-[200px] flex-col items-center justify-center overflow-hidden rounded-md p-0 font-semibold xs:h-[250px] sm:h-[350px]">
+            <IoIosImages className="h-12 w-12 sm:h-24 sm:w-24" />
             No images.
             {isDeleting && (
               <Loading className="center-abslute z-30 !opacity-100" size={30} />

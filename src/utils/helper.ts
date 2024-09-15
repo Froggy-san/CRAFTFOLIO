@@ -29,7 +29,7 @@ import { formatDistance, parseISO, subDays } from "date-fns";
 
 export const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en", { style: "currency", currency: "egp" }).format(
-    value
+    value,
   );
 
 export const formatText = (value: string) => {
@@ -85,7 +85,7 @@ export function validateEmail(email: string) {
 
 export function isValidUrl(
   urlString: string,
-  allowedProtocols: string[] = ["http", "https", "ftp", "mailto"]
+  allowedProtocols: string[] = ["http", "https", "ftp", "mailto"],
 ): boolean {
   try {
     const url = new URL(urlString);
@@ -214,3 +214,39 @@ const previewRegex = /pre[av]iew:/i;
 export const findPreviewLink = (links: string) => {
   return links.split(",").find((link) => previewRegex.test(link.trim()));
 };
+
+function getLevenshteinDistance(a: string, b: string): number {
+  const matrix: number[][] = [];
+
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i][j - 1] + 1, // insertion
+          matrix[i - 1][j] + 1, // deletion
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+export function isCloseMatch(input: string, target: string): boolean {
+  const distance = getLevenshteinDistance(
+    input.toLowerCase(),
+    target.toLowerCase(),
+  );
+  return distance <= 2; // Adjust the threshold as needed
+}

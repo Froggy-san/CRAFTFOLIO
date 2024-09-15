@@ -6,16 +6,16 @@ import React from "react";
 const Tools = ({ toolsArr }: { toolsArr: string[] }) => {
   if (!toolsArr.filter((el) => el !== "").length)
     return (
-      <span className=" flex items-center flex-wrap  h-[25px] overflow-hidden">
+      <span className="flex h-[25px] flex-wrap items-center overflow-hidden">
         Tools: ~
       </span>
     );
 
   return (
     <div>
-      <Heading Text="Tools:" as="h3" className="font-semibold text-lg" />
-      <div className=" flex items-center justify-center sm:justify-normal flex-wrap mt-5  overflow-hidden ">
-        <span className=" text-lg  pb-[2px]">[</span>{" "}
+      <Heading Text="Tools:" as="h3" className="text-lg font-semibold" />
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-y-1 overflow-hidden sm:justify-normal">
+        <span className="pb-[2px] text-lg">[</span>{" "}
         {toolsArr.map((tool, i: number) => {
           const lastITem = i + 1 === toolsArr.length;
           const icon = getIconForTool(tool);
@@ -25,7 +25,7 @@ const Tools = ({ toolsArr }: { toolsArr: string[] }) => {
             <React.Fragment key={i}>
               <TooltipComp toolTipText={tool}>
                 <span
-                  className={`h-full flex justify-center items-center ${
+                  className={`flex h-full items-center justify-center ${
                     isReactNode ? "text-[20px]" : "text-sm"
                   }`}
                 >
@@ -33,12 +33,12 @@ const Tools = ({ toolsArr }: { toolsArr: string[] }) => {
                 </span>
               </TooltipComp>
               {!lastITem && icon ? (
-                <span className=" font-semibold text-[12px] mx-3"> , </span>
+                <span className="mx-3 text-[12px] font-semibold"> , </span>
               ) : null}
             </React.Fragment>
           );
         })}
-        <span className=" text-lg  pb-[2px]"> ]</span>
+        <span className="pb-[2px] text-lg"> ]</span>
       </div>
     </div>
   );
