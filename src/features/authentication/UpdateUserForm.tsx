@@ -93,7 +93,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                   labelText="Username"
                   fieldName="username"
                   control={form.control}
-                  className="w-full"
+                  className="mb-auto w-full"
                   description="A personalized name for your account."
                 >
                   <Input disabled={isUpdatingUser} />
@@ -102,7 +102,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Email"
                   fieldName="email"
-                  className="w-full"
+                  className="mb-auto w-full"
                   description="Your primary email address"
                   control={form.control}
                 >
@@ -113,7 +113,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Speciality"
                   fieldName="speciality"
-                  className="w-full"
+                  className="mb-auto w-full"
                   description="Your primary area of expertise or focus."
                   control={form.control}
                 >
@@ -126,7 +126,7 @@ const UpdateUserForm = ({ user }: { user: User | undefined }) => {
                 <FormFieldItem<updateUserSchemaTypes>
                   labelText="Resume URL"
                   fieldName="resumeUrl"
-                  className="w-full"
+                  className="mb-auto w-full"
                   description="Upload your resume url for potential employers to view."
                   control={form.control}
                 >

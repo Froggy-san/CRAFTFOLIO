@@ -23,6 +23,10 @@ import ForgetPassword from "./features/authentication/ForgetPassword";
 import ResetPassword from "./features/authentication/ResetPassword";
 import DashBoard from "./pages/DashBoard";
 import Error from "./components/shared/Error";
+import { useEffect } from "react";
+import supabase from "./services/supabase";
+import { deleteUser, getCurrentUser, getUserById } from "./services/authApi";
+import { createAboutMe } from "./services/aboutMeApi";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +74,47 @@ const queryClient = new QueryClient({
   },
 });
 function App() {
+  useEffect(() => {
+    const checkIfUserExists = async () => {
+      const { data } = await supabase.auth.getSession();
+      const user = await getUserById(data.session?.user.id || "");
+
+      if (!user.length) {
+        const { error: publicUserError } = await supabase
+          .from("publicUsers")
+          .insert([
+            {
+              email: data.session?.user.email,
+              phone: "",
+              speciality: "",
+              username: data.session?.user.user_metadata.name,
+              userId: data.session?.user?.id,
+              resumeUrl: "",
+            },
+          ])
+          .select();
+
+        // if (publicUserError) throw new Error(publicUserError.message);
+
+        const DEFAULT_ABOUT_ME_COLOR = { r: 110, g: 64, b: 191, a: 1 };
+
+        const aboutError = await createAboutMe({
+          links: "",
+          aboutMe: "",
+          toolsAndTech: "",
+          arrowType: "",
+          arrowColor: JSON.stringify(DEFAULT_ABOUT_ME_COLOR),
+          user_id: data.session?.user?.id,
+        });
+        if (aboutError) {
+          await deleteUser(data.session?.user?.id || ""); // deleting the user from the users table.
+
+          // throw new Error(aboutError.message);
+        }
+      }
+    };
+    checkIfUserExists();
+  }, []);
   return (
     <AuthContextProvidor>
       <ThemeProvider defaultTheme="light">

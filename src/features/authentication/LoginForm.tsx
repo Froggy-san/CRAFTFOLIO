@@ -1,4 +1,3 @@
-("use client");
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,19 +14,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import useLogin from "./useLogin";
-import { useState } from "react";
+import { useRef, useState } from "react";
 // import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEyeFill } from "react-icons/ri";
 import IconButton from "@/components/shared/IconButton";
 import loginSchema from "@/formScehmas/loginSchema";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
+import supabase from "@/services/supabase";
+import { useTheme } from "@/context/ThemeProvidor";
 
 type loginSchemaTypes = z.infer<typeof loginSchema>;
 
 const LoginForm = () => {
   const [isShowPass, setIsShowPass] = useState(false);
   const { login, isSigningIn } = useLogin();
+  const { theme } = useTheme();
+  const formRef = useRef<HTMLFormElement>(null);
 
+  const submitForm = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true }),
+      );
+    }
+  };
   const form = useForm<loginSchemaTypes>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -42,10 +54,14 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="w-[94%] mx-auto ">
-      <h1 className=" text-xl font-semibold mb-12">Login</h1>
+    <div className="mx-auto w-[94%]">
+      <h1 className="mb-12 text-xl font-semibold">Login</h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          ref={formRef}
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8"
+        >
           <FormField
             control={form.control}
             name="email"
@@ -72,11 +88,11 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className=" flex justify-between items-center">
+                  <FormLabel className="flex items-center justify-between">
                     Password{" "}
-                    <p className=" mt-2 text-sm">
+                    <p className="mt-2 text-sm">
                       <Link
-                        className=" text-blue-500 underline"
+                        className="text-blue-500 underline"
                         to={"/frogot-password"}
                       >
                         Forgot password?
@@ -84,9 +100,9 @@ const LoginForm = () => {
                     </p>
                   </FormLabel>
                   <FormControl>
-                    <div className=" relative ">
+                    <div className="relative">
                       <Input
-                        className=" pr-10"
+                        className="pr-10"
                         disabled={isSigningIn}
                         type="password"
                         placeholder="Password"
@@ -96,7 +112,7 @@ const LoginForm = () => {
                         type="button"
                         ariaLabel="show password"
                         variant="outline"
-                        className="  absolute right-3 top-1/2 translate-y-[-50%]"
+                        className="absolute right-3 top-1/2 translate-y-[-50%]"
                         onClick={() => setIsShowPass(true)}
                       >
                         <RiEyeFill size={20} />
@@ -114,11 +130,11 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className=" flex justify-between items-center">
+                  <FormLabel className="flex items-center justify-between">
                     Password{" "}
-                    <p className=" mt-2 text-sm">
+                    <p className="mt-2 text-sm">
                       <Link
-                        className=" text-blue-500 underline"
+                        className="text-blue-500 underline"
                         to={"/frogot-password"}
                       >
                         Forgot password?
@@ -126,9 +142,9 @@ const LoginForm = () => {
                     </p>
                   </FormLabel>
                   <FormControl>
-                    <div className=" relative ">
+                    <div className="relative">
                       <Input
-                        className=" pr-10"
+                        className="pr-10"
                         disabled={isSigningIn}
                         type="text"
                         placeholder="Password"
@@ -138,7 +154,7 @@ const LoginForm = () => {
                         type="button"
                         ariaLabel=" hide password"
                         variant="outline"
-                        className="  absolute right-3 top-1/2 translate-y-[-50%]"
+                        className="absolute right-3 top-1/2 translate-y-[-50%]"
                         onClick={() => setIsShowPass(false)}
                       >
                         <RiEyeCloseFill size={20} />
@@ -151,26 +167,35 @@ const LoginForm = () => {
               )}
             />
           )}
-
-          <Button
-            size="sm"
-            disabled={isSigningIn}
-            type="submit"
-            className="  block  "
-          >
-            Login
-          </Button>
-
-          <div>
-            <p className=" text-sm">
-              Don't have an account?{" "}
-              <Link className=" text-blue-500 underline" to={"/signup"}>
-                Sign up.
-              </Link>
-            </p>
-          </div>
         </form>
       </Form>
+      <div className="mx-auto mt-11">
+        <Button
+          onClick={submitForm}
+          size="sm"
+          disabled={isSigningIn}
+          type="submit"
+          className="block w-full"
+        >
+          Login
+        </Button>
+        <Auth
+          onlyThirdPartyProviders
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          theme={theme}
+          providers={["google"]}
+        />
+      </div>
+
+      <div>
+        <p className="text-sm">
+          Don't have an account?{" "}
+          <Link className="text-blue-500 underline" to={"/signup"}>
+            Sign up.
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

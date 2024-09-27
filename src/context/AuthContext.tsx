@@ -55,10 +55,14 @@ const AuthContextProvidor = ({ children }: { children: React.ReactNode }) => {
           email: currentUser.email,
           id: currentUser.id,
           socials: currentUser.user_metadata.socials,
-          avatar: currentUser.user_metadata.avatar,
+          avatar:
+            currentUser.user_metadata.avatar ||
+            currentUser.user_metadata.avatar_url,
           phone: currentUser.user_metadata.phone,
           speciality: currentUser.user_metadata.speciality,
-          username: currentUser.user_metadata.username,
+          username:
+            currentUser.user_metadata.username ||
+            currentUser.user_metadata.name,
           role: currentUser.user_metadata.role,
           resumeUrl: currentUser.user_metadata.resumeUrl,
           created_at: currentUser.created_at,
