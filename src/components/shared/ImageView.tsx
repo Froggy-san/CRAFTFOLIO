@@ -22,33 +22,35 @@ const ImageView = ({
   };
 
   useEffect(() => {
-    const body = document.querySelector("body");
+    if (typeof window !== "undefined") {
+      const body = document.querySelector("body");
 
-    if (!body) return;
+      if (!body) return;
 
-    // Set the style when the image is open
-    if (typeof image === "string" && body) {
-      body.style.height = "100vh";
-      body.style.overflow = "hidden";
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault(); // Prevent default browser behavior
-        handleClose();
+      // Set the style when the image is open
+      if (typeof image === "string" && body) {
+        body.style.height = "100vh";
+        body.style.overflow = "hidden";
       }
-    };
 
-    // Add event listener for browser navigation
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("popstate", resetBodyStyle);
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          event.preventDefault(); // Prevent default browser behavior
+          handleClose();
+        }
+      };
 
-    // Clean up the event listener and reset styles when the component unmounts or image changes
-    return () => {
-      window.removeEventListener("popstate", resetBodyStyle);
-      window.removeEventListener("keydown", handleKeyDown);
-      resetBodyStyle(); // Reset styles on unmount or image change
-    };
+      // Add event listener for browser navigation
+      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("popstate", resetBodyStyle);
+
+      // Clean up the event listener and reset styles when the component unmounts or image changes
+      return () => {
+        window.removeEventListener("popstate", resetBodyStyle);
+        window.removeEventListener("keydown", handleKeyDown);
+        resetBodyStyle(); // Reset styles on unmount or image change
+      };
+    }
   }, [image]);
 
   return (
@@ -60,11 +62,11 @@ const ImageView = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2, type: "spring" }}
               key="container"
-              className="fixed flex items-center justify-center  left-0 top-0 w-full h-[100dvh] bg-[rgba(0,0,0,0.3)] select-none backdrop-blur-sm backdrop-brightness-50 z-[99999]"
+              className="fixed left-0 top-0 z-[99999] flex h-[100dvh] w-full select-none items-center justify-center bg-[rgba(0,0,0,0.3)] backdrop-blur-sm backdrop-brightness-50"
             >
               <Button
                 variant="secondary"
-                className="absolute right-5 top-10 rounded-full w-7 h-7 p-0  z-[99999] bg-muted "
+                className="absolute right-5 top-10 z-[99999] h-7 w-7 rounded-full bg-muted p-0"
                 onClick={handleClose} // Ensure this button calls the handleClose function
               >
                 <IoIosClose size={50} />
@@ -85,13 +87,13 @@ const ImageView = ({
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.2, type: "spring" }}
                   alt="Enlarged view"
-                  className="max-w-[100%] max-h-[90%] sm:max-h-[100%] object-contain   "
+                  className="max-h-[90%] max-w-[100%] object-contain sm:max-h-[100%]"
                 />
               </ClickAwayListener>
             </motion.div>
           ) : null}
         </AnimatePresence>,
-        document.body
+        document.body,
       )}
     </>
   );

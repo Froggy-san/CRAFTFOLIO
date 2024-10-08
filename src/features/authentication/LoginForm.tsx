@@ -60,125 +60,128 @@ const LoginForm = () => {
         <form
           ref={formRef}
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8"
+          className="space-y-11"
         >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    disabled={isSigningIn}
-                    placeholder="craftfolio@me.com"
-                    {...field}
-                  />
-                </FormControl>
+          <div className="space-y-8">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      disabled={isSigningIn}
+                      placeholder="craftfolio@me.com"
+                      {...field}
+                    />
+                  </FormControl>
 
-                <FormMessage />
-              </FormItem>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {!isShowPass ? (
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center justify-between">
+                      Password{" "}
+                      <p className="mt-2 text-sm">
+                        <Link
+                          className="text-blue-500 underline"
+                          to={"/frogot-password"}
+                        >
+                          Forgot password?
+                        </Link>
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          className="pr-10"
+                          disabled={isSigningIn}
+                          type="password"
+                          placeholder="Password"
+                          {...field}
+                        />
+                        <IconButton
+                          type="button"
+                          ariaLabel="show password"
+                          variant="outline"
+                          className="absolute right-3 top-1/2 translate-y-[-50%]"
+                          onClick={() => setIsShowPass(true)}
+                        >
+                          <RiEyeFill size={20} />
+                        </IconButton>
+                      </div>
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ) : (
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center justify-between">
+                      Password{" "}
+                      <p className="mt-2 text-sm">
+                        <Link
+                          className="text-blue-500 underline"
+                          to={"/frogot-password"}
+                        >
+                          Forgot password?
+                        </Link>
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          className="pr-10"
+                          disabled={isSigningIn}
+                          type="text"
+                          placeholder="Password"
+                          {...field}
+                        />
+                        <IconButton
+                          type="button"
+                          ariaLabel=" hide password"
+                          variant="outline"
+                          className="absolute right-3 top-1/2 translate-y-[-50%]"
+                          onClick={() => setIsShowPass(false)}
+                        >
+                          <RiEyeCloseFill size={20} />
+                        </IconButton>
+                      </div>
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             )}
-          />
+          </div>
 
-          {!isShowPass ? (
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="flex items-center justify-between">
-                    Password{" "}
-                    <p className="mt-2 text-sm">
-                      <Link
-                        className="text-blue-500 underline"
-                        to={"/frogot-password"}
-                      >
-                        Forgot password?
-                      </Link>
-                    </p>
-                  </FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        className="pr-10"
-                        disabled={isSigningIn}
-                        type="password"
-                        placeholder="Password"
-                        {...field}
-                      />
-                      <IconButton
-                        type="button"
-                        ariaLabel="show password"
-                        variant="outline"
-                        className="absolute right-3 top-1/2 translate-y-[-50%]"
-                        onClick={() => setIsShowPass(true)}
-                      >
-                        <RiEyeFill size={20} />
-                      </IconButton>
-                    </div>
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          ) : (
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="flex items-center justify-between">
-                    Password{" "}
-                    <p className="mt-2 text-sm">
-                      <Link
-                        className="text-blue-500 underline"
-                        to={"/frogot-password"}
-                      >
-                        Forgot password?
-                      </Link>
-                    </p>
-                  </FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        className="pr-10"
-                        disabled={isSigningIn}
-                        type="text"
-                        placeholder="Password"
-                        {...field}
-                      />
-                      <IconButton
-                        type="button"
-                        ariaLabel=" hide password"
-                        variant="outline"
-                        className="absolute right-3 top-1/2 translate-y-[-50%]"
-                        onClick={() => setIsShowPass(false)}
-                      >
-                        <RiEyeCloseFill size={20} />
-                      </IconButton>
-                    </div>
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
+          <Button
+            onClick={submitForm}
+            size="sm"
+            disabled={isSigningIn}
+            type="submit"
+            className="block w-full"
+          >
+            Login
+          </Button>
         </form>
       </Form>
-      <div className="mx-auto mt-11">
-        <Button
-          onClick={submitForm}
-          size="sm"
-          disabled={isSigningIn}
-          type="submit"
-          className="block w-full"
-        >
-          Login
-        </Button>
+      <div className="mx-auto">
         <Auth
           onlyThirdPartyProviders
           supabaseClient={supabase}
