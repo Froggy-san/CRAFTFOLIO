@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 
 import DeleteUserAlert from "./DeleteUserDialog";
 import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 const TableDropDown = ({ id }: { id: string }) => {
   const { user } = useAuth();
@@ -31,11 +32,11 @@ const TableDropDown = ({ id }: { id: string }) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className=" ml-3 p-0 w-7 h-7  " size="sm" variant="ghost">
+          <Button className="ml-3 h-7 w-7 p-0" size="sm" variant="ghost">
             <PiDotsThreeVertical size={20} />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className=" w-48  mr-10">
+        <DropdownMenuContent className="mr-10 w-48">
           {/* <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator /> */}
           <DropdownMenuGroup>
@@ -47,7 +48,14 @@ const TableDropDown = ({ id }: { id: string }) => {
             </Link>
             <DropdownMenuItem
               disabled={user?.role !== "admin"}
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                if (user?.role !== "admin")
+                  return toast.error(
+                    "You are not authorized to do this action.",
+                  );
+
+                setOpen(true);
+              }}
             >
               {" "}
               <TbTrashFilled className="mr-2 h-4 w-4" /> Delete account
