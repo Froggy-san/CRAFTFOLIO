@@ -1,6 +1,6 @@
 import { Project, imageObject } from "@/types/types";
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import UserTag from "../UserTag";
 import CardControls from "./PostCardControls";
 import useDeletePost from "@/features/projects/useDeletePost";
@@ -14,7 +14,7 @@ import ToolsUsed from "./ToolsUsed";
 import { motion } from "framer-motion";
 import PostCardContributors from "./PostCardContributors";
 import Loading from "../Loading";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { IoIosImages } from "react-icons/io";
 
 const previewRegex = /pre[av]iew/i;
@@ -24,7 +24,23 @@ const previewRegex = /pre[av]iew/i;
 //   const match = text.match(/pre[av]iew:.*?(https:\/\/\S+)/i);
 //   return match ? match[1] : null;
 // }
-const PostCard = ({ post }: { post: Project }) => {
+const PostCard = ({
+  post,
+  postsLength,
+}: {
+  postsLength: number;
+  post: Project;
+}) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+
+  const checkIfLastItemInPage = useCallback(() => {
+    if (page > 1 && postsLength === 1) {
+      searchParams.set("page", String(page - 1));
+      setSearchParams(searchParams);
+    }
+  }, [searchParams, postsLength, setSearchParams]);
+
   const { isDeleting, deletePost } = useDeletePost();
   const { user: loggedInUser } = useAuth();
   const user = {
@@ -74,9 +90,12 @@ const PostCard = ({ post }: { post: Project }) => {
     >
       {currentOwner ? (
         <CardControls
-          deletePost={() =>
-            deletePost({ postId: String(post.id), imagesToDelete })
-          }
+          deletePost={() => {
+            deletePost(
+              { postId: String(post.id), imagesToDelete },
+              { onSuccess: checkIfLastItemInPage },
+            );
+          }}
           postId={String(post.id)}
         />
       ) : null}

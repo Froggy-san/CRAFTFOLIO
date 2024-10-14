@@ -14,11 +14,11 @@ const AddAdminAcc = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className=" mx-auto mt-4 block" variant="outline">
+        <Button className="mx-auto mt-4 block" variant="outline">
           Add an admin account
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px] max-h-[600px] overflow-y-auto">
+      <DialogContent className="max-h-[65vh] overflow-y-auto sm:max-h-[600px] sm:max-w-[800px]">
         <DialogHeader>
           <DialogTitle>Add an admin account.</DialogTitle>
           <DialogDescription>
@@ -26,7 +26,7 @@ const AddAdminAcc = () => {
             register user accounts navigate to the signUp page.
           </DialogDescription>
         </DialogHeader>
-        <SignUpForm adminSession className=" h-full" />
+        <SignUpForm adminSession className="h-full" />
       </DialogContent>
     </Dialog>
   );
