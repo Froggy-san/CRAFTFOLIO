@@ -51,7 +51,6 @@ const SelectComp = ({
   options,
   selectPlaceholer,
   className,
-
   disabled = false,
 }: SelectProps) => {
   const [searchParams] = useSearchParams();
@@ -69,7 +68,7 @@ const SelectComp = ({
           setParam(paramName, value, doesTheUrlHasTheSortProp)
         }
       >
-        <SelectTrigger className={`w-[280px] hidden sm:flex ${className}`}>
+        <SelectTrigger className={`hidden w-[280px] sm:flex ${className}`}>
           <SelectValue placeholder={selectPlaceholer || "Select"} />
         </SelectTrigger>
         <SelectContent>
@@ -78,7 +77,7 @@ const SelectComp = ({
               <SelectItem key={i} value={option.value}>
                 {option.label}
               </SelectItem>
-            )
+            ),
           )}
         </SelectContent>
       </Select>
@@ -89,12 +88,12 @@ const SelectComp = ({
           <Button
             disabled={disabled}
             variant="ghost"
-            className=" p-0 w-8 h-8 rounded-md  sm:hidden"
+            className="h-8 w-8 rounded-md p-0 sm:hidden"
           >
             <IoIosMore size={22} />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 mr-4 sm:hidden">
+        <DropdownMenuContent className="mr-4 w-56 sm:hidden">
           <DropdownMenuLabel>Sort by</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {options.map((option, i) => {

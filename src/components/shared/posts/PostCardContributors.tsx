@@ -34,9 +34,14 @@ const PostCardContributors = ({ items }: { items: userEssentialData[] }) => {
             >
               <AvatarImage
                 src={item.avatar || defaultProfilePicture}
+                onError={(e) => {
+                  e.currentTarget.src = defaultProfilePicture;
+                }}
                 alt={item.username}
               />
-              <AvatarFallback>Img</AvatarFallback>
+              <AvatarFallback>
+                <img src={defaultProfilePicture} alt="User Avatar" />
+              </AvatarFallback>
             </Avatar>
             {/* </Link> */}
           </TooltipComp>

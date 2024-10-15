@@ -45,15 +45,24 @@ export async function getPosts({ page, searchTerm, sortValue }: getPosts) {
           "* ,projectImages(id,imageUrl,project_id) ,publicUsers(userId,avatar,username)",
           { count: "exact" },
         )
+        .order("created_at", {
+          referencedTable: "projectImages",
+          ascending: true,
+        })
     : // if there is no sort value we want the data to come from the database sorted by the newest to the oldest posts when the web app load the first time.
       supabase
         .from("projects")
         .select(
-          "* ,projectImages(id,imageUrl,project_id) ,publicUsers(userId,avatar,username)",
+          `*, 
+      projectImages(id, imageUrl, project_id) , 
+      publicUsers(userId, avatar, username)`,
           { count: "exact" },
         )
-        .order("created_at", { ascending: false });
-
+        .order("created_at", { ascending: false })
+        .order("created_at", {
+          referencedTable: "projectImages",
+          ascending: true,
+        });
   // Searching through projects .
 
   if (searchTerm) {
@@ -292,10 +301,18 @@ export async function getUserPosts({
     ? supabase
         .from("projects")
         .select("* ,projectImages(id,imageUrl,project_id)", { count: "exact" })
+        .order("created_at", {
+          referencedTable: "projectImages",
+          ascending: true,
+        })
     : supabase
         .from("projects")
         .select("* ,projectImages(id,imageUrl,project_id)", { count: "exact" })
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .order("created_at", {
+          referencedTable: "projectImages",
+          ascending: true,
+        });
 
   // searching.
   if (searchTerm) {
@@ -335,7 +352,11 @@ export async function getProjectById(projectId: string) {
   projectImages(id,project_id,imageUrl)
   `,
     )
-    .eq("id", projectId);
+    .eq("id", projectId)
+    .order("created_at", {
+      referencedTable: "projectImages",
+      ascending: true,
+    });
 
   if (error) throw new Error(error.message);
   if (!project.length)

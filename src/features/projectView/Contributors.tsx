@@ -1,8 +1,7 @@
 import { AnimatedTooltip } from "@/components/shared/AnimatedTooltops";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+
 import { userEssentialData } from "@/types/types";
-import React from "react";
 
 const Contributors = ({
   contrbiutersTags,

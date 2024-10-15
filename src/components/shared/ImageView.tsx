@@ -86,7 +86,7 @@ const ImageView = ({
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.2, type: "spring" }}
-                  alt="Enlarged view"
+                  alt={image}
                   className="max-h-[90%] max-w-[100%] object-contain sm:max-h-[100%]"
                 />
               </ClickAwayListener>

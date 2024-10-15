@@ -103,7 +103,7 @@ const ProjectView = () => {
           as="h1"
           Text={project.name}
           ariaLabel="project name"
-          className="text-center"
+          className="relative text-center"
           style={{
             fontSize: "clamp(40px, 5vw, 50px)",
             lineHeight: 1.1,
