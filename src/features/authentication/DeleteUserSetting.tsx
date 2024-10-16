@@ -13,17 +13,17 @@ const DeleteUserSetting = ({
   return (
     <>
       <div
-        className={`flex flex-col  xs:flex-row gap-y-6 items-center justify-between rounded-lg border p-4 w-[90%] mx-auto mb-3 ${className}`}
+        className={`mx-auto mb-3 flex flex-col items-center justify-between gap-y-6 rounded-lg border p-4 xs:flex-row sm:w-[90%] ${className}`}
       >
-        <div className="space-y-0.5 text-center xs:text-left  w-full xs:w-fit">
-          <div className="text-base font-semibold">
-            Delete all of your posts
+        <div className="w-full space-y-0.5 text-center xs:w-fit xs:text-left">
+          <div className="text-base font-semibold">Delete account</div>
+          <div>
+            Delete your account and permanently remove all associated data.
           </div>
-          <div>Remove all posts on your account.</div>
         </div>
-        <div className=" w-full xs:w-fit">
+        <div className="w-full xs:w-fit">
           <Button
-            className=" w-full "
+            className="w-full"
             onClick={() => setOpen(true)}
             variant="destructive"
           >
