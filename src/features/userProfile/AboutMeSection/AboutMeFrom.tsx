@@ -110,7 +110,7 @@ const aboutMeSchema = z.object({
 
 type aboutMeFormTypes = z.infer<typeof aboutMeSchema>;
 
-const AboutMeFrom = React.forwardRef(function (
+const AboutMeForm = React.forwardRef(function (
   {
     linksAndTech,
     userId,
@@ -362,4 +362,4 @@ const AboutMeFrom = React.forwardRef(function (
   );
 });
 
-export default AboutMeFrom;
+export default AboutMeForm;

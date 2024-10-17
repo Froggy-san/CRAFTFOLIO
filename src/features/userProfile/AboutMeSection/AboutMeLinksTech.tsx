@@ -1,8 +1,8 @@
 import { aboutMeFormProps } from "@/types/types";
 import React, { useCallback, useState } from "react";
-import AboutMeFrom, { options } from "./AboutMeFrom";
+import AboutMeForm, { options } from "./AboutMeFrom";
 import HandleLinkIcons from "@/components/shared/HandleLinkIcons";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import { defaultTextColor } from "@/utils/constants";
 import { getIconForTool } from "@/components/shared/HandleIcons";
@@ -51,7 +51,7 @@ const AboutMeLinksTech = ({
       )}
 
       {isEditing && (
-        <AboutMeFrom
+        <AboutMeForm
           handleCloseForm={handleCloseForm}
           linksAndTech={linksAndtech}
           userId={userId}

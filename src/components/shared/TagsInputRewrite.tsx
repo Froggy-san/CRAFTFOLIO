@@ -6,6 +6,8 @@ import React, {
   createContext,
   forwardRef,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 import { Card } from "../ui/card";
@@ -14,21 +16,26 @@ import { Button } from "../ui/button";
 import { buttonSize, variant } from "@/types/types";
 import { BsSendFill } from "react-icons/bs";
 import { Badge } from "../ui/badge";
+import { Input } from "../ui/input";
 
 interface TagsInputContextValues {
   onChange: React.Dispatch<SetStateAction<string[]>>;
   Tags: string[];
   handleAddTag: (value: string) => void;
+  handleEditTag: (newString: string, index: number) => void;
   value: string;
   setValue: React.Dispatch<SetStateAction<string>>;
+  isEditable?: boolean;
 }
 
 const TagsInputContext = createContext<TagsInputContextValues>({
   onChange: () => {},
   Tags: [],
   handleAddTag: () => {},
+  handleEditTag: () => {},
   value: "",
   setValue: () => {},
+  isEditable: true,
 });
 interface TagsInputProps {
   onChange: React.Dispatch<SetStateAction<string[]>>;
@@ -36,8 +43,14 @@ interface TagsInputProps {
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
+  isEditable?: boolean;
 }
-const TagsInput = function ({ children, Tags, onChange }: TagsInputProps) {
+const TagsInput = function ({
+  children,
+  Tags,
+  onChange,
+  isEditable = true,
+}: TagsInputProps) {
   const [value, setValue] = useState("");
   function handleAddTag(value: string) {
     const trimmedValue = value.trim();
@@ -46,9 +59,21 @@ const TagsInput = function ({ children, Tags, onChange }: TagsInputProps) {
       setValue("");
     }
   }
+
+  function handleEditTag(newString: string, index: number) {
+    onChange(Tags.map((item, i) => (i === index ? newString : item)));
+  }
   return (
     <TagsInputContext.Provider
-      value={{ onChange, Tags, handleAddTag, value, setValue }}
+      value={{
+        onChange,
+        Tags,
+        handleAddTag,
+        handleEditTag,
+        value,
+        setValue,
+        isEditable,
+      }}
     >
       {children}
     </TagsInputContext.Provider>
@@ -67,7 +92,7 @@ const TagsContainer = forwardRef(function (
     tagsStyles?: string;
     children?: ReactElement;
   },
-  ref?: React.Ref<HTMLDivElement>
+  ref?: React.Ref<HTMLDivElement>,
 ) {
   const { onChange, Tags } = useContext(TagsInputContext);
   function handleRemovingTag(index: number) {
@@ -80,13 +105,14 @@ const TagsContainer = forwardRef(function (
     <Card
       ref={ref}
       style={style}
-      className={` flex items-center p-2 gap-1 flex-wrap my-10 ${
+      className={`my-10 flex flex-wrap items-center gap-1 p-2 ${
         className || ""
       }`}
     >
       {Tags.length
         ? Tags.map((tag, i) => (
             <TagItem
+              itemIndex={i}
               className={tagsStyles}
               key={i}
               tag={tag}
@@ -98,24 +124,63 @@ const TagsContainer = forwardRef(function (
     </Card>
   );
 });
+
 function TagItem({
+  itemIndex,
   tag,
   removeFunction,
   className,
 }: {
+  itemIndex?: number;
   className?: string;
   tag: string;
   removeFunction: () => void;
 }) {
+  const { handleEditTag, isEditable } = useContext(TagsInputContext);
+  const [value, setValue] = useState(tag);
+  const [isEditing, setIsEditing] = useState(false);
+  const [width, setWidth] = useState(0);
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (spanRef.current) {
+      const contentWidth = spanRef.current.offsetWidth + 20;
+
+      setWidth(contentWidth);
+    }
+  }, [value, setWidth, spanRef]);
+
   return (
     <div
-      className={`border flex  justify-between items-center pl-2   max-w-[100%]  bg-primary hover:bg-primary/90 text-primary-foreground  transition-all text-sm h-8 rounded-md border-solid font-semibold  show-tag ${
-        className || ""
-      }`}
+      className={`show-tag relative flex h-8 max-w-[100%] items-center justify-between rounded-md border border-solid bg-primary pl-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 ${className || ""}`}
     >
-      <span className="pb-[1px]  flex-1 truncate">{tag}</span>{" "}
-      <button type="button" className=" mt-1 p-1 h-fit mx-2">
-        {" "}
+      <span className="invisible absolute w-fit" ref={spanRef}>
+        {value}
+      </span>
+      {isEditable && isEditing ? (
+        <input
+          ref={inputRef}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onBlur={() => {
+            setIsEditing(false);
+            if (value.trim() !== tag.trim() && itemIndex)
+              handleEditTag(value, itemIndex);
+          }}
+          autoFocus
+          className="h-[90%] max-w-full rounded-sm border bg-primary px-2 text-sm font-semibold text-primary-foreground"
+          style={{ width: `${width}px` }}
+        />
+      ) : (
+        <span
+          onClick={() => setIsEditing(true)}
+          className="flex-1 cursor-pointer truncate pb-[1px]"
+        >
+          {tag}
+        </span>
+      )}
+      <button type="button" className="mx-2 mt-1 h-fit p-1">
         <IoClose onClick={removeFunction} size={15} />
       </button>
     </div>
@@ -136,7 +201,7 @@ const TagsInputField = forwardRef(function (
     ariaLabel?: string;
     style?: CSSProperties;
   },
-  ref?: React.Ref<HTMLDivElement>
+  ref?: React.Ref<HTMLDivElement>,
 ) {
   const { value, setValue, handleAddTag, onChange, Tags } =
     useContext(TagsInputContext);
@@ -157,7 +222,7 @@ const TagsInputField = forwardRef(function (
   return (
     <div
       ref={ref}
-      className=" relative pl-3 bg-background  text-foreground   flex-1 min-w-[250px]  h-7"
+      className="relative h-7 min-w-[250px] flex-1 bg-background pl-3 text-foreground"
     >
       <input
         type={type || "text"}
@@ -167,12 +232,12 @@ const TagsInputField = forwardRef(function (
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         style={style}
-        className={` focus:outline-none w-full h-full bg-background pr-16  ${
+        className={`h-full w-full bg-background pr-16 focus:outline-none ${
           className || ""
         }`}
       />
       {value && (
-        <Badge className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex  text-foreground   show-tag">
+        <Badge className="show-tag pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-foreground opacity-100 sm:flex">
           Enter
         </Badge>
       )}
@@ -194,7 +259,7 @@ const SendBtn = forwardRef(function (
     size?: buttonSize;
     children?: ReactElement;
   },
-  ref?: React.Ref<HTMLButtonElement>
+  ref?: React.Ref<HTMLButtonElement>,
 ) {
   const { value, handleAddTag } = useContext(TagsInputContext);
   const isValue = value.trim().length; // checking if the user inputed any value in the input field
@@ -206,8 +271,8 @@ const SendBtn = forwardRef(function (
       onClick={() => handleAddTag(value)}
       size={size || "sm"}
       style={style}
-      className={`  transition-all   ${
-        !isValue ? "opacity-0 invisible" : " opacity-100 visible"
+      className={`transition-all ${
+        !isValue ? "invisible opacity-0" : "visible opacity-100"
       } ${className || ""}`}
       variant={variant || "default"}
     >
