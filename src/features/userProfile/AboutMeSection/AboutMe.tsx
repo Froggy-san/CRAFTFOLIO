@@ -1,10 +1,8 @@
-import React from "react";
-
 import Collapse from "@/components/shared/Collapse";
 import useAboutMe from "./useAboutMe";
 import useEditAboutMe from "./useEditAboutMe";
 import FullSnLoading from "@/components/shared/FullSnLoading";
-import { defaultAboutMeText, defaultTextColor } from "@/utils/constants";
+import { defaultTextColor } from "@/utils/constants";
 import AboutMeText from "./AboutMeText";
 
 import AboutMeLinksTech, { ShowLinksAndTools } from "./AboutMeLinksTech";

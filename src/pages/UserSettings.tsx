@@ -15,7 +15,7 @@ const UserSettings = () => {
   useDocumentTitle("Settings");
   if (isLoading)
     return (
-      <div className="h-[91dvb] flex items-center justify-center">
+      <div className="flex h-[91dvb] items-center justify-center">
         <Loading size={40} />
       </div>
     );

@@ -51,7 +51,7 @@ const AboutMeText = ({
       <Heading>About me</Heading>
       {clickCount === 2 ? (
         <div className="my-5 space-y-4">
-          <h1 className="font-medium leading-none">About me</h1>
+          <h1 className="font-medium leading-none">Edit about me</h1>
           <Textarea
             value={aboutMeValue}
             className="h-48"

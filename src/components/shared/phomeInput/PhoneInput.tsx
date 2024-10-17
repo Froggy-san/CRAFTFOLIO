@@ -94,7 +94,7 @@ export function PhoneInput({
     React.useState<CountryCode>(defaultCountry);
 
   const selectedCountry = countries.find(
-    (country) => country.iso2 === countryCode
+    (country) => country.iso2 === countryCode,
   );
 
   const initializeDefaultValue = () => {
@@ -164,12 +164,12 @@ export function PhoneInput({
               <>
                 <img
                   src={`/flags/${selectedCountry.iso2.toLowerCase()}.svg`}
-                  className="relative top-0.5 mr-2 w-4 h-3 object-cover"
+                  className="relative top-0.5 mr-2 h-3 w-4 object-cover"
                   aria-labelledby={selectedCountry.name}
                   title={selectedCountry.name}
                   alt={selectedCountry.name}
                 />
-                <span className="relative  hidden xs:block top-0.5">
+                <span className="relative top-0.5 hidden xs:block">
                   {selectedCountry.emoji}
                 </span>
               </>
@@ -179,14 +179,14 @@ export function PhoneInput({
             <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-0 w-max" align="start">
+        <PopoverContent className="w-max p-0" align="start">
           <Command>
             <CommandInput placeholder="Search country..." />
             <CommandList>
               <CommandEmpty>No country found.</CommandEmpty>
               <ScrollArea
                 className={
-                  "[&>[data-radix-scroll-area-viewport]]:max-h-[300px]"
+                  "[&>[data-radix-scroll-area-viewport]]:max-h-[200px] sm:[&>[data-radix-scroll-area-viewport]]:max-h-[300px]"
                 }
               >
                 <CommandGroup>
@@ -210,12 +210,12 @@ export function PhoneInput({
                             "mr-2 size-4",
                             countryCode === country.iso2
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                         <img
                           src={`/flags/${country.iso2.toLowerCase()}.svg`}
-                          className="relative top-0.5 mr-2 w-4 h-3 object-cover"
+                          className="relative top-0.5 mr-2 h-3 w-4 object-cover"
                           aria-labelledby={country.name}
                           title={country.name}
                           alt={country.name}

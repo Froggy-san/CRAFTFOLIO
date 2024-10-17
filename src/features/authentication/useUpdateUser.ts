@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import toast from "react-hot-toast";
 
 export default function useUpdateUser() {
-  const { setUser } = useAuth();
+  const { setUser, checkAuthUser } = useAuth();
 
   const { isPending: isUpdatingUser, mutate: updateUser } = useMutation({
     mutationFn: updateUserApi,
@@ -18,11 +18,15 @@ export default function useUpdateUser() {
       // queryClient.invalidateQueries({
       //   queryKey: ["user"],
       // });
+
+      // checkAuthUser();
+
       setUser({
         aud: data.user.aud,
         email: data.user.email,
         id: data.user.id,
-        avatar: data.user.user_metadata.avatar,
+        avatar:
+          data.user.user_metadata.avatar || data.user.user_metadata.avatar_url,
         socials: data.user.user_metadata.socials,
         phone: data.user.user_metadata.phone,
         speciality: data.user.user_metadata.speciality,

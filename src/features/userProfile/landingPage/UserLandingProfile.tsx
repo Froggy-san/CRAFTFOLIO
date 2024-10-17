@@ -66,7 +66,12 @@ const UserLandingProfile = ({
                   left: "calc(-150% + 150px)",
                   opacity: 1,
                 }}
-                exit={{ width: 30, right: "calc(100% - 30px)", opacity: 0 }}
+                exit={{
+                  width: 30,
+                  right: "calc(100% - 30px)",
+                  opacity: 0,
+                  transition: { duration: 0.1 },
+                }}
                 transition={{ type: "spring", duration: 0.3 }}
                 className="absolute overflow-hidden whitespace-nowrap rounded-md bg-background p-1 text-sm"
               >

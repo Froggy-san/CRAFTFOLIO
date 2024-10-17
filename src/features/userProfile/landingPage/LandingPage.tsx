@@ -1,11 +1,8 @@
-import UserLandingProfile from "@/features/userProfile/landingPage/UserLandingProfile";
-import HandleIcons from "@/components/shared/HandleLinkIcons";
 import useLandingPage from "./useLandingPage";
-import LandingForm from "./LandingForm";
+
 // import Loading from "@/components/shared/Loading";
 import FullSnLoading from "@/components/shared/FullSnLoading";
 import { defaultLandingPageImage, defaultText } from "@/utils/constants";
-import GrainyImg from "@/components/shared/GrainyImg";
 
 import LandingPageText from "./LandingPageText";
 import LandingUserInfo from "./LandingUserInfo";

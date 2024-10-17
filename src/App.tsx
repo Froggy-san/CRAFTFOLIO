@@ -88,6 +88,7 @@ function App() {
               phone: "",
               speciality: "",
               username: data.session?.user.user_metadata.name,
+              avatar: data.session?.user.user_metadata.avatar_url,
               userId: data.session?.user?.id,
               resumeUrl: "",
             },
