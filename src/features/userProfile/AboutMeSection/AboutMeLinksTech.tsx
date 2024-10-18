@@ -125,7 +125,7 @@ export const ShowLinksAndTools = ({
                 <Button
                   key={i}
                   variant="ghost"
-                  className="h-fit w-fit max-w-[100%] gap-2"
+                  className="sm:p- h-fit w-fit max-w-[100%] gap-2 px-2 py-1 text-[10px] sm:px-4 sm:py-2 sm:text-sm"
                 >
                   {" "}
                   <span
@@ -136,7 +136,7 @@ export const ShowLinksAndTools = ({
                           ? ""
                           : `rgb(${Object.values(arrowColor).join(",")})`,
                     }}
-                    className={`text-lg ${!icon && !arrowShape && "hidden"}`}
+                    className={`text-sm sm:text-lg ${!icon && !arrowShape && "hidden"}`}
                   >
                     {" "}
                     {icon || arrowShape}

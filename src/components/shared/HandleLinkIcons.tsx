@@ -60,13 +60,13 @@ export const icons: { [key: string]: JSX.Element } = {
   "ziprecruiter.co": <PiOfficeChairFill size={iconSize} />,
   "ziprecruiter.net": <PiOfficeChairFill size={iconSize} />,
   "wuzzuf.net": (
-    <img src={wuzzuf} alt="wuzzuf image" className="  w-[20px] h-[20px]" />
+    <img src={wuzzuf} alt="wuzzuf image" className="h-[20px] w-[20px]" />
   ),
   "wuzzuf.co": (
-    <img src={wuzzuf} alt="wuzzuf image" className="  w-[20px] h-[20px]" />
+    <img src={wuzzuf} alt="wuzzuf image" className="h-[20px] w-[20px]" />
   ),
   "wuzzuf.com": (
-    <img src={wuzzuf} alt="wuzzuf image" className="  w-[20px] h-[20px]" />
+    <img src={wuzzuf} alt="wuzzuf image" className="h-[20px] w-[20px]" />
   ),
   "youtube.com": <FaYoutube size={iconSize} />,
   "youtube.co": <FaYoutube size={iconSize} />,
@@ -110,21 +110,23 @@ const HandleLinkIcons = ({
     .filter((el) => !isUndefined(el));
 
   return (
-    <div className={`flex item-center gap-3 ${className}`}>
-      {iconLinks.length
-        ? iconLinks.map((link, i: number) => {
-            return (
-              <Link
-                key={i}
-                target="_blank"
-                to={links[i]}
-                className=" hover:opacity-80 transition-all"
-              >
-                {link}
-              </Link>
-            );
-          })
-        : <p className=" w-full text-center">{errorMessage}</p> || null}
+    <div className={`item-center flex gap-3 ${className}`}>
+      {iconLinks.length ? (
+        iconLinks.map((link, i: number) => {
+          return (
+            <Link
+              key={i}
+              target="_blank"
+              to={links[i]}
+              className="transition-all hover:opacity-80"
+            >
+              {link}
+            </Link>
+          );
+        })
+      ) : errorMessage ? (
+        <p className="w-full text-center">{errorMessage}</p>
+      ) : null}
     </div>
   );
 };
