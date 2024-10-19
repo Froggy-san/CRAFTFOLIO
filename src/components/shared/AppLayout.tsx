@@ -10,7 +10,7 @@ const AppLayout = () => {
     <div
       id="home"
       vaul-drawer-wrapper=""
-      className=" container bg-background pt-2   overflow-x-hidden "
+      className="container overflow-x-hidden bg-background pt-2"
     >
       <GrainyImg />
       {/* {createPortal(<GrainyImg />, document.body)} */}

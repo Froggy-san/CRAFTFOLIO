@@ -118,7 +118,7 @@ function App() {
   }, []);
   return (
     <AuthContextProvidor>
-      <ThemeProvider defaultTheme="light">
+      <ThemeProvider defaultTheme="system">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider router={router} />
