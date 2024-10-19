@@ -165,7 +165,7 @@ function TagItem({
           onChange={(e) => setValue(e.target.value)}
           onBlur={() => {
             setIsEditing(false);
-            if (value.trim() !== tag.trim() && itemIndex)
+            if (value.trim() !== tag.trim() && itemIndex !== undefined)
               handleEditTag(value, itemIndex);
           }}
           autoFocus

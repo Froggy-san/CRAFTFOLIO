@@ -53,6 +53,8 @@ import {
   SiGithub,
   SiSpringCreators,
   SiThreedotjs,
+  SiLeaflet,
+  SiLodash,
 } from "react-icons/si";
 // import { SiDrizzle } from "react-icons/si";
 
@@ -201,6 +203,8 @@ export const icons: { [key: string]: JSX.Element } = {
   "dot net": <SiDotnet />,
   "c++": <SiCplusplus />,
   "c plus plus": <SiCplusplus />,
+  leaflet: <SiLeaflet size={iconSize} />,
+  lodash: <SiLodash size={iconSize} />,
   shadcn: (
     <img
       src="https://jldptczaxybijbhlcbjj.supabase.co/storage/v1/object/public/defaultImages/139895814.png"
