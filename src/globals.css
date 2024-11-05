@@ -98,7 +98,7 @@
     }
     ::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: gray; /* Customize the thumb color */
+      background-color: hsl(var(--primary)); /* Customize the thumb color */
     }
     ::-webkit-scrollbar-track {
       background-color: transparent; /* Customize the track color */

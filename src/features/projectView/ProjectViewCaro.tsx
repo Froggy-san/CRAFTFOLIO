@@ -40,7 +40,7 @@ const ProjectViewCaro = ({ images }: { images: string[] }) => {
     const body = document.querySelector("body");
     if (body) {
       body.style.height = "unset";
-      body.style.overflow = "unset";
+      body.style.overflow = "auto";
     }
   };
 
