@@ -1,4 +1,3 @@
-("use client");
 import * as React from "react";
 import { useState, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,7 +28,6 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormRow from "@/components/shared/FormRow";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,7 +43,6 @@ import FullSnLoading from "@/components/shared/FullSnLoading";
 import useObjectCompare from "@/hooks/useCompareObjects";
 import ErrorComp from "@/components/shared/ErrorComp";
 import FormDialog from "./FormDialog";
-import { handleText } from "@/utils/helper";
 import TagsInput from "@/components/shared/TagsInputRewrite";
 import ContributorsTags from "./contribuorsInputField/ContributorsTags";
 import { projectFormSchema } from "@/formScehmas/projectFormSchema";
@@ -103,7 +100,7 @@ const ProjectForm = ({
   const defaultValues = {
     name: post?.name || "",
     type: post?.type || "",
-    startDate: post ? new Date(post.startDate) : undefined,
+    startDate: post ? new Date(post.startDate) : new Date(),
     endDate: post ? new Date(post.endDate) : undefined,
     technologies:
       post && post.technologies ? JSON.parse(post.technologies) : [],

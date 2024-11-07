@@ -35,10 +35,13 @@ const PostCard = ({
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
   const checkIfLastItemInPage = useCallback(() => {
+    if (page === 1 && postsLength === 1) {
+      searchParams.delete("search");
+    }
     if (page > 1 && postsLength === 1) {
       searchParams.set("page", String(page - 1));
-      setSearchParams(searchParams);
     }
+    setSearchParams(searchParams);
   }, [searchParams, postsLength, setSearchParams]);
 
   const { isDeleting, deletePost } = useDeletePost();
