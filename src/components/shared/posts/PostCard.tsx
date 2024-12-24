@@ -33,6 +33,8 @@ const PostCard = ({
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+  const { isDeleting, deletePost } = useDeletePost();
+  const { user: loggedInUser } = useAuth();
 
   const checkIfLastItemInPage = useCallback(() => {
     if (page === 1 && postsLength === 1) {
@@ -44,8 +46,6 @@ const PostCard = ({
     setSearchParams(searchParams);
   }, [searchParams, postsLength, setSearchParams]);
 
-  const { isDeleting, deletePost } = useDeletePost();
-  const { user: loggedInUser } = useAuth();
   const user = {
     username: post.publicUsers?.username,
     userId: post.publicUsers?.userId,

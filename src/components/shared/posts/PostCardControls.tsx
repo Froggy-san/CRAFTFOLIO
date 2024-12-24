@@ -4,15 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  // DropdownMenuGroup,
   DropdownMenuItem,
-  // DropdownMenuLabel,
-  // DropdownMenuPortal,
-  // DropdownMenuSeparator,
-  // DropdownMenuShortcut,
-  // DropdownMenuSub,
-  // DropdownMenuSubContent,
-  // DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -20,7 +12,6 @@ import { MdDeleteForever } from "react-icons/md";
 import { MdOutlineEditNote } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
-import DialogComp from "../DialogComp";
 import DeletePostDiaDrawer from "./DeletePostDiaDrawer";
 
 interface CartControlsProps {
@@ -80,12 +71,12 @@ const PostCardControls = ({
         <DropdownMenuTrigger asChild>
           <Button
             variant="secondary"
-            className=" absolute  opacity-90  top-2 right-2 sm:top-5 sm:right-4 z-[4] p-0 w-7 h-7 rounded-md "
+            className="absolute right-2 top-2 z-[4] h-7 w-7 rounded-md p-0 opacity-90 sm:right-4 sm:top-5"
           >
             <IoIosMore size={22} />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className={` w-48 mr-4 right-0 ${className}`}>
+        <DropdownMenuContent className={`right-0 mr-4 w-48 ${className}`}>
           <DropdownMenuItem onClick={() => setIsDiaOpen(true)}>
             <MdDeleteForever className="mr-2 h-4 w-4" />
             <span>Delete</span>

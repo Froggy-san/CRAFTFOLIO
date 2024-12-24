@@ -28,7 +28,9 @@ const Links = ({
               <HandleLinkIcons links={links} className="flex-col gap-6" />
               <div className="h-[90px] w-[1px] rounded-2xl bg-foreground" />
             </div>
-          ) : null}
+          ) : (
+            <div />
+          )}
           {/* ----------------------------------------------- */}
           {userEmail && (
             <div className="flex flex-col items-center justify-center space-y-10">
