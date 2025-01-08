@@ -113,6 +113,117 @@
 }
 
 @layer utilities {
+  @keyframes dialogOpen {
+    from {
+      -webkit-transform: translate(-50%, -50%) translateZ(0)
+        scale3d(1.048, 1.048, 1.048);
+    }
+    to {
+      -webkit-transform: translate(-50%, -50%) translateZ(0) scale3d(1, 1, 1);
+    }
+  }
+  @keyframes dialogClose {
+    from {
+      -webkit-transform: translate(-50%, -50%) translateZ(0) scale3d(1, 1, 1);
+    }
+    to {
+      -webkit-transform: translate(-50%, -50%) translateZ(0)
+        scale3d(1.048, 1.048, 1.048);
+    }
+  }
+
+  .dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%) translateZ(0)
+      scale3d(1.048, 1.048, 1.048);
+    opacity: 0;
+    /* perspective: 100px; */
+    /* filter: blur(0) !important; */
+
+    visibility: hidden;
+    /* filter: inherit; */
+    transition:
+      transform 300 cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 0s;
+    backface-visibility: hidden; /* Improve rendering performance */
+    -webkit-font-smoothing: subpixel-antialiased;
+    will-change: transform; /* Inform browser about possible changes */
+  }
+  .dialog-open {
+    animation: dialogOpen 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .dialog-closed {
+    animation: dialogClose 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      150ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 150ms;
+  }
+
+  .main__heading {
+    font-weight: 600;
+    font-size: 2.25em;
+    margin-bottom: 0.75em;
+    text-align: center;
+    color: #eceff1;
+  }
+  .card-1 {
+    background-color: hsla(165, 82.26%, 51.37%, 0.15);
+    border-color: hsla(165, 82.26%, 51.37%, 1);
+    box-shadow: 0 0 0 1px inset hsl(165, 82.26%, 51.37%);
+  }
+
+  .card-2 {
+    background-color: hsla(291.34, 95.9%, 61.76%, 0.15);
+    border-color: hsla(291.34, 95.9%, 61.76%, 1);
+    box-shadow: 0 0 0 1px inset hsl(291.34, 95.9%, 61.76%);
+  }
+
+  .card-3 {
+    background-color: hsla(338.69, 100%, 48.04%, 0.15);
+    border-color: hsla(338.69, 100%, 48.04%, 1);
+    box-shadow: 0 0 0 1px inset hsl(338.69, 100%, 48.04%);
+  }
+
+  .card-1 .btn {
+    background-color: hsl(165, 82.26%, 51.37%);
+    box-shadow: 0 0 0 1px hsl(165, 82.26%, 51.37%);
+  }
+
+  .card-2 .btn {
+    background-color: hsl(291.34, 95.9%, 61.76%);
+    box-shadow: 0 0 0 1px hsl(291.34, 95.9%, 61.76%);
+  }
+  .card-3 .btn {
+    background-color: hsl(338.69, 100%, 48.04%);
+    box-shadow: 0 0 0 1px hsl(338.69, 100%, 48.04%);
+  }
+
+  .card__bullets {
+    line-height: 1.4;
+  }
+  .card__bullets li::before {
+    display: inline-block;
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%23dddddd'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
+    transform: translatey(0.25ch);
+    margin-right: 1ch;
+  }
+  .card__heading {
+    font-size: 1.05em;
+    font-weight: 600;
+  }
+
+  .card__price {
+    font-size: 1.75em;
+    font-weight: 700;
+  }
   .scroll-gutter-both {
     scrollbar-gutter: stable both-edges;
   }

@@ -1,6 +1,8 @@
+import { cn } from "@/lib/utils";
+
 const GrainyImg = ({ className }: { className?: string }) => {
   return (
-    <svg className={`absolute ${className || ""}`}>
+    <svg className={cn("absolute", className)}>
       <filter id="noiseFilter">
         <feTurbulence
           type="fractalNoise"

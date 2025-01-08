@@ -1,6 +1,8 @@
 import { VanishList } from "@/components/shared/Animation";
+import GlowingCards from "@/components/shared/GlowingCards";
 import LinkPreviewDemo from "@/components/shared/LinkPreviewDemo";
 import Pagination from "@/components/shared/Pagination";
+import SearchDialog from "@/components/shared/search-dialog";
 
 import { LinkPreview } from "@/components/ui/link-preview";
 import Banner from "@/features/home/Banner";
@@ -30,7 +32,19 @@ const Home = () => {
     <div>
       {/* <div className=" ball"></div> */}
       <Banner />
-
+      {/* <SearchDialog
+        currPage="1"
+        carId={"1"}
+        clientId={"1"}
+        dateFrom={"1"}
+        dateTo={"1"}
+        minPrice={"1"}
+        maxPrice={"1"}
+        serviceStatusId={"1"}
+        status={[]}
+        cars={[]}
+        clients={[]}
+      /> */}
       <HomePostControlls
         selectDisabled={!posts?.length}
         user={userObj}
@@ -40,6 +54,8 @@ const Home = () => {
       {!pageCount ? null : (
         <Pagination pageCount={pageCount} className="mb-5" />
       )}
+
+      <GlowingCards />
 
       {/* <Faq /> */}
 
