@@ -139,8 +139,16 @@ export default function GlowingCards() {
               <h2 className="card__heading text-transparent">Basic</h2>
               <p className="card__price text-transparent">$9.99</p>
               <ul role="list" className="card__bullets flow text-transparent">
-                <li>Access to standard workouts and nutrition plans</li>
-                <li>Email support</li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />{" "}
+                  Access to standard workouts and nutrition plans
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" /> Email
+                  support
+                </li>
               </ul>
               <a
                 href="#basic"
@@ -153,9 +161,21 @@ export default function GlowingCards() {
               <h2 className="card__heading text-transparent">Pro</h2>
               <p className="card__price text-transparent">$19.99</p>
               <ul role="list" className="card__bullets flow text-transparent">
-                <li>Access to advanced workouts and nutrition plans</li>
-                <li>Priority Email support</li>
-                <li>Exclusive access to live Q&A sessions</li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />{" "}
+                  Access to advanced workouts and nutrition plans
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Priority Email support
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />{" "}
+                  Exclusive access to live Q&A sessions
+                </li>
               </ul>
               <a
                 href="#pro"
@@ -168,10 +188,26 @@ export default function GlowingCards() {
               <h2 className="card__heading text-transparent">Ultimate</h2>
               <p className="card__price text-transparent">$29.99</p>
               <ul role="list" className="card__bullets flow text-transparent">
-                <li>Access to all premium workouts and nutrition plans</li>
-                <li>24/7 Priority support</li>
-                <li>1-on-1 virtual coaching session every month</li>
-                <li>Exclusive content and early access to new features</li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Access to all premium workouts and nutrition plans
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" /> 24/7
+                  Priority support
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  1-on-1 virtual coaching session every month
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Exclusive content and early access to new features
+                </li>
               </ul>
               <a
                 href="#ultimate"
