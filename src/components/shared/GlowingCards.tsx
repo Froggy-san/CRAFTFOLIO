@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Card } from "../ui/card";
+import { GiCheckMark } from "react-icons/gi";
 
 export default function GlowingCards() {
   const cardsContainer = useRef<HTMLDivElement>(null);
@@ -34,47 +35,79 @@ export default function GlowingCards() {
         <h1 className="main__heading">Pricing</h1>
         <div className="relative" ref={cardsContainer}>
           <div className="flex flex-wrap gap-5 md:gap-10">
-            <Card className="flex min-w-[220px] flex-1 flex-col items-start gap-5 rounded-xl border border-solid border-[#eceff133] bg-[#2b2b2b] px-7 py-10 text-[#eceff1] transition-colors hover:bg-[#303030]">
+            <Card className="flex min-w-[220px] flex-1 flex-col items-start gap-5 rounded-xl border border-solid border-gray-300 bg-gray-200 px-7 py-10 transition-colors hover:bg-gray-100 dark:border-[#eceff133] dark:bg-[#2b2b2b] dark:hover:bg-[#303030]">
               <h2 className="card__heading">Basic</h2>
-              <p className="card__price">$9.99</p>
+              <p className="card__price">$0</p>
               <ul role="list" className="card__bullets flow">
-                <li>Access to standard workouts and nutrition plans</li>
-                <li>Email support</li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Access to standard workouts and nutrition plans
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Email support
+                </li>
               </ul>
               <a
                 href="#basic"
-                className="mt-auto block w-full rounded-lg bg-black p-2 text-center font-semibold"
+                className="mt-auto block w-full rounded-lg bg-black p-2 text-center font-semibold text-white"
               >
                 Get Started
               </a>
             </Card>
-            <Card className="flex min-w-[220px] flex-1 flex-col items-start gap-5 rounded-xl border border-solid border-[#eceff133] bg-[#2b2b2b] px-7 py-10 text-[#eceff1] transition-colors hover:bg-[#303030]">
+            <Card className="flex min-w-[220px] flex-1 flex-col items-start gap-5 rounded-xl border border-solid border-gray-300 bg-gray-200 px-7 py-10 transition-colors hover:bg-gray-100 dark:border-[#eceff133] dark:bg-[#2b2b2b] dark:hover:bg-[#303030]">
               <h2 className="card__heading">Pro</h2>
               <p className="card__price">$19.99</p>
               <ul role="list" className="card__bullets flow">
-                <li>Access to advanced workouts and nutrition plans</li>
-                <li>Priority Email support</li>
-                <li>Exclusive access to live Q&A sessions</li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Access to advanced workouts and nutrition plans
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Priority Email support
+                </li>
+                <li>
+                  {" "}
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Exclusive access to live Q&A sessions
+                </li>
               </ul>
               <a
                 href="#pro"
-                className="mt-auto block w-full rounded-lg bg-black p-2 text-center font-semibold"
+                className="mt-auto block w-full rounded-lg bg-black p-2 text-center font-semibold text-white"
               >
                 Upgrade to Pro
               </a>
             </Card>
-            <Card className="flex min-w-[220px] flex-1 flex-col items-start gap-5 rounded-xl border border-solid border-[#eceff133] bg-[#2b2b2b] px-7 py-10 text-[#eceff1] transition-colors hover:bg-[#303030]">
+            <Card className="flex min-w-[220px] flex-1 flex-col items-start gap-5 rounded-xl border border-solid border-gray-300 bg-gray-200 px-7 py-10 transition-colors hover:bg-gray-100 dark:border-[#eceff133] dark:bg-[#2b2b2b] dark:hover:bg-[#303030]">
               <h2 className="card__heading">Ultimate</h2>
               <p className="card__price">$29.99</p>
               <ul role="list" className="card__bullets flow">
-                <li>Access to all premium workouts and nutrition plans</li>
-                <li>24/7 Priority support</li>
-                <li>1-on-1 virtual coaching session every month</li>
-                <li>Exclusive content and early access to new features</li>
+                <li>
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Access to all premium workouts and nutrition plans
+                </li>
+                <li>
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  24/7 Priority support
+                </li>
+                <li>
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  1-on-1 virtual coaching session every month
+                </li>
+                <li>
+                  <GiCheckMark className="mt-[0.3rem] h-3 w-3 shrink-0" />
+                  Exclusive content and early access to new features
+                </li>
               </ul>
               <a
                 href="#ultimate"
-                className="mt-auto block w-full rounded-lg bg-black p-2 text-center font-semibold"
+                className="mt-auto block w-full rounded-lg bg-black p-2 text-center font-semibold text-white"
               >
                 Go Ultimate
               </a>
@@ -111,7 +144,7 @@ export default function GlowingCards() {
               </ul>
               <a
                 href="#basic"
-                className="btn mt-auto block w-full rounded-lg p-2 text-center font-semibold"
+                className="btn mt-auto block w-full rounded-lg p-2 text-center font-semibold text-foreground text-white"
               >
                 Get Started
               </a>
@@ -126,7 +159,7 @@ export default function GlowingCards() {
               </ul>
               <a
                 href="#pro"
-                className="btn mt-auto block w-full rounded-lg p-2 text-center font-semibold"
+                className="btn mt-auto block w-full rounded-lg p-2 text-center font-semibold text-white"
               >
                 Upgrade to Pro
               </a>
@@ -142,7 +175,7 @@ export default function GlowingCards() {
               </ul>
               <a
                 href="#ultimate"
-                className="btn mt-auto block w-full rounded-lg p-2 text-center font-semibold"
+                className="btn mt-auto block w-full rounded-lg p-2 text-center font-semibold text-white"
               >
                 Go Ultimate
               </a>
