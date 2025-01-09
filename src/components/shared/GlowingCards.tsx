@@ -22,6 +22,9 @@ export default function GlowingCards() {
   };
 
   useEffect(() => {
+    const screenSize = window.innerWidth;
+    console.log(screenSize);
+    if (screenSize < 550) return;
     document.body.addEventListener("pointermove", applyOverlayMask);
 
     return () => {
